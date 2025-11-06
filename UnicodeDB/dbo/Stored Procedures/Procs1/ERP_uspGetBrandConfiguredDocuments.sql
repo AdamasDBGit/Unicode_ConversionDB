@@ -1,15 +1,15 @@
-﻿CREATE PROCEDURE [dbo].[ERP_uspGetBrandConfiguredDocuments]
+CREATE PROCEDURE [dbo].[ERP_uspGetBrandConfiguredDocuments]
 (
-    @sToken NVARCHAR(200),
-    @sMobileNo NVARCHAR(MAX),
-    @DocumentType NVARCHAR(MAX) = NULL
+    @sToken Nnvarchar(max),
+    @sMobileNo Nnvarchar(max),
+    @DocumentType Nnvarchar(max) = NULL
 )
 AS
 BEGIN
     DECLARE @BrandID INT;
 
     CREATE TABLE #Documents (
-        DocumentPath VARCHAR(100),
+        DocumentPath nvarchar(max),
         DocumentTypeID INT,
         PatternHeaderID INT,
         SaasPatternChildHeaderID INT,

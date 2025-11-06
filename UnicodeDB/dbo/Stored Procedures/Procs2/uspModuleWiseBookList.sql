@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspModuleWiseBookList]     
+CREATE PROCEDURE [dbo].[uspModuleWiseBookList]     
 (    
- @sCourseList NVARCHAR(MAX)   
+ @sCourseList Nnvarchar(max)   
 )  
 AS  
 BEGIN  

@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetExamScheduleDetailsAPI]
-    @token nvarchar(MAX),
+CREATE PROCEDURE [dbo].[usp_ERP_GetExamScheduleDetailsAPI]
+    @token nnvarchar(max),
     @MonthId INT
 AS
 BEGIN

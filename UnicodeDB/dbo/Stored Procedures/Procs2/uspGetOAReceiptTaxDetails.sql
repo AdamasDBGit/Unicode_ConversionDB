@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[uspGetOAReceiptTaxDetails]
-	@sReceiptIDs NVARCHAR(MAX)
+CREATE PROCEDURE [dbo].[uspGetOAReceiptTaxDetails]
+	@sReceiptIDs Nnvarchar(max)
 
 AS
 BEGIN

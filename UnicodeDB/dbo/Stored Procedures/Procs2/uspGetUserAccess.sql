@@ -1,7 +1,7 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetUserAccess]
 (
-	@vLoginID NVARCHAR(MAX)
+	@vLoginID Nnvarchar(max)
 )
 AS
 BEGIN
@@ -10,7 +10,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     DECLARE @iUserID int
-	DECLARE @vUserType varchar(20)
+	DECLARE @vUserType nvarchar(max)
 	DECLARE @iTotalRowCount int
 	DECLARE @iRow int
 
@@ -54,13 +54,13 @@ BEGIN
 	(
 		seq int identity(1,1),
 		HierarchyDetailsID int not null,
-		HierarchyName varchar(MAX),
+		HierarchyName nvarchar(max),
 		SalesOrgID int not null,
-		SalesOrgCode varchar(20),
-		SalesOrgName varchar(200),
-		SalesOrgType varchar(20),
-		HierarchyChain varchar(100),
-		SalesOrgChain varchar(100),
+		SalesOrgCode nvarchar(max),
+		SalesOrgName nvarchar(max),
+		SalesOrgType nvarchar(max),
+		HierarchyChain nvarchar(max),
+		SalesOrgChain nvarchar(max),
 		ChildLevelID int,
 		LevelSequence int,
 		LastLevelID int
@@ -105,7 +105,7 @@ BEGIN
 		lenwithseparator int,
 		lenwithoutseparator int,
 		noofseparator int,
-		hierarchychain varchar(100)
+		hierarchychain nvarchar(max)
 	)
 		
 	WHILE(@iRow <= @iTotalRowCount)

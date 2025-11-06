@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertStudentDataInInterfaceForDiscontinuation]
+CREATE PROCEDURE [dbo].[uspInsertStudentDataInInterfaceForDiscontinuation]
     (
       @sDiscontinueXML XML ,
       @iFlag INT ,
-      @sLoginID NVARCHAR(MAX)
+      @sLoginID Nnvarchar(max)
     )
 AS
     BEGIN
@@ -24,8 +24,8 @@ AS
                       TotalPaid ,
                       TotalDue
                     )
-                    SELECT  T.c.value('@S_Student_ID', 'VARCHAR(MAX)') ,
-                            T.c.value('@S_Student_Name', 'VARCHAR(MAX)') ,
+                    SELECT  T.c.value('@S_Student_ID', 'nvarchar(max)') ,
+                            T.c.value('@S_Student_Name', 'nvarchar(max)') ,
                             T.c.value('@I_Invoice_Detail_ID', 'INT') ,
                             T.c.value('@Due_Value', 'DECIMAL(14,2)') ,
                             T.c.value('@Tax_Value', 'DECIMAL(14,2)') ,
@@ -38,7 +38,7 @@ AS
                 
                 
             IF ( @iFlag = 1 )
-                EXEC dbo.uspDiscontinueStudents @sLoginID = @sLoginID -- varchar(50)
+                EXEC dbo.uspDiscontinueStudents @sLoginID = @sLoginID -- nvarchar(max)
                 
                 
                 
@@ -47,7 +47,7 @@ AS
         END TRY      
         BEGIN CATCH      
             ROLLBACK TRANSACTION  
-            DECLARE @ErrMsg NVARCHAR(4000) ,
+            DECLARE @ErrMsg Nnvarchar(max) ,
                 @ErrSeverity INT      
             SELECT  @ErrMsg = ERROR_MESSAGE() ,
                     @ErrSeverity = ERROR_SEVERITY()      

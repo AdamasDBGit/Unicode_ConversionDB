@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyExamMaster]
+CREATE PROCEDURE [dbo].[uspModifyExamMaster]
     @iExamID INT ,
-    @sExamName NVARCHAR(MAX) ,
-    @sExamType NVARCHAR(MAX) ,
+    @sExamName Nnvarchar(max) ,
+    @sExamType Nnvarchar(max) ,
     @iExamTypeMaster INT = NULL ,
-    @sExamBy NVARCHAR(MAX) ,
+    @sExamBy Nnvarchar(max) ,
     @dExamOn DATETIME ,
     @iFlag INT ,
     @iBrandID INT = NULL ,
@@ -85,7 +85,7 @@ AS
     BEGIN CATCH    
  --Error occurred:      
     
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()    

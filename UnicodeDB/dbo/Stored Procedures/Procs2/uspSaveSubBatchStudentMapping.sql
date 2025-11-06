@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspSaveSubBatchStudentMapping]
+CREATE PROCEDURE [dbo].[uspSaveSubBatchStudentMapping]
     (
       @sBatchStdTableXML XML = NULL       
     )
@@ -11,11 +11,11 @@ AS
             (
               srlno INT IDENTITY(1, 1) ,
               I_Sub_Batch_ID INT ,
-              S_Student_ID VARCHAR(50) ,
+              S_Student_ID nvarchar(max) ,
               I_Batch_ID INT ,
               I_Status INT ,
-              S_Crtd_By VARCHAR(20) ,
-              S_Updt_By VARCHAR(20) ,
+              S_Crtd_By nvarchar(max) ,
+              S_Updt_By nvarchar(max) ,
               Dt_Crtd_On DATETIME ,
               Dt_Upd_On DATETIME ,
               I_Student_Detail_ID INT
@@ -24,11 +24,11 @@ AS
    -- Insert Values into Temporary Table              
         INSERT  INTO #T_Student_Sub_Batch_Student_Mapping
                 SELECT  T.c.value('@I_Sub_Batch_ID', 'int') ,
-                        T.c.value('@S_Student_ID', 'varchar(50)') ,
+                        T.c.value('@S_Student_ID', 'nvarchar(max)') ,
                         T.c.value('@I_Batch_ID', 'int') ,
                         T.c.value('@I_Status', 'int') ,
-                        T.c.value('@S_Crtd_By', 'varchar(20)') ,
-                        T.c.value('@S_Updt_By', 'varchar(20)') ,
+                        T.c.value('@S_Crtd_By', 'nvarchar(max)') ,
+                        T.c.value('@S_Updt_By', 'nvarchar(max)') ,
                         T.c.value('@Dt_Crtd_On', 'datetime') ,
                         T.c.value('@Dt_Upd_On', 'datetime') ,
                         --CONVERT(DATETIME, T.c.value('@Dt_Crtd_On',
@@ -147,7 +147,7 @@ AS
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()                    

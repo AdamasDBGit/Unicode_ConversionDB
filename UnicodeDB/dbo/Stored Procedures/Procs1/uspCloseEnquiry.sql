@@ -1,12 +1,12 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspCloseEnquiry]           
 (             
   @iCenterID INT,    
   @iEnquiryID INT,      
   @iEnquiryStatus INT,         
-  @sUpdatedBy NVARCHAR(MAX),    
+  @sUpdatedBy Nnvarchar(max),    
   @dtUpdatedOn DATETIME ,
-  @iNewEnquiryID NVARCHAR(MAX)     
+  @iNewEnquiryID Nnvarchar(max)     
 )            
 AS            
 BEGIN TRY    
@@ -31,7 +31,7 @@ if exists (select * from T_Student_Tags where I_Enquiry_Regn_ID=@iEnquiryID)
 	END
   
   
-DECLARE @sFormNo varchar(100)	
+DECLARE @sFormNo nvarchar(max)	
 
 SELECT  @sFormNo = S_Form_No FROM dbo.T_Enquiry_Regn_Detail WHERE I_Enquiry_Regn_ID=@iEnquiryID 
   UPDATE  dbo.T_Enquiry_Regn_Detail      
@@ -41,7 +41,7 @@ END TRY
 BEGIN CATCH    
  --Error occurred:      
     
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     

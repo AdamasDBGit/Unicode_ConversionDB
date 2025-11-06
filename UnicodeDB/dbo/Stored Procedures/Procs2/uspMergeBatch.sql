@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspMergeBatch] --[dbo].[uspMergeBatch] '<Root><MergeBatch I_Student_ID="963" I_Batch_ID="48" /><MergeBatch I_Student_ID="1213" I_Batch_ID="47" /></Root>', 149    
+CREATE PROCEDURE [dbo].[uspMergeBatch] --[dbo].[uspMergeBatch] '<Root><MergeBatch I_Student_ID="963" I_Batch_ID="48" /><MergeBatch I_Student_ID="1213" I_Batch_ID="47" /></Root>', 149    
     (
       @SMergeBatchXML XML = NULL ,
       @IdesBatchID INT ,
-      @SCrtdby NVARCHAR(MAX) ,  
+      @SCrtdby Nnvarchar(max) ,  
       @DtCrtdOn DATETIME                 
     )
 AS 
@@ -73,7 +73,7 @@ AS
     END TRY                        
     BEGIN CATCH                        
         ROLLBACK TRANSACTION                       
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT                        
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()                        

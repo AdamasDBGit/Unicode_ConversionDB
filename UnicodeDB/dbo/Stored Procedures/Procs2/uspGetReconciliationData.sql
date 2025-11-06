@@ -1,20 +1,20 @@
-﻿CREATE PROCEDURE [dbo].[uspGetReconciliationData]
+CREATE PROCEDURE [dbo].[uspGetReconciliationData]
 	(
 		@iSelectedHierarchyId int,
 		@iSelectedBrandId int,
 		@dtDateTo datetime = null,
 		@dtDateFrom datetime = null,
 		@dtCurrentDate datetime,
-		@sFName NVARCHAR(MAX) = null,
-		@sMName NVARCHAR(MAX) = null,
-		@sLName NVARCHAR(MAX) = null
+		@sFName Nnvarchar(max) = null,
+		@sMName Nnvarchar(max) = null,
+		@sLName Nnvarchar(max) = null
 	)
 
 AS
 
 BEGIN
 	SET NOCOUNT ON;
-	DECLARE @sSearchCriteria varchar(20)
+	DECLARE @sSearchCriteria nvarchar(max)
 	
 	CREATE TABLE #TempCenter
 	( 
@@ -51,21 +51,21 @@ BEGIN
 
 	DECLARE @InvoiceDetail TABLE
 	(
-		S_Invoice_No VARCHAR(100),
+		S_Invoice_No nvarchar(max),
 		I_Invoice_Header_ID INT,
 		N_Invoice_Amount NUMERIC(18,2),
 		Dt_Invoice_Date DATETIME,
 		I_Student_Detail_ID INT,
-		S_Student_ID VARCHAR(100),
-		S_First_Name VARCHAR(100),
-		S_Middle_Name VARCHAR(100),
-		S_Last_Name VARCHAR(100),
+		S_Student_ID nvarchar(max),
+		S_First_Name nvarchar(max),
+		S_Middle_Name nvarchar(max),
+		S_Last_Name nvarchar(max),
 		I_Status INT,
 		I_Centre_Id INT,
 		I_Currency_ID INT,
 		N_Tax_Amount NUMERIC(18,2),
-		S_Center_Code VARCHAR(50),
-		S_Center_Short_Name VARCHAR(50)
+		S_Center_Code nvarchar(max),
+		S_Center_Short_Name nvarchar(max)
 	)
 
 	INSERT INTO @InvoiceDetail

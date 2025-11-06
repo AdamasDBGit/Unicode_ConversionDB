@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[UspGetStudentList]
-@Session_ID nvarchar(30),
-@Brand_ID nvarchar(30)=null,
+CREATE PROCEDURE [dbo].[UspGetStudentList]
+@Session_ID nnvarchar(max),
+@Brand_ID nnvarchar(max)=null,
 ----@Student__Detail_ID nvarchar(30)=Null,
-@School_Group_ID nvarchar(30)=null,
-@Class_ID nvarchar(30)=null,
-@Stream_ID nvarchar(30)=null,
-@Section_ID nvarchar(30)=Null
+@School_Group_ID nnvarchar(max)=null,
+@Class_ID nnvarchar(max)=null,
+@Stream_ID nnvarchar(max)=null,
+@Section_ID nnvarchar(max)=Null
 as
 SET NOCOUNT ON;  
 select 

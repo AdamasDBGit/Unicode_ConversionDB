@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateHolidayMaster]  
+CREATE PROCEDURE [dbo].[uspUpdateHolidayMaster]  
 ( 
  @iHolidayId INT,  
  @iBrandId INT = NULL,   
  @iCenterId INT = NULL,     
  @dtHolidayDt DATETIME,  
- @sHolidayDesc NVARCHAR(MAX)  
+ @sHolidayDesc Nnvarchar(max)  
 )  
 AS   
   
@@ -25,7 +25,7 @@ END TRY
   
 BEGIN CATCH  
  ROLLBACK TRANSACTION  
-    DECLARE @ErrMsg NVARCHAR(4000),@ErrSeverity INT  
+    DECLARE @ErrMsg Nnvarchar(max),@ErrSeverity INT  
     SELECT  @ErrMsg = ERROR_MESSAGE(),@ErrSeverity = ERROR_SEVERITY()  
     RAISERROR ( @ErrMsg, @ErrSeverity, 1 )  
   

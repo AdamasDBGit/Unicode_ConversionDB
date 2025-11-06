@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_Cheque_DebitCredit_Settlement_Report_Bak]
-@BrandID NVARCHAR(MAX)
+CREATE PROCEDURE [dbo].[usp_ERP_Cheque_DebitCredit_Settlement_Report_Bak]
+@BrandID Nnvarchar(max)
 AS
 BEGIN
 SET NOCOUNT ON;

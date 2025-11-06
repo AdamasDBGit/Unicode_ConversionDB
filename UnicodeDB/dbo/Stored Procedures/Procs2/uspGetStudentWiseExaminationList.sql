@@ -1,10 +1,10 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetStudentWiseExaminationList]
-@StudentDetailId NVARCHAR(500)
+@StudentDetailId Nnvarchar(max)
 AS
 BEGIN TRY 
 DECLARE @CURR_DATE DATETIME=GETDATE()
-DECLARE @StudentWiseExamList table (ExamName nvarchar(255),IsApplied char(1), Barcode NVARCHAR(500)) 
+DECLARE @StudentWiseExamList table (ExamName nnvarchar(max),IsApplied char(1), Barcode Nnvarchar(max)) 
 
 PRINT @CURR_DATE
 
@@ -29,7 +29,7 @@ SELECT Fld_KPMG_ExaminationName AS ExamName,
 END TRY
 BEGIN CATCH 
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[GetMethodologyCategory] 
+CREATE PROCEDURE [dbo].[GetMethodologyCategory] 
 -- =============================================
      -- Author:	Tridip Chatterjee
 -- Create date: 28-09-2023 
@@ -7,7 +7,7 @@
 -- Add the parameters for the stored procedure here
 @MethodologyID int =null,
 @BrandID int =null,
-@MethodologyName nvarchar(255) =null,
+@MethodologyName nnvarchar(max) =null,
 @Status int= null
 
 

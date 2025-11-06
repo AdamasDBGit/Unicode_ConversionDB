@@ -1,17 +1,17 @@
-﻿CREATE PROCEDURE [dbo].[uspGenerateOnAccReceiptFromExtSource]
+CREATE PROCEDURE [dbo].[uspGenerateOnAccReceiptFromExtSource]
     (
       @iCenterId INT ,
       @iAmount NUMERIC(18, 2) = NULL ,
       @iReceiptDate DATETIME = NULL ,
       @iEnquiryID INT = NULL ,
-      @sFormNo NVARCHAR(MAX) = NULL ,
+      @sFormNo Nnvarchar(max) = NULL ,
       @iBrandID INT = NULL ,
-      @TransactionNo NVARCHAR(MAX) = NULL ,
-      @ExtReceiptNo NVARCHAR(MAX) = NULL ,
-      @ExtReceiptDate NVARCHAR(MAX) = NULL ,
-      @Source NVARCHAR(MAX) = NULL ,
-      @DepositAccNo NVARCHAR(MAX) = NULL ,
-      @CrtdBy NVARCHAR(MAX) ,
+      @TransactionNo Nnvarchar(max) = NULL ,
+      @ExtReceiptNo Nnvarchar(max) = NULL ,
+      @ExtReceiptDate Nnvarchar(max) = NULL ,
+      @Source Nnvarchar(max) = NULL ,
+      @DepositAccNo Nnvarchar(max) = NULL ,
+      @CrtdBy Nnvarchar(max) ,
       @CrtdOn DATETIME
     )
 AS
@@ -86,24 +86,24 @@ AS
                                 @iStudentDetailId = NULL, -- int
                                 @iReceiptDate = @dtDate, -- datetime
                                 @iPaymentModeId = 23, -- int
-                                @sChequeDDno = NULL, -- varchar(20)
+                                @sChequeDDno = NULL, -- nvarchar(max)
                                 @dChequeDate = NULL, -- datetime
-                                @sBankName = NULL, -- varchar(50)
-                                @sBranchName = NULL, -- varchar(20)
+                                @sBankName = NULL, -- nvarchar(max)
+                                @sBranchName = NULL, -- nvarchar(max)
                                 @iCreditCardNo = NULL, -- numeric
-                                @sCreditCardIssuer = NULL, -- varchar(50)
+                                @sCreditCardIssuer = NULL, -- nvarchar(max)
                                 @dCardExpiryDate = NULL, -- datetime
-                                @sCrtdBy = @CrtdBy, -- varchar(20)
+                                @sCrtdBy = @CrtdBy, -- nvarchar(max)
                                 @iReceiptType = @ReceiptType, -- int
                                 @dTaxAmount = @TaxAmount, -- numeric
                                 @TaxXML = @TaxXML, -- xml
                                 @iEnquiryID = @iEnquiryID, -- int
-                                @sFormNo = @sFormNo, -- varchar(100)
+                                @sFormNo = @sFormNo, -- nvarchar(max)
                                 @iBrandID = @iBrandID, -- int
-                                @sNarration = NULL -- varchar(500)
+                                @sNarration = NULL -- nvarchar(max)
                         
                         
-                            DECLARE @ReceiptNo VARCHAR(MAX)= NULL
+                            DECLARE @ReceiptNo nvarchar(max)= NULL
                             SET @ReceiptNo = ( SELECT   S_Receipt_No
                                                FROM     dbo.T_Receipt_Header
                                                WHERE    I_Enquiry_Regn_ID = @iEnquiryID
@@ -166,11 +166,11 @@ AS
                                               Dt_ActualReceiptDate
 						                    )
                                     VALUES  ( @ReceiptHeaderID , -- I_Receipt_Header_ID - int
-                                              @ReceiptNo , -- S_Receipt_No - varchar(max)
-                                              @TransactionNo , -- S_Transaction_No - varchar(max)
-                                              @ExtReceiptNo , -- S_Ext_Receipt_No - varchar(max)
+                                              @ReceiptNo , -- S_Receipt_No - nvarchar(max)
+                                              @TransactionNo , -- S_Transaction_No - nvarchar(max)
+                                              @ExtReceiptNo , -- S_Ext_Receipt_No - nvarchar(max)
                                               @CrtdOn , -- Dt_Crtd_On - datetime
-                                              @Source , -- S_Crtd_By - varchar(max)
+                                              @Source , -- S_Crtd_By - nvarchar(max)
                                               @BaseReceiptAmt , -- N_Amount - decimal
                                               @TaxAmount , -- N_Tax - decimal
                                               @ExtReceiptDate  -- Dt_ActualReceiptDate - datetime

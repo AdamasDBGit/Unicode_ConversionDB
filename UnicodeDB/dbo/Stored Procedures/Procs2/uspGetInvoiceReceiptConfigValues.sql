@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspGetInvoiceReceiptConfigValues]  
+CREATE PROCEDURE [dbo].[uspGetInvoiceReceiptConfigValues]  
 (  
  @iHierarchyDetailID INT  
 )    
 AS  
 BEGIN  
 --------------------------------------------------------------------------------   
-DECLARE @sSearchCriteria VARCHAR(100)  
+DECLARE @sSearchCriteria nvarchar(max)  
   
 DECLARE @TempCenter TABLE(ROWID INT IDENTITY(1,1),I_Center_ID INT)  
   
@@ -26,37 +26,37 @@ AND HMD.S_Hierarchy_Chain LIKE @sSearchCriteria + '%'
 --------------------------------------------------------------------------------  
 DECLARE @CONFIGTABLE TABLE  
 (  
-  CENTERNAME VARCHAR(100)  
- ,IUH VARCHAR(500)  
- ,ILH VARCHAR(500)  
- ,ICN VARCHAR(500)  
- ,ICT VARCHAR(500)  
- ,IRO VARCHAR(500)  
- ,RUH VARCHAR(500)  
- ,RLH VARCHAR(500)  
- ,RCN VARCHAR(500)  
- ,RCT VARCHAR(500)  
- ,RTC VARCHAR(500)  
- ,RRO VARCHAR(500)  
+  CENTERNAME nvarchar(max)  
+ ,IUH nvarchar(max)  
+ ,ILH nvarchar(max)  
+ ,ICN nvarchar(max)  
+ ,ICT nvarchar(max)  
+ ,IRO nvarchar(max)  
+ ,RUH nvarchar(max)  
+ ,RLH nvarchar(max)  
+ ,RCN nvarchar(max)  
+ ,RCT nvarchar(max)  
+ ,RTC nvarchar(max)  
+ ,RRO nvarchar(max)  
    
 )  
   
 DECLARE @min INT  
 DECLARE @max INT  
 ---------------------------------  
-DECLARE @sCenterName VARCHAR(100)  
+DECLARE @sCenterName nvarchar(max)  
 DECLARE @iCenterID INT  
-DECLARE @sIUH VARCHAR(500)  
-DECLARE @sILH VARCHAR(500)  
-DECLARE @sICN VARCHAR(500)  
-DECLARE @sICT VARCHAR(500)  
-DECLARE @sIRO VARCHAR(500)  
-DECLARE @sRUH VARCHAR(500)  
-DECLARE @sRLH VARCHAR(500)  
-DECLARE @sRCN VARCHAR(500)  
-DECLARE @sRCT VARCHAR(500)  
-DECLARE @sRTC VARCHAR(500)  
-DECLARE @sRRO VARCHAR(500)  
+DECLARE @sIUH nvarchar(max)  
+DECLARE @sILH nvarchar(max)  
+DECLARE @sICN nvarchar(max)  
+DECLARE @sICT nvarchar(max)  
+DECLARE @sIRO nvarchar(max)  
+DECLARE @sRUH nvarchar(max)  
+DECLARE @sRLH nvarchar(max)  
+DECLARE @sRCN nvarchar(max)  
+DECLARE @sRCT nvarchar(max)  
+DECLARE @sRTC nvarchar(max)  
+DECLARE @sRRO nvarchar(max)  
 ---------------------------------  
 SELECT @min = MIN(ROWID), @max = MAX(ROWID) FROM @TempCenter  
   

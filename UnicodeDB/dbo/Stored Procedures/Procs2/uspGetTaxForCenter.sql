@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetTaxForCenter] @iCenterID INT
+CREATE PROCEDURE [dbo].[uspGetTaxForCenter] @iCenterID INT
 AS 
     BEGIN    
   
@@ -16,10 +16,10 @@ AS
             (
               I_Fee_Component_ID INT ,
               I_Fee_Component_type_ID INT ,
-              S_Component_Code VARCHAR(20) ,
+              S_Component_Code nvarchar(max) ,
               I_Tax_ID INT ,
               N_Tax_Rate NUMERIC(10, 6) ,
-              S_Tax_Desc VARCHAR(50)
+              S_Tax_Desc nvarchar(max)
             )  
   
         INSERT  INTO #TempTable
@@ -49,7 +49,7 @@ AS
               I_Fee_Component_ID INT ,
               I_Tax_ID INT ,
               N_Tax_Rate NUMERIC(10, 6) ,
-              S_Tax_Desc VARCHAR(50)
+              S_Tax_Desc nvarchar(max)
             )  
   
         INSERT  INTO #tempCenterTax

@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertSMSReceiptDetailsFromAPI]
+CREATE PROCEDURE [dbo].[uspInsertSMSReceiptDetailsFromAPI]
     (
-      @sReceiptDetail NVARCHAR(MAX) ,
+      @sReceiptDetail Nnvarchar(max) ,
       @iReceiptHeaderID INT
     )
 AS
@@ -8,7 +8,7 @@ AS
 INSERT INTO dbo.T_SP_Transaction_Log
         ( CreatedOn, LogText )
 VALUES  ( GETDATE(), -- CreatedOn - datetime
-          'Starting inside Receipt Detail' -- LogText - varchar(max)
+          'Starting inside Receipt Detail' -- LogText - nvarchar(max)
           
           )
 
@@ -19,7 +19,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
     INSERT INTO dbo.T_SP_Transaction_Log
         ( CreatedOn, LogText )
 VALUES  ( GETDATE(), -- CreatedOn - datetime
-          'Starting inside Receipt Detail TRY BLOCK' -- LogText - varchar(max)
+          'Starting inside Receipt Detail TRY BLOCK' -- LogText - nvarchar(max)
           
           )
 
@@ -38,7 +38,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
         DECLARE @TaxShare NUMERIC(18, 2)
         DECLARE @bUseCenterServiceTax BIT
         DECLARE @iInvoiceParentId INT
-        DECLARE @iInvoiceNo VARCHAR(256)
+        DECLARE @iInvoiceNo nvarchar(max)
 
         DECLARE @iInvoiceChildHeaderID INT
         DECLARE @iInvoiceHeaderID INT
@@ -341,7 +341,7 @@ END
             INSERT INTO dbo.T_SP_Transaction_Log
         ( CreatedOn, LogText )
 VALUES  ( GETDATE(), -- CreatedOn - datetime
-          'After tax block' -- LogText - varchar(max)
+          'After tax block' -- LogText - nvarchar(max)
           
           )
             
@@ -351,7 +351,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
         INSERT INTO dbo.T_SP_Transaction_Log
         ( CreatedOn, LogText )
 VALUES  ( GETDATE(), -- CreatedOn - datetime
-          'After uspInsertUpdateForAdvancePayment' -- LogText - varchar(max)
+          'After uspInsertUpdateForAdvancePayment' -- LogText - nvarchar(max)
           
           )
         
@@ -362,7 +362,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
         INSERT INTO dbo.T_SP_Transaction_Log
         ( CreatedOn, LogText )
 VALUES  ( GETDATE(), -- CreatedOn - datetime
-          'After uspUpdateInvoiceParentForAdvanceTax' -- LogText - varchar(max)
+          'After uspUpdateInvoiceParentForAdvanceTax' -- LogText - nvarchar(max)
           
           )
 
@@ -409,7 +409,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
       INSERT INTO dbo.T_SP_Transaction_Log
         ( CreatedOn, LogText )
 VALUES  ( GETDATE(), -- CreatedOn - datetime
-          'End of Receipt Detail' -- LogText - varchar(max)
+          'End of Receipt Detail' -- LogText - nvarchar(max)
           
           )  
 
@@ -419,12 +419,12 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
       INSERT INTO dbo.T_SP_Transaction_Log
         ( CreatedOn, LogText )
 VALUES  ( GETDATE(), -- CreatedOn - datetime
-          'Inside of Receipt Detail CATCH BLOCK' -- LogText - varchar(max)
+          'Inside of Receipt Detail CATCH BLOCK' -- LogText - nvarchar(max)
           
           ) 
 	--Error occurred:  
         ROLLBACK TRANSACTION
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()

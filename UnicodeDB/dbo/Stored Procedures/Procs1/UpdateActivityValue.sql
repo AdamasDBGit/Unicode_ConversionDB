@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[UpdateActivityValue]
+CREATE PROCEDURE [dbo].[UpdateActivityValue]
 -- =============================================
 -- Author:		Tridip Chatterjee
 -- Create date: 30-09-2023
@@ -7,7 +7,7 @@
 -- Add the parameters for the stored procedure here
 @MethodologyActivityValueID int,
 @MethodologyActivityID int =null,
-@ActivityValue nvarchar(400)=null 
+@ActivityValue nnvarchar(max)=null 
 
 AS
 BEGIN

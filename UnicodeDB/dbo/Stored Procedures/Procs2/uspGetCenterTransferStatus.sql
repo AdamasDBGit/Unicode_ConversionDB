@@ -1,22 +1,22 @@
-﻿CREATE PROCEDURE [dbo].[uspGetCenterTransferStatus]           
+CREATE PROCEDURE [dbo].[uspGetCenterTransferStatus]           
 (          
- @sStudentCode NVARCHAR(MAX) = NULL          
-,@sStudentFName NVARCHAR(MAX)  = NULL          
-,@sStudentMName NVARCHAR(MAX)  = NULL          
-,@sStudentLName NVARCHAR(MAX)  = NULL    
+ @sStudentCode Nnvarchar(max) = NULL          
+,@sStudentFName Nnvarchar(max)  = NULL          
+,@sStudentMName Nnvarchar(max)  = NULL          
+,@sStudentLName Nnvarchar(max)  = NULL    
 ,@iHierarchyDetailId INT           
 )          
 AS          
 BEGIN         
     
 -------------------------      
-DECLARE @TempTable TABLE(ROWID INT IDENTITY (1,1) ,I_Transfer_Request_Id INT , I_Task_Details_Id INT, S_Users VARCHAR(500))        
+DECLARE @TempTable TABLE(ROWID INT IDENTITY (1,1) ,I_Transfer_Request_Id INT , I_Task_Details_Id INT, S_Users nvarchar(max))        
 INSERT INTO @TempTable(I_Transfer_Request_Id,I_Task_Details_Id)        
 SELECT I_Transfer_Request_Id,MAX(I_Task_Details_Id)        
 FROM T_student_transfer_history        
 GROUP BY I_Transfer_Request_Id     
 -------------------------------------    
-DECLARE @sSearchCriteria VARCHAR(400)    
+DECLARE @sSearchCriteria nvarchar(max)    
 DECLARE @TempCenter TABLE    
 (     
  I_Center_ID int    
@@ -39,7 +39,7 @@ AND S_Hierarchy_Chain LIKE @sSearchCriteria + '%'
         
 DECLARE @min INT        
 DECLARE @max INT        
-DECLARE @users VARCHAR(100) set @users = ''       
+DECLARE @users nvarchar(max) set @users = ''       
         
 SELECT @min = MIN(rowid), @max = MAX(rowid) FROM @TempTable        
         

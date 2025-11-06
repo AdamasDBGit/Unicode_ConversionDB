@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudetForCT]     
+CREATE PROCEDURE [dbo].[uspGetStudetForCT]     
 (    
- @sStudentCode NVARCHAR(MAX) = NULL    
-,@sStudentFName NVARCHAR(MAX)  = NULL    
-,@sStudentMName NVARCHAR(MAX)  = NULL    
-,@sStudentLName NVARCHAR(MAX)  = NULL    
-,@sInvoiceNo NVARCHAR(MAX) = NULL    
+ @sStudentCode Nnvarchar(max) = NULL    
+,@sStudentFName Nnvarchar(max)  = NULL    
+,@sStudentMName Nnvarchar(max)  = NULL    
+,@sStudentLName Nnvarchar(max)  = NULL    
+,@sInvoiceNo Nnvarchar(max) = NULL    
 ,@iCentreId  INT    
 )    
 as    

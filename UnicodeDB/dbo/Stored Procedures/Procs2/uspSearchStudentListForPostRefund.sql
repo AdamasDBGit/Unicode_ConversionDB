@@ -1,18 +1,18 @@
-﻿CREATE PROCEDURE [dbo].[uspSearchStudentListForPostRefund]   
+CREATE PROCEDURE [dbo].[uspSearchStudentListForPostRefund]   
 (      
       @iSelectedHierarchyId INT,  
       @iSelectedBrandId INT = NULL,    
-      @sStudentId NVARCHAR(MAX)=NULL,      
-      @sStudentFirstName NVARCHAR(MAX)=NULL,      
-      @sStudentSecondName NVARCHAR(MAX)=NULL,      
-      @sStudentLastName NVARCHAR(MAX)=NULL      
+      @sStudentId Nnvarchar(max)=NULL,      
+      @sStudentFirstName Nnvarchar(max)=NULL,      
+      @sStudentSecondName Nnvarchar(max)=NULL,      
+      @sStudentLastName Nnvarchar(max)=NULL      
 )      
       
 AS      
       
 BEGIN      
       SET NOCOUNT ON;         
-      DECLARE @sSearchCenterList VARCHAR(MAX)  
+      DECLARE @sSearchCenterList nvarchar(max)  
       SELECT  @sSearchCenterList = dbo.fnCenterList(@iSelectedHierarchyId,@iSelectedBrandId)  
       
             

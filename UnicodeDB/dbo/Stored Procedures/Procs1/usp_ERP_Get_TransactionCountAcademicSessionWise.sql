@@ -1,4 +1,4 @@
-﻿CREATE   PROCEDURE [dbo].[usp_ERP_Get_TransactionCountAcademicSessionWise] 
+CREATE   PROCEDURE [dbo].[usp_ERP_Get_TransactionCountAcademicSessionWise] 
 	-- Add the parameters for the stored procedure here
 	@iBrandID INT,
 	@dtStartDate DATETIME,
@@ -11,7 +11,7 @@ BEGIN
 
 	Create Table #SuccessEx_InternalTransaction
 	(
-	TransactionNo Varchar(max),
+	TransactionNo nvarchar(max),
 	ReceiptHeaderID INT,
 	PaymentStatusID int,
 	--PaymentStatus varchar(max),
@@ -21,7 +21,7 @@ BEGIN
 
 	Create Table #UnSuccessFulExternalTransaction
 	(
-	TransactionNo Varchar(max),
+	TransactionNo nvarchar(max),
 	PaymentStatusID int,
 	--PaymentStatus varchar(max),
 	TotalTransactionAmount decimal(8,2),
@@ -31,8 +31,8 @@ BEGIN
 	DECLARE @PaymentStatusTable TABLE 
 (
 	PaymentStatusID INT,
-    StatusDescription VARCHAR(255),
-    StatusColour VARCHAR(255)
+    StatusDescription nvarchar(max),
+    StatusColour nvarchar(max)
 );
 
 ---- Step 2: Insert the function result into the table variable

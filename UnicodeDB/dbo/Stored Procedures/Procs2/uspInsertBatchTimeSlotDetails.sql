@@ -1,15 +1,15 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertBatchTimeSlotDetails]
+CREATE PROCEDURE [dbo].[uspInsertBatchTimeSlotDetails]
 (
 @BatchID INT,
-@ClassMode NVARCHAR(MAX),
-@DayofWeek NVARCHAR(MAX),
-@Period1 NVARCHAR(MAX)=NULL,
-@Period2 NVARCHAR(MAX)=NULL,
-@Period3 NVARCHAR(MAX)=NULL,
-@Period4 NVARCHAR(MAX)=NULL,
-@Period5 NVARCHAR(MAX)=NULL,
-@Period6 NVARCHAR(MAX)=NULL,
-@CreatedBy NVARCHAR(MAX)=''
+@ClassMode Nnvarchar(max),
+@DayofWeek Nnvarchar(max),
+@Period1 Nnvarchar(max)=NULL,
+@Period2 Nnvarchar(max)=NULL,
+@Period3 Nnvarchar(max)=NULL,
+@Period4 Nnvarchar(max)=NULL,
+@Period5 Nnvarchar(max)=NULL,
+@Period6 Nnvarchar(max)=NULL,
+@CreatedBy Nnvarchar(max)=''
 )
 AS
 BEGIN

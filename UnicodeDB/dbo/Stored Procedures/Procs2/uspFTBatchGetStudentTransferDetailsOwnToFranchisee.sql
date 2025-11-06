@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspFTBatchGetStudentTransferDetailsOwnToFranchisee]-- 1,'10/9/2007','10/3/2007'
+CREATE PROCEDURE [dbo].[uspFTBatchGetStudentTransferDetailsOwnToFranchisee]-- 1,'10/9/2007','10/3/2007'
 	@iCenterID INT,
 	@dtCurrentDate DATETIME,
 	@dtReportStartDate DATETIME
@@ -16,7 +16,7 @@ BEGIN
 		Dt_Course_Start_Date DATETIME,
 		Dt_Course_Actual_End_Date DATETIME,
 		N_Amount_Paid NUMERIC(18,2),
-		S_Destination_Center_Code VARCHAR(20)
+		S_Destination_Center_Code nvarchar(max)
 	)
 
 	CREATE TABLE #tempTable1

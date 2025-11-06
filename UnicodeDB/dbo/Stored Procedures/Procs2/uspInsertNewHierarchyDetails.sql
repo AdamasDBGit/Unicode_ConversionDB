@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertNewHierarchyDetails]               
+CREATE PROCEDURE [dbo].[uspInsertNewHierarchyDetails]               
 (              
-  @sLoginID    NVARCHAR(MAX)  
+  @sLoginID    Nnvarchar(max)  
  ,@iStudentDetailId  INT  
  ,@iTransferRequestId  INT 
 )              

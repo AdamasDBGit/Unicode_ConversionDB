@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetGradeDetails] 
+CREATE PROCEDURE [dbo].[uspGetGradeDetails] 
 (
 	@iExamGradeMasterHeaderID int = null
 )
@@ -31,7 +31,7 @@ from T_Exam_Grade_Master where  I_Exam_Grade_Master_Header_ID = @iExamGradeMaste
 END TRY
 BEGIN CATCH
 	rollback transaction
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

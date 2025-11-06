@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[tempInsertCredNote](@StdID NVARCHAR(MAX), @Amt DECIMAL(14,2))
+CREATE PROCEDURE [dbo].[tempInsertCredNote](@StdID Nnvarchar(max), @Amt DECIMAL(14,2))
 AS
 BEGIN
 --DECLARE @StdID VARCHAR(MAX)='1920/RICE/3269'

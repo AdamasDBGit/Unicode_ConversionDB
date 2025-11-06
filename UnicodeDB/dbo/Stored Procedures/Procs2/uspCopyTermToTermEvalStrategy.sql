@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspCopyTermToTermEvalStrategy] 
+CREATE PROCEDURE [dbo].[uspCopyTermToTermEvalStrategy] 
 (
 	@iSourceCourseID Int,
 	@iSourceTermID Int,
-	@sDestinationCourseList NVARCHAR(MAX),
-	@sUpdatedBy NVARCHAR(MAX),
+	@sDestinationCourseList Nnvarchar(max),
+	@sUpdatedBy Nnvarchar(max),
 	@dUpdatedOn DateTime
 )
 
@@ -19,7 +19,7 @@ Begin Try
 	Declare @Source_I_Exam_Type_Master_ID Int
 	Declare @Source_I_TotMarks Int
 	Declare @Source_N_Weightage Numeric(8,2)
-	Declare @Source_S_Remarks Varchar(200)
+	Declare @Source_S_Remarks nvarchar(max)
 	Declare @Source_I_IsPSDate Bit
 	Declare @Source_I_Template_ID Int
 	Declare @Source_I_Exam_Duration Int
@@ -240,7 +240,7 @@ End Try
 
 Begin Catch
 	ROLLBACK TRANSACTION
-	Declare @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	Declare @ErrMsg Nnvarchar(max), @ErrSeverity int
 	Select	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

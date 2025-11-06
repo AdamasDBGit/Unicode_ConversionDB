@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspSaveCourseBridgeMapping]
+CREATE PROCEDURE [dbo].[uspSaveCourseBridgeMapping]
 (
 @iBridgeID INT,
 @iPreviousCourseID INT,
 @iNextCourseID INT,
-@sCreatedBy NVARCHAR(MAX)=NULL,
+@sCreatedBy Nnvarchar(max)=NULL,
 @dtCreatedOn DATETIME = NULL
 )
 AS
@@ -37,7 +37,7 @@ END TRY
 BEGIN CATCH    
  --Error occurred:      
     
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     

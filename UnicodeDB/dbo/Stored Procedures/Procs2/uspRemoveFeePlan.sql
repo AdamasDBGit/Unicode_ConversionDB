@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspRemoveFeePlan] 
+CREATE PROCEDURE [dbo].[uspRemoveFeePlan] 
 (
 	@iFeePlanId int,
 	@dEffectiveEndDate datetime,
-	@sUpdatedBy NVARCHAR(MAX)
+	@sUpdatedBy Nnvarchar(max)
 )
 
 AS
@@ -25,7 +25,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

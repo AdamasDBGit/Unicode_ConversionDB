@@ -1,17 +1,17 @@
-﻿CREATE PROCEDURE [dbo].[GenerateAuditTableTriggerNew]
+CREATE PROCEDURE [dbo].[GenerateAuditTableTriggerNew]
 AS 
     BEGIN
 
-        DECLARE @TableName VARCHAR(64)
-        DECLARE @ColumnName VARCHAR(64)
-        DECLARE @SQLString VARCHAR(MAX)
-        DECLARE @SQLTrigger VARCHAR(MAX)
-        DECLARE @SQLColumn VARCHAR(MAX)
+        DECLARE @TableName nvarchar(max)
+        DECLARE @ColumnName nvarchar(max)
+        DECLARE @SQLString nvarchar(max)
+        DECLARE @SQLTrigger nvarchar(max)
+        DECLARE @SQLColumn nvarchar(max)
         DECLARE @IsUpdateAuditReqd BIT
         DECLARE @IsInsertAuditReqd BIT
         DECLARE @IsDeleteAuditReqd BIT
         DECLARE @IsActiveAvailable BIT
-        DECLARE @CreateOrAlterChk VARCHAR(20)
+        DECLARE @CreateOrAlterChk nvarchar(max)
 	
         CREATE TABLE #AuditColumn
             (

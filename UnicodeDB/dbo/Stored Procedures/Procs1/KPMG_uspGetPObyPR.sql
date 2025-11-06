@@ -1,7 +1,7 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGetPObyPR]
 (	
-	@PR_Id NVARCHAR(MAX)
+	@PR_Id Nnvarchar(max)
 )
 AS
 	BEGIN Try	
@@ -12,7 +12,7 @@ AS
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            

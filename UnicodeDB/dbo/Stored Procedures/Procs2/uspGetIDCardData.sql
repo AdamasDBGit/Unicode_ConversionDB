@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspGetIDCardData]
+CREATE PROCEDURE [dbo].[uspGetIDCardData]
 (
 @BrandID int,
-@sHierarchyListID NVARCHAR(MAX),
+@sHierarchyListID Nnvarchar(max),
 @dtStartDate Datetime,
 @dtEndDate Datetime
 )

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetFeeCompWiseInvoiceSummary]    
+CREATE PROCEDURE [dbo].[uspGetFeeCompWiseInvoiceSummary]    
 (                  
 @iInvoiceHeaderId INT           
 )           
@@ -22,7 +22,7 @@ INNER JOIN dbo.T_Invoice_Child_Detail ICD WITH(NOLOCK) ON ICH.I_Invoice_Child_He
 WHERE IP.I_Invoice_Header_ID = @iInvoiceHeaderId          
 GROUP BY ICD.I_Fee_Component_Id,ICD.I_Display_Fee_Component_ID       
           
-CREATE TABLE #TaxTable(I_Fee_Component_Id INT,I_Tax_ID INT,S_Tax_Desc VARCHAR(50) ,N_Tax_Value NUMERIC(18,2))          
+CREATE TABLE #TaxTable(I_Fee_Component_Id INT,I_Tax_ID INT,S_Tax_Desc nvarchar(max) ,N_Tax_Value NUMERIC(18,2))          
 INSERT INTO #TaxTable          
 SELECT ICD.I_Fee_Component_Id,IDT.I_Tax_ID,TM.S_Tax_Desc,SUM(ISNULL(IDT.N_Tax_Value,0))          
 FROM dbo.T_Invoice_Parent IP WITH(NOLOCK)          
@@ -64,15 +64,15 @@ FROM #FINALTABLE FT
 UPDATE  #FINALTABLE SET  N_Amount_Due = N_Amount_Due + N_Discount_Amount     
         
       
-DECLARE @TAX TABLE (ROWID INT IDENTITY(1,1),I_Tax_ID VARCHAR(50),S_Tax_Desc VARCHAR(50))      
+DECLARE @TAX TABLE (ROWID INT IDENTITY(1,1),I_Tax_ID nvarchar(max),S_Tax_Desc nvarchar(max))      
 INSERT INTO @TAX      
 SELECT DISTINCT I_Tax_ID,S_Tax_Desc FROM #TaxTable      
       
 DECLARE @min INT      
 DECLARE @max INT      
-DECLARE @strSQL NVARCHAR(500)      
-DECLARE @strSQL2 NVARCHAR(500)      
-DECLARE @sColumnName VARCHAR(50)      
+DECLARE @strSQL Nnvarchar(max)      
+DECLARE @strSQL2 Nnvarchar(max)      
+DECLARE @sColumnName nvarchar(max)      
       
       
 SELECT @min = MIN(ROWID), @max = MAX(ROWID) FROM @TAX      
@@ -80,7 +80,7 @@ WHILE @min <= @max
 BEGIN      
  SET @sColumnName = 'TAX'      
  SELECT @sColumnName = @sColumnName+I_Tax_ID FROM @TAX WHERE ROWID = @min      
- SET @strSQL = N'ALTER TABLE #FINALTABLE ADD ' + @sColumnName + ' VARCHAR(100)'      
+ SET @strSQL = N'ALTER TABLE #FINALTABLE ADD ' + @sColumnName + ' nvarchar(max)'      
  exec sp_executesql @strSQL      
       
  UPDATE #TaxTable SET S_Tax_Desc = @sColumnName FROM #TaxTable WHERE I_Tax_ID IN      

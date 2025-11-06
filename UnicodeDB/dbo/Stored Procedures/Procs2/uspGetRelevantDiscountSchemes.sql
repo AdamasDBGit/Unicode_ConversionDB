@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetRelevantDiscountSchemes]    
+CREATE PROCEDURE [dbo].[uspGetRelevantDiscountSchemes]    
 (    
- @sCourseIdList NVARCHAR(MAX),    
+ @sCourseIdList Nnvarchar(max),    
  @iCenterID int     
 )    
     

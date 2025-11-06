@@ -1,24 +1,24 @@
-﻿
+
 
     
 CREATE PROCEDURE [dbo].[KPMG_uspStudyMaterialIssue] 
     
-@StudentBarCodeNo nvarchar(255),    
-@MaterialBarCode nvarchar(255),    
-@ReplacedBarCode nvarchar(255),    
-@ReissueReceiptNo nvarchar(255),    
-@StudyMaterialName nvarchar(255),    
-@Context nvarchar(255)    
+@StudentBarCodeNo nnvarchar(max),    
+@MaterialBarCode nnvarchar(max),    
+@ReplacedBarCode nnvarchar(max),    
+@ReissueReceiptNo nnvarchar(max),    
+@StudyMaterialName nnvarchar(max),    
+@Context nnvarchar(max)    
     
 AS    
 BEGIN TRY     
-DECLARE @ERROR NVARCHAR(MAX)    
+DECLARE @ERROR Nnvarchar(max)    
 DECLARE @STUDENTID INT    
 DECLARE @INSTALLMENTNO INT    
 DECLARE @STUDYMATERIALID INT    
-DECLARE @STATUS NVARCHAR(MAX)    
-DECLARE @itemCode NVARCHAR(255)    
-DECLARE @ISSUED_STUDY_MATERIAL NVARCHAR(255)    
+DECLARE @STATUS Nnvarchar(max)    
+DECLARE @itemCode Nnvarchar(max)    
+DECLARE @ISSUED_STUDY_MATERIAL Nnvarchar(max)    
      
  IF (ISNULL(@StudentBarCodeNo,'')<>'')    
   BEGIN     
@@ -101,7 +101,7 @@ DECLARE @ISSUED_STUDY_MATERIAL NVARCHAR(255)
 END TRY    
 BEGIN CATCH    
      
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
     
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    

@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetTeacherByToken]  
+CREATE PROCEDURE [dbo].[usp_ERP_GetTeacherByToken]  
 (  
- @sToken nvarchar(max)  
+ @sToken nnvarchar(max)  
 )  
 AS  
 BEGIN  

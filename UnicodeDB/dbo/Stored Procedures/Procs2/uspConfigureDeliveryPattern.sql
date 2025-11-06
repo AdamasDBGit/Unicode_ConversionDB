@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspConfigureDeliveryPattern] 
+CREATE PROCEDURE [dbo].[uspConfigureDeliveryPattern] 
 (
 	 @iCourseID int,
-	 @sUpdatedBy NVARCHAR(MAX),
+	 @sUpdatedBy Nnvarchar(max),
 	 @dUpdatedOn datetime,
-	 @sDeliveryPatternIdList NVARCHAR(MAX)
+	 @sDeliveryPatternIdList Nnvarchar(max)
 )
 
 AS
@@ -29,7 +29,7 @@ BEGIN TRY
 
 	SET @iNoOfSession_CM=ISNULL((SELECT I_No_Of_Session FROM dbo.T_Course_Master WHERE I_Course_ID=@iCourseID),0)
 	--SELECT @iNoOfSession_CM
-		DECLARE @iDeliveryPatternID varchar(10), @iPos int
+		DECLARE @iDeliveryPatternID nvarchar(max), @iPos int
 
 		SET @sDeliveryPatternIdList = LTRIM(RTRIM(@sDeliveryPatternIdList))+ ','
 		SET @iPos = CHARINDEX(',', @sDeliveryPatternIdList, 1)
@@ -91,7 +91,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

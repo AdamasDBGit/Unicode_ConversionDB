@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGetUnAcknowledgedPoItems]
 
 
@@ -8,7 +8,7 @@ BEGIN
 	
 
 	SET NOCOUNT ON;
-	DECLARE @TempTable TABLE (ID INT , OraclePoId VARCHAR(100), PO_PR_Id INT)
+	DECLARE @TempTable TABLE (ID INT , OraclePoId nvarchar(max), PO_PR_Id INT)
 	IF EXISTS(SELECT 1 FROM Tbl_KPMG_PoDetailItems WHERE Fld_KPMG_Status=4)
 	BEGIN
 		INSERT INTO @TempTable (OraclePoId,PO_PR_Id)

@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyHierarchyLevelMaster] 
+CREATE PROCEDURE [dbo].[uspModifyHierarchyLevelMaster] 
 (
 	@iHierarchyLevelID int = null,
 	@iHierarchyMasterID int,
-	@sHierarchyLevelCode NVARCHAR(MAX) = null,
-	@sHierarchyLevelName NVARCHAR(MAX) = null,
+	@sHierarchyLevelCode Nnvarchar(max) = null,
+	@sHierarchyLevelName Nnvarchar(max) = null,
 	@iIsLastNode int,
 	@iSequence int,
-    @sHierarchyLevelBy NVARCHAR(MAX),
+    @sHierarchyLevelBy Nnvarchar(max),
 	@dHierarchyLevelOn datetime,
     @iFlag int
 )
@@ -16,7 +16,7 @@ BEGIN TRY
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON
 	
-	DECLARE @sErrorCode varchar(20)
+	DECLARE @sErrorCode nvarchar(max)
 
     IF @iFlag = 1
 	BEGIN
@@ -75,7 +75,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

@@ -1,20 +1,20 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyCompanyUserStudent]
+CREATE PROCEDURE [dbo].[uspModifyCompanyUserStudent]
 	@iUserID int,
-	@sLoginID NVARCHAR(MAX),
-	@sPassword NVARCHAR(MAX)=NULL,
-	@sTitle NVARCHAR(MAX)=NULL,
-	@sFirstName NVARCHAR(MAX),
-	@sMiddleName NVARCHAR(MAX)=NULL,
-	@sLastName NVARCHAR(MAX)=NULL,
-	@sEmailID NVARCHAR(MAX)=NULL,
-	@sUserType NVARCHAR(MAX),
-	@sForgotPasswordQuestion NVARCHAR(MAX)=NULL,
-	@sForgotPasswordAnswer NVARCHAR(MAX)=NULL,	
+	@sLoginID Nnvarchar(max),
+	@sPassword Nnvarchar(max)=NULL,
+	@sTitle Nnvarchar(max)=NULL,
+	@sFirstName Nnvarchar(max),
+	@sMiddleName Nnvarchar(max)=NULL,
+	@sLastName Nnvarchar(max)=NULL,
+	@sEmailID Nnvarchar(max)=NULL,
+	@sUserType Nnvarchar(max),
+	@sForgotPasswordQuestion Nnvarchar(max)=NULL,
+	@sForgotPasswordAnswer Nnvarchar(max)=NULL,	
 	@iReferenceID int = null,
 	@iHierarchyMasterID int=NULL,
 	@iHierarchyDetailID int=NULL,
 	@iOldHierarchyDetailID int=NULL,
-	@sCreatedBy NVARCHAR(MAX),
+	@sCreatedBy Nnvarchar(max),
 	@DOB DATETIME,
 	@iflag int
 AS
@@ -22,7 +22,7 @@ BEGIN TRY
 	
 	SET NOCOUNT ON;
 	DECLARE @iTempUserID int;
-	DECLARE @sSequence varchar(10)
+	DECLARE @sSequence nvarchar(max)
 	DECLARE @iSequence int
 	DECLARE @iStudentHierarchyDetailID int
 	DECLARE @iStudentMasterID int
@@ -228,7 +228,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

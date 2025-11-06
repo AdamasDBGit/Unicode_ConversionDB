@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspCheckExamCompDependency]  
+CREATE PROCEDURE [dbo].[uspCheckExamCompDependency]  
   
  -- Add the parameters for the stored procedure here  
  @iExamComponentID INT  
@@ -15,7 +15,7 @@ END TRY
 BEGIN CATCH  
  --Error occurred:    
   
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
   

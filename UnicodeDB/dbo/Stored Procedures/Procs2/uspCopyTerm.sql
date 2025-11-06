@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspCopyTerm]
+CREATE PROCEDURE [dbo].[uspCopyTerm]
 (
 	@iSourceTermID INT,	
 	
-	@sDestinationTermCode NVARCHAR(MAX),
-	@sDestinationTermName NVARCHAR(MAX),
+	@sDestinationTermCode Nnvarchar(max),
+	@sDestinationTermName Nnvarchar(max),
 
-	@sUpdatedBy NVARCHAR(MAX),
+	@sUpdatedBy Nnvarchar(max),
 	@dUpdatedOn DATETIME,
 	@iDestinationBrandID INT
 )
@@ -81,7 +81,7 @@ END TRY
 
 BEGIN CATCH
 	ROLLBACK TRANSACTION
-    DECLARE @ErrMsg NVARCHAR(4000),@ErrSeverity INT
+    DECLARE @ErrMsg Nnvarchar(max),@ErrSeverity INT
     SELECT  @ErrMsg = ERROR_MESSAGE(),@ErrSeverity = ERROR_SEVERITY()
     RAISERROR ( @ErrMsg, @ErrSeverity, 1 )
 

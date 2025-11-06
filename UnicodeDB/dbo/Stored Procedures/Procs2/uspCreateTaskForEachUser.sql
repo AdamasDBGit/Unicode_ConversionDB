@@ -1,13 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[uspCreateTaskForEachUser]  
+CREATE PROCEDURE [dbo].[uspCreateTaskForEachUser]  
 (  
  @iTaskID INT,  
- @sCreatedBy NVARCHAR(MAX),  
- @sTrustDomain NVARCHAR(MAX) = null,  
- @sStudentIDs NVARCHAR(MAX) = null,  
- @sCenterID NVARCHAR(MAX) = null,  
+ @sCreatedBy Nnvarchar(max),  
+ @sTrustDomain Nnvarchar(max) = null,  
+ @sStudentIDs Nnvarchar(max) = null,  
+ @sCenterID Nnvarchar(max) = null,  
  @iEmployeeID INT = null,  
  @iRoleID INT = null,  
- @sHierarchyChain NVARCHAR(MAX),
+ @sHierarchyChain Nnvarchar(max),
  @iUserID INT = NULL
 )  
    
@@ -17,7 +17,7 @@ BEGIN TRY
  CREATE TABLE #TEMPUSERTABLE  
  (  
   I_User_ID INT,  
-  S_Login_ID VARCHAR(200)  
+  S_Login_ID nvarchar(max)  
  )  
   
  INSERT INTO #TEMPUSERTABLE  
@@ -156,7 +156,7 @@ BEGIN TRY
      
     SELECT @iCenterIDTemp = I_Center_ID from #TempCenterTable where ID_Identity = @iCount1  
       
-    Declare @sHierarchyCenterChain VARCHAR(200)  
+    Declare @sHierarchyCenterChain nvarchar(max)  
   
     SELECT @sHierarchyCenterChain = S_Hierarchy_Chain  
      FROM dbo.T_Hierarchy_Mapping_Details HMD  
@@ -257,7 +257,7 @@ END TRY
 BEGIN CATCH  
  --Error occurred:    
   
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
  RAISERROR(@ErrMsg, @ErrSeverity, 1)  

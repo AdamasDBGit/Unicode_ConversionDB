@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateBatchForCenter]
+CREATE PROCEDURE [dbo].[uspUpdateBatchForCenter]
     (
       @iBatchId INT ,
       @iCenterId INT = NULL ,
       @MaxStrength INT ,
       @MinRegnAmt DECIMAL(10, 2) ,
-      @UpdtBy NVARCHAR(MAX) ,
+      @UpdtBy Nnvarchar(max) ,
       @UpdtOn DATETIME ,
       @EmpID INT ,
       @Status INT ,              
@@ -15,23 +15,23 @@
       @iAdmissionGraceDays INT ,
       @MinStrength INT ,
       @iLateFeeGraceDays INT ,
-      @sBatchName NVARCHAR(MAX) ,
+      @sBatchName Nnvarchar(max) ,
       @DtBatchIntroductionDate DATETIME = NULL ,
-      @sIntroductionTime NVARCHAR(MAX) = NULL,
+      @sIntroductionTime Nnvarchar(max) = NULL,
 	  @DtMBatchStartDate DATETIME=NULL,
 	  @iBatchType INT=1,
-	  @S_ClassDays NVARCHAR(MAX)='',
-	  @S_OfflineClassTime NVARCHAR(MAX)='',
-	  @S_OnlineClassTime NVARCHAR(MAX)='',
-	  @S_HandoutClassTime NVARCHAR(MAX)='',
-	  @S_ClassMode NVARCHAR(MAX)='',
-	  @S_BatchTime NVARCHAR(MAX)=''
+	  @S_ClassDays Nnvarchar(max)='',
+	  @S_OfflineClassTime Nnvarchar(max)='',
+	  @S_OnlineClassTime Nnvarchar(max)='',
+	  @S_HandoutClassTime Nnvarchar(max)='',
+	  @S_ClassMode Nnvarchar(max)='',
+	  @S_BatchTime Nnvarchar(max)=''
     )
 AS
     BEGIN TRY                
             
         DECLARE @dtprevStartDate DATETIME = NULL            
-        DECLARE @Message VARCHAR(MAX)              
+        DECLARE @Message nvarchar(max)              
              
  --Get Old Start Date            
              
@@ -326,7 +326,7 @@ AS
                  
     END TRY                
     BEGIN CATCH          
-        DECLARE @ErrorMessage NVARCHAR(4000);            
+        DECLARE @ErrorMessage Nnvarchar(max);            
         DECLARE @ErrorSeverity INT;            
         DECLARE @ErrorState INT;            
             

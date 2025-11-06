@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspSearchStudentListForOnAccountRefund]
+CREATE PROCEDURE [dbo].[uspSearchStudentListForOnAccountRefund]
     (
       @iCenterID INT ,
-      @sStudentId NVARCHAR(MAX) = NULL ,
-      @sStudentFirstName NVARCHAR(MAX) = NULL ,
-      @sStudentSecondName NVARCHAR(MAX) = NULL ,
-      @sStudentLastName NVARCHAR(MAX) = NULL ,
-      @sEnquiryNo NVARCHAR(MAX) = NULL        
+      @sStudentId Nnvarchar(max) = NULL ,
+      @sStudentFirstName Nnvarchar(max) = NULL ,
+      @sStudentSecondName Nnvarchar(max) = NULL ,
+      @sStudentLastName Nnvarchar(max) = NULL ,
+      @sEnquiryNo Nnvarchar(max) = NULL        
     )
 AS 
     BEGIN        

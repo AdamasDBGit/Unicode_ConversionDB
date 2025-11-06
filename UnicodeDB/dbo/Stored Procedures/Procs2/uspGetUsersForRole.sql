@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspGetUsersForRole]
+CREATE PROCEDURE [dbo].[uspGetUsersForRole]
 (
 	@iCenterID int,
-	@srole NVARCHAR(MAX) = null
+	@srole Nnvarchar(max) = null
 )
 AS
 BEGIN

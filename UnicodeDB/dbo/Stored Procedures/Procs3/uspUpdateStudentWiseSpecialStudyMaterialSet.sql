@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateStudentWiseSpecialStudyMaterialSet]      
-@StudentDetailId NVARCHAR(500),      
+CREATE PROCEDURE [dbo].[uspUpdateStudentWiseSpecialStudyMaterialSet]      
+@StudentDetailId Nnvarchar(max),      
 @ExamDetails XML      
 AS      
 BEGIN TRY       
@@ -10,10 +10,10 @@ select @iStudentID=I_student_detail_id from T_student_detail where S_student_id 
  CREATE TABLE #tempStudentExaminationDetails  
             (  
               Fld_KPMG_ExaminationId int,  
-              Fld_KPMG_StudentDetailId NVARCHAR(250),  
-              Fld_KPMG_MaterialBarCode NVARCHAR(500),  
+              Fld_KPMG_StudentDetailId Nnvarchar(max),  
+              Fld_KPMG_MaterialBarCode Nnvarchar(max),  
               I_Student_detail_id INT,  
-              Fld_KPMG_Admit_Path VARCHAR(500)  
+              Fld_KPMG_Admit_Path nvarchar(max)  
             )            
      
 INSERT INTO #tempStudentExaminationDetails  
@@ -26,9 +26,9 @@ INSERT INTO #tempStudentExaminationDetails
        SELECT      
  a.b.value('EXAMID[1]','INT') ,      
  @StudentDetailId,      
- CASE WHEN ISNULL(a.b.value('BARCODE[1]','nvarchar(500)'),'')<>'' THEN a.b.value('BARCODE[1]','nvarchar(500)')  ELSE  null END,    
+ CASE WHEN ISNULL(a.b.value('BARCODE[1]','nnvarchar(max)'),'')<>'' THEN a.b.value('BARCODE[1]','nnvarchar(max)')  ELSE  null END,    
  @iStudentID,    
- a.b.value('FileName[1]','varchar(500)')    
+ a.b.value('FileName[1]','nvarchar(max)')    
  FROM @ExamDetails.nodes('ROOT/EXAM') a(b)  
    
    IF NOT EXISTS(SELECT * FROM Tbl_KPMG_StudentExaminationDetails TKS INNER JOIN #tempStudentExaminationDetails temp ON TKS.I_Student_Detail_ID = temp.I_Student_detail_id  
@@ -38,9 +38,9 @@ INSERT INTO Tbl_KPMG_StudentExaminationDetails (Fld_KPMG_ExaminationId,Fld_KPMG_
  SELECT      
  a.b.value('EXAMID[1]','INT') ,      
  @StudentDetailId,      
- CASE WHEN ISNULL(a.b.value('BARCODE[1]','nvarchar(500)'),'')<>'' THEN a.b.value('BARCODE[1]','nvarchar(500)')  ELSE  null END,    
+ CASE WHEN ISNULL(a.b.value('BARCODE[1]','nnvarchar(max)'),'')<>'' THEN a.b.value('BARCODE[1]','nnvarchar(max)')  ELSE  null END,    
  @iStudentID,    
- a.b.value('FileName[1]','varchar(500)')    
+ a.b.value('FileName[1]','nvarchar(max)')    
  FROM @ExamDetails.nodes('ROOT/EXAM') a(b)     
    END   
  ELSE   
@@ -57,7 +57,7 @@ INSERT INTO Tbl_KPMG_StudentExaminationDetails (Fld_KPMG_ExaminationId,Fld_KPMG_
 END TRY      
 BEGIN CATCH      
       
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int      
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int      
       
  SELECT @ErrMsg = ERROR_MESSAGE(),      
    @ErrSeverity = ERROR_SEVERITY()      

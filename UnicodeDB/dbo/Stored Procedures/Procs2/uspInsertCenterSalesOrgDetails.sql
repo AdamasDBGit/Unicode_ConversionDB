@@ -1,17 +1,17 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertCenterSalesOrgDetails]
+CREATE PROCEDURE [dbo].[uspInsertCenterSalesOrgDetails]
 	(
 		@iSelectedHierarchyId int,
 		@iSelectedBrandId int,
 		@iCourseID int,
 		@iDeliveryID int,
 		@iFeePlanID int,
-		@sCreatedBy NVARCHAR(MAX),
+		@sCreatedBy Nnvarchar(max),
 		@dCreatedOn datetime
 	)
 AS
 BEGIN
 	SET NOCOUNT OFF;
-	DECLARE @sSearchCriteria varchar(20)
+	DECLARE @sSearchCriteria nvarchar(max)
 	
 	SELECT @sSearchCriteria= S_Hierarchy_Chain from T_Hierarchy_Mapping_Details where I_Hierarchy_detail_id = @iSelectedHierarchyId  
 		

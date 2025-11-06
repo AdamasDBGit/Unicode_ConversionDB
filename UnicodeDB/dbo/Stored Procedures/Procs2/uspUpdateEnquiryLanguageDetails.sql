@@ -1,4 +1,4 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[uspUpdateEnquiryLanguageDetails] 
 	-- Add the parameters for the stored procedure here
@@ -8,7 +8,7 @@ CREATE PROCEDURE [dbo].[uspUpdateEnquiryLanguageDetails]
 AS
  BEGIN TRY
 	
-	DECLARE @LanguageID INT,@LanguageName VARCHAR(200)
+	DECLARE @LanguageID INT,@LanguageName nvarchar(max)
 	select Top 1 @LanguageID=I_Language_ID,@LanguageName=I_Language_Name from T_course_Master
 	where I_Course_ID in (select TOP 1 I_Course_ID from T_Enquiry_Course where I_Enquiry_Regn_ID=@iEnquiryID)
 
@@ -36,7 +36,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

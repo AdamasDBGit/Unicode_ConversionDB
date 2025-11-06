@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateCenterHierarchyNameDetails]
+CREATE PROCEDURE [dbo].[uspUpdateCenterHierarchyNameDetails]
 AS
 BEGIN
 	DECLARE @index INT, @rowCount INT, @iTempCenterID INT
 	DECLARE @tblCenter TABLE(ID INT IDENTITY(1,1), CenterId INT)
 	DECLARE @tblTempHierarchy TABLE (ID INT)
-	DECLARE @iHierarchDetailID INT, @sHierarchyChain VARCHAR(100)
-	DECLARE @CenterName VARCHAR(100), @BrandID INT, @BrandName VARCHAR(100), @RegionID INT, @RegionName VARCHAR(100)
-	DECLARE @TerritoryID INT, @TerritoryName VARCHAR(100), @CityID INT, @CityName VARCHAR(100)
+	DECLARE @iHierarchDetailID INT, @sHierarchyChain nvarchar(max)
+	DECLARE @CenterName nvarchar(max), @BrandID INT, @BrandName nvarchar(max), @RegionID INT, @RegionName nvarchar(max)
+	DECLARE @TerritoryID INT, @TerritoryName nvarchar(max), @CityID INT, @CityName nvarchar(max)
 	
 	
 	INSERT INTO @tblCenter

@@ -1,17 +1,17 @@
-﻿CREATE PROCEDURE [dbo].[uspCopyCourse]  
+CREATE PROCEDURE [dbo].[uspCopyCourse]  
 (  
  @iSourceBrandID AS INT,  
  @iSourceCourseFamilyID AS INT,  
  @iSourceCourseID AS INT,  
- @sSourceCourseCode AS VARCHAR(500),  
+ @sSourceCourseCode AS nvarchar(max),  
   
  @iDestinationBrandID AS INT,  
  @iDestinationCourseFamilyID AS INT,  
- @sDestinationCourseCode AS VARCHAR(500),  
- @sDestinationCourseName AS VARCHAR(500),  
- @sDestinationCourseDescription AS VARCHAR(800),  
+ @sDestinationCourseCode AS nvarchar(max),  
+ @sDestinationCourseName AS nvarchar(max),  
+ @sDestinationCourseDescription AS nvarchar(max),  
   
- @sUpdatedBy AS VARCHAR(100),  
+ @sUpdatedBy AS nvarchar(max),  
  @dUpdatedOn AS DATETIME  
 )  
    
@@ -214,7 +214,7 @@ BEGIN TRY
 END TRY  
 BEGIN CATCH      
   ROLLBACK TRANSACTION     
-  DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int      
+  DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int      
   SELECT @ErrMsg = ERROR_MESSAGE(),      
     @ErrSeverity = ERROR_SEVERITY()      
        

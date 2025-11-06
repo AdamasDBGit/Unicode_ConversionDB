@@ -1,11 +1,11 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspCheckStudyMateialStatus]
 
 
-@MaterialBarCode nvarchar(255),
+@MaterialBarCode nnvarchar(max),
 @STUDENTID INT,
-@StudyMaterialName nvarchar(255),
-@MATERIAL_STATUS nvarchar(255) output
+@StudyMaterialName nnvarchar(max),
+@MATERIAL_STATUS nnvarchar(max) output
 
 AS
 BEGIN TRY 
@@ -81,7 +81,7 @@ PRINT @MATERIAL_STATUS+'333'
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

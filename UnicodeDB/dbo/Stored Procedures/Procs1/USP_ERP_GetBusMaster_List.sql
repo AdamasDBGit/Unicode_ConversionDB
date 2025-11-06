@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[USP_ERP_GetBusMaster_List]
+CREATE PROCEDURE [dbo].[USP_ERP_GetBusMaster_List]
 (
     @iBrandID   INT,
-    @Search     NVARCHAR(100) = NULL,  -- optional search text
+    @Search     Nnvarchar(max) = NULL,  -- optional search text
     @Limit      INT = NULL,            -- pagination
     @Offset     INT = NULL             -- pagination
 )
@@ -13,9 +13,9 @@ BEGIN
     CREATE TABLE #BusList
     (
         I_Bus_ID INT,
-        S_Bus_Number NVARCHAR(50),
+        S_Bus_Number Nnvarchar(max),
         I_Total_Seat INT,
-        S_Tracking_Device_ID NVARCHAR(50),
+        S_Tracking_Device_ID Nnvarchar(max),
         I_Flag TINYINT,
         Dt_CreatedAt DATETIME,
         Dt_UpdatedAt DATETIME

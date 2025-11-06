@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspGetUserLoginInformationAdmin]
+CREATE PROCEDURE [dbo].[uspGetUserLoginInformationAdmin]
     (
-      @vLoginID NVARCHAR(MAX) ,
-      @vPassword NVARCHAR(200)
+      @vLoginID Nnvarchar(max) ,
+      @vPassword Nnvarchar(max)
     )
 AS
     BEGIN
@@ -9,8 +9,8 @@ AS
 	-- interfering with SELECT statements.
         SET NOCOUNT ON;
 	
-        DECLARE @vUserType VARCHAR(20)
-        DECLARE @vPasswordTemp NVARCHAR(200)
+        DECLARE @vUserType nvarchar(max)
+        DECLARE @vPasswordTemp Nnvarchar(max)
         DECLARE @iUserID INT
         DECLARE @bLDAPUser BIT
 

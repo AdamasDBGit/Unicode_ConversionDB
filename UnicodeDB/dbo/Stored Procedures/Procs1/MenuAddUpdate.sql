@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[MenuAddUpdate] 
+CREATE PROCEDURE [dbo].[MenuAddUpdate] 
 -- =============================================
      -- Author:	Tridip Chatterjee
 -- Create date: 20-09-2023
@@ -7,12 +7,12 @@
 -- Add the parameters for the stored procedure here
 	
 @MenuID int =null,
-@MenuCode nvarchar(255)=null,
-@MenuName NVARCHAR(MAX)=null,
+@MenuCode nnvarchar(max)=null,
+@MenuName Nnvarchar(max)=null,
 @ParentMenuID int =null,
 @LeafNode int =null,
-@Icon nvarchar(255)=null,
-@Url  nvarchar(255)=null,
+@Icon nnvarchar(max)=null,
+@Url  nnvarchar(max)=null,
 @CreatedBy int=null,
 @Status int =null
 

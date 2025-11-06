@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[usp_ERP_Get_Discounted_Revised_Installments_BKP_June_2025]  
  -- Add the parameters for the stored procedure here  
  @iDiscountSchemeID int,  
@@ -112,7 +112,7 @@ WHERE
  declare @DiscountRate int=null;  
  declare @DiscountAmount int=null;  
  DECLARE @EligibleCount int=0;  
- DECLARE @CompoName varchar(max)=NULL;  
+ DECLARE @CompoName nvarchar(max)=NULL;  
   
  while(@ID <= @maxID )  
  begin  

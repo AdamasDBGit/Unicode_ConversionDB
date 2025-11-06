@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspGetDueListForDiscontinuation]
+CREATE PROCEDURE [dbo].[uspGetDueListForDiscontinuation]
     (
       @iBrandID INT ,
-      @sHierarchyListID NVARCHAR(MAX) ,
-      @sStudentID NVARCHAR(MAX) = NULL ,
-      @sFirstName NVARCHAR(MAX) = NULL ,
-      @sMiddleName NVARCHAR(MAX) = NULL ,
-      @sLastName NVARCHAR(MAX) = NULL
+      @sHierarchyListID Nnvarchar(max) ,
+      @sStudentID Nnvarchar(max) = NULL ,
+      @sFirstName Nnvarchar(max) = NULL ,
+      @sMiddleName Nnvarchar(max) = NULL ,
+      @sLastName Nnvarchar(max) = NULL
     )
 AS
     BEGIN
@@ -15,22 +15,22 @@ AS
         CREATE TABLE #DUEREPORT
             (
               I_Student_Detail_ID INT ,
-              S_Mobile_No VARCHAR(50) ,
-              S_Student_ID VARCHAR(100) ,
+              S_Mobile_No nvarchar(max) ,
+              S_Student_ID nvarchar(max) ,
               I_Roll_No INT ,
-              S_Student_Name VARCHAR(200) ,
-              S_Invoice_No VARCHAR(100) ,
-              S_Receipt_No VARCHAR(100) ,
+              S_Student_Name nvarchar(max) ,
+              S_Invoice_No nvarchar(max) ,
+              S_Receipt_No nvarchar(max) ,
               Dt_Invoice_Date DATETIME ,
               I_Fee_Component_ID INT ,
-              S_Component_Name VARCHAR(100) ,
-              S_Batch_Name VARCHAR(100) ,
-              S_Course_Name VARCHAR(100) ,
+              S_Component_Name nvarchar(max) ,
+              S_Batch_Name nvarchar(max) ,
+              S_Course_Name nvarchar(max) ,
               I_Center_ID INT ,
-              S_Center_Name VARCHAR(100) ,
-              TypeofCentre VARCHAR(MAX) ,
-              S_Brand_Name VARCHAR(100) ,
-              S_Cost_Center VARCHAR(100) ,
+              S_Center_Name nvarchar(max) ,
+              TypeofCentre nvarchar(max) ,
+              S_Brand_Name nvarchar(max) ,
+              S_Cost_Center nvarchar(max) ,
               Due_Value REAL ,
               Dt_Installment_Date DATETIME ,
               I_Installment_No INT ,
@@ -45,14 +45,14 @@ AS
               Total_Due DECIMAL(14, 2) ,
               IsGSTImplemented INT ,
               Age INT ,
-              instanceChain VARCHAR(MAX)
+              instanceChain nvarchar(max)
             )         
               
         INSERT  INTO #DUEREPORT
-                EXEC REPORT.uspGetDueReport_History @sHierarchyList = @sHierarchyListID, -- varchar(max)
+                EXEC REPORT.uspGetDueReport_History @sHierarchyList = @sHierarchyListID, -- nvarchar(max)
                     @iBrandID = @iBrandID, -- int
                     @dtUptoDate = @dtUptoDate, -- datetime
-                    @sStatus = 'ALL' -- varchar(100)
+                    @sStatus = 'ALL' -- nvarchar(max)
     
         IF ( @sStudentID IS NULL
              AND @sFirstName IS NULL

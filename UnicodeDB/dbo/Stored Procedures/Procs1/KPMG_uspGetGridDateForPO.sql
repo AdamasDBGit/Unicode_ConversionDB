@@ -1,6 +1,6 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGetGridDateForPO]
-@POID	NVARCHAR(MAX),
+@POID	Nnvarchar(max),
 @ItemID	xml
 --@STR_PASSWORD	NVARCHAR(MAX)
 --@STR_USERSESSION	NVARCHAR(MAX)
@@ -14,8 +14,8 @@ BEGIN
 	 Declare @TempTable table
     (    
 		ID INT,
-		PoId varchar(255),
-		ItemId varchar(255)
+		PoId nvarchar(max),
+		ItemId nvarchar(max)
     )
 	
 	IF ISNULL(CAST(@ItemID as varchar(max)),'') <> ''
@@ -24,7 +24,7 @@ BEGIN
 		INSERT INTO @TempTable (ID,PoId,ItemId) 
 		SELECT Tbl_KPMG_PoDetails.Fld_KPMG_PoPr_Id,Tbl_KPMG_PoDetails.Fld_KPMG_PO_Id,Tbl_KPMG_PoDetails.Fld_KPMG_Item_Id 
 		FROM Tbl_KPMG_PoDetails join @ItemID.nodes('/root/Id') COM(Col)
-		ON Tbl_KPMG_PoDetails.Fld_KPMG_Item_Id  = COM.Col.value('.[1]','VARCHAR(100)')
+		ON Tbl_KPMG_PoDetails.Fld_KPMG_Item_Id  = COM.Col.value('.[1]','nvarchar(max)')
 		 WHERE Tbl_KPMG_PoDetails.Fld_KPMG_PO_Id = @POID	
 		
 

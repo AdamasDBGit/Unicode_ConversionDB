@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetAdvanceFromStudentWithInvoiceNo]    
+CREATE PROCEDURE [dbo].[usp_ERP_GetAdvanceFromStudentWithInvoiceNo]    
 (    
-  @sHierarchyList NVARCHAR(MAX) =Null,    
+  @sHierarchyList Nnvarchar(max) =Null,    
   @iBrandID INT =Null,    
   @dtfromDate DATETIME=Null  ,
   @dtUptoDate DATETIME =Null,    
-  @sStatus NVARCHAR(MAX) = 'ALL'     
+  @sStatus Nnvarchar(max) = 'ALL'     
   
 )    
 AS    
@@ -105,20 +105,20 @@ BEGIN
         CREATE TABLE #temp    
         (    
             I_Student_Detail_ID INT ,    
-            S_Mobile_No VARCHAR(50) ,    
-            S_Student_ID VARCHAR(100) ,    
+            S_Mobile_No nvarchar(max) ,    
+            S_Student_ID nvarchar(max) ,    
             I_Roll_No INT ,    
-            S_Student_Name VARCHAR(200) ,    
-            S_Invoice_No VARCHAR(100) ,    
-            S_Receipt_No VARCHAR(100) ,    
+            S_Student_Name nvarchar(max) ,    
+            S_Invoice_No nvarchar(max) ,    
+            S_Receipt_No nvarchar(max) ,    
             Dt_Invoice_Date DATETIME ,    
-            S_Component_Name VARCHAR(100) ,    
-            S_Batch_Name VARCHAR(100) ,    
-            S_Course_Name VARCHAR(100) ,    
+            S_Component_Name nvarchar(max) ,    
+            S_Batch_Name nvarchar(max) ,    
+            S_Course_Name nvarchar(max) ,    
             I_Center_ID INT ,    
-            S_Center_Name VARCHAR(100) ,    
-            S_Brand_Name VARCHAR(100) ,    
-            S_Cost_Center VARCHAR(100) ,    
+            S_Center_Name nvarchar(max) ,    
+            S_Brand_Name nvarchar(max) ,    
+            S_Cost_Center nvarchar(max) ,    
             Due_Value REAL ,    
             Dt_Installment_Date DATETIME ,    
             I_Installment_No INT ,    
@@ -298,20 +298,20 @@ BEGIN
         CREATE TABLE #temphistory    
         (    
             I_Student_Detail_ID INT ,    
-            S_Mobile_No VARCHAR(50) ,    
-            S_Student_ID VARCHAR(100) ,    
+            S_Mobile_No nvarchar(max) ,    
+            S_Student_ID nvarchar(max) ,    
             I_Roll_No INT ,    
-            S_Student_Name VARCHAR(200) ,    
-            S_Invoice_No VARCHAR(100) ,    
-            S_Receipt_No VARCHAR(100) ,    
+            S_Student_Name nvarchar(max) ,    
+            S_Invoice_No nvarchar(max) ,    
+            S_Receipt_No nvarchar(max) ,    
             Dt_Invoice_Date DATETIME ,    
-            S_Component_Name VARCHAR(100) ,    
-            S_Batch_Name VARCHAR(100) ,    
-            S_Course_Name VARCHAR(100) ,    
+            S_Component_Name nvarchar(max) ,    
+            S_Batch_Name nvarchar(max) ,    
+            S_Course_Name nvarchar(max) ,    
             I_Center_ID INT ,    
-            S_Center_Name VARCHAR(100) ,    
-            S_Brand_Name VARCHAR(100) ,    
-            S_Cost_Center VARCHAR(100) ,    
+            S_Center_Name nvarchar(max) ,    
+            S_Brand_Name nvarchar(max) ,    
+            S_Cost_Center nvarchar(max) ,    
             Due_Value REAL ,    
             Dt_Installment_Date DATETIME ,    
             I_Installment_No INT ,    

@@ -1,37 +1,37 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspAddPoPRDetails]
 @POPR_XML XML,
-@Context NVARCHAR(MAX)
+@Context Nnvarchar(max)
 AS   
 	BEGIN Try	
 		DECLARE @POLIST_COUNT INT
 		DECLARE @PO_COUNTER INT
 		DECLARE @ITEMNODE_COUNT INT
 		DECLARE @ITEM_COUNTER INT
-		DECLARE @PO_ID VARCHAR(100)
-		DECLARE @PO_NMBR VARCHAR(100)
-		DECLARE @PR_NMBR VARCHAR(100)
+		DECLARE @PO_ID nvarchar(max)
+		DECLARE @PO_NMBR nvarchar(max)
+		DECLARE @PR_NMBR nvarchar(max)
 		DECLARE @GEN_MOV_ID INT
-		DECLARE @LINEID VARCHAR(255)
-		DECLARE @ITEM_ID VARCHAR(100)
+		DECLARE @LINEID nvarchar(max)
+		DECLARE @ITEM_ID nvarchar(max)
 		DECLARE @START_SR_NO INT
 		DECLARE @QUANTITY INT
-		DECLARE @CREATE_DATE VARCHAR(255)
-		DECLARE @PREFIX VARCHAR(255)
-		DECLARE @tempStrtNo VARCHAR(255)
+		DECLARE @CREATE_DATE nvarchar(max)
+		DECLARE @PREFIX nvarchar(max)
+		DECLARE @tempStrtNo nvarchar(max)
 		DECLARE @tempCharCount INT
 		
 		IF ISNULL(@Context,'') = 'ADD'
 		BEGIN
-			select @POLIST_COUNT = count(1)  --t.col.value('PO_LIST[1]','varchar(50)')
+			select @POLIST_COUNT = count(1)  --t.col.value('PO_LIST[1]','nvarchar(max)')
 			from @POPR_XML.nodes('/NODE/PO_LIST') as t(col)
 			SET @PO_COUNTER = 1
 			WHILE @PO_COUNTER <= @POLIST_COUNT
 			BEGIN
 				
-				SELECT	@PO_ID = t.col.value('PO_ID[1]','varchar(50)'),
-						@PO_NMBR = t.col.value('PO_NUMBER[1]','varchar(50)'),
-						@PR_NMBR = t.col.value('PR_NUMBER[1]','varchar(50)')
+				SELECT	@PO_ID = t.col.value('PO_ID[1]','nvarchar(max)'),
+						@PO_NMBR = t.col.value('PO_NUMBER[1]','nvarchar(max)'),
+						@PR_NMBR = t.col.value('PR_NUMBER[1]','nvarchar(max)')
 				FROM @POPR_XML.nodes('/NODE/PO_LIST[sql:variable("@PO_COUNTER")]') as t(col)
 				
 				SELECT @ITEMNODE_COUNT = COUNT(1)
@@ -40,13 +40,13 @@ AS
 				WHILE @ITEM_COUNTER <= @ITEMNODE_COUNT
 				BEGIN
 					
-					SELECT	@ITEM_ID = t.col.value('ITEM_ID[1]','varchar(50)'),
+					SELECT	@ITEM_ID = t.col.value('ITEM_ID[1]','nvarchar(max)'),
 							@START_SR_NO = t.col.value('START_SR_NO[1]','INT'),
 							@QUANTITY = t.col.value('QUANTITY[1]','INT'),
-							@CREATE_DATE = t.col.value('CREATED_DATE[1]','varchar(50)'),
-							@PREFIX = t.col.value('PREFIX[1]','varchar(50)'),
-							@LINEID = t.col.value('LINE_ID[1]','varchar(50)'),
-							@tempStrtNo = t.col.value('START_SR_NO[1]','varchar(100)')
+							@CREATE_DATE = t.col.value('CREATED_DATE[1]','nvarchar(max)'),
+							@PREFIX = t.col.value('PREFIX[1]','nvarchar(max)'),
+							@LINEID = t.col.value('LINE_ID[1]','nvarchar(max)'),
+							@tempStrtNo = t.col.value('START_SR_NO[1]','nvarchar(max)')
 							
 					FROM @POPR_XML.nodes('/NODE/PO_LIST[sql:variable("@PO_COUNTER")]/ITEMS[sql:variable("@ITEM_COUNTER")]/ITEM') as t(col)
 					--select * from  Tbl_KPMG_PoDetails
@@ -60,7 +60,7 @@ AS
 					print @tempCharCount
 					DECLARE @ITEM_QTY_CNTR INT = 1
 					DECLARE @BARCODE_COUNTER INT = 1
-					DECLARE @tempBarCode varchar(255)
+					DECLARE @tempBarCode nvarchar(max)
 					SET @BARCODE_COUNTER = @START_SR_NO
 					WHILE @ITEM_QTY_CNTR <= @QUANTITY
 					BEGIN
@@ -92,7 +92,7 @@ AS
 	BEGIN CATCH            
 	--Error occurred:              
 
-		DECLARE @ErrMsg NVARCHAR(4000) ,  
+		DECLARE @ErrMsg Nnvarchar(max) ,  
 		@ErrSeverity INT            
 		SELECT  @ErrMsg = ERROR_MESSAGE() ,  
 			@ErrSeverity = ERROR_SEVERITY()            

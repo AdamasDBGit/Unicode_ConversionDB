@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_upsert_Bulk_Transport]        
+CREATE PROCEDURE [dbo].[usp_ERP_upsert_Bulk_Transport]        
 (        
-    @str_route NVARCHAR(MAX),        
+    @str_route Nnvarchar(max),        
     @brandid int,        
     @Erp_Createdby int,        
     @response int  -- 0 for delete, 1 for new insert/update          
@@ -12,12 +12,12 @@ BEGIN
     (        
         [ID] [int] IDENTITY(1, 1) NOT NULL,        
         Routeid int,        
-        routename varchar(255) NULL,        
-        start_loc varchar(500) NULL,        
+        routename nvarchar(max) NULL,        
+        start_loc nvarchar(max) NULL,        
         Pickupid int,        
-        Pickup_Name varchar(500) NULL,        
-        Landmark varchar(500) NULL,        
-        Fulladdress varchar(500) NULL,        
+        Pickup_Name nvarchar(max) NULL,        
+        Landmark nvarchar(max) NULL,        
+        Fulladdress nvarchar(max) NULL,        
         Pickup_Order int NULL,        
         Drop_Order int NULL,      
         m_Fee decimal(18,2) NULL,      
@@ -47,12 +47,12 @@ BEGIN
     ELSE        
     BEGIN        
         DECLARE @newrouteID int,        
-                @newroutename varchar(100),        
+                @newroutename nvarchar(max),        
                 @newpickupID int,        
-                @newpickup_name varchar(200),        
-                @newstartlocation varchar(100),        
-                @newlandmark varchar(255),        
-                @Newfulladdress varchar(255),        
+                @newpickup_name nvarchar(max),        
+                @newstartlocation nvarchar(max),        
+                @newlandmark nvarchar(max),        
+                @Newfulladdress nvarchar(max),        
                 @newpickup_order int,        
                 @newdrop_order int,        
                 @monthlyfee decimal(18, 2),        

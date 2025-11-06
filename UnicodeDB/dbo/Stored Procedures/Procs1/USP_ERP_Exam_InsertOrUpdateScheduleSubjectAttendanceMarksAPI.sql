@@ -1,10 +1,10 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[USP_ERP_Exam_InsertOrUpdateScheduleSubjectAttendanceMarksAPI]
 (
     @examScheduleSubjectDetailId INT = NULL,
     @AttendanceMarks dbo.UT_StudentExamDetails READONLY,
-    @token nvarchar(MAX)
+    @token nnvarchar(max)
 )
 AS
 BEGIN

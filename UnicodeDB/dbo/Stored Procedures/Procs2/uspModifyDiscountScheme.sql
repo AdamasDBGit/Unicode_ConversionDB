@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyDiscountScheme] 
+CREATE PROCEDURE [dbo].[uspModifyDiscountScheme] 
 (
 	@iDiscountSchemeID int,
 	@sDiscountSchemeDetails text,
-	@sDiscountSchemeName NVARCHAR(MAX),
+	@sDiscountSchemeName Nnvarchar(max),
 	@dValidFrom datetime,
 	@dValidTo datetime,
-    @sModifiedBy NVARCHAR(MAX),
+    @sModifiedBy Nnvarchar(max),
 	@dModifiedOn datetime,
     @iFlag int
 )
@@ -129,7 +129,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

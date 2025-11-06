@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspGetAllUsersforRoleMappingWithBrand] --2,'','','','','',22
+CREATE PROCEDURE [dbo].[uspGetAllUsersforRoleMappingWithBrand] --2,'','','','','',22
 	-- Add the parameters for the stored procedure here
 			@iSelectedHierarchyId int,
-			@vLoginID NVARCHAR(MAX),
-			@vFirstName NVARCHAR(MAX),
-			@vMiddleName NVARCHAR(MAX),
-			@vLastName NVARCHAR(MAX),
-			@sCriteron NVARCHAR(MAX),
+			@vLoginID Nnvarchar(max),
+			@vFirstName Nnvarchar(max),
+			@vMiddleName Nnvarchar(max),
+			@vLastName Nnvarchar(max),
+			@sCriteron Nnvarchar(max),
 			@iSelectedBrandID int
  			
 AS

@@ -1,17 +1,17 @@
-﻿CREATE   PROCEDURE [dbo].[User_Master_parameters]    
+CREATE   PROCEDURE [dbo].[User_Master_parameters]    
 (   
  @User_ID INT = NULL,     
- @Username NVARCHAR(MAX) = NULL,     
- @Email NVARCHAR(MAX) = NULL,     
- @Name NVARCHAR(MAX) = NULL,       
- @Mobile NVARCHAR(MAX) = NULL,     
+ @Username Nnvarchar(max) = NULL,     
+ @Email Nnvarchar(max) = NULL,     
+ @Name Nnvarchar(max) = NULL,       
+ @Mobile Nnvarchar(max) = NULL,     
  @Status INT = NULL,   
  @isTeacher BIT = NULL,   
  @iBrandID INT = NULL,    @Offset INT = 0,   
  @Limit INT = 10,   
- @SortColumn NVARCHAR(MAX) = 'S_Username',   
- @SortDirection NVARCHAR(MAX) = 'asc',   
- @SearchValue NVARCHAR(MAX) = NULL   
+ @SortColumn Nnvarchar(max) = 'S_Username',   
+ @SortDirection Nnvarchar(max) = 'asc',   
+ @SearchValue Nnvarchar(max) = NULL   
 )   
 AS   
 BEGIN   
@@ -38,7 +38,7 @@ BEGIN
    UserGroupMap.User_Group_ID AS UserGroupID,   
    ISNULL(UserGroupMap.S_User_GroupName, 'NA') AS UserGroupName,   
    EU.unUserId,   
-   COUNT(*) OVER() AS TotalRecords,  -- 👈 include total count   
+   COUNT(*) OVER() AS TotalRecords,  -- ?? include total count   
    ROW_NUMBER() OVER (   
     ORDER BY    
      CASE WHEN @SortDirection = 'asc' THEN   

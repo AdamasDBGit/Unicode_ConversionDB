@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyModuleTermMapping] 
+CREATE PROCEDURE [dbo].[uspModifyModuleTermMapping] 
 (
 	@iTermID int,
 	@sModuleTermMap text,
-	@sModifiedBy NVARCHAR(MAX),
+	@sModifiedBy Nnvarchar(max),
 	@dModifiedOn datetime
 )
 
@@ -41,14 +41,14 @@ BEGIN TRY
 		C_Examinable char(1),		
 		Dt_Valid_From datetime,
 		I_Status int, 
-		S_Crtd_By varchar(20), 
+		S_Crtd_By nvarchar(max), 
 		Dt_Crtd_On datetime	)
 	COMMIT TRANSACTION
 END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

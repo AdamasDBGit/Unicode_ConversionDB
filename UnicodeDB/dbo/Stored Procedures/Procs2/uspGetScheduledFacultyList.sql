@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspGetScheduledFacultyList]
+CREATE PROCEDURE [dbo].[uspGetScheduledFacultyList]
     (
       @iBrandID INT ,
-      @HierarchyDetailID NVARCHAR(MAX) ,
+      @HierarchyDetailID Nnvarchar(max) ,
       @dFromDate DATE
     )
 AS 

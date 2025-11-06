@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_Savings_Grade_Pattern]
+CREATE PROCEDURE [dbo].[usp_ERP_Savings_Grade_Pattern]
     @h_I_Exam_Grade_Master_Header_ID INT = NULL,
-    @Grade_Name NVARCHAR(MAX),
+    @Grade_Name Nnvarchar(max),
     @p_I_CreatedBy int,
     @Is_Active Int Null,
     @Grade_PatternDetails [UT_Grade_Pattern_Details] READONLY
@@ -10,7 +10,7 @@ BEGIN
     BEGIN TRY
         BEGIN TRANSACTION;
 
-        DECLARE @OperationType NVARCHAR(50); -- Variable to track the operation type
+        DECLARE @OperationType Nnvarchar(max); -- Variable to track the operation type
 
         -- Check for duplicate Grade_Name
         IF EXISTS (
@@ -114,7 +114,7 @@ BEGIN
         IF @@TRANCOUNT > 0
             ROLLBACK;
 
-        DECLARE @ErrMsg NVARCHAR(4000),
+        DECLARE @ErrMsg Nnvarchar(max),
                 @ErrSeverity INT;
 
         SELECT @ErrMsg = ERROR_MESSAGE(), @ErrSeverity = ERROR_SEVERITY();

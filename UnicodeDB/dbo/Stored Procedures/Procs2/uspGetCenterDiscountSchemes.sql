@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetCenterDiscountSchemes]
+CREATE PROCEDURE [dbo].[uspGetCenterDiscountSchemes]
 	(
 		@iHierarchyDetailID int,
 		@iBrandID int = null
@@ -8,7 +8,7 @@ AS
 BEGIN TRY
 	SET NOCOUNT ON
 	
-	DECLARE @sSearchCriteria varchar(max)
+	DECLARE @sSearchCriteria nvarchar(max)
 	DECLARE @iMax int
 	DECLARE @iCount int
 	
@@ -20,15 +20,15 @@ BEGIN TRY
 	(
 		seq int identity(1,1),
 		centerID int,
-		centerCode varchar(20),
-		centerName varchar(100)
+		centerCode nvarchar(max),
+		centerName nvarchar(max)
 	)
 
 	CREATE TABLE #tempDiscountScheme
 	(
 		centerDiscountSchemeID int,
 		centerID int,
-		discountSchemeName varchar(250)
+		discountSchemeName nvarchar(max)
 	)	
 	
 	SET @iMax = 0
@@ -123,7 +123,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

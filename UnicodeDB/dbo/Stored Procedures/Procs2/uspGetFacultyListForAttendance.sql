@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetFacultyListForAttendance] -- [dbo].[uspGetFacultyListForAttendance] 19,50      
+CREATE PROCEDURE [dbo].[uspGetFacultyListForAttendance] -- [dbo].[uspGetFacultyListForAttendance] 19,50      
     (    
       @iCenterID INT ,    
       @iModuleID INT      
@@ -13,7 +13,7 @@ AS
 		
 		---Akash---    
       
-        DECLARE @sCheckFacultyEligibility VARCHAR(20) ,    
+        DECLARE @sCheckFacultyEligibility nvarchar(max) ,    
             @iRoleID INT      
        
         SELECT  @iRoleID = ISNULL(I_Role_ID, 18)    

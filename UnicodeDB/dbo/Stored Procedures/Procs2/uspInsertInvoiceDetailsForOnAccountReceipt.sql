@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertInvoiceDetailsForOnAccountReceipt] --exec dbo.uspInsertInvoiceDetailsForOnAccountReceipt 763876  
+CREATE PROCEDURE [dbo].[uspInsertInvoiceDetailsForOnAccountReceipt] --exec dbo.uspInsertInvoiceDetailsForOnAccountReceipt 763876  
 (  
  @iReceiptHeaderId INT  
 )  
@@ -20,7 +20,7 @@ BEGIN
   CREATE TABLE #IDFOAR(  
    ID int IDENTITY(1,1) NOT NULL,  
    I_Receipt_Header_ID int NULL,  
-   S_Receipt_No varchar(20) NULL,  
+   S_Receipt_No nvarchar(max) NULL,  
    Dt_Receipt_Date datetime NULL,  
    I_Student_Detail_ID int NULL,  
    I_Enquiry_Regn_ID int NULL,  
@@ -30,7 +30,7 @@ BEGIN
    N_Receipt_Amount numeric(18, 2) NULL,  
    N_Tax_Amount numeric(18, 2) NULL,  
    S_Invoice_Type char(10) NULL,  
-   S_Invoice_Number varchar(100) NULL,  
+   S_Invoice_Number nvarchar(max) NULL,  
    Dt_Crtd_On datetime NULL,  
    Dt_Upd_On datetime NULL  
   )  
@@ -61,15 +61,15 @@ BEGIN
   WHERE I_Receipt_Header_ID = @iReceiptHeaderId  
   
   DECLARE @CenterID INT  
-  DECLARE @S_Short_Code VARCHAR(10)  
+  DECLARE @S_Short_Code nvarchar(max)  
   DECLARE @S_State_Code INT  
   DECLARE @invoiceSequence INT  
   DECLARE @Year INT  
   DECLARE @stateID INT  
   DECLARE @brandID INT  
   DECLARE @I_OnAccount_Ivoice_ID INT  
-  DECLARE @invoiceType VARCHAR(10)  
-  DECLARE @InvoiceNumber VARCHAR(100)  
+  DECLARE @invoiceType nvarchar(max)  
+  DECLARE @InvoiceNumber nvarchar(max)  
   SET @Year = RIGHT(CONVERT(VARCHAR(8), GETDATE(), 1),2)  
   
   SELECT @CenterID = I_Centre_Id, @invoiceType = S_Invoice_Type  

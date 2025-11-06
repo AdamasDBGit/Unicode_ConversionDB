@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGenerateMoveOrders] 
 	
 AS
@@ -49,7 +49,7 @@ END TRY
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            

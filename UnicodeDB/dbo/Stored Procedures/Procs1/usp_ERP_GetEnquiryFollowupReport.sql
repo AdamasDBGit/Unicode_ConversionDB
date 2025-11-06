@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetEnquiryFollowupReport]  
+CREATE PROCEDURE [dbo].[usp_ERP_GetEnquiryFollowupReport]  
     (  
-      @sHierarchyID NVARCHAR(MAX)=NULL ,  
+      @sHierarchyID Nnvarchar(max)=NULL ,  
       @StartDate DATE ,  
       @EndDate DATE ,  
       @iBrandID INT ,  

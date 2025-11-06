@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetAISProgressReport]  
+CREATE PROCEDURE [dbo].[usp_ERP_GetAISProgressReport]  
     (  
       @iStudentID INT ,  
       @iCourseID INT ,  
@@ -6,7 +6,7 @@
     )  
 AS   
     BEGIN  
-        DECLARE @sStudentName VARCHAR(250), @sStudentID VARCHAR(250)  
+        DECLARE @sStudentName nvarchar(max), @sStudentID nvarchar(max)  
     
         SELECT TOP 1  
                 @sStudentName = S_First_Name + ' ' + ISNULL(S_Middle_Name, '')  
@@ -18,10 +18,10 @@ AS
         CREATE TABLE #tblResult   
             (  
               I_Student_ID INT ,  
-              S_Student_ID VARCHAR(250) ,  
-              S_Student_Name VARCHAR(150) ,  
+              S_Student_ID nvarchar(max) ,  
+              S_Student_Name nvarchar(max) ,  
               I_Course_ID INT ,  
-              S_Course_Name VARCHAR(250) ,  
+              S_Course_Name nvarchar(max) ,  
               I_Term_ID1 INT ,  
               I_Module_ID11 INT ,  
               I_Module_ID12 INT ,  
@@ -32,7 +32,7 @@ AS
               I_Module_ID31 INT ,  
               I_Module_ID32 INT ,  
               I_Exam_Component_ID INT ,  
-              S_Exam_Component_Name VARCHAR(200) ,  
+              S_Exam_Component_Name nvarchar(max) ,  
               Internal_Marks1 INT ,  
               Term_Marks1 INT ,  
               Total_Marks1 INT ,  

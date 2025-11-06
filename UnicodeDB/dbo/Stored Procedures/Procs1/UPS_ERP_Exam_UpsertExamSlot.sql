@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[UPS_ERP_Exam_UpsertExamSlot]  
+CREATE PROCEDURE [dbo].[UPS_ERP_Exam_UpsertExamSlot]  
     @inSlotID         INT = NULL,    
-    @stSlotCode       NVARCHAR(MAX) = NULL,  
+    @stSlotCode       Nnvarchar(max) = NULL,  
     @tmSlotStartTime  TIME(0) = NULL,  
     @tmSlotEndTime    TIME(0) = NULL,     
     @inCreatedBy      INT = NULL,  

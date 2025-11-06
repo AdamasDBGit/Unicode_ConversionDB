@@ -1,9 +1,9 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetStudentDetails] -- [dbo].[uspGetStudentDetails] NULL,'12-0087'                   
     (
       -- Add the parameters for the stored procedure here                        
       @iStudentDetailId INT ,
-      @sStudentNo NVARCHAR(MAX) = NULL ,
+      @sStudentNo Nnvarchar(max) = NULL ,
       @iCenterId INT = NULL                        
 
     )

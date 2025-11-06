@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetSelectedCoursesDetail]  
+CREATE PROCEDURE [dbo].[uspGetSelectedCoursesDetail]  
 (  
-@sCourseList NVARCHAR(MAX),  
+@sCourseList Nnvarchar(max),  
 @iCenterID int  
 )  
 AS  

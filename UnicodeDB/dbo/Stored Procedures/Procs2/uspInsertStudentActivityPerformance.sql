@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertStudentActivityPerformance]
+CREATE PROCEDURE [dbo].[uspInsertStudentActivityPerformance]
     (
       @sEvaluationXML XML ,
-      @sCrtdBy NVARCHAR(MAX) ,
+      @sCrtdBy Nnvarchar(max) ,
       @sCrtdOn DATETIME ,
       @iEmployeeId INT = null
     )
@@ -12,7 +12,7 @@ AS
         SELECT  T.c.value('@I_Student_Activity_ID', 'int') AS I_Student_Activity_ID,
                 T.c.value('@I_Term_ID', 'int') AS I_Term_ID,
                 T.c.value('@I_Evaluation_ID', 'int') AS I_Evaluation_ID,
-                T.c.value('@S_Grade', 'varchar(50)') AS S_Grade,
+                T.c.value('@S_Grade', 'nvarchar(max)') AS S_Grade,
                 1 AS I_Status,
                 @sCrtdBy AS S_Crtd_By,
                 @sCrtdOn AS Dt_Crtd_On
@@ -51,7 +51,7 @@ AS
     END TRY
     BEGIN CATCH
 	
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT
 
         SELECT  @ErrMsg = ERROR_MESSAGE() ,

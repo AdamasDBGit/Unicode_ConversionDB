@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_Delete_Grade_Pattern]
+CREATE PROCEDURE [dbo].[usp_ERP_Delete_Grade_Pattern]
     @h_I_Exam_Grade_Master_Header_ID INT
 AS
 BEGIN
@@ -38,7 +38,7 @@ BEGIN
         IF @@TRANCOUNT > 0
             ROLLBACK;
 
-        DECLARE @ErrMsg NVARCHAR(4000)
+        DECLARE @ErrMsg Nnvarchar(max)
               , @ErrSeverity INT;
 
         SELECT @ErrMsg = ERROR_MESSAGE(), @ErrSeverity = ERROR_SEVERITY();

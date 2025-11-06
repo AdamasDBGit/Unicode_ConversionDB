@@ -1,15 +1,15 @@
-﻿CREATE PROCEDURE [dbo].[uspGetHierarchyChainforCenterTransfer] 
+CREATE PROCEDURE [dbo].[uspGetHierarchyChainforCenterTransfer] 
 
 (
-	@sSalesOrgChain NVARCHAR(MAX),
-	@sHierarchyChain NVARCHAR(MAX)
+	@sSalesOrgChain Nnvarchar(max),
+	@sHierarchyChain Nnvarchar(max)
 )
 
 AS
 BEGIN
 	DECLARE
 		@iCtryLevelId int,
-		@iHierarchyDetailID varchar(10),
+		@iHierarchyDetailID nvarchar(max),
 		@iPos int,
 		@iIDPos int
 		

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentID]
+CREATE PROCEDURE [dbo].[uspGetStudentID]
 	
 	@iHCenterId int
 				
@@ -12,7 +12,7 @@ DECLARE
 DECLARE @tblTemp TABLE
 	(
 		[ID] int identity(1,1),
-		S_Student_ID varchar(500),		
+		S_Student_ID nvarchar(max),		
 		I_Student_Detail_ID int
 		
 	)

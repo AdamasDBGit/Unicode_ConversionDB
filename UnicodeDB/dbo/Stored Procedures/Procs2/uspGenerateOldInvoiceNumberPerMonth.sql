@@ -1,18 +1,18 @@
-﻿CREATE PROCEDURE [dbo].[uspGenerateOldInvoiceNumberPerMonth] 
+CREATE PROCEDURE [dbo].[uspGenerateOldInvoiceNumberPerMonth] 
 (
 	@invoiceHeaderID INT,
 	@installmentNo INT,
 	@dtInstallmentDate DATETIME,
 	@dtFrom DATETIME,
 	@dtTo DATETIME,
-	@invoiceType NVARCHAR(MAX),
-	@InvoiceNumber NVARCHAR(MAX) OUTPUT
+	@invoiceType Nnvarchar(max),
+	@InvoiceNumber Nnvarchar(max) OUTPUT
 )	
 AS
 BEGIN	
 	
 	DECLARE @invoiceSequence INT
-	DECLARE @brandCode VARCHAR(50),@stateCode VARCHAR(50),@stateID INT, @brandID INT
+	DECLARE @brandCode nvarchar(max),@stateCode nvarchar(max),@stateID INT, @brandID INT
 	
 	DECLARE @Month INT, @Year INT 
 

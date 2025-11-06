@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentStudentStatus]
+CREATE PROCEDURE [dbo].[uspGetStudentStudentStatus]
 	-- Add the parameters for the stored procedure here
 	@iStudentId INT,
 	@iCenterId INT 
 AS 
 BEGIN TRY
   
-  DECLARE @sStatus VARCHAR(100)
+  DECLARE @sStatus nvarchar(max)
   
 	SELECT @sStatus = dbo.ufnGetStudentStatus(@iCenterId,@iStudentId)
 	
@@ -14,7 +14,7 @@ BEGIN TRY
 	
 END TRY
 BEGIN CATCH
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)

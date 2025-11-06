@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetStudentInformationService]  
+CREATE PROCEDURE [dbo].[usp_ERP_GetStudentInformationService]  
 (  
 @iBrandID INT ,  
-@sHierarchyListID NVARCHAR(MAX)=NULL ,  
-@sStudentID NVARCHAR(MAX)  
+@sHierarchyListID Nnvarchar(max)=NULL ,  
+@sStudentID Nnvarchar(max)  
 )  
 --1516/RICE/378  
 AS   

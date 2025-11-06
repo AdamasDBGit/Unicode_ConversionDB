@@ -1,4 +1,4 @@
-﻿CREATE   PROCEDURE [dbo].[usp_ERP_GetFeePlanDetails] 
+CREATE   PROCEDURE [dbo].[usp_ERP_GetFeePlanDetails] 
 	-- Add the parameters for the stored procedure here
 	@iBrand INT,
 	@iSchoolGroup INT =null,
@@ -13,27 +13,27 @@ BEGIN
 	Create table #Temp 
 	(
 	FeeStructureID INT,
-	FeeStructureName varchar(max), 
-	FeeCode varchar(max),
+	FeeStructureName nvarchar(max), 
+	FeeCode nvarchar(max),
 	ValidStartDate datetime,      
 	ValidEndDate datetime,      
 	SchoolGroupID int,
-	SchoolGroupName varchar(max),
+	SchoolGroupName nvarchar(max),
 	ClassID int, 
-	ClassName varchar(max),
+	ClassName nvarchar(max),
 	StreamID INT,
-	StreamName varchar(max),     
+	StreamName nvarchar(max),     
 	IsLateFineApplicable bit,                 
 	CurrencyTypeID int,
-	CurrencyType varchar(max),
+	CurrencyType nvarchar(max),
 	OnetimeTotalFeeAmount decimal(18,2),
 	InstallmentTotalFeeAmount decimal(18,2),
 	TotalFeeAmountDuringPreAdmission decimal(18,2),
-	CreatedBy varchar(max),
+	CreatedBy nvarchar(max),
 	CreatedAt Datetime,
 	IsEditable bit,
 	FeeCategory int,
-	FeeCategoryName varchar(max)
+	FeeCategoryName nvarchar(max)
 	)
 
 

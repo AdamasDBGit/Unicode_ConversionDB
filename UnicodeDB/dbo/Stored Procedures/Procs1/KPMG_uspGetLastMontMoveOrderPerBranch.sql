@@ -1,7 +1,7 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGetLastMontMoveOrderPerBranch]
 @Parama1	INT,
-@Context	NVARCHAR(MAX)
+@Context	Nnvarchar(max)
 AS
 
 BEGIN TRY 
@@ -21,7 +21,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

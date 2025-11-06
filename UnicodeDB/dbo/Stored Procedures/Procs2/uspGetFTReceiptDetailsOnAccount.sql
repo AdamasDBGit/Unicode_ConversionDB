@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetFTReceiptDetailsOnAccount] 
-	@sReceiptIDs NVARCHAR(MAX),
-	@sCancelledReceiptIDs NVARCHAR(MAX),
+CREATE PROCEDURE [dbo].[uspGetFTReceiptDetailsOnAccount] 
+	@sReceiptIDs Nnvarchar(max),
+	@sCancelledReceiptIDs Nnvarchar(max),
 	@iCenterID int = NULL
 
 AS

@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[USP_GetReceiptDetailsByTransactionNo]
-    @TransactionNo NVARCHAR(MAX)
+CREATE PROCEDURE [dbo].[USP_GetReceiptDetailsByTransactionNo]
+    @TransactionNo Nnvarchar(max)
 AS
 BEGIN
     SET NOCOUNT ON;

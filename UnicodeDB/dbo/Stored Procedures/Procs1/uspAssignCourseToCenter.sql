@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspAssignCourseToCenter]
+CREATE PROCEDURE [dbo].[uspAssignCourseToCenter]
 
 	(
-		@sSelectedCenters NVARCHAR(MAX),
-		@sSelectedCourseID NVARCHAR(MAX),
-		@sLoginID NVARCHAR(MAX)
+		@sSelectedCenters Nnvarchar(max),
+		@sSelectedCourseID Nnvarchar(max),
+		@sLoginID Nnvarchar(max)
 	)
 
 AS
@@ -15,7 +15,7 @@ DECLARE @iLength int
 DECLARE @iCourseListLength int
 DECLARE @iCenterID int
 DECLARE @iCourseID int
-DECLARE @sSelectedCourseIDs varchar(100)
+DECLARE @sSelectedCourseIDs nvarchar(max)
 
 SET @iGetCenterIndex = CHARINDEX(',',LTRIM(RTRIM(@sSelectedCenters)),1)
 
@@ -145,7 +145,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

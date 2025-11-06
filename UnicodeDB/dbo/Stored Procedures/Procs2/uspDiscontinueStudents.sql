@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspDiscontinueStudents] ( @sLoginID NVARCHAR(MAX) )
+CREATE PROCEDURE [dbo].[uspDiscontinueStudents] ( @sLoginID Nnvarchar(max) )
 AS
     BEGIN
 
@@ -102,7 +102,7 @@ AS
                               I_Parent_Invoice_ID ,
                               S_Cancel_Type
                             )
-                    VALUES  ( NULL , -- S_Invoice_No - varchar(50)
+                    VALUES  ( NULL , -- S_Invoice_No - nvarchar(max)
                               @StudentDetID , -- I_Student_Detail_ID - int
                               @CentreID , -- I_Centre_Id - int
                               0.00 , -- N_Invoice_Amount - numeric
@@ -112,13 +112,13 @@ AS
                               1 , -- I_Status - int
                               NULL , -- I_Discount_Scheme_ID - int
                               NULL , -- I_Discount_Applied_At - int
-                              @sLoginID , -- S_Crtd_By - varchar(20)
-                              NULL , -- S_Upd_By - varchar(20)
+                              @sLoginID , -- S_Crtd_By - nvarchar(max)
+                              NULL , -- S_Upd_By - nvarchar(max)
                               GETDATE() , -- Dt_Crtd_On - datetime
                               NULL , -- Dt_Upd_On - datetime
                               NULL , -- I_Coupon_Discount - int
                               @InvoiceHeaderID , -- I_Parent_Invoice_ID - int
-                              NULL  -- S_Cancel_Type - varchar(10)
+                              NULL  -- S_Cancel_Type - nvarchar(max)
                             )
         
                     SET @newInvoiceHeaderID = SCOPE_IDENTITY()        
@@ -180,8 +180,8 @@ AS
                     VALUES  ( @newInvoiceChildHeaderID , -- I_Invoice_Child_Header_ID - int
                               @BatchID , -- I_Batch_ID - int
                               1 , -- I_Status - int
-                              @sLoginID , -- S_Crtd_By - varchar(20)
-                              NULL , -- S_Updt_By - varchar(20)
+                              @sLoginID , -- S_Crtd_By - nvarchar(max)
+                              NULL , -- S_Updt_By - nvarchar(max)
                               GETDATE() , -- Dt_Crtd_On - datetime
                               NULL  -- Dt_Updt_On - datetime
                             )
@@ -192,7 +192,7 @@ AS
                             AND I_Course_ID = @CourseID        
          
                     EXEC dbo.uspCancelInvoice @iInvoiceId = @InvoiceHeaderID, -- int
-                        @sUpdatedBy = @sLoginID, -- varchar(20)
+                        @sUpdatedBy = @sLoginID, -- nvarchar(max)
                         @iCancellationReasonId = 2 -- int
     
                     INSERT  INTO dbo.T_Student_Batch_Details
@@ -279,8 +279,8 @@ AS
                                       @CentreID , -- I_Center_Id - int
                                       GETDATE() , -- Dt_Dropout_Date - datetime
                                       4 , -- I_Dropout_Type_ID - int
-                                      @sLoginID , -- S_Crtd_By - varchar(20)
-                                      'Discontinued in the system' , -- S_Reason - varchar(2000)
+                                      @sLoginID , -- S_Crtd_By - nvarchar(max)
+                                      'Discontinued in the system' , -- S_Reason - nvarchar(max)
                                       GETDATE()  -- Dt_Crtd_On - datetime
                                     )
         
@@ -306,7 +306,7 @@ AS
 
         BEGIN CATCH      
             ROLLBACK TRANSACTION  
-            DECLARE @ErrMsg NVARCHAR(4000) ,
+            DECLARE @ErrMsg Nnvarchar(max) ,
                 @ErrSeverity INT      
             SELECT  @ErrMsg = ERROR_MESSAGE() ,
                     @ErrSeverity = ERROR_SEVERITY()      

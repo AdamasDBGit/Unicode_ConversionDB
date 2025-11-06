@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[GetSubjectStructureMappingDetail]
+CREATE PROCEDURE [dbo].[GetSubjectStructureMappingDetail]
 -- =============================================
      -- Author:	Tridip Chatterjee
 -- Create date: 03-10-2023
@@ -9,13 +9,13 @@
 @SubjectStructureHeaderID int =null,
 @SubjectTemplateHeaderID int =null,
 @SubjectID int =null,
-@Title nvarchar(400)=null,
-@SubjectName nvarchar(400)=null,
+@Title nnvarchar(max)=null,
+@SubjectName nnvarchar(max)=null,
 @SubjectStatus int =null,
 @ClassID int =null,
 @SchoolGroupID int =null,
 @SubjectTemplateID int =null,
-@SubjectStructureName nvarchar(400)=null
+@SubjectStructureName nnvarchar(max)=null
 
 
 AS

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspCreateCenterTransferAdjustmentReceipts]
+CREATE PROCEDURE [dbo].[uspCreateCenterTransferAdjustmentReceipts]
     (
       @iPositiveAdjustmentCenterID INT ,
       @iNegativeAdjustmentCenterID INT ,
@@ -6,7 +6,7 @@
       @nNegativeAdjustmentAmount DECIMAL(18, 2) ,
       @iStudentID INT ,
       @iReceiptTypeID INT ,
-      @sAdjustmentText NVARCHAR(MAX),
+      @sAdjustmentText Nnvarchar(max),
       @iBrandID INT
     )
 AS 

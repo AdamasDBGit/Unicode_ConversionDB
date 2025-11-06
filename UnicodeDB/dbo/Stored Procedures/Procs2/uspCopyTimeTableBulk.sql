@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspCopyTimeTableBulk]
+CREATE PROCEDURE [dbo].[uspCopyTimeTableBulk]
     (
       @CenterId INT ,
-      @S_Crtd_By NVARCHAR(MAX) ,
+      @S_Crtd_By Nnvarchar(max) ,
       @I_TimeSlot_ID INT = NULL ,
       @XMLDateRange XML = NULL 
     )
@@ -38,25 +38,25 @@ AS
               I_Room_ID INT ,
               I_Skill_ID INT NULL ,
               I_Status INT ,
-              S_Crtd_By VARCHAR(100) NULL ,
+              S_Crtd_By nvarchar(max) NULL ,
               Dt_Crtd_On DATETIME ,
-              S_Updt_By VARCHAR(100) NULL ,
+              S_Updt_By nvarchar(max) NULL ,
               Dt_Updt_On DATETIME NULL ,
-              S_Remarks VARCHAR(200) NULL ,
+              S_Remarks nvarchar(max) NULL ,
               I_Session_ID_ASIS INT ,
               I_Term_ID INT ,
               I_Module_ID INT ,
-              S_Session_Name_ASIS VARCHAR(500) ,
-              S_Session_Topic_ASIS VARCHAR(500) ,
+              S_Session_Name_ASIS nvarchar(max) ,
+              S_Session_Topic_ASIS nvarchar(max) ,
               Dt_Actual_Date DATETIME NULL ,
               I_Is_Complete INT ,
               I_Employee_ID INT ,
               B_Is_Actual BIT ,
               ROW INT ,
               I_Session_ID INT ,
-              S_Session_Code VARCHAR(500) ,
-              S_Session_Name VARCHAR(500) ,
-              S_Session_Topic VARCHAR(500) ,
+              S_Session_Code nvarchar(max) ,
+              S_Session_Name nvarchar(max) ,
+              S_Session_Topic nvarchar(max) ,
               I_Module_ID_tobe INT
             ) ;
  
@@ -66,7 +66,7 @@ AS
         DECLARE @totalcountS INT= 1 ;
         DECLARE @routineDate DATETIME ;
         DECLARE @Todate DATETIME ;
-        DECLARE @SDayOfWeek VARCHAR(1) ;
+        DECLARE @SDayOfWeek nvarchar(max) ;
         DECLARE @ptimetableid INT ;
   
         INSERT  INTO #tempTimeTable

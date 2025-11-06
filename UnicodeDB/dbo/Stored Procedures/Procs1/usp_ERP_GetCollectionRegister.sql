@@ -1,14 +1,14 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetCollectionRegister]      
+CREATE PROCEDURE [dbo].[usp_ERP_GetCollectionRegister]      
     (      
       @iSelectedHierarchyId INT=NULL ,      
       @iSelectedBrandId INT,    
       @dtDateTo DATETIME=null ,      
       @dtDateFrom DATETIME=null ,      
-      @sFName NVARCHAR(MAX)=NULL,      
-      @sMName NVARCHAR(MAX)=NULL,      
-      @sLName NVARCHAR(MAX)=NULL,      
-      @sStudentCode NVARCHAR(MAX) = NULL ,      
-      @sEnquiryNo NVARCHAR(MAX) = NULL   ,
+      @sFName Nnvarchar(max)=NULL,      
+      @sMName Nnvarchar(max)=NULL,      
+      @sLName Nnvarchar(max)=NULL,      
+      @sStudentCode Nnvarchar(max) = NULL ,      
+      @sEnquiryNo Nnvarchar(max) = NULL   ,
 	  @iReceiptNo int=NULL
     )      
 AS       
@@ -49,19 +49,19 @@ BEGIN
     (      
         N_Receipt_Amount NUMERIC(18, 2),      
         I_Receipt_Header_ID INT,      
-        S_First_Name VARCHAR(50),      
-        S_Middle_Name VARCHAR(50),      
-        S_Last_Name VARCHAR(50),      
+        S_First_Name nvarchar(max),      
+        S_Middle_Name nvarchar(max),      
+        S_Last_Name nvarchar(max),      
         I_Enquiry_Regn_ID INT,      
         I_Student_Detail_ID INT,      
-        S_Receipt_No VARCHAR(20),      
+        S_Receipt_No nvarchar(max),      
         Dt_Receipt_Date DATETIME,      
         I_Invoice_Header_ID INT,      
         I_Receipt_Type INT,      
         I_Status INT,      
         I_Centre_Id INT,    
-        OnAccountInvoiceNo VARCHAR(100)   ,
-		S_Cancellation_Reason nvarchar(MAX)
+        OnAccountInvoiceNo nvarchar(max)   ,
+		S_Cancellation_Reason nnvarchar(max)
     );                
 
     -- Insert Active Receipts
@@ -151,7 +151,7 @@ BEGIN
 
     -- Default Currency Details  
     DECLARE @DEFAULTCurrencyID INT;    
-    DECLARE @DEFAULTCurrencyCode VARCHAR(MAX);    
+    DECLARE @DEFAULTCurrencyCode nvarchar(max);    
 
     SELECT     
         @DEFAULTCurrencyID = CurM.I_Currency_ID,    

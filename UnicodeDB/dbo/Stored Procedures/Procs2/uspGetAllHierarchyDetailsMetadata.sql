@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspGetAllHierarchyDetailsMetadata]
+CREATE PROCEDURE [dbo].[uspGetAllHierarchyDetailsMetadata]
  
 AS
 
 BEGIN
 	SET NOCOUNT OFF
 
-	declare @strQuery varchar(5000)
+	declare @strQuery nvarchar(max)
 	
 	set @strQuery = 'Select *
 					 from T_Hierarchy_details hd

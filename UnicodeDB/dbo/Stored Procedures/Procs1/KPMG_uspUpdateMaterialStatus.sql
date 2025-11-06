@@ -1,6 +1,6 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspUpdateMaterialStatus] 
-	@MaterialBarCodeNo NVARCHAR(255),
+	@MaterialBarCodeNo Nnvarchar(max),
 	@OkStatus INT,
 	@DamageStatus INT,
 	@DuplicateStatus INT
@@ -21,7 +21,7 @@ END TRY
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            

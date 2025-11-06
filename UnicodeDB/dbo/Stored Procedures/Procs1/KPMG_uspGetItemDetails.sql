@@ -1,7 +1,7 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGetItemDetails]
 @MoveOrderNo INT,
-@ItemCode NVARCHAR(100)
+@ItemCode Nnvarchar(max)
 
 AS
 
@@ -12,7 +12,7 @@ AS
 	END TRY
 	BEGIN CATCH
 		
-		DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+		DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 		SELECT	@ErrMsg = ERROR_MESSAGE(),
 				@ErrSeverity = ERROR_SEVERITY()

@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_StudentFuzzySearch]    
+CREATE PROCEDURE [dbo].[usp_ERP_StudentFuzzySearch]    
 (    
     @brandid INT,    
-    @StudentID NVARCHAR(MAX) = NULL,    
-    @StudentName NVARCHAR(MAX) = NULL,    
-    @Search NVARCHAR(MAX) = NULL    
+    @StudentID Nnvarchar(max) = NULL,    
+    @StudentName Nnvarchar(max) = NULL,    
+    @Search Nnvarchar(max) = NULL    
 )    
 AS    
 BEGIN    

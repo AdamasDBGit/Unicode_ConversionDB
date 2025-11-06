@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE dbo.usp_ERP_Get_Oracle_Report_v2  
-    @Mode NVARCHAR(MAX)  
+CREATE PROCEDURE dbo.usp_ERP_Get_Oracle_Report_v2  
+    @Mode Nnvarchar(max)  
 AS  
 BEGIN  
     SET NOCOUNT ON;  
@@ -38,7 +38,7 @@ BEGIN
         RETURN;  
     END;  
 
-    DECLARE @realMode VARCHAR(50) = LTRIM(RTRIM(ISNULL(@Mode, '')));  
+    DECLARE @realMode nvarchar(max) = LTRIM(RTRIM(ISNULL(@Mode, '')));  
 
     IF @realMode NOT IN ('none','sync','reconcile','all')  
     BEGIN  
@@ -202,7 +202,7 @@ BEGIN
         END;  
     END TRY  
     BEGIN CATCH  
-        DECLARE @ErrMsg NVARCHAR(4000) = ERROR_MESSAGE();  
+        DECLARE @ErrMsg Nnvarchar(max) = ERROR_MESSAGE();  
         RAISERROR('Error in usp_ERP_Get_Oracle_Report_v2: %s', 16, 1, @ErrMsg);  
         THROW;  
     END CATCH;  

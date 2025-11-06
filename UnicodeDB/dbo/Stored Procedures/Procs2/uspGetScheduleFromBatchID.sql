@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetScheduleFromBatchID]   --NULL,7523  --332,NULL,738
+CREATE PROCEDURE [dbo].[uspGetScheduleFromBatchID]   --NULL,7523  --332,NULL,738
  -- Add the parameters for the stored procedure here  
  @iBatchID INT = NULL,  
  @iBatchScheduleID INT = NULL,  
@@ -19,15 +19,15 @@ BEGIN TRY
 (  
  I_Batch_Schedule_ID INT,  
  I_Term_ID INT,  
- S_Term_Name VARCHAR(500),  
+ S_Term_Name nvarchar(max),  
  I_Module_ID INT,  
- S_Module_Name VARCHAR(500),  
+ S_Module_Name nvarchar(max),  
  I_Session_ID INT,  
- S_Session_Name VARCHAR(500),  
- S_Session_Topic VARCHAR(1000),  
+ S_Session_Name nvarchar(max),  
+ S_Session_Topic nvarchar(max),  
  Dt_Schedule_Date DATETIME,  
  Dt_Actual_Date DATETIME,  
- S_Faculty_Name VARCHAR(500),  
+ S_Faculty_Name nvarchar(max),  
  I_Employee_ID INT,  
  I_Is_Complete INT,  
  I_Batch_ID INT,  
@@ -184,7 +184,7 @@ ELSE
 DROP TABLE #temp  
 END TRY  
 BEGIN CATCH  
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
   

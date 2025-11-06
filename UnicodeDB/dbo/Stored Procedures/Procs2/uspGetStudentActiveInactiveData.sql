@@ -1,19 +1,19 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentActiveInactiveData] ( @dtDate DATE )
+CREATE PROCEDURE [dbo].[uspGetStudentActiveInactiveData] ( @dtDate DATE )
 AS 
     BEGIN
     
         DECLARE @studentid INT
-        DECLARE @Sstudentid VARCHAR(MAX)
+        DECLARE @Sstudentid nvarchar(max)
     
 		
         CREATE TABLE #temp
             (
               StudentDetailID INT ,
-              StudentID VARCHAR(MAX) ,
+              StudentID nvarchar(max) ,
               BatchID INT ,
-              BatchName VARCHAR(MAX) ,
+              BatchName nvarchar(max) ,
               CenterID INT ,
-              CenterName VARCHAR(MAX) ,
+              CenterName nvarchar(max) ,
               IsDiscontinued INT ,
               IsDropout INT ,
               IsOnLeave INT ,

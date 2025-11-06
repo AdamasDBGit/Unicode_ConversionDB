@@ -1,14 +1,14 @@
-﻿CREATE PROCEDURE [dbo].[uspImportCourseStructure] ( @iBrandID INT )
+CREATE PROCEDURE [dbo].[uspImportCourseStructure] ( @iBrandID INT )
 AS 
     BEGIN
-        DECLARE @Course VARCHAR(MAX) ,
+        DECLARE @Course nvarchar(max) ,
             @CourseID INT ,
-            @Term VARCHAR(MAX) ,
+            @Term nvarchar(max) ,
             @TermID INT ,
             @TotalSessionCount INT ,
-            @Module VARCHAR(MAX) ,
+            @Module nvarchar(max) ,
             @ModuleID INT ,
-            @Session VARCHAR(MAX) ,
+            @Session nvarchar(max) ,
             @SessionID INT ,
             @SkillID INT ,
             @SessionDuration INT ,
@@ -62,9 +62,9 @@ AS
                                           I_Total_Session_Count
 				                )
                                 VALUES  ( @iBrandID , -- I_Brand_ID - int
-                                          @Term , -- S_Term_Code - varchar(50)
-                                          @Term , -- S_Term_Name - varchar(250)
-                                          'dba' , -- S_Crtd_By - varchar(20)
+                                          @Term , -- S_Term_Code - nvarchar(max)
+                                          @Term , -- S_Term_Name - nvarchar(max)
+                                          'dba' , -- S_Crtd_By - nvarchar(max)
                                           GETDATE() , -- Dt_Crtd_On - datetime
                                           1 , -- I_Is_Editable - int
                                           1 , -- I_Status - int
@@ -96,7 +96,7 @@ AS
                                           @Tid , -- I_Term_ID - int
                                           @MaxTermSeq + 1 , -- I_Sequence - int
                                           'Y' , -- C_Examinable - char(1)
-                                          'dba' , -- S_Crtd_By - varchar(20)
+                                          'dba' , -- S_Crtd_By - nvarchar(max)
                                           GETDATE() , -- Dt_Crtd_On - datetime
                                           GETDATE() , -- Dt_Valid_From - datetime
                                           1  -- I_Status - int
@@ -115,9 +115,9 @@ AS
 				                	        
                                                 )
                                         VALUES  ( @iBrandID , -- I_Brand_ID - int
-                                                  SUBSTRING(@Module,0,50) , -- S_Module_Code - varchar(50)
-                                                  @Module , -- S_Module_Name - varchar(250)
-                                                  'dba' , -- S_Crtd_By - varchar(20)
+                                                  SUBSTRING(@Module,0,50) , -- S_Module_Code - nvarchar(max)
+                                                  @Module , -- S_Module_Name - nvarchar(max)
+                                                  'dba' , -- S_Crtd_By - nvarchar(max)
                                                   GETDATE() , -- Dt_Crtd_On - datetime
                                                   1 , -- I_Is_Editable - int
                                                   1  -- I_Status - int
@@ -150,7 +150,7 @@ AS
                                                   @Mid , -- I_Module_ID - int
                                                   @MaxModuleSeq + 1 , -- I_Sequence - int
                                                   'Y' , -- C_Examinable - char(1)
-                                                  'dba' , -- S_Crtd_By - varchar(20)
+                                                  'dba' , -- S_Crtd_By - nvarchar(max)
                                                   GETDATE() , -- Dt_Valid_From - datetime
                                                   GETDATE() , -- Dt_Crtd_On - datetime
                                                   1  -- I_Status - int
@@ -175,11 +175,11 @@ AS
                                                         )
                                                 VALUES  ( @SessionTypeID , -- I_Session_Type_ID - int
                                                           @iBrandID , -- I_Brand_ID - int
-                                                          SUBSTRING(@Session,0,10) , -- S_Session_Code - varchar(50)
-                                                          @Session , -- S_Session_Name - varchar(250)
+                                                          SUBSTRING(@Session,0,10) , -- S_Session_Code - nvarchar(max)
+                                                          @Session , -- S_Session_Name - nvarchar(max)
                                                           @SessionDuration , -- N_Session_Duration - numeric
-                                                          'dba' , -- S_Crtd_By - varchar(20)
-                                                          @Session , -- S_Session_Topic - varchar(1000)
+                                                          'dba' , -- S_Crtd_By - nvarchar(max)
+                                                          @Session , -- S_Session_Topic - nvarchar(max)
                                                           GETDATE() , -- Dt_Crtd_On - datetime
                                                           1 , -- I_Is_Editable - int
                                                           1 , -- I_Status - int
@@ -211,7 +211,7 @@ AS
                                                 VALUES  ( @Mid , -- I_Module_ID - int
                                                           @Sid , -- I_Session_ID - int
                                                           @MaxSessionSeq + 1 , -- I_Sequence - int
-                                                          'dba' , -- S_Crtd_By - varchar(20)
+                                                          'dba' , -- S_Crtd_By - nvarchar(max)
                                                           GETDATE() , -- Dt_Valid_From - datetime
                                                           GETDATE() , -- Dt_Crtd_On - datetime
                                                           1  -- I_Status - int
@@ -253,7 +253,7 @@ AS
                                                               @MaxModuleSeq
                                                               + 1 , -- I_Sequence - int
                                                               'Y' , -- C_Examinable - char(1)
-                                                              'dba' , -- S_Crtd_By - varchar(20)
+                                                              'dba' , -- S_Crtd_By - nvarchar(max)
                                                               GETDATE() , -- Dt_Valid_From - datetime
                                                               GETDATE() , -- Dt_Crtd_On - datetime
                                                               1  -- I_Status - int
@@ -279,11 +279,11 @@ AS
                                                             )
                                                     VALUES  ( @SessionTypeID , -- I_Session_Type_ID - int
                                                               @iBrandID , -- I_Brand_ID - int
-                                                              SUBSTRING(@Session,0,10) , -- S_Session_Code - varchar(50)
-                                                              @Session , -- S_Session_Name - varchar(250)
+                                                              SUBSTRING(@Session,0,10) , -- S_Session_Code - nvarchar(max)
+                                                              @Session , -- S_Session_Name - nvarchar(max)
                                                               @SessionDuration , -- N_Session_Duration - numeric
-                                                              'dba' , -- S_Crtd_By - varchar(20)
-                                                              @Session , -- S_Session_Topic - varchar(1000)
+                                                              'dba' , -- S_Crtd_By - nvarchar(max)
+                                                              @Session , -- S_Session_Topic - nvarchar(max)
                                                               GETDATE() , -- Dt_Crtd_On - datetime
                                                               1 , -- I_Is_Editable - int
                                                               1 , -- I_Status - int
@@ -316,7 +316,7 @@ AS
                                                               @Sid , -- I_Session_ID - int
                                                               @MaxSessionSeq
                                                               + 1 , -- I_Sequence - int
-                                                              'dba' , -- S_Crtd_By - varchar(20)
+                                                              'dba' , -- S_Crtd_By - nvarchar(max)
                                                               GETDATE() , -- Dt_Valid_From - datetime
                                                               GETDATE() , -- Dt_Crtd_On - datetime
                                                               1  -- I_Status - int
@@ -355,7 +355,7 @@ AS
                                               @TermID , -- I_Term_ID - int
                                               @MaxTermSeq + 1 , -- I_Sequence - int
                                               'Y' , -- C_Examinable - char(1)
-                                              'dba' , -- S_Crtd_By - varchar(20)
+                                              'dba' , -- S_Crtd_By - nvarchar(max)
                                               GETDATE() , -- Dt_Crtd_On - datetime
                                               GETDATE() , -- Dt_Valid_From - datetime
                                               1  -- I_Status - int
@@ -375,9 +375,9 @@ AS
 				                	        
                                                     )
                                             VALUES  ( @iBrandID , -- I_Brand_ID - int
-                                                      SUBSTRING(@Module,0,50) , -- S_Module_Code - varchar(50)
-                                                      @Module , -- S_Module_Name - varchar(250)
-                                                      'dba' , -- S_Crtd_By - varchar(20)
+                                                      SUBSTRING(@Module,0,50) , -- S_Module_Code - nvarchar(max)
+                                                      @Module , -- S_Module_Name - nvarchar(max)
+                                                      'dba' , -- S_Crtd_By - nvarchar(max)
                                                       GETDATE() , -- Dt_Crtd_On - datetime
                                                       1 , -- I_Is_Editable - int
                                                       1  -- I_Status - int
@@ -409,7 +409,7 @@ AS
                                                       @Mid , -- I_Module_ID - int
                                                       @MaxModuleSeq + 1 , -- I_Sequence - int
                                                       'Y' , -- C_Examinable - char(1)
-                                                      'dba' , -- S_Crtd_By - varchar(20)
+                                                      'dba' , -- S_Crtd_By - nvarchar(max)
                                                       GETDATE() , -- Dt_Valid_From - datetime
                                                       GETDATE() , -- Dt_Crtd_On - datetime
                                                       1  -- I_Status - int
@@ -434,11 +434,11 @@ AS
                                                             )
                                                     VALUES  ( @SessionTypeID , -- I_Session_Type_ID - int
                                                               @iBrandID , -- I_Brand_ID - int
-                                                              SUBSTRING(@Session,0,10) , -- S_Session_Code - varchar(50)
-                                                              @Session , -- S_Session_Name - varchar(250)
+                                                              SUBSTRING(@Session,0,10) , -- S_Session_Code - nvarchar(max)
+                                                              @Session , -- S_Session_Name - nvarchar(max)
                                                               @SessionDuration , -- N_Session_Duration - numeric
-                                                              'dba' , -- S_Crtd_By - varchar(20)
-                                                              @Session , -- S_Session_Topic - varchar(1000)
+                                                              'dba' , -- S_Crtd_By - nvarchar(max)
+                                                              @Session , -- S_Session_Topic - nvarchar(max)
                                                               GETDATE() , -- Dt_Crtd_On - datetime
                                                               1 , -- I_Is_Editable - int
                                                               1 , -- I_Status - int
@@ -471,7 +471,7 @@ AS
                                                               @Sid , -- I_Session_ID - int
                                                               @MaxSessionSeq
                                                               + 1 , -- I_Sequence - int
-                                                              'dba' , -- S_Crtd_By - varchar(20)
+                                                              'dba' , -- S_Crtd_By - nvarchar(max)
                                                               GETDATE() , -- Dt_Valid_From - datetime
                                                               GETDATE() , -- Dt_Crtd_On - datetime
                                                               1  -- I_Status - int
@@ -512,7 +512,7 @@ AS
                                                           @ModuleID , -- I_Module_ID - int
                                                           @MaxModuleSeq + 1 , -- I_Sequence - int
                                                           'Y' , -- C_Examinable - char(1)
-                                                          'dba' , -- S_Crtd_By - varchar(20)
+                                                          'dba' , -- S_Crtd_By - nvarchar(max)
                                                           GETDATE() , -- Dt_Valid_From - datetime
                                                           GETDATE() , -- Dt_Crtd_On - datetime
                                                           1  -- I_Status - int
@@ -541,11 +541,11 @@ AS
                                                               ( 
                                                               @SessionTypeID , -- I_Session_Type_ID - int
                                                               @iBrandID , -- I_Brand_ID - int
-                                                              SUBSTRING(@Session,0,10) , -- S_Session_Code - varchar(50)
-                                                              @Session , -- S_Session_Name - varchar(250)
+                                                              SUBSTRING(@Session,0,10) , -- S_Session_Code - nvarchar(max)
+                                                              @Session , -- S_Session_Name - nvarchar(max)
                                                               @SessionDuration , -- N_Session_Duration - numeric
-                                                              'dba' , -- S_Crtd_By - varchar(20)
-                                                              @Session , -- S_Session_Topic - varchar(1000)
+                                                              'dba' , -- S_Crtd_By - nvarchar(max)
+                                                              @Session , -- S_Session_Topic - nvarchar(max)
                                                               GETDATE() , -- Dt_Crtd_On - datetime
                                                               1 , -- I_Is_Editable - int
                                                               1 , -- I_Status - int
@@ -584,7 +584,7 @@ AS
                                                               @Sid , -- I_Session_ID - int
                                                               @MaxSessionSeq
                                                               + 1 , -- I_Sequence - int
-                                                              'dba' , -- S_Crtd_By - varchar(20)
+                                                              'dba' , -- S_Crtd_By - nvarchar(max)
                                                               GETDATE() , -- Dt_Valid_From - datetime
                                                               GETDATE() , -- Dt_Crtd_On - datetime
                                                               1  -- I_Status - int

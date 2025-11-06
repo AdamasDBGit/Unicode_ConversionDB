@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_UpsertRouteAndPickupPoints]  
+CREATE PROCEDURE [dbo].[usp_ERP_UpsertRouteAndPickupPoints]  
     @I_Route_ID INT = NULL,  
-    @S_Route_No NVARCHAR(MAX),  
-    @S_Location NVARCHAR(MAX),  
+    @S_Route_No Nnvarchar(max),  
+    @S_Location Nnvarchar(max),  
     @ERP_User_ID INT,  
     @I_Brand_ID INT,  
-    @start_latitude NVARCHAR(MAX),  
-    @start_longitude NVARCHAR(MAX),  
+    @start_latitude Nnvarchar(max),  
+    @start_longitude Nnvarchar(max),  
     @pickup_points UT_Route_PickupMap READONLY  
 AS  
 BEGIN  
@@ -16,8 +16,8 @@ BEGIN
   I_route_ID int ,  
   I_Pickup_ID int,  
   IS_NewPickup bit,  
-  Start_latitude varchar(50),  
-  Start_lognitude varchar(50)  
+  Start_latitude nvarchar(max),  
+  Start_lognitude nvarchar(max)  
   )  
   
         -- Insert or Update HeaderTable  
@@ -46,9 +46,9 @@ BEGIN
   Select IDENTITY(INT,1,1) AS ID, * INTO #pickup_points from @pickup_points  
   
        Declare @ID int=1,@lst int  
-    Declare @PickupID int, @S_PickupPoint_Name Varchar(500),@PickPoint_Landmark Varchar(255),  
-    @Pickup_Full_Address Varchar(500),@pickup_latitude Varchar(50),  
-    @pickup_longitude Varchar(50),@pickup_index Int,@drop_index Int,@N_Fees Decimal(18,2)  
+    Declare @PickupID int, @S_PickupPoint_Name nvarchar(max),@PickPoint_Landmark nvarchar(max),  
+    @Pickup_Full_Address nvarchar(max),@pickup_latitude nvarchar(max),  
+    @pickup_longitude nvarchar(max),@pickup_index Int,@drop_index Int,@N_Fees Decimal(18,2)  
     SET @lst=(select MAX(ID) from #pickup_points)  
     While @ID <=@lst  
     Begin  
@@ -128,7 +128,7 @@ BEGIN
         SELECT ', ' + CAST(rp.I_Pickup_ID AS VARCHAR)
         FROM #RoutePickup rp
         WHERE rp.I_route_ID = r.I_route_ID
-        FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, '') AS Pickup_IDs
+        FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 2, '') AS Pickup_IDs
 FROM 
     #RoutePickup r
 GROUP BY 

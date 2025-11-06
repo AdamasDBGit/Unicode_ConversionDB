@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateCTProcess]  
+CREATE PROCEDURE [dbo].[uspUpdateCTProcess]  
     (  
-      @sLoginId NVARCHAR(MAX) ,  
+      @sLoginId Nnvarchar(max) ,  
       @iSourceCenterID INT = NULL ,  
       @iDestinationCenterID INT = NULL ,  
       @iStudentDetailId INT = NULL ,  
-      @sRemarks NVARCHAR(MAX) ,  
+      @sRemarks Nnvarchar(max) ,  
       @iCTStatus INT ,  
       @iTransferRequestId INT = NULL ,  
       @iCourseDuration INT = NULL ,  
@@ -16,7 +16,7 @@ AS
     BEGIN                      
         DECLARE @ID INT            
         DECLARE @iTaskDetailId INT              
-        DECLARE @info VARCHAR(500)                    
+        DECLARE @info nvarchar(max)                    
         DECLARE @USERID TABLE ( I_User_Id INT )                      
                       
         DECLARE @iTaskMasterId INT                      

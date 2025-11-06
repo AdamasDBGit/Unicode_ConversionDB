@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspAddAccessibilityForSystemAdmin] 
+CREATE PROCEDURE [dbo].[uspAddAccessibilityForSystemAdmin] 
 (
 	@iHierarchyDetailID int,
-	@sLoginID NVARCHAR(MAX)
+	@sLoginID Nnvarchar(max)
 )
 
 AS
@@ -53,7 +53,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

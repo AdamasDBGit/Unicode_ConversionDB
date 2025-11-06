@@ -1,8 +1,8 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_usReceiveRejectItems]
-@Action	NVARCHAR(MAX),
+@Action	Nnvarchar(max),
 @GridData	xml,
-@OracleTransactionId NVARCHAR(MAX)
+@OracleTransactionId Nnvarchar(max)
 
 AS
 BEGIN
@@ -14,16 +14,16 @@ BEGIN
 	set @loopCount = 1
 	select @nodeCount = COUNT(1) FROM @GridData.nodes('/Root/MaterialItem') COM(Col)
 	
-	DECLARE @slNo varchar(100)
-	DECLARE @ItemCode varchar(100)
-	DECLARE @barCode varchar(100)
-	DECLARE @courseNo varchar(100)
-	DECLARE @TBL_STOCK TABLE(UUID INT IDENTITY(1,1),ItemCode NVARCHAR(255),Quantity INT) 
-	DECLARE @TBL_STOCK_DTL TABLE(ItemCode NVARCHAR(255),BarCode nvarchar(255)) 
+	DECLARE @slNo nvarchar(max)
+	DECLARE @ItemCode nvarchar(max)
+	DECLARE @barCode nvarchar(max)
+	DECLARE @courseNo nvarchar(max)
+	DECLARE @TBL_STOCK TABLE(UUID INT IDENTITY(1,1),ItemCode Nnvarchar(max),Quantity INT) 
+	DECLARE @TBL_STOCK_DTL TABLE(ItemCode Nnvarchar(max),BarCode nnvarchar(max)) 
 	
 	INSERT INTO @TBL_STOCK_DTL(ItemCode,BarCode)
-	SELECT     T.c.value('itemCode[1]', 'NVARCHAR(255)'),                  
-               T.c.value('barCode[1]', 'NVARCHAR(255)')                       
+	SELECT     T.c.value('itemCode[1]', 'Nnvarchar(max)'),                  
+               T.c.value('barCode[1]', 'Nnvarchar(max)')                       
                         
     FROM    @GridData.nodes('/Root/MaterialItem') T ( c )
 	
@@ -44,7 +44,7 @@ BEGIN
 		SELECT @nodeCount= MAX(UUID) FROM @TBL_STOCK 
 		SELECT @loopCount= MIN(UUID) FROM @TBL_STOCK 
 		select @nodeCount,@loopCount
-		DECLARE @ITEM_CODE NVARCHAR(255)
+		DECLARE @ITEM_CODE Nnvarchar(max)
 		WHILE @loopCount <= @nodeCount
 		BEGIN
 			DECLARE @GENID INT

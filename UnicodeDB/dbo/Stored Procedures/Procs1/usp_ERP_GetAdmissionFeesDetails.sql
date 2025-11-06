@@ -1,4 +1,4 @@
-﻿    
+    
 CREATE PROCEDURE [dbo].[usp_ERP_GetAdmissionFeesDetails]              
 (              
     @EnquiryID INT,              
@@ -97,9 +97,9 @@ BEGIN
  Create table #DiscountDetails    
  (    
  DiscountSchemeID int,    
- DiscountSchemeName varchar(max),    
+ DiscountSchemeName nvarchar(max),    
  StatusID bit,    
- ErrorMsg varchar(max)    
+ ErrorMsg nvarchar(max)    
  )    
     
  set @iERPFeeStructureID= (select top 1 R_I_Fee_Structure_ID from #Temp_Fee_Installment where R_I_Fee_Structure_ID IS NOT NULL and R_I_Fee_Structure_ID > 0 )    

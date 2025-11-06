@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspValidateFormNo]   
+CREATE PROCEDURE [dbo].[uspValidateFormNo]   
 (  
- @sFormNo NVARCHAR(MAX),  
+ @sFormNo Nnvarchar(max),  
  @iBrandID INT  
 )    
 AS     

@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspCopyTimeTableForDate]     
+CREATE PROCEDURE [dbo].[uspCopyTimeTableForDate]     
     (      
       @ICenterID INT ,        
       @DtSelected DATETIME ,       
       @SCopyTimeTableForDateXML XML = NULL ,            
-      @sCrtdBy NVARCHAR(MAX) ,        
+      @sCrtdBy Nnvarchar(max) ,        
       @DtCrtdOn DATETIME               
     )      
 AS       
@@ -16,11 +16,11 @@ AS
      I_TimeSlot_ID int ,      
      I_Batch_ID int ,      
      I_Room_ID int ,      
-     S_Remarks varchar(500) ,      
+     S_Remarks nvarchar(max) ,      
      I_Session_ID int ,      
      Dt_DestDate DATETIME ,      
-     S_SessionName VARCHAR(500) ,      
-     S_SessionTopic VARCHAR(500) ,      
+     S_SessionName nvarchar(max) ,      
+     S_SessionTopic nvarchar(max) ,      
      I_ModuleId INT ,      
      I_TermId INT      
             )        
@@ -30,11 +30,11 @@ AS
                 SELECT  T.c.value('@I_TimeSlot_ID', 'int') ,      
       T.c.value('@I_Batch_ID', 'int') ,      
                         T.c.value('@I_Room_ID', 'int') ,                             
-                        CASE WHEN T.c.value('@S_Remarks','varchar(500)') = '' THEN NULL ELSE T.c.value('@S_Remarks','varchar(500)') END,      
+                        CASE WHEN T.c.value('@S_Remarks','nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Remarks','nvarchar(max)') END,      
                         T.c.value('@I_Session_ID', 'int'),      
                         T.c.value('@Dt_DestDate', 'DATETIME') ,      
-                        T.c.value('@S_SessionName', 'VARCHAR(500)') ,      
-                        CASE WHEN T.c.value('@S_SessionTopic', 'varchar(500)') = '' THEN NULL ELSE T.c.value('@S_SessionTopic', 'varchar(500)') END,      
+                        T.c.value('@S_SessionName', 'nvarchar(max)') ,      
+                        CASE WHEN T.c.value('@S_SessionTopic', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_SessionTopic', 'nvarchar(max)') END,      
                         T.c.value('@I_ModuleId', 'INT') ,                              
                         T.c.value('@I_TermId', 'INT')                               
                 FROM    @SCopyTimeTableForDateXML.nodes('/Root/MonthWiseCopy') T ( c )      
@@ -152,7 +152,7 @@ AS
     BEGIN CATCH                              
  --Error occurred:                                
         ROLLBACK TRANSACTION T1                             
-        DECLARE @ErrMsg NVARCHAR(4000) ,      
+        DECLARE @ErrMsg Nnvarchar(max) ,      
             @ErrSeverity INT                              
         SELECT  @ErrMsg = ERROR_MESSAGE() ,      
                 @ErrSeverity = ERROR_SEVERITY()                              

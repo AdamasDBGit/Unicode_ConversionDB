@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspWriteBatchProcessLog_New]
+CREATE PROCEDURE [dbo].[uspWriteBatchProcessLog_New]
 (
 	@I_Process_ID_Max Int,
-	@S_Batch_Process_Name NVARCHAR(MAX),
-	@S_Comments NVARCHAR(MAX),
-	@S_Status NVARCHAR(MAX),
+	@S_Batch_Process_Name Nnvarchar(max),
+	@S_Comments Nnvarchar(max),
+	@S_Status Nnvarchar(max),
 	@I_Batch_Process_ID Int
 )
  

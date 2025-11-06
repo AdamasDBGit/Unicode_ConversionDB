@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateGuardianDetails]    
+CREATE PROCEDURE [dbo].[uspUpdateGuardianDetails]    
 (    
     @guardianID INT,    
-    @Email NVARCHAR(MAX)    
+    @Email Nnvarchar(max)    
 )    
 AS    
 BEGIN    

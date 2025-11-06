@@ -1,23 +1,23 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateReceiptHeader]
+CREATE PROCEDURE [dbo].[uspUpdateReceiptHeader]
 (
 	@iReceiptID int,
 	@iInvoiceHeaderID int,
-	@dReceiptDate NVARCHAR(MAX),
+	@dReceiptDate Nnvarchar(max),
 	@iStudentDetailID int,
 	@iPaymentModeID int,
 	@iCentreId int,
 	@nReceiptAmount numeric(18,2),
 	@nReceiptTaxAmount numeric(18,2),
 	@sFundTransferStatus char(1),
-	@sUpdatedBy NVARCHAR(MAX),
+	@sUpdatedBy Nnvarchar(max),
 	@dUpdatedOn datetime,
 	@nCreditCardNo numeric(18,0),
-	@dCreditCardExpiry NVARCHAR(MAX),
-	@sCreditCardIssuer NVARCHAR(MAX),
-	@sChequeDDNo NVARCHAR(MAX),
-	@dChequeDDDate NVARCHAR(MAX),
-	@sBankName NVARCHAR(MAX),
-	@sBranchName NVARCHAR(MAX),
+	@dCreditCardExpiry Nnvarchar(max),
+	@sCreditCardIssuer Nnvarchar(max),
+	@sChequeDDNo Nnvarchar(max),
+	@dChequeDDDate Nnvarchar(max),
+	@sBankName Nnvarchar(max),
+	@sBranchName Nnvarchar(max),
 	@iReceiptType int		
 ) 
 
@@ -59,7 +59,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

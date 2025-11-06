@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[usp_ERP_GetTeacherMonthAttendance] 
 (
 	-- Add the parameters for the stored procedure here
@@ -10,7 +10,7 @@ BEGIN
 	BEGIN TRY
 	DECLARE @MinDate DATE = '',
 		@MaxDate DATE = '',
-		@SessionName nvarchar(50),
+		@SessionName nnvarchar(max),
 		@BrandID int;
 
 		set @BrandID = (select I_Brand_ID from T_Faculty_Master where I_Faculty_Master_ID = @FacultyMasterID)
@@ -79,7 +79,7 @@ SELECT
 	;
 	END TRY
 	BEGIN CATCH
-		DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+		DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 		SELECT	@ErrMsg = ERROR_MESSAGE(),
 				@ErrSeverity = ERROR_SEVERITY()

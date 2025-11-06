@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentCourseSuggestions]  --338347    
+CREATE PROCEDURE [dbo].[uspGetStudentCourseSuggestions]  --338347    
 (      
  -- Add the parameters for the stored procedure here      
  @iEnquiryID INT    
 )      
 AS      
 BEGIN      
- declare @tmp varchar(max)    
+ declare @tmp nvarchar(max)    
  SET @tmp = ''    
  SELECT  @tmp = @tmp + S_Course_Name + ', ' FROM ASSESSMENT.T_Student_Assessment_Suggestion A    
  INNER JOIN ASSESSMENT.T_Assessment_CourseList_Course_Map B    

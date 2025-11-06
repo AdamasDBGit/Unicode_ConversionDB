@@ -1,16 +1,16 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertUpdateRoomsDetails]   
+CREATE PROCEDURE [dbo].[uspInsertUpdateRoomsDetails]   
     (  
       @IRoomID INT = NULL ,  
       @IBrandID INT ,  
-      @SBuildingName NVARCHAR(MAX) ,  
-      @SBlockName NVARCHAR(MAX) ,  
-      @SFloorName NVARCHAR(MAX) ,  
-      @SRoomNo NVARCHAR(MAX) ,  
+      @SBuildingName Nnvarchar(max) ,  
+      @SBlockName Nnvarchar(max) ,  
+      @SFloorName Nnvarchar(max) ,  
+      @SRoomNo Nnvarchar(max) ,  
       @IRoomType INT ,  
       @NRoomRate INT ,  
       @INoOfBeds INT ,  
       @IStatus INT ,  
-      @SCrtdby NVARCHAR(MAX) ,  
+      @SCrtdby Nnvarchar(max) ,  
       @DtCrtdOn DATETIME ,  
       @iFlag INT,
       @iCenterID INT  = null
@@ -44,15 +44,15 @@ AS
 							  I_Centre_Id  
 							)  
 					VALUES  ( @IBrandID , -- I_Brand_ID - int  
-							  @SBuildingName , -- S_Building_Name - varchar(255)  
-							  @SBlockName , -- S_Block_Name - varchar(255)  
-							  @SFloorName , -- S_Floor_Name - varchar(255)  
-							  @SRoomNo , -- S_Room_No - varchar(50)  
+							  @SBuildingName , -- S_Building_Name - nvarchar(max)  
+							  @SBlockName , -- S_Block_Name - nvarchar(max)  
+							  @SFloorName , -- S_Floor_Name - nvarchar(max)  
+							  @SRoomNo , -- S_Room_No - nvarchar(max)  
 							  @IRoomType , -- I_Room_Type - int  
 							  @NRoomRate , -- N_Room_Rate - numeric  
 							  @INoOfBeds , -- I_No_Of_Beds - int  
 							  @IStatus , -- I_Status - int  
-							  @SCrtdby , -- S_Crtd_by - varchar(50)  
+							  @SCrtdby , -- S_Crtd_by - nvarchar(max)  
 							  @DtCrtdOn , -- Dt_Crtd_On - datetime
 							  @iCenterID  
 							)      
@@ -100,15 +100,15 @@ AS
 							  I_Centre_Id  
 							)  
 					VALUES  ( @IBrandID , -- I_Brand_ID - int  
-							  @SBuildingName , -- S_Building_Name - varchar(255)  
-							  @SBlockName , -- S_Block_Name - varchar(255)  
-							  @SFloorName , -- S_Floor_Name - varchar(255)  
-							  @SRoomNo , -- S_Room_No - varchar(50)  
+							  @SBuildingName , -- S_Building_Name - nvarchar(max)  
+							  @SBlockName , -- S_Block_Name - nvarchar(max)  
+							  @SFloorName , -- S_Floor_Name - nvarchar(max)  
+							  @SRoomNo , -- S_Room_No - nvarchar(max)  
 							  @IRoomType , -- I_Room_Type - int  
 							  @NRoomRate , -- N_Room_Rate - numeric  
 							  @INoOfBeds , -- I_No_Of_Beds - int  
 							  @IStatus , -- I_Status - int  
-							  @SCrtdby , -- S_Crtd_by - varchar(50)  
+							  @SCrtdby , -- S_Crtd_by - nvarchar(max)  
 							  @DtCrtdOn , -- Dt_Crtd_On - datetime
 							  @iCenterID  
 							)      
@@ -148,7 +148,7 @@ AS
     END TRY             
     BEGIN CATCH              
  --Error occurred:                
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT              
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()              

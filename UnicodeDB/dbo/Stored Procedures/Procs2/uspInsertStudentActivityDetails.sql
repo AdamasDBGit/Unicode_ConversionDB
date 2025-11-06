@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertStudentActivityDetails]
+CREATE PROCEDURE [dbo].[uspInsertStudentActivityDetails]
     (
-      @S_Activity_IDs NVARCHAR(MAX) = NULL ,
+      @S_Activity_IDs Nnvarchar(max) = NULL ,
       @I_Student_Detail_ID INT ,
       @I_Batch_ID INT ,
-      @sCrtdBy NVARCHAR(MAX) ,
+      @sCrtdBy Nnvarchar(max) ,
       @iStatus INT ,
       @dtCrtdOn DATETIME   
  
@@ -139,7 +139,7 @@ AS
     END TRY    
     BEGIN CATCH    
         ROLLBACK TRANSACTION T1    
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT    
     
         SELECT  @ErrMsg = ERROR_MESSAGE() ,

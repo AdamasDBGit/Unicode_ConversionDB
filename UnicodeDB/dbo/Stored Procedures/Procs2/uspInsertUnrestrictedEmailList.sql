@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertUnrestrictedEmailList] --'<Root><EmailId sEmailId="abc@abc.com" /><EmailId sEmailId="one@vao.com" /><EmailId sEmailId="test@gmail.com" /><EmailId sEmailId="a123@abc.com" /></Root>','sa','1/12/2011'
+CREATE PROCEDURE [dbo].[uspInsertUnrestrictedEmailList] --'<Root><EmailId sEmailId="abc@abc.com" /><EmailId sEmailId="one@vao.com" /><EmailId sEmailId="test@gmail.com" /><EmailId sEmailId="a123@abc.com" /></Root>','sa','1/12/2011'
 (                          
                       
- @sEmailId NVARCHAR(MAX),    
- @sCrtdBy NVARCHAR(MAX),                    
+ @sEmailId Nnvarchar(max),    
+ @sCrtdBy Nnvarchar(max),                    
  @dtCrtdOn DATETIME=NULL           
 )                          
 AS                             
@@ -13,7 +13,7 @@ BEGIN TRY
        
   CREATE TABLE #tempEmail            
   (                        
-    EmailId VARCHAR(200)        
+    EmailId nvarchar(max)        
   )      
         
   EXEC sp_xml_preparedocument @xml_hndl OUTPUT, @sEmailId            
@@ -27,11 +27,11 @@ BEGIN TRY
    OPENXML(@xml_hndl, '/Root/EmailId', 1)                  
  With                  
  (                  
-    sEmailId VARCHAR(200) '@sEmailId'              
+    sEmailId nvarchar(max) '@sEmailId'              
   )                  
    
         
-    DECLARE @cn_email VARCHAR(50)            
+    DECLARE @cn_email nvarchar(max)            
           
     DECLARE INSERT_Email CURSOR FOR            
     SELECT EmailId FROM #tempEmail  
@@ -75,7 +75,7 @@ BEGIN CATCH
               
   ROLLBACK TRANSACTION                  
                         
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int                            
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int                            
  SELECT @ErrMsg = ERROR_MESSAGE(),                            
  @ErrSeverity = ERROR_SEVERITY()                            
  RAISERROR(@ErrMsg, @ErrSeverity, 1)                

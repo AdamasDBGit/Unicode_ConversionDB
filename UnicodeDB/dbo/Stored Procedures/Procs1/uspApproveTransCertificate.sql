@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspApproveTransCertificate]    
+CREATE PROCEDURE [dbo].[uspApproveTransCertificate]    
     @iStudentID INT ,    
     @iRequestStatus CHAR ,  
-    @SRemarks NVARCHAR(MAX),  
-    @sUpdatedBy NVARCHAR(MAX),  
+    @SRemarks Nnvarchar(max),  
+    @sUpdatedBy Nnvarchar(max),  
     @DtUpdatedOn DATETIME       
 AS     
     BEGIN TRY      
@@ -49,7 +49,7 @@ AS
     BEGIN CATCH      
  --Error occurred:        
       
-        DECLARE @ErrMsg NVARCHAR(4000) ,    
+        DECLARE @ErrMsg Nnvarchar(max) ,    
             @ErrSeverity INT      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,    
                 @ErrSeverity = ERROR_SEVERITY()      

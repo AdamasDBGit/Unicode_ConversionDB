@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_insert_Update_Fee_Plan_Structure_Component]          
+CREATE PROCEDURE [dbo].[usp_ERP_insert_Update_Fee_Plan_Structure_Component]          
     @h_I_Fee_Structure_ID INT = NULL,            
-    @p_S_Fee_Structure_Name NVARCHAR(MAX),          
-    @p_S_Fee_Code NVARCHAR(MAX)=null,          
+    @p_S_Fee_Structure_Name Nnvarchar(max),          
+    @p_S_Fee_Code Nnvarchar(max)=null,          
     @p_Dt_StartDt date=NULL,          
     @p_Dt_EndDt date=NULL,          
     @p_I_School_Group_ID int,          
@@ -26,7 +26,7 @@ BEGIN
     BEGIN TRY          
         BEGIN TRANSACTION;     
   
-  DECLARE @ErrMessage NVARCHAR(4000) --,@BrandID int--,@sessionID   
+  DECLARE @ErrMessage Nnvarchar(max) --,@BrandID int--,@sessionID   
   IF @ibrandiD is NULL 
   begin 
   SET @ibrandiD=(select top 1 I_Brand_Id from T_School_Group where I_School_Group_ID=@p_I_School_Group_ID)
@@ -283,7 +283,7 @@ END
         IF @@TRANCOUNT > 0          
             ROLLBACK;          
           
-       DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int      
+       DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int      
       
  SELECT @ErrMsg = ERROR_MESSAGE(),      
    @ErrSeverity = ERROR_SEVERITY()      

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_Get_TaxRegister_ByDateRange_Oracle]
+CREATE PROCEDURE [dbo].[usp_ERP_Get_TaxRegister_ByDateRange_Oracle]
     @iBrandID INT,
     @dtStartDate DATETIME = NULL,
     @dtEndDate   DATETIME = NULL
@@ -18,12 +18,12 @@ BEGIN
             BrandID int,
             TransactionTypeID int,
             StudentDetailID int,
-            StudentID varchar(max),
-            CostCentre varchar(max),
+            StudentID nvarchar(max),
+            CostCentre nvarchar(max),
             Amount decimal(14,2),
             TransactionDate datetime,
-            CreditNoteNo varchar(max),
-            FeeComponent varchar(max)
+            CreditNoteNo nvarchar(max),
+            FeeComponent nvarchar(max)
         );
 
         SET @dtExecutionDate = @dtStartDate;  -- mm/dd/yyyy

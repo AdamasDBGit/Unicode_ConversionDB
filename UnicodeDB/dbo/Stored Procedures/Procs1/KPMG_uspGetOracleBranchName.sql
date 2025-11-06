@@ -1,6 +1,6 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGetOracleBranchName]  
-@BranchMame NVARCHAR(255)
+@BranchMame Nnvarchar(max)
 AS   
     BEGIN TRY 
     		   
@@ -17,7 +17,7 @@ AS
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            

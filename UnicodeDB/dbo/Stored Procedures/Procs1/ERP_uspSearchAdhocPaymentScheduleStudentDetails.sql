@@ -1,15 +1,15 @@
-﻿CREATE PROCEDURE [dbo].[ERP_uspSearchAdhocPaymentScheduleStudentDetails]  
+CREATE PROCEDURE [dbo].[ERP_uspSearchAdhocPaymentScheduleStudentDetails]  
 (  
     @EnquiryNo INT = NULL,  
-    @StudentID NVARCHAR(MAX) = NULL,  
-    @StudentName NVARCHAR(MAX) = NULL,  
+    @StudentID Nnvarchar(max) = NULL,  
+    @StudentName Nnvarchar(max) = NULL,  
     @Limit INT,  
     @Offset INT,  
     @SortCol INT,  
-    @SortDir NVARCHAR(MAX),  
+    @SortDir Nnvarchar(max),  
     @Id INT = NULL,  
     @PaymentID INT = NULL,  
-    @SearchValue NVARCHAR(MAX) = NULL  -- 🔍 New Parameter for Universal Search  
+    @SearchValue Nnvarchar(max) = NULL  -- ?? New Parameter for Universal Search  
 )  
 AS  
 BEGIN  
@@ -60,7 +60,7 @@ BEGIN
             AND EAPSSD.inAdhocPaymentScheduleStudentDetailID = ISNULL(@Id, EAPSSD.inAdhocPaymentScheduleStudentDetailID)  
             AND EAPSD.inAdhocPaymentScheduleHeaderID = ISNULL(@PaymentID, EAPSD.inAdhocPaymentScheduleHeaderID)  
               
-            -- 🔍 Universal Search (applied only if SearchValue is NOT NULL)  
+            -- ?? Universal Search (applied only if SearchValue is NOT NULL)  
             AND (  
                 @SearchValue IS NULL OR  
                 SD.S_Student_ID LIKE '%' + @SearchValue + '%' OR  

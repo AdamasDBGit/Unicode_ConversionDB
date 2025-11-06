@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[USP_ERP_Save_StudentPromotionHistory]
+CREATE PROCEDURE [dbo].[USP_ERP_Save_StudentPromotionHistory]
 (
     @UT_StudentPromotionDetails AS dbo.UT_StudentPromotionDetails READONLY,
     @iBrandID INT,
@@ -18,13 +18,13 @@ BEGIN
     ----------------------------------------------------
     DECLARE @MergeOutput TABLE
     (
-        ActionType NVARCHAR(10),
+        ActionType Nnvarchar(max),
         I_Student_Promotion_History_Header_ID INT,
         I_Student_DetailID INT,
         I_Source_Academic_Session INT,
         I_Destination_Academic_Session INT,
         I_Promotion_Status INT,
-        S_Remarks NVARCHAR(MAX)
+        S_Remarks Nnvarchar(max)
     );
 
     ----------------------------------------------------
@@ -156,7 +156,7 @@ BEGIN
      ----------------------------------------------------
         -- SUCCESS RESPONSE
         ----------------------------------------------------
-        DECLARE @InsertedIDs NVARCHAR(MAX) = '';
+        DECLARE @InsertedIDs Nnvarchar(max) = '';
 
         SELECT @InsertedIDs = 
             COALESCE(@InsertedIDs + ',', '') + CAST(I_Student_Promotion_History_Header_ID AS NVARCHAR(20))

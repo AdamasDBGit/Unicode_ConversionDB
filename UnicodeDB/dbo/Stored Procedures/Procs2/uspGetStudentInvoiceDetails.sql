@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentInvoiceDetails]
+CREATE PROCEDURE [dbo].[uspGetStudentInvoiceDetails]
     (
-      @sStudentCode NVARCHAR(MAX) ,
-      @sStudentFName NVARCHAR(MAX) ,
-      @sStudentMName NVARCHAR(MAX) ,
-      @sStudentLName NVARCHAR(MAX) ,
-      @sInvoiceNo NVARCHAR(MAX) ,
+      @sStudentCode Nnvarchar(max) ,
+      @sStudentFName Nnvarchar(max) ,
+      @sStudentMName Nnvarchar(max) ,
+      @sStudentLName Nnvarchar(max) ,
+      @sInvoiceNo Nnvarchar(max) ,
       @iCentreId INT      
     )
 AS

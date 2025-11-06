@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateDiscontinueInvoiceDetails]
+CREATE PROCEDURE [dbo].[uspUpdateDiscontinueInvoiceDetails]
 AS
 BEGIN
 
-DECLARE @sInvoiceNo VARCHAR(20)
-DECLARE @sStudentID VARCHAR(MAX)
+DECLARE @sInvoiceNo nvarchar(max)
+DECLARE @sStudentID nvarchar(max)
 DECLARE @dtReviseInvoiceDate DATE
 
 
@@ -20,8 +20,8 @@ DECLARE @NewDate DATE ='2016-03-01'
 CREATE TABLE #temp
 (
 ID INT,
-StudentID VARCHAR(MAX),
-InvoiceNo VARCHAR(MAX)
+StudentID nvarchar(max),
+InvoiceNo nvarchar(max)
 )
 
 insert into #temp(ID,StudentID,InvoiceNo)values(1,'1516/RICE/332','83074')

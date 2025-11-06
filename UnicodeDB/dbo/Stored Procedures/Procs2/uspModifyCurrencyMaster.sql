@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyCurrencyMaster] 
+CREATE PROCEDURE [dbo].[uspModifyCurrencyMaster] 
 (
 	@iCurrencyID int,
-	@sCurrencyCode NVARCHAR(MAX),
-	@sCurrencyName NVARCHAR(MAX),
-    @sCurrencyBy NVARCHAR(MAX),
+	@sCurrencyCode Nnvarchar(max),
+	@sCurrencyName Nnvarchar(max),
+    @sCurrencyBy Nnvarchar(max),
 	@dCurrencyOn datetime,
     @iFlag int
 )
@@ -49,7 +49,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

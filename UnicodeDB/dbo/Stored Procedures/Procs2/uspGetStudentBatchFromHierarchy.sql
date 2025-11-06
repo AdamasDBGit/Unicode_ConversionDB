@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentBatchFromHierarchy] 
+CREATE PROCEDURE [dbo].[uspGetStudentBatchFromHierarchy] 
 (
-@sHierarchyList NVARCHAR(MAX),
+@sHierarchyList Nnvarchar(max),
 @iBrandID int
 )         
 AS             

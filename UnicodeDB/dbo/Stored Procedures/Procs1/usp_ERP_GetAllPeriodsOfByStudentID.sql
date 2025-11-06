@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetAllPeriodsOfByStudentID] 
+CREATE PROCEDURE [dbo].[usp_ERP_GetAllPeriodsOfByStudentID] 
 (
 	-- Add the parameters for the stored procedure here
 	@StudentDetailID INT = NULL,
@@ -129,7 +129,7 @@ BEGIN
 
 	END TRY
 	BEGIN CATCH
-		DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+		DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 		SELECT	@ErrMsg = ERROR_MESSAGE(),
 				@ErrSeverity = ERROR_SEVERITY()

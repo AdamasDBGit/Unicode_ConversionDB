@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyModuleGroupModuleMapping] 
+CREATE PROCEDURE [dbo].[uspModifyModuleGroupModuleMapping] 
 (
 	@iTermID int,
 	@sModuleTermMap text,
-	@sModifiedBy NVARCHAR(MAX),
+	@sModifiedBy Nnvarchar(max),
 	@dModifiedOn datetime
 )
 
@@ -27,7 +27,7 @@ BEGIN TRY
 		 I_Module_ID INT ,
 		 I_ModuleGroup_ID INT ,
 		 I_Status INT ,
-         S_Crtd_By VARCHAR(100) NULL,
+         S_Crtd_By nvarchar(max) NULL,
 		 Dt_Crtd_On datetime NULL  
         )
 	EXEC sp_xml_preparedocument @iDocHandle output,@sModuleTermMap
@@ -46,7 +46,7 @@ BEGIN TRY
 		I_Module_ID int, 
 		I_ModuleGroup_ID int, 
 		I_Status int, 
-		S_Crtd_By varchar(20), 
+		S_Crtd_By nvarchar(max), 
 		Dt_Crtd_On datetime	)
 		
 		UPDATE MT
@@ -70,7 +70,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

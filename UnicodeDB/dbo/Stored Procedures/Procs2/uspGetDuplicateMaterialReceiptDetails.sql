@@ -1,21 +1,21 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetDuplicateMaterialReceiptDetails]
 
-@IssuedStudyMaterialBarCode NVARCHAR(500),
+@IssuedStudyMaterialBarCode Nnvarchar(max),
 
-@StudentDetailId NVARCHAR(500),
+@StudentDetailId Nnvarchar(max),
 
-@Context NVARCHAR(500)
+@Context Nnvarchar(max)
 AS
 BEGIN TRY 
 DECLARE @ReceiptDate  DATETIME
-DECLARE @RceiptId NVARCHAR(255)
+DECLARE @RceiptId Nnvarchar(max)
 DECLARE @ReceiptNoInd INT
-DECLARE @ItemCode NVARCHAR(255)
-DECLARE @ErrorMessage NVARCHAR(max)
-DECLARE @ItemDescription NVARCHAR(MAX)
+DECLARE @ItemCode Nnvarchar(max)
+DECLARE @ErrorMessage Nnvarchar(max)
+DECLARE @ItemDescription Nnvarchar(max)
 
-DECLARE @TEMP_RECEIPT_DETAIL TABLE (ReceiptId NVARCHAR(255),ItemCode NVARCHAR(255),ReIssuedStudyMaterialBarCode NVARCHAR(500),Price DECIMAL(10,2),Tax DECIMAL(10,2),Total DECIMAL(10,2),ItemDescription NVARCHAR(255) )
+DECLARE @TEMP_RECEIPT_DETAIL TABLE (ReceiptId Nnvarchar(max),ItemCode Nnvarchar(max),ReIssuedStudyMaterialBarCode Nnvarchar(max),Price DECIMAL(10,2),Tax DECIMAL(10,2),Total DECIMAL(10,2),ItemDescription Nnvarchar(max) )
 IF @Context='ADD'
 BEGIN
 
@@ -57,7 +57,7 @@ END TRY
 
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

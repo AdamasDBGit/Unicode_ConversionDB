@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateInvoiceChild]
+CREATE PROCEDURE [dbo].[uspUpdateInvoiceChild]
 (
 	@iInvoiceHeaderId INT,
 	@iCourseId INT,
-	@sIsLumpsum NVARCHAR(MAX),	
+	@sIsLumpsum Nnvarchar(max),	
 	@iCourseFeePlanId INT,
 	@iCourseStartDate DATETIME,
 	@iCenterId INT,
@@ -66,7 +66,7 @@ BEGIN TRY
 	-- FOR THE LAST COURSE, UPDATE THE INSTALLMENT NUMBER ACCORDING TO THE INSTALLMENT DATE
 	IF @iLastCourse = 1 
 	BEGIN
-		DECLARE @TEMPTABLE TABLE(ID INT IDENTITY(1,1), INSALLMENT_DATE VARCHAR(10), Dt_Installment_Date DateTime)
+		DECLARE @TEMPTABLE TABLE(ID INT IDENTITY(1,1), INSALLMENT_DATE nvarchar(max), Dt_Installment_Date DateTime)
 		INSERT INTO @TEMPTABLE
 		SELECT DISTINCT CONVERT(VARCHAR(10), Dt_Installment_Date, 101), Dt_Installment_Date
 		FROM T_INVOICE_CHILD_DETAIL WHERE I_INVOICE_CHILD_HEADER_ID IN
@@ -144,7 +144,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

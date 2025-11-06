@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[USP_ERP_Insert_update_Student_Approve]
+CREATE PROCEDURE [dbo].[USP_ERP_Insert_update_Student_Approve]
     @Student_Promotion_History_Header_ID INT = NULL,
     @BrandID INT , 
     @CreatedByUserID INT , 
@@ -24,7 +24,7 @@ BEGIN
                 Total_Inv_Amount NUMERIC(10,2),
                 Total_Recpt_Amount NUMERIC(10,2),
                 Stud_Due_Amount NUMERIC(10,2),
-                Due_Status VARCHAR(50)
+                Due_Status nvarchar(max)
             );
 
             -- Insert data using stored procedure
@@ -45,7 +45,7 @@ BEGIN
                 I_Promotion_Status INT,
                 Is_Due_Cleared BIT,
                 Stud_Due_Amount NUMERIC(10,2),
-                Remarks NVARCHAR(MAX),
+                Remarks Nnvarchar(max),
                 CreatedBy INT,
                 CreatedDate DATETIME,
                 UpdatedBy INT,
@@ -152,7 +152,7 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        DECLARE @ErrMsg NVARCHAR(4000),                  
+        DECLARE @ErrMsg Nnvarchar(max),                  
                 @ErrSeverity int                  
                   
         SELECT ERROR_MESSAGE() as Message,                  

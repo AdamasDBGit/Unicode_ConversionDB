@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertEnquiryMigrationDetails] 
+CREATE PROCEDURE [dbo].[uspInsertEnquiryMigrationDetails] 
     (
       @sEnquiryMigrationXML XML = NULL     
     )
@@ -14,50 +14,50 @@ AS
         CREATE TABLE #tempTimeTable
             (
 				 I_CenterId int ,
-				 S_FirstName varchar(50),
-				 S_LastName varchar(50),
+				 S_FirstName nvarchar(max),
+				 S_LastName nvarchar(max),
 				 DT_BirthDate datetime,
-				 S_Caste varchar(20) ,
-				 S_MobileNo varchar(20) ,
-				 S_Address varchar(200) ,
-				 S_Country varchar(20) ,
-				 S_State varchar(20) ,
-				 S_City varchar(20) ,
-				 S_Pincode varchar(20) ,
-				 S_Remarks varchar(500) ,
-				 S_Source varchar(20) ,
-				 S_EnrolType varchar(20) ,
-				 S_SeatType varchar(20) ,
-				 S_EnrolNo varchar(50) ,
-				 S_Rank varchar(20) ,
-				 S_Age varchar(20) ,
+				 S_Caste nvarchar(max) ,
+				 S_MobileNo nvarchar(max) ,
+				 S_Address nvarchar(max) ,
+				 S_Country nvarchar(max) ,
+				 S_State nvarchar(max) ,
+				 S_City nvarchar(max) ,
+				 S_Pincode nvarchar(max) ,
+				 S_Remarks nvarchar(max) ,
+				 S_Source nvarchar(max) ,
+				 S_EnrolType nvarchar(max) ,
+				 S_SeatType nvarchar(max) ,
+				 S_EnrolNo nvarchar(max) ,
+				 S_Rank nvarchar(max) ,
+				 S_Age nvarchar(max) ,
 				 DT_FirstFollowUpDate datetime ,
-				 S_CrtdBy varchar(20) ,
+				 S_CrtdBy nvarchar(max) ,
 				 Dt_CrtdOn datetime
             )  
    
    -- Insert Values into Temporary Table            
         INSERT  INTO #tempTimeTable
                 SELECT  T.c.value('@I_CenterId', 'int') ,
-                        T.c.value('@S_FirstName', 'varchar(50)') ,
-                        T.c.value('@S_LastName', 'varchar(50)') ,
+                        T.c.value('@S_FirstName', 'nvarchar(max)') ,
+                        T.c.value('@S_LastName', 'nvarchar(max)') ,
                         T.c.value('@DT_BirthDate', 'datetime') ,
-                        CASE WHEN T.c.value('@S_Caste','varchar(20)') = '' THEN NULL ELSE T.c.value('@S_Caste','varchar(20)') END,
-                        T.c.value('@S_MobileNo', 'varchar(20)') ,
-                        CASE WHEN T.c.value('@S_Address', 'varchar(200)') = '' THEN NULL ELSE T.c.value('@S_Address', 'varchar(200)') END,
-                        CASE WHEN T.c.value('@S_Country', 'varchar(20)') = '' THEN NULL ELSE T.c.value('@S_Country', 'varchar(20)') END,
-                        CASE WHEN T.c.value('@S_State', 'varchar(20)') = '' THEN NULL ELSE T.c.value('@S_State', 'varchar(20)') END,
-                        CASE WHEN T.c.value('@S_City', 'varchar(20)') = '' THEN NULL ELSE T.c.value('@S_City', 'varchar(20)') END,
-                        CASE WHEN T.c.value('@S_Pincode', 'varchar(20)') = '' THEN NULL ELSE T.c.value('@S_Pincode', 'varchar(20)') END,
-                        CASE WHEN T.c.value('@S_Remarks', 'varchar(500)') = '' THEN NULL ELSE T.c.value('@S_Remarks', 'varchar(500)') END,
-                        CASE WHEN T.c.value('@S_Source', 'varchar(20)') = '' THEN NULL ELSE T.c.value('@S_Source', 'varchar(20)') END,
-                        CASE WHEN T.c.value('@S_EnrolType', 'varchar(20)') = '' THEN NULL ELSE T.c.value('@S_EnrolType', 'varchar(20)') END,
-                        CASE WHEN T.c.value('@S_SeatType', 'varchar(20)') = '' THEN NULL ELSE T.c.value('@S_SeatType', 'varchar(20)') END,
-                        CASE WHEN T.c.value('@S_EnrolNo','varchar(50)') = '' THEN NULL ELSE T.c.value('@S_EnrolNo','varchar(50)') END,
-                        CASE WHEN T.c.value('@S_Rank', 'varchar(20)') = '' THEN NULL ELSE T.c.value('@S_Rank', 'varchar(20)') END,
-                        CASE WHEN T.c.value('@S_Age', 'varchar(20)') = '' THEN NULL ELSE T.c.value('@S_Age', 'varchar(20)') END,
+                        CASE WHEN T.c.value('@S_Caste','nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Caste','nvarchar(max)') END,
+                        T.c.value('@S_MobileNo', 'nvarchar(max)') ,
+                        CASE WHEN T.c.value('@S_Address', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Address', 'nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_Country', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Country', 'nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_State', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_State', 'nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_City', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_City', 'nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_Pincode', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Pincode', 'nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_Remarks', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Remarks', 'nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_Source', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Source', 'nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_EnrolType', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_EnrolType', 'nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_SeatType', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_SeatType', 'nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_EnrolNo','nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_EnrolNo','nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_Rank', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Rank', 'nvarchar(max)') END,
+                        CASE WHEN T.c.value('@S_Age', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Age', 'nvarchar(max)') END,
 						T.c.value('@DT_FirstFollowUpDate', 'datetime') ,
-                        T.c.value('@S_CrtdBy', 'varchar(20)') ,
+                        T.c.value('@S_CrtdBy', 'nvarchar(max)') ,
                         T.c.value('@Dt_CrtdOn', 'datetime')
                 FROM    @sEnquiryMigrationXML.nodes('/Root/EnquiryMigration') T ( c )
                 
@@ -148,7 +148,7 @@ AS
     BEGIN CATCH                  
  --Error occurred:                    
         ROLLBACK TRANSACTION                   
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT                  
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()                  

@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateTask] 
+CREATE PROCEDURE [dbo].[uspUpdateTask] 
 (
 	@iTaskDetailId int,
 	@iTaskMasterId int,
-	@sTaskDescription NVARCHAR(MAX),
-	@sQueryString NVARCHAR(MAX),
+	@sTaskDescription Nnvarchar(max),
+	@sQueryString Nnvarchar(max),
 	@iHierarchyMasterId int,
-	@sHierarchyChain NVARCHAR(MAX),
+	@sHierarchyChain Nnvarchar(max),
 	@iStatus int,
 	@swfInstanceId int 
 )
@@ -30,7 +30,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

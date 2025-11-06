@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspGetLoginIdsForTask] 
+CREATE PROCEDURE [dbo].[uspGetLoginIdsForTask] 
 (
-	@sLoginID NVARCHAR(MAX),
+	@sLoginID Nnvarchar(max),
 	@iHierarchyMasterID int,	
-	@sHierarchyInstanceName NVARCHAR(MAX)
+	@sHierarchyInstanceName Nnvarchar(max)
 	
 )
 
@@ -15,7 +15,7 @@ BEGIN
 	@iHDId int,
 	@iHierarchydetailId int,
 	@iHierarchyLevelID int,
-	@sHierarchyChain varchar(500),
+	@sHierarchyChain nvarchar(max),
 	@iRowCount int,
 	@iRow int,
 	@iPos int,
@@ -27,7 +27,7 @@ BEGIN
 		iHDid int,
 		iHLid int,
 		iUserid int,
-		sEmailid varchar(20)
+		sEmailid nvarchar(max)
    ) 
    
 	SELECT @iUserID = I_User_ID 

@@ -1,17 +1,17 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[usp_ERP_Save_Request_Log]
 (
-	@InvokedRoute NVARCHAR(MAX)=NULL,
-	@sToken NVARCHAR(MAX),
-	@Source NVARCHAR(MAX),
-	@InvokedMethod NVARCHAR(MAX),
-	@UniqueAttributeName NVARCHAR(MAX)=NULL,
-	@UniqueAttributeValue NVARCHAR(MAX)=NULL,
-	@RequestParameters NVARCHAR(MAX)=NULL,
-	@RequestResult NVARCHAR(MAX)=NULL,
-	@ErrorMessage NVARCHAR(MAX)=NULL,
-	@MobileNo NVARCHAR(MAX)=NULL
+	@InvokedRoute Nnvarchar(max)=NULL,
+	@sToken Nnvarchar(max),
+	@Source Nnvarchar(max),
+	@InvokedMethod Nnvarchar(max),
+	@UniqueAttributeName Nnvarchar(max)=NULL,
+	@UniqueAttributeValue Nnvarchar(max)=NULL,
+	@RequestParameters Nnvarchar(max)=NULL,
+	@RequestResult Nnvarchar(max)=NULL,
+	@ErrorMessage Nnvarchar(max)=NULL,
+	@MobileNo Nnvarchar(max)=NULL
 )
 AS
 BEGIN

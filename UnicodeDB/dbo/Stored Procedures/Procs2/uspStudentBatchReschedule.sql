@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspStudentBatchReschedule] -- 258,'2011-09-09 00:00:00.000',NULL,'',''
+CREATE PROCEDURE [dbo].[uspStudentBatchReschedule] -- 258,'2011-09-09 00:00:00.000',NULL,'',''
 (          
  @iBatchID INT ,          
  @dtStartDate DATETIME,
  @dtEndDate DATETIME,
- @sComment NVARCHAR(MAX),
- @sCreatedBy NVARCHAR(MAX)
+ @sComment Nnvarchar(max),
+ @sCreatedBy Nnvarchar(max)
 )          
           
 AS          
@@ -33,7 +33,7 @@ BEGIN
            @dtStartDate , -- Dt_Batch_Hold_Start_Date - datetime
            @dtEndDate , -- Dt_Batch_Hold_End_Date - datetime
            @dtCurrentDate , -- Dt_Crtd_On - datetime
-           @sCreatedBy  -- S_Crtd_By - varchar(20)
+           @sCreatedBy  -- S_Crtd_By - nvarchar(max)
          )
     
     

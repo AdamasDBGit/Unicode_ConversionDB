@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetTaskDetails] 
+CREATE PROCEDURE [dbo].[uspGetTaskDetails] 
 (
-    @S_TUM_Login_ID NVARCHAR(MAX)
+    @S_TUM_Login_ID Nnvarchar(max)
 	
 )
 

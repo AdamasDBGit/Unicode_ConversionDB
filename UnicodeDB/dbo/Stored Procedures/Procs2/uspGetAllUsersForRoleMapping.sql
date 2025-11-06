@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspGetAllUsersForRoleMapping]
+CREATE PROCEDURE [dbo].[uspGetAllUsersForRoleMapping]
 	-- Add the parameters for the stored procedure here
 			@iSelectedHierarchyId int,
-			@vLoginID NVARCHAR(MAX),
-			@vFirstName NVARCHAR(MAX) = null,
-			@vMiddleName NVARCHAR(MAX) = null,
-			@vLastName NVARCHAR(MAX) = null,
-			@sCriteron NVARCHAR(MAX)
+			@vLoginID Nnvarchar(max),
+			@vFirstName Nnvarchar(max) = null,
+			@vMiddleName Nnvarchar(max) = null,
+			@vLastName Nnvarchar(max) = null,
+			@sCriteron Nnvarchar(max)
  			
 AS
 

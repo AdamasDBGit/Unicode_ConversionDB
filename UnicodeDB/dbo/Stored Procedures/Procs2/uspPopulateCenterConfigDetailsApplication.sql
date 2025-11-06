@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspPopulateCenterConfigDetailsApplication]
+CREATE PROCEDURE [dbo].[uspPopulateCenterConfigDetailsApplication]
 (
 	@iCenterID int,
 	@dtDateTimeNow datetime	
@@ -14,8 +14,8 @@ BEGIN
 	(
 		ID_Identity INT IDENTITY(1,1),
 		I_Config_ID INT,
-		S_Config_Code VARCHAR(50),
-		S_Config_Value VARCHAR(50)
+		S_Config_Code nvarchar(max),
+		S_Config_Value nvarchar(max)
 	)
 
 	INSERT INTO #tempTable (S_Config_Code,S_Config_Value,I_Config_ID)

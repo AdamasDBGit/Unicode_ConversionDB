@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspBatchLogArchive]    
+CREATE PROCEDURE [dbo].[uspBatchLogArchive]    
     
 AS    
 BEGIN    
    
-DECLARE @ArchiveDays VARCHAR(50)    
+DECLARE @ArchiveDays nvarchar(max)    
     
 SELECT @ArchiveDays = S_Config_Value    
 FROM dbo.T_Center_Configuration      

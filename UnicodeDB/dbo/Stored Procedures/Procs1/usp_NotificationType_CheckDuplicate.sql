@@ -1,7 +1,7 @@
-﻿
+
 CREATE   PROCEDURE dbo.usp_NotificationType_CheckDuplicate
     @NotificationTypeID INT = NULL,
-    @NotificationTypeName NVARCHAR(255),
+    @NotificationTypeName Nnvarchar(max),
     @BrandId INT
 AS
 BEGIN

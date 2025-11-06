@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateUserVideoAccessTrail]  
+CREATE PROCEDURE [dbo].[uspUpdateUserVideoAccessTrail]  
 (  
 @iVideoAccessTrailID INT,  
 @dtLogoutTime DATETIME  
@@ -12,7 +12,7 @@ BEGIN
  
  END TRY  
  BEGIN CATCH   
-  DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+  DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
   SELECT @ErrMsg = ERROR_MESSAGE(),    
   @ErrSeverity = ERROR_SEVERITY()    
   

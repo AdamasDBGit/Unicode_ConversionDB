@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateTimeTable]
+CREATE PROCEDURE [dbo].[uspUpdateTimeTable]
     (
       @iTimeTableID INT ,
       @dtActualDate DATETIME ,
@@ -20,7 +20,7 @@ AS
         
     END TRY        
     BEGIN CATCH        
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT        
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()        

@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspCancelReceipt]      -- [dbo].[uspCancelReceipt] 3965,'',null  
+CREATE PROCEDURE [dbo].[uspCancelReceipt]      -- [dbo].[uspCancelReceipt] 3965,'',null  
     (  
       @iReceiptHeaderId INT ,  
-      @sCancellationReason NVARCHAR(MAX) ,  
-      @sUpdatedBy NVARCHAR(MAX) = NULL,  
+      @sCancellationReason Nnvarchar(max) ,  
+      @sUpdatedBy Nnvarchar(max) = NULL,  
       @iFlag INT--akash      
     )  
 AS   
@@ -118,7 +118,7 @@ AS
     END TRY        
     BEGIN CATCH        
         ROLLBACK TRANSACTION       
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT        
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()        

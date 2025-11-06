@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetPageName]
+CREATE PROCEDURE [dbo].[uspGetPageName]
 (
-	@SPAGENAME NVARCHAR(MAX)
+	@SPAGENAME Nnvarchar(max)
 )
 AS 
 

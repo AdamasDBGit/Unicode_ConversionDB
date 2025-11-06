@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspSaveInvoiceDiscountDetails]
+CREATE PROCEDURE [dbo].[uspSaveInvoiceDiscountDetails]
 (
 @InvoiceID int,
 @InvoiceDetailID int,
 @DiscountAmount decimal(14,2),
-@sUser NVARCHAR(MAX)
+@sUser Nnvarchar(max)
 )
 as
 

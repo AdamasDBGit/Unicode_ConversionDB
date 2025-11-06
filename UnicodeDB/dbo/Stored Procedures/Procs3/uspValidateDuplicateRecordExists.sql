@@ -1,19 +1,19 @@
-﻿CREATE PROCEDURE [dbo].[uspValidateDuplicateRecordExists]
+CREATE PROCEDURE [dbo].[uspValidateDuplicateRecordExists]
 (
-	@sTableName NVARCHAR(MAX),
-	@sFieldName NVARCHAR(MAX),
-	@sValue NVARCHAR(MAX)
+	@sTableName Nnvarchar(max),
+	@sFieldName Nnvarchar(max),
+	@sValue Nnvarchar(max)
 )
 As
 
 Begin
 
-	Declare @sQuery nVarchar(MAX)
+	Declare @sQuery nnvarchar(max)
 	SET @sQuery ='SELECT ''TRUE'' FROM '+@sTableName +' Where '+ @sFieldName +'='+''''+@sValue+''''
 
 	Create Table #Result
 	(
-		ResultValue VARCHAR(10)
+		ResultValue nvarchar(max)
 	)
 
 	INSERT INTO #Result

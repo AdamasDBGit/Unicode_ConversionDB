@@ -1,4 +1,4 @@
-﻿
+
   
 CREATE PROCEDURE [dbo].[Usp_ERP_Users_UserGroupMap_Insert_Update_BKP_May_2025]                
     @User_Group_Role_Map_ID bigint=Null ,            
@@ -183,7 +183,7 @@ MERGE INTO T_ERP_Users_Role_Permission_Map AS target
     BEGIN CATCH                
         IF @@TRANCOUNT > 0                
             ROLLBACK;                
-DECLARE @ErrorMessage NVARCHAR(4000);              
+DECLARE @ErrorMessage Nnvarchar(max);              
         SET @ErrorMessage = ERROR_MESSAGE();        
         -- Log the error message or handle it as needed              
               

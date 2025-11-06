@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_FormSaleDetail]  
+CREATE PROCEDURE [dbo].[usp_ERP_FormSaleDetail]  
     (  
       @dtStart DATETIME ,  
       @dtEnd DATETIME ,  
       @iBrandId INT ,  
-      @sHierarchyList NVARCHAR(MAX) =NULL 
+      @sHierarchyList Nnvarchar(max) =NULL 
     )  
 AS   
     BEGIN  

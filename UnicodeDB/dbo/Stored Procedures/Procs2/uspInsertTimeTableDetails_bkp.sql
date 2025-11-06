@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspInsertTimeTableDetails_bkp] 
     (  
       @sTimeTableXML XML = NULL       
@@ -8,14 +8,14 @@ AS
         SET NOCOUNT OFF ;                    
      
         DECLARE @iTimeTableID INT    
-        DECLARE @S_Batch_Name VARCHAR(50)  
-        DECLARE @S_DateTime VARCHAR(50)  
+        DECLARE @S_Batch_Name nvarchar(max)  
+        DECLARE @S_DateTime nvarchar(max)  
         DECLARE @Dt_DateTime DATETIME  
         DECLARE @I_timeSlot_id INT  
         DECLARE @Dt_StartTime DATETIME  
   DECLARE @Dt_EndTime DATETIME  
-  DECLARE @S_StartTime VARCHAR(50)  
-  DECLARE @S_EndTime VARCHAR(50)  
+  DECLARE @S_StartTime nvarchar(max)  
+  DECLARE @S_EndTime nvarchar(max)  
     
         BEGIN TRANSACTION                    
            
@@ -29,18 +29,18 @@ AS
               I_Batch_ID INT ,  
               I_Room_ID INT ,  
               I_Skill_ID INT ,  
-              S_EmployeeId VARCHAR(MAX) ,  
-              S_Remarks VARCHAR(500) ,  
-              S_SessionFullName VARCHAR(100) ,  
+              S_EmployeeId nvarchar(max) ,  
+              S_Remarks nvarchar(max) ,  
+              S_SessionFullName nvarchar(max) ,  
               I_Session_ID INT ,  
-              S_SessionName VARCHAR(500) ,  
-              S_SessionTopic VARCHAR(500) ,  
+              S_SessionName nvarchar(max) ,  
+              S_SessionTopic nvarchar(max) ,  
               I_ModuleId INT ,  
               I_TermId INT ,  
               Dt_ActualDate DATETIME ,  
               I_Is_Complete INT ,  
               I_Status INT ,  
-              S_Crtd_By VARCHAR(20) ,  
+              S_Crtd_By nvarchar(max) ,  
               Dt_Crtd_On DATETIME  
             )    
      
@@ -53,18 +53,18 @@ AS
                         CASE WHEN T.c.value('@I_BatchID', 'INT') = '' THEN NULL ELSE T.c.value('@I_BatchID', 'INT') END,  
                         T.c.value('@I_RoomID', 'int') ,  
                         CASE WHEN T.c.value('@I_SkillID', 'INT') = 0 THEN NULL ELSE T.c.value('@I_SkillID', 'INT') END,  
-                        CASE WHEN T.c.value('@S_EmployeeId', 'varchar(max)') = '' THEN NULL ELSE T.c.value('@S_EmployeeId', 'varchar(max)') END,                          
-                        CASE WHEN T.c.value('@S_Remarks', 'varchar(500)') = '' THEN NULL ELSE T.c.value('@S_Remarks', 'varchar(500)') END,  
-                        CASE WHEN T.c.value('@S_SessionFullName', 'varchar(100)') = '' THEN NULL ELSE T.c.value('@S_SessionFullName', 'varchar(100)') END,                         
+                        CASE WHEN T.c.value('@S_EmployeeId', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_EmployeeId', 'nvarchar(max)') END,                          
+                        CASE WHEN T.c.value('@S_Remarks', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Remarks', 'nvarchar(max)') END,  
+                        CASE WHEN T.c.value('@S_SessionFullName', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_SessionFullName', 'nvarchar(max)') END,                         
                         CASE WHEN T.c.value('@I_SessionID', 'INT') = '' THEN NULL ELSE T.c.value('@I_SessionID', 'INT') END,  
-                        CASE WHEN T.c.value('@S_SessionName', 'varchar(500)') = '' THEN NULL ELSE T.c.value('@S_SessionName', 'varchar(500)') END,  
-                        CASE WHEN T.c.value('@S_SessionTopic', 'varchar(500)') = '' THEN NULL ELSE T.c.value('@S_SessionTopic', 'varchar(500)') END,   
+                        CASE WHEN T.c.value('@S_SessionName', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_SessionName', 'nvarchar(max)') END,  
+                        CASE WHEN T.c.value('@S_SessionTopic', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_SessionTopic', 'nvarchar(max)') END,   
                         CASE WHEN T.c.value('@I_ModuleId', 'INT') = '' THEN NULL ELSE T.c.value('@I_ModuleId', 'INT') END,   
                         CASE WHEN T.c.value('@I_TermId', 'INT') = '' THEN NULL ELSE T.c.value('@I_TermId', 'INT') END,  
                         CASE WHEN T.c.value('@Dt_ActualDate', 'datetime') = '' THEN NULL ELSE T.c.value('@Dt_ActualDate', 'datetime') END,  
                         CASE WHEN T.c.value('@I_Is_Complete', 'int') = 0 THEN 0 ELSE T.c.value('@I_Is_Complete', 'int') END,  
                         T.c.value('@S_Status', 'int') ,  
-                        T.c.value('@S_CrtdBy', 'varchar(20)') ,  
+                        T.c.value('@S_CrtdBy', 'nvarchar(max)') ,  
                         T.c.value('@Dt_CrtdOn', 'datetime')  
                 FROM    @sTimeTableXML.nodes('/Root/TimeTable') T ( c )    
      
@@ -76,18 +76,18 @@ AS
         DECLARE @ipI_Batch_ID INT              
         DECLARE @ipI_Room_ID INT              
         DECLARE @ipI_Skill_ID INT              
-        DECLARE @ipS_EmployeeId VARCHAR(200)    
-        DECLARE @ipS_Remarks VARCHAR(500)   
+        DECLARE @ipS_EmployeeId nvarchar(max)    
+        DECLARE @ipS_Remarks nvarchar(max)   
         DECLARE @ipI_Session_ID INT   
-        DECLARE @ipS_SessionFullName VARCHAR(100)  
-        DECLARE @ipS_SessionName VARCHAR(500)  
-        DECLARE @ipS_SessionTopic VARCHAR(500)  
+        DECLARE @ipS_SessionFullName nvarchar(max)  
+        DECLARE @ipS_SessionName nvarchar(max)  
+        DECLARE @ipS_SessionTopic nvarchar(max)  
         DECLARE @ipI_ModuleId INT  
         DECLARE @ipI_TermId INT  
         DECLARE @ipDt_ActualDate DATETIME  
         DECLARE @ipI_Is_Complete INT           
         DECLARE @ipI_Status INT                        
-        DECLARE @ipS_Crtd_By VARCHAR(20)              
+        DECLARE @ipS_Crtd_By nvarchar(max)              
         DECLARE @ipDt_Crtd_On DATETIME           
                        
    -- declare cursor for TimeTable details              
@@ -346,7 +346,7 @@ AS
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()                    

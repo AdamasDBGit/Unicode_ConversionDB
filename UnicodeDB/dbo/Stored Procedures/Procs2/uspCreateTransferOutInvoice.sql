@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspCreateTransferOutInvoice] --exec uspCreateTransferOutInvoice 158949, 3265, 1, 'sarmisthasanyal', 107
+CREATE PROCEDURE [dbo].[uspCreateTransferOutInvoice] --exec uspCreateTransferOutInvoice 158949, 3265, 1, 'sarmisthasanyal', 107
     @iCancelledInvoiceId INT ,   
     @iStudentId INT ,   
     @iCenterId INT ,   
-    @iUserId NVARCHAR(MAX),   
+    @iUserId Nnvarchar(max),   
     @iBrandID INT   
 AS   
     BEGIN                     
@@ -29,7 +29,7 @@ AS
 			  I_Status INT ,   
 			  I_Discount_Scheme_ID INT ,   
 			  I_Discount_Applied_At INT ,   
-			  S_Crtd_By VARCHAR(20) ,   
+			  S_Crtd_By nvarchar(max) ,   
 			  Dt_Crtd_On DATETIME   
 			)
 
@@ -55,7 +55,7 @@ AS
 			   ,I_Display_Fee_Component_ID int
 			   ,I_Sequence int
 			   ,N_Amount_Adv_Coln numeric(18,2)
-			   ,Flag_IsAdvanceTax varchar(1)
+			   ,Flag_IsAdvanceTax nvarchar(max)
 			)
 
 			DECLARE @IDTTempTable TABLE    
@@ -174,7 +174,7 @@ AS
             DECLARE @ipI_Status INT                     
             DECLARE @ipI_Discount_Scheme_ID INT                     
             DECLARE @ipI_Discount_Applied_At INT                     
-            DECLARE @ipS_Crtd_By VARCHAR(20)                     
+            DECLARE @ipS_Crtd_By nvarchar(max)                     
             DECLARE @ipDt_Crtd_On DATETIME                     
 --defination of the variables of the invoice child                     
             DECLARE @icI_Invoice_Child_Header_ID INT                     
@@ -361,7 +361,7 @@ AS
 											)
 									SET @iInvoiceChildDetailsID = SCOPE_IDENTITY()
 									
-									DECLARE @INVN VARCHAR(256)
+									DECLARE @INVN nvarchar(max)
 									
 									EXEC dbo.uspGenerateInvoiceNumber  @iInvoiceID,@icdI_Installment_No,@icdDt_Installment_Date,'I', @INVN OUTPUT
 									UPDATE T_Invoice_Child_Detail SET S_Invoice_Number = @INVN WHERE I_Invoice_Detail_ID = @iInvoiceChildDetailsID
@@ -439,7 +439,7 @@ AS
         BEGIN CATCH                     
 --Error occurred:                       
                     
-            DECLARE @ErrMsg NVARCHAR(4000) ,   
+            DECLARE @ErrMsg Nnvarchar(max) ,   
                 @ErrSeverity INT                     
             SELECT  @ErrMsg = ERROR_MESSAGE() ,   
                     @ErrSeverity = ERROR_SEVERITY()                     

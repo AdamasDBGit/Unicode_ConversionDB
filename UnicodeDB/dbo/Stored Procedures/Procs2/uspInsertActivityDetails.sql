@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertActivityDetails]     
+CREATE PROCEDURE [dbo].[uspInsertActivityDetails]     
 (      
  @I_Brand_ID      INT   ,   
  @iActivityID  INT = NULL,
- @S_Activity_Name    NVARCHAR(MAX) ,     
- @S_Evaluation_IDs    NVARCHAR(MAX)   ,    
- @vEsdCrtdBy      NVARCHAR(MAX) ,    
+ @S_Activity_Name    Nnvarchar(max) ,     
+ @S_Evaluation_IDs    Nnvarchar(max)   ,    
+ @vEsdCrtdBy      Nnvarchar(max) ,    
  @I_Status         INT  ,    
- @vEsdUpdBy      NVARCHAR(MAX) ,    
+ @vEsdUpdBy      Nnvarchar(max) ,    
  @dEsdCrtdOn         DATETIME  ,    
  @dEsdUpdOn      DATETIME ,
  @iflag   INT
@@ -23,10 +23,10 @@ BEGIN TRY
 	           S_Crtd_By ,
 	           Dt_Crtd_On 
 	         )
-	 VALUES  ( @S_Activity_Name , -- S_Activity_Name - varchar(50)
+	 VALUES  ( @S_Activity_Name , -- S_Activity_Name - nvarchar(max)
 	           @I_Brand_ID , -- I_Brand_ID - int
 	           @I_Status , -- I_Status - int
-	           @vEsdCrtdBy , -- S_Crtd_By - varchar(20)
+	           @vEsdCrtdBy , -- S_Crtd_By - nvarchar(max)
 	           @dEsdCrtdOn  -- Dt_Crtd_On - datetime
 	           )
 	 SET @iActivityID = @@IDENTITY
@@ -53,7 +53,7 @@ BEGIN TRY
 END TRY    
 BEGIN CATCH    
  ROLLBACK TRANSACTION T1    
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
     
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    

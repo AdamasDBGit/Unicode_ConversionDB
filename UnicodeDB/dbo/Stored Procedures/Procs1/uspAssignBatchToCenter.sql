@@ -1,8 +1,8 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspAssignBatchToCenter]   
 (  
  @iBatchId INT,  
- @CreatedBy NVARCHAR(MAX),  
+ @CreatedBy Nnvarchar(max),  
  @CreatedOn DATETIME,  
  @CenterID INT,  
  @CourseFeePlanID INT,  
@@ -12,12 +12,12 @@ CREATE PROCEDURE [dbo].[uspAssignBatchToCenter]
  @I_FacultyID INT,
  @MinStrength INT,
  @I_CenterDispatchScheme INT,
- @S_ClassDays NVARCHAR(MAX)='',
- @S_OfflineClassTime NVARCHAR(MAX)='',
- @S_OnlineClassTime NVARCHAR(MAX)='',
- @S_HandoutClassTime NVARCHAR(MAX)='',
- @S_ClassMode NVARCHAR(MAX)='',
- @S_BatchTime NVARCHAR(MAX)=''
+ @S_ClassDays Nnvarchar(max)='',
+ @S_OfflineClassTime Nnvarchar(max)='',
+ @S_OnlineClassTime Nnvarchar(max)='',
+ @S_HandoutClassTime Nnvarchar(max)='',
+ @S_ClassMode Nnvarchar(max)='',
+ @S_BatchTime Nnvarchar(max)=''
 )  
 AS  
 BEGIN TRY 
@@ -117,7 +117,7 @@ end
   @MinRegnAmt,  
   /* I_Status - int */ @I_Status,  
   @I_FacultyID,  
-  /* S_Crtd_By - varchar(20) */ @CreatedBy,  
+  /* S_Crtd_By - nvarchar(max) */ @CreatedBy,  
   /* Dt_Crtd_On - datetime */ @CreatedOn,
   @MinStrength,
   @I_CenterDispatchScheme,
@@ -131,7 +131,7 @@ end
 
   ----susmita paul : 2023March08 : Current Batch - Fee plan Details insert into log table
 
-	Declare @BatchFeeplanJson varchar(Max)=NULL
+	Declare @BatchFeeplanJson nvarchar(max)=NULL
 	SELECT @BatchFeeplanJson ='['+ STUFF((
                 SELECT ',{"I_Batch_ID":"' + CONVERT(NVARCHAR(MAX),t1.I_Batch_ID) + '",'+
 							+'"I_Centre_Id":"'+CONVERT(NVARCHAR(MAX),t1.I_Centre_Id) + '",'+
@@ -155,7 +155,7 @@ end
 						+'"S_BatchTime":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_BatchTime),'NULL') + '"}'
 				   FROM (select * from T_Center_Batch_Details where I_Batch_ID=@iBatchId) t1 
 					FOR XML PATH(''), TYPE
-                  ).value('.', 'varchar(max)'),1,1,''
+                  ).value('.', 'nvarchar(max)'),1,1,''
               ) + ']' ;
 
 
@@ -191,7 +191,7 @@ end
 
 END TRY  
 BEGIN CATCH  
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
   

@@ -1,17 +1,17 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_ERPvsSMS_Recon_DueAdvance]  
+CREATE PROCEDURE [dbo].[usp_ERP_ERPvsSMS_Recon_DueAdvance]  
     @iBrandID INT,  
-    @sHierarchyList NVARCHAR(MAX) = null,  
+    @sHierarchyList Nnvarchar(max) = null,  
     @dtSMSInceptionDate DATETIME = '2011-01-01',  
     @dtStartDate DATETIME,  
     @dtEndDate DATETIME ,  
-    @sReconType NVARCHAR(MAX)  
+    @sReconType Nnvarchar(max)  
 AS  
 BEGIN  
     SET NOCOUNT ON;  
   
     DECLARE @dtPrevMonthDate DATETIME;  
     DECLARE @StatusFlag INT;  
-    DECLARE @Message VARCHAR(500);  
+    DECLARE @Message nvarchar(max);  
   
     BEGIN TRY  
         BEGIN TRAN;  
@@ -40,23 +40,23 @@ IF ( @sReconType = 'DUE' )
         CREATE TABLE #DUERECONMONTH
             (
               I_Student_Detail_ID INT ,
-              S_Mobile_No VARCHAR(50) ,
-              S_Student_ID VARCHAR(100) ,
+              S_Mobile_No nvarchar(max) ,
+              S_Student_ID nvarchar(max) ,
               I_Roll_No INT ,
-              S_Student_Name VARCHAR(200) ,
-              S_Invoice_No VARCHAR(100) ,
-              S_Receipt_No VARCHAR(100) ,
+              S_Student_Name nvarchar(max) ,
+              S_Invoice_No nvarchar(max) ,
+              S_Receipt_No nvarchar(max) ,
               Dt_Invoice_Date DATETIME ,
               I_Fee_Component_ID INT ,
-              S_Component_Name VARCHAR(100) ,
+              S_Component_Name nvarchar(max) ,
 			  I_Batch_ID INT,
-              S_Batch_Name VARCHAR(100) ,
-              S_Course_Name VARCHAR(100) ,
+              S_Batch_Name nvarchar(max) ,
+              S_Course_Name nvarchar(max) ,
               I_Center_ID INT ,
-              S_Center_Name VARCHAR(100) ,
-              TypeofCentre VARCHAR(MAX) ,
-              S_Brand_Name VARCHAR(100) ,
-              S_Cost_Center VARCHAR(100) ,
+              S_Center_Name nvarchar(max) ,
+              TypeofCentre nvarchar(max) ,
+              S_Brand_Name nvarchar(max) ,
+              S_Cost_Center nvarchar(max) ,
               Due_Value REAL ,
               Dt_Installment_Date DATETIME ,
               I_Installment_No INT ,
@@ -71,29 +71,29 @@ IF ( @sReconType = 'DUE' )
               Total_Due DECIMAL(14, 2) ,
               IsGSTImplemented INT ,
               Age INT ,
-              instanceChain VARCHAR(MAX)
+              instanceChain nvarchar(max)
             )
 
         CREATE TABLE #DUEPREVMONTH
             (
               I_Student_Detail_ID INT ,
-              S_Mobile_No VARCHAR(50) ,
-              S_Student_ID VARCHAR(100) ,
+              S_Mobile_No nvarchar(max) ,
+              S_Student_ID nvarchar(max) ,
               I_Roll_No INT ,
-              S_Student_Name VARCHAR(200) ,
-              S_Invoice_No VARCHAR(100) ,
-              S_Receipt_No VARCHAR(100) ,
+              S_Student_Name nvarchar(max) ,
+              S_Invoice_No nvarchar(max) ,
+              S_Receipt_No nvarchar(max) ,
               Dt_Invoice_Date DATETIME ,
               I_Fee_Component_ID INT ,
-              S_Component_Name VARCHAR(100) ,
+              S_Component_Name nvarchar(max) ,
 			  I_Batch_ID INT,
-              S_Batch_Name VARCHAR(100) ,
-              S_Course_Name VARCHAR(100) ,
+              S_Batch_Name nvarchar(max) ,
+              S_Course_Name nvarchar(max) ,
               I_Center_ID INT ,
-              S_Center_Name VARCHAR(100) ,
-              TypeofCentre VARCHAR(MAX) ,
-              S_Brand_Name VARCHAR(100) ,
-              S_Cost_Center VARCHAR(100) ,
+              S_Center_Name nvarchar(max) ,
+              TypeofCentre nvarchar(max) ,
+              S_Brand_Name nvarchar(max) ,
+              S_Cost_Center nvarchar(max) ,
               Due_Value REAL ,
               Dt_Installment_Date DATETIME ,
               I_Installment_No INT ,
@@ -108,24 +108,24 @@ IF ( @sReconType = 'DUE' )
               Total_Due DECIMAL(14, 2) ,
               IsGSTImplemented INT ,
               Age INT ,
-              instanceChain VARCHAR(MAX)
+              instanceChain nvarchar(max)
             )
 
         CREATE TABLE #ERPSYNC
             (
-              [Type] VARCHAR(MAX) ,
-              S_Brand_Name VARCHAR(MAX) ,
-              S_Center_Name VARCHAR(MAX) ,
+              [Type] nvarchar(max) ,
+              S_Brand_Name nvarchar(max) ,
+              S_Center_Name nvarchar(max) ,
               I_Transaction_Nature_ID INT ,
-              S_Student_ID VARCHAR(MAX) ,
-              S_Student_Name VARCHAR(MAX) ,
-              S_Transaction_Code VARCHAR(MAX) ,
+              S_Student_ID nvarchar(max) ,
+              S_Student_Name nvarchar(max) ,
+              S_Transaction_Code nvarchar(max) ,
               Amount DECIMAL(14, 2)
             )
     
         CREATE TABLE #ERPDUERECON
             (
-              StudentID VARCHAR(MAX) ,
+              StudentID nvarchar(max) ,
               ReconMonthDue DECIMAL(14, 2) ,
               PrevMonthDue DECIMAL(14, 2) ,
               ReconMonthFinalDue DECIMAL(14, 2) ,
@@ -135,14 +135,14 @@ IF ( @sReconType = 'DUE' )
 
 
         INSERT  INTO #DUERECONMONTH
-                EXEC REPORT.uspGetDueReport_History @sHierarchyList = @sHierarchyList, -- varchar(max)
+                EXEC REPORT.uspGetDueReport_History @sHierarchyList = @sHierarchyList, -- nvarchar(max)
                     @iBrandID = @iBrandID, -- int
                     @dtUptoDate = @dtEndDate, -- datetime
                     @sStatus = 'ALL'
  -- varchar(100)
     
         INSERT  INTO #DUEPREVMONTH
-                EXEC REPORT.uspGetDueReport_History @sHierarchyList = @sHierarchyList, -- varchar(max)
+                EXEC REPORT.uspGetDueReport_History @sHierarchyList = @sHierarchyList, -- nvarchar(max)
                     @iBrandID = @iBrandID, -- int
                     @dtUptoDate = @dtPrevMonthDate, -- datetime
                     @sStatus = 'ALL'
@@ -150,7 +150,7 @@ IF ( @sReconType = 'DUE' )
     
     
         INSERT  INTO #ERPSYNC
-                EXEC REPORT.uspGetERPSyncReportDetail @sHierarchyList = @sHierarchyList, -- varchar(max)
+                EXEC REPORT.uspGetERPSyncReportDetail @sHierarchyList = @sHierarchyList, -- nvarchar(max)
                     @iBrandID = @iBrandID, -- int
                     @dtStartDate = @dtStartDate, -- datetime
                     @dtEndDate = @dtEndDate
@@ -234,13 +234,13 @@ ELSE
 
             CREATE TABLE #ERPSYNCADV
                 (
-                  [Type] VARCHAR(MAX) ,
-                  S_Brand_Name VARCHAR(MAX) ,
-                  S_Center_Name VARCHAR(MAX) ,
+                  [Type] nvarchar(max) ,
+                  S_Brand_Name nvarchar(max) ,
+                  S_Center_Name nvarchar(max) ,
                   I_Transaction_Nature_ID INT ,
-                  S_Student_ID VARCHAR(MAX) ,
-                  S_Student_Name VARCHAR(MAX) ,
-                  S_Transaction_Code VARCHAR(MAX) ,
+                  S_Student_ID nvarchar(max) ,
+                  S_Student_Name nvarchar(max) ,
+                  S_Transaction_Code nvarchar(max) ,
                   Amount DECIMAL(14, 2) ,
                   FinalAmount DECIMAL(14, 2)
                 )
@@ -248,20 +248,20 @@ ELSE
             CREATE TABLE #RECONMONTHADV
                 (
                   I_Student_Detail_ID INT ,
-                  S_Mobile_No VARCHAR(50) ,
-                  S_Student_ID VARCHAR(100) ,
+                  S_Mobile_No nvarchar(max) ,
+                  S_Student_ID nvarchar(max) ,
                   I_Roll_No INT ,
-                  S_Student_Name VARCHAR(200) ,
-                  S_Invoice_No VARCHAR(100) ,
-                  S_Receipt_No VARCHAR(100) ,
+                  S_Student_Name nvarchar(max) ,
+                  S_Invoice_No nvarchar(max) ,
+                  S_Receipt_No nvarchar(max) ,
                   Dt_Invoice_Date DATETIME ,
-                  S_Component_Name VARCHAR(100) ,
-                  S_Batch_Name VARCHAR(100) ,
-                  S_Course_Name VARCHAR(100) ,
+                  S_Component_Name nvarchar(max) ,
+                  S_Batch_Name nvarchar(max) ,
+                  S_Course_Name nvarchar(max) ,
                   I_Center_ID INT ,
-                  S_Center_Name VARCHAR(100) ,
-                  S_Brand_Name VARCHAR(100) ,
-                  S_Cost_Center VARCHAR(100) ,
+                  S_Center_Name nvarchar(max) ,
+                  S_Brand_Name nvarchar(max) ,
+                  S_Cost_Center nvarchar(max) ,
                   Due_Value REAL ,
                   Dt_Installment_Date DATETIME ,
                   I_Installment_No INT ,
@@ -274,28 +274,28 @@ ELSE
                   Tax_Paid DECIMAL(14, 2) ,
                   Total_Paid DECIMAL(14, 2) ,
                   Effective_Advance DECIMAL(14, 2) ,
-                  MonthYear VARCHAR(MAX) ,
-                  instanceChain VARCHAR(MAX)
+                  MonthYear nvarchar(max) ,
+                  instanceChain nvarchar(max)
                 ) 
 
 
             CREATE TABLE #PREVMONTHADV
                 (
                   I_Student_Detail_ID INT ,
-                  S_Mobile_No VARCHAR(50) ,
-                  S_Student_ID VARCHAR(100) ,
+                  S_Mobile_No nvarchar(max) ,
+                  S_Student_ID nvarchar(max) ,
                   I_Roll_No INT ,
-                  S_Student_Name VARCHAR(200) ,
-                  S_Invoice_No VARCHAR(100) ,
-                  S_Receipt_No VARCHAR(100) ,
+                  S_Student_Name nvarchar(max) ,
+                  S_Invoice_No nvarchar(max) ,
+                  S_Receipt_No nvarchar(max) ,
                   Dt_Invoice_Date DATETIME ,
-                  S_Component_Name VARCHAR(100) ,
-                  S_Batch_Name VARCHAR(100) ,
-                  S_Course_Name VARCHAR(100) ,
+                  S_Component_Name nvarchar(max) ,
+                  S_Batch_Name nvarchar(max) ,
+                  S_Course_Name nvarchar(max) ,
                   I_Center_ID INT ,
-                  S_Center_Name VARCHAR(100) ,
-                  S_Brand_Name VARCHAR(100) ,
-                  S_Cost_Center VARCHAR(100) ,
+                  S_Center_Name nvarchar(max) ,
+                  S_Brand_Name nvarchar(max) ,
+                  S_Cost_Center nvarchar(max) ,
                   Due_Value REAL ,
                   Dt_Installment_Date DATETIME ,
                   I_Installment_No INT ,
@@ -308,13 +308,13 @@ ELSE
                   Tax_Paid DECIMAL(14, 2) ,
                   Total_Paid DECIMAL(14, 2) ,
                   Effective_Advance DECIMAL(14, 2) ,
-                  MonthYear VARCHAR(MAX) ,
-                  instanceChain VARCHAR(MAX)
+                  MonthYear nvarchar(max) ,
+                  instanceChain nvarchar(max)
                 )
 
             CREATE TABLE #ERPADVRECON
                 (
-                  StudentID VARCHAR(MAX) ,
+                  StudentID nvarchar(max) ,
                   ReconMonthAdv DECIMAL(14, 2) ,
                   PrevMonthAdv DECIMAL(14, 2) ,
                   ReconMonthFinalAdv DECIMAL(14, 2) ,
@@ -324,7 +324,7 @@ ELSE
                 
             CREATE TABLE #ERPADVCAL
                 (
-                  Std VARCHAR(MAX) ,
+                  Std nvarchar(max) ,
                   CollectionData DECIMAL(14, 2) ,
                   AdjData DECIMAL(14, 2) ,
                   ActAdv DECIMAL(14, 2)
@@ -341,7 +341,7 @@ ELSE
                       S_Transaction_Code ,
                       Amount
                     )
-                    EXEC REPORT.uspGetERPSyncReportDetail @sHierarchyList = @sHierarchyList, -- varchar(max)
+                    EXEC REPORT.uspGetERPSyncReportDetail @sHierarchyList = @sHierarchyList, -- nvarchar(max)
                         @iBrandID = @iBrandID, -- int
                         @dtStartDate = @dtStartDate, -- datetime
                         @dtEndDate = @dtEndDate
@@ -349,18 +349,18 @@ ELSE
  
  
             INSERT  INTO #RECONMONTHADV
-                    EXEC REPORT.uspGetAdvanceformStudentReport_History @sHierarchyList = @sHierarchyList, -- varchar(max)
+                    EXEC REPORT.uspGetAdvanceformStudentReport_History @sHierarchyList = @sHierarchyList, -- nvarchar(max)
                         @iBrandID = @iBrandID, -- int
                         @dtUptoDate = @dtEndDate, -- datetime
-                        @sStatus = 'ALL', -- varchar(100)
+                        @sStatus = 'ALL', -- nvarchar(max)
                         @dtfromDate = @dtSMSInceptionDate -- datetime
      
      
             INSERT  INTO #PREVMONTHADV
-                    EXEC REPORT.uspGetAdvanceformStudentReport_History @sHierarchyList = @sHierarchyList, -- varchar(max)
+                    EXEC REPORT.uspGetAdvanceformStudentReport_History @sHierarchyList = @sHierarchyList, -- nvarchar(max)
                         @iBrandID = @iBrandID, -- int
                         @dtUptoDate = @dtPrevMonthDate, -- datetime
-                        @sStatus = 'ALL', -- varchar(100)
+                        @sStatus = 'ALL', -- nvarchar(max)
                         @dtfromDate = @dtSMSInceptionDate -- datetime     
  
  

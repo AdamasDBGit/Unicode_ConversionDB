@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[USP_UpdateNotificationLogStatus]  
+CREATE PROCEDURE [dbo].[USP_UpdateNotificationLogStatus]  
     @inNotificationLogsID INT,  
-    @stNotificationStatus NVARCHAR(MAX),  
-    @stErrorMessage NVARCHAR(MAX) = NULL,  
-    @stRenderMessageBody NVARCHAR(MAX) = NULL,  
+    @stNotificationStatus Nnvarchar(max),  
+    @stErrorMessage Nnvarchar(max) = NULL,  
+    @stRenderMessageBody Nnvarchar(max) = NULL,  
     @inSendStatus INT = NULL  
 AS  
 BEGIN  

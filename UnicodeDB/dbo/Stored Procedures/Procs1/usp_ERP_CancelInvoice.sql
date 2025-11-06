@@ -1,12 +1,12 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[usp_ERP_CancelInvoice]
     (
       @iInvoiceId INT ,
-	  @iUpdatedBy NVARCHAR(MAX) ,
-      @sUpdatedBy NVARCHAR(MAX)=null ,
+	  @iUpdatedBy Nnvarchar(max) ,
+      @sUpdatedBy Nnvarchar(max)=null ,
       @iCancellationReasonId INT = NULL ,
-	  @sCancellationRemarks NVARCHAR(MAX)=NULL
+	  @sCancellationRemarks Nnvarchar(max)=NULL
     )
 AS
     BEGIN TRY      
@@ -175,7 +175,7 @@ T_Course_Fee_Plan as CFP on CFP.I_Course_Fee_Plan_ID=ICP.I_Course_FeePlan_ID
     BEGIN CATCH      
  --Error occurred:        
         ROLLBACK TRANSACTION      
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()      

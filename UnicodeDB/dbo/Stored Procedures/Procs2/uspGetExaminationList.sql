@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetExaminationList]
 AS
 BEGIN TRY 
@@ -8,7 +8,7 @@ SELECT Fld_KPMG_ExaminationId AS ExaminationId,Fld_KPMG_ExaminationName AS Exami
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

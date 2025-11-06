@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyStateMaster] 
+CREATE PROCEDURE [dbo].[uspModifyStateMaster] 
 	-- Add the parameters for the stored procedure here
 	@iStateID INT,
-	@sStateCode NVARCHAR(MAX),
-	@sStateName NVARCHAR(MAX),
+	@sStateCode Nnvarchar(max),
+	@sStateName Nnvarchar(max),
 	@iCountryID INT,
-	@sStateBy NVARCHAR(MAX),
+	@sStateBy Nnvarchar(max),
 	@dStateOn DATETIME,
 	@iFlag INT
 AS
@@ -57,7 +57,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

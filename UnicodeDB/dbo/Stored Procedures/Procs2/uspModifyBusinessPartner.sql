@@ -1,14 +1,14 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyBusinessPartner]
+CREATE PROCEDURE [dbo].[uspModifyBusinessPartner]
 	@iUserID int,
-	@sLoginID NVARCHAR(MAX),
-	@sPassword NVARCHAR(MAX)=NULL,
-	@sTitle NVARCHAR(MAX)=NULL,
-	@sFirstName NVARCHAR(MAX),
-	@sMiddleName NVARCHAR(MAX)=NULL,
-	@sLastName NVARCHAR(MAX)=NULL,
-	@sEmailID NVARCHAR(MAX)=NULL,
-	@sUserType NVARCHAR(MAX),	
-	@sCreatedBy NVARCHAR(MAX),
+	@sLoginID Nnvarchar(max),
+	@sPassword Nnvarchar(max)=NULL,
+	@sTitle Nnvarchar(max)=NULL,
+	@sFirstName Nnvarchar(max),
+	@sMiddleName Nnvarchar(max)=NULL,
+	@sLastName Nnvarchar(max)=NULL,
+	@sEmailID Nnvarchar(max)=NULL,
+	@sUserType Nnvarchar(max),	
+	@sCreatedBy Nnvarchar(max),
 	@iflag int
 AS
 BEGIN TRY
@@ -70,7 +70,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

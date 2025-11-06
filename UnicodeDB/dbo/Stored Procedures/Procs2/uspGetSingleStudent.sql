@@ -1,7 +1,7 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetSingleStudent]
 
-@StudentBarCodeNo nvarchar(255),
+@StudentBarCodeNo nnvarchar(max),
 @IssueingUser INT
 
 AS
@@ -57,7 +57,7 @@ END
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

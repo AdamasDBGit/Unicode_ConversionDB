@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetTimeTableMonthwiseCompletion] --[dbo].[uspGetTimeTableMonthwiseCompletion] 794,12,2012
+CREATE PROCEDURE [dbo].[uspGetTimeTableMonthwiseCompletion] --[dbo].[uspGetTimeTableMonthwiseCompletion] 794,12,2012
     (
       @ICenterID INT ,
       @month INT ,
@@ -43,7 +43,7 @@ AS
     BEGIN CATCH                      
  --Error occurred:                        
         ROLLBACK TRANSACTION T1                     
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT                      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()                      

@@ -1,14 +1,14 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentListForEnrollment]
+CREATE PROCEDURE [dbo].[uspGetStudentListForEnrollment]
     (
       @iHierarchyDetailID INT ,
-      @sEnquiryNumber NVARCHAR(MAX) ,
-      @sFname NVARCHAR(MAX) ,
-      @sMname NVARCHAR(MAX) ,
-      @sLname NVARCHAR(MAX) ,
+      @sEnquiryNumber Nnvarchar(max) ,
+      @sFname Nnvarchar(max) ,
+      @sMname Nnvarchar(max) ,
+      @sLname Nnvarchar(max) ,
       @sStatus INT = NULL ,
       @iStartRowNumber INT = NULL ,
       @iEndRowNumber INT = NULL ,
-      @sFormNo NVARCHAR(MAX) = NULL                
+      @sFormNo Nnvarchar(max) = NULL                
     )
 AS 
     BEGIN                  

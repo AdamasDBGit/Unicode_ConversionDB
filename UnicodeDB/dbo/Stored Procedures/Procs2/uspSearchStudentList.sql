@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspSearchStudentList]   --19,NULL,'CE',NULL,NULL         
+CREATE PROCEDURE [dbo].[uspSearchStudentList]   --19,NULL,'CE',NULL,NULL         
     (
       @iCenterId INT ,
-      @sStudentId NVARCHAR(MAX) = NULL ,
-      @sStudentFirstName NVARCHAR(MAX) = NULL ,
-      @sStudentSecondName NVARCHAR(MAX) = NULL ,
-      @sStudentLastName NVARCHAR(MAX) = NULL            
+      @sStudentId Nnvarchar(max) = NULL ,
+      @sStudentFirstName Nnvarchar(max) = NULL ,
+      @sStudentSecondName Nnvarchar(max) = NULL ,
+      @sStudentLastName Nnvarchar(max) = NULL            
     )
 AS
     BEGIN            

@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertUpdateDeleteSubjectMaster]     
+CREATE PROCEDURE [dbo].[uspInsertUpdateDeleteSubjectMaster]     
 (    
  @iMode int =0,    
  @iSubjectID int = null,    
  @iSchoolGroupID int = null,    
  @iClassID int =null,    
  @iStreamID int = null,    
- @sSubjectName nvarchar(50)=null,    
- @sSubjectCode  nvarchar(50)=null,    
+ @sSubjectName nnvarchar(max)=null,    
+ @sSubjectCode  nnvarchar(max)=null,    
  @iTotalNumberOfClassesRequired int = null,    
  @iStatus int = 1,    
  @iBrandID int=null,    
@@ -143,7 +143,7 @@ BEGIN TRY
 END TRY    
 BEGIN CATCH    
  ROLLBACK TRANSACTION    
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(), @ErrSeverity = ERROR_SEVERITY()    
  SELECT 0 StatusFlag,@ErrMsg Message    
 END CATCH    

@@ -1,43 +1,43 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[uspInsertPreEnquiryDetailsFromAPI]  
     (  
       @Centre INT ,  
       @IEnquiryStatusCode INT = NULL ,  
-      @FirstName NVARCHAR(MAX) ,  
-      @MiddleName NVARCHAR(MAX) ,  
-      @LastName NVARCHAR(MAX) ,  
+      @FirstName Nnvarchar(max) ,  
+      @MiddleName Nnvarchar(max) ,  
+      @LastName Nnvarchar(max) ,  
       @DtBirthDate DATETIME ,  
-      @Age NVARCHAR(MAX) ,  
+      @Age Nnvarchar(max) ,  
       @casteID INT = NULL ,  
-      @MobileNo NVARCHAR(MAX) , 
-	  @EmailID NVARCHAR(MAX),
-	  @PhoneNo NVARCHAR(MAX),
+      @MobileNo Nnvarchar(max) , 
+	  @EmailID Nnvarchar(max),
+	  @PhoneNo Nnvarchar(max),
       @CurrCityID INT ,  
       @CurrStateID INT ,  
       @CurrCountryID INT ,  
-      @CurrAddress1 NVARCHAR(MAX) ,  
-      @CurrAddress2 NVARCHAR(MAX) ,  
-      @CurrPincode NVARCHAR(MAX) ,  
-      @FatherName NVARCHAR(MAX) ,  
-      @MotherName NVARCHAR(MAX) ,  
-      @EnquiryDesc NVARCHAR(MAX) ,  
+      @CurrAddress1 Nnvarchar(max) ,  
+      @CurrAddress2 Nnvarchar(max) ,  
+      @CurrPincode Nnvarchar(max) ,  
+      @FatherName Nnvarchar(max) ,  
+      @MotherName Nnvarchar(max) ,  
+      @EnquiryDesc Nnvarchar(max) ,  
       @IsPreEnquiry BIT ,  
-      @CrtdBy NVARCHAR(MAX) ,  
+      @CrtdBy Nnvarchar(max) ,  
       @DtCrtdOn DATETIME ,  
-      @sSelectedCourseID NVARCHAR(MAX) = NULL ,  
+      @sSelectedCourseID Nnvarchar(max) = NULL ,  
       @InfoSourceID INT = NULL ,  
       @bHasGivenOtherExam BIT = NULL ,  
       @sQualificationXML XML = NULL ,  
       @iSeatType INT = NULL ,  
       @iEnrolmentType INT = NULL ,  
-      @sEnrolmentNo NVARCHAR(MAX) = NULL ,  
+      @sEnrolmentNo Nnvarchar(max) = NULL ,  
       @iRankObtained INT = NULL ,  
       @dtFirstFollowUpDate DATETIME,  
       @IsLateral BIT = NULL ,  
       @IPreEnquiryFor INT = NULL,
-      @GuardianName NVARCHAR(MAX)=NULL,
-      @GuardianPhoneNo NVARCHAR(MAX)=NULL,
+      @GuardianName Nnvarchar(max)=NULL,
+      @GuardianPhoneNo Nnvarchar(max)=NULL,
       @iFatherIncomeGroup INT=NULL,
       --@iMotherIncomeGroup INT=NULL,
       @EducationCurrentStatus INT=NULL ,
@@ -50,7 +50,7 @@ AS
         DECLARE @iEnquiryID INT                    
                            
         DECLARE @iEmployeeId INT       
-        DECLARE @sSelectedCourseIDs VARCHAR(100)                      
+        DECLARE @sSelectedCourseIDs nvarchar(max)                      
            
         BEGIN TRANSACTION                    
                      
@@ -179,18 +179,18 @@ AS
                           S_Institution        
                         )  
                         SELECT  @iEnquiryID ,  
-                                T.c.value('@S_Name_Of_Exam', 'varchar(200)') ,  
-                                T.c.value('@S_University_Name', 'varchar(200)') ,  
-                                T.c.value('@S_Year_From', 'varchar(4)') ,  
-                                T.c.value('@S_Year_To', 'varchar(4)') ,  
-                                T.c.value('@S_Subject_Name', 'varchar(200)') ,  
+                                T.c.value('@S_Name_Of_Exam', 'nvarchar(max)') ,  
+                                T.c.value('@S_University_Name', 'nvarchar(max)') ,  
+                                T.c.value('@S_Year_From', 'nvarchar(max)') ,  
+                                T.c.value('@S_Year_To', 'nvarchar(max)') ,  
+                                T.c.value('@S_Subject_Name', 'nvarchar(max)') ,  
                                 T.c.value('@N_Marks_Obtained', 'decimal(18,2)') ,  
                                 T.c.value('@N_Percentage', 'decimal(18, 2)') ,  
-                                T.c.value('@S_Division', 'varchar(50)') ,  
+                                T.c.value('@S_Division', 'nvarchar(max)') ,  
                                 1 ,  
                                 @CrtdBy ,  
                                 @DtCrtdOn,
-                                T.c.value('@S_Institution','varchar(MAX)') 
+                                T.c.value('@S_Institution','nvarchar(max)') 
                         FROM    @sQualificationXML.nodes('/Root/Qualification') T ( c )         
   -- Update the first followup information for the enquiry                    
                 INSERT  INTO dbo.T_Enquiry_Regn_FollowUp  
@@ -215,7 +215,7 @@ AS
                         )
                 VALUES  ( @iEnquiryID , -- I_Enquiry_Regn_ID - int
                           @EducationCurrentStatus , -- I_Education_CurrentStatus_ID - int
-                          @CrtdBy , -- S_Crtd_By - varchar(max)
+                          @CrtdBy , -- S_Crtd_By - nvarchar(max)
                           @DtCrtdOn -- Dt_Crtd_On - datetime
            
                         )                           
@@ -224,7 +224,7 @@ AS
 
 				 ---- Start Of Added instructions For language Details before CustomerId & Admission: By Susmita  
 				 
-				 DECLARE @LanguageName VARCHAR(200),@LanguageID INT,@BrandID INT
+				 DECLARE @LanguageName nvarchar(max),@LanguageID INT,@BrandID INT
 				 SELECT TOP 1 @LanguageName=I_Language_Name,@LanguageID=I_Language_ID,@BrandID=I_Brand_ID from T_Course_Master 
 				 where I_Course_ID = (select TOP 1 I_Course_ID from dbo.T_Enquiry_Course where I_Enquiry_Regn_ID=@iEnquiryID)
 
@@ -268,7 +268,7 @@ AS
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()                    

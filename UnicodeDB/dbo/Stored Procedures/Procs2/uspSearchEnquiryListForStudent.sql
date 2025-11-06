@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspSearchEnquiryListForStudent]   
+CREATE PROCEDURE [dbo].[uspSearchEnquiryListForStudent]   
 (        
       @iSelectedHierarchyId INT,    
       @iSelectedBrandId INT = NULL,      
       @iEnquiryId INT = NULL,        
-      @sStudentFirstName NVARCHAR(MAX)=NULL,        
-      @sStudentSecondName NVARCHAR(MAX)=NULL,        
-      @sStudentLastName NVARCHAR(MAX)=NULL ,
+      @sStudentFirstName Nnvarchar(max)=NULL,        
+      @sStudentSecondName Nnvarchar(max)=NULL,        
+      @sStudentLastName Nnvarchar(max)=NULL ,
       @dtDOB DATETIME = NULL       
 )        
         
@@ -13,7 +13,7 @@ AS
         
 BEGIN        
       SET NOCOUNT ON;           
-      DECLARE @sSearchCenterList VARCHAR(MAX)    
+      DECLARE @sSearchCenterList nvarchar(max)    
       SELECT  @sSearchCenterList = dbo.fnCenterList(@iSelectedHierarchyId,@iSelectedBrandId)    
         
         

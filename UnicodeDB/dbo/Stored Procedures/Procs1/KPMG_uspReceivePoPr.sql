@@ -1,14 +1,14 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspReceivePoPr]
 (
-@PO_Id NVARCHAR(MAX),
-@PR_Id NVARCHAR(MAX),
+@PO_Id Nnvarchar(max),
+@PR_Id Nnvarchar(max),
 @PO_Date datetime,
 @Delivery_Date datetime,
 
 @Branch_Id int = 0,
 @ItemCode int = 0,
-@Barcode NVARCHAR(MAX),
+@Barcode Nnvarchar(max),
 @Status int = 0
 )
 AS   
@@ -40,7 +40,7 @@ DECLARE @idmaster INT
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            

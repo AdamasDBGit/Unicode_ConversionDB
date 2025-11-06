@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertCreditNoteForInvoice] --exec uspInsertCreditNoteForInvoice 153624
+CREATE PROCEDURE [dbo].[uspInsertCreditNoteForInvoice] --exec uspInsertCreditNoteForInvoice 153624
 (
     @iInvoiceId INT
 )
@@ -55,8 +55,8 @@ BEGIN
         Dt_Installment_Date DATETIME,
         N_Amount_Due NUMERIC(18,2),
         N_Amount_Adv NUMERIC(18,2),
-        S_Invoice_Number VARCHAR(100),
-        Flag_IsAdvanceTax VARCHAR(10)
+        S_Invoice_Number nvarchar(max),
+        Flag_IsAdvanceTax nvarchar(max)
     )
 
     INSERT INTO #ICHNW(I_Invoice_Detail_ID,I_Fee_Component_ID,I_Invoice_Child_Header_ID,I_Invoice_Header_ID,I_Installment_No,
@@ -154,8 +154,8 @@ BEGIN
     DECLARE @Dt_Installment_Date DATETIME
     DECLARE @N_Amount_Due NUMERIC(18,2)
     DECLARE @N_Amount_Adv NUMERIC(18,2)
-    DECLARE @S_Invoice_Number VARCHAR(100)
-    DECLARE @Flag_IsAdvanceTax VARCHAR(10)
+    DECLARE @S_Invoice_Number nvarchar(max)
+    DECLARE @Flag_IsAdvanceTax nvarchar(max)
 
     ----- TAX DIFF -----
     --Declare @TotalInvTax NUMERIC(18,2)

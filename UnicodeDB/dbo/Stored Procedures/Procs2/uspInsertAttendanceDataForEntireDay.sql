@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertAttendanceDataForEntireDay]
+CREATE PROCEDURE [dbo].[uspInsertAttendanceDataForEntireDay]
     (
       @iBatchID INT ,
       @dtScheduleDate DATE ,
-      @sCrtdBy NVARCHAR(MAX),
+      @sCrtdBy Nnvarchar(max),
       @dtCrtd DATETIME
       --@iBrandID INT ,
       --@sHierarchyID NVARCHAR(MAX)

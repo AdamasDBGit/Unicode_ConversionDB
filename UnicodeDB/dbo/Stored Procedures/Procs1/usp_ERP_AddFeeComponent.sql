@@ -1,14 +1,14 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[usp_ERP_AddFeeComponent]
     @FeeHeadID int NULL,
-    @FeeComponentCode NVARCHAR(MAX),
-    @FeeComponentName NVARCHAR(MAX),
+    @FeeComponentCode Nnvarchar(max),
+    @FeeComponentName Nnvarchar(max),
     @Status int,
-    @UpdatedBy NVARCHAR(MAX),
+    @UpdatedBy Nnvarchar(max),
     @FeeComponentType int,
     @BrandID int,
-    @TypeOfComponent NVARCHAR(MAX),
+    @TypeOfComponent Nnvarchar(max),
     @Is_GST_Applicable bit NULL,
     @I_GST_FeeComponent_Catagory_ID int NULL,
     @Valid_from datetime NULL,
@@ -207,7 +207,7 @@ BEGIN
 
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity INT;
+        DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT;
         SELECT @ErrMsg = ERROR_MESSAGE(), @ErrSeverity = ERROR_SEVERITY();
         SELECT 0 AS StatusFlag, @ErrMsg AS Message;
     END CATCH

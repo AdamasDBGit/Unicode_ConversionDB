@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspAttachReceiptToNewInvoice]
+CREATE PROCEDURE [dbo].[uspAttachReceiptToNewInvoice]
 (
 	@iOldInvoiceId INT,
 	@iNewInvoiceId INT,
-	@sUpdatedBy NVARCHAR(MAX)
+	@sUpdatedBy Nnvarchar(max)
 )
 
 AS
@@ -18,7 +18,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

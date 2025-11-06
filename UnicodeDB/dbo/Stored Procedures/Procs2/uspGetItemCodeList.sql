@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetItemCodeList] 
 (
 	@MoveOrderNo INT
@@ -26,7 +26,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

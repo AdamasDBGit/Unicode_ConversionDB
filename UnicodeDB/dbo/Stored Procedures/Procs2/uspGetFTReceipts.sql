@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetFTReceipts]    
+CREATE PROCEDURE [dbo].[uspGetFTReceipts]    
 (    
- @sReceiptID NVARCHAR(MAX)    
+ @sReceiptID Nnvarchar(max)    
 )    
     
 AS    

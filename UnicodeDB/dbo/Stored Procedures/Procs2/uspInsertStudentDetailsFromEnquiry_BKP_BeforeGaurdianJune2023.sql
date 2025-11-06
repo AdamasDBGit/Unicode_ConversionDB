@@ -1,19 +1,19 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspInsertStudentDetailsFromEnquiry_BKP_BeforeGaurdianJune2023]  
     (  
       @iEnquiryRegnID INT ,  
-      @CrtdBy NVARCHAR(MAX) ,  
+      @CrtdBy Nnvarchar(max) ,  
       @DtCrtdOn DATETIME ,  
-      @sConductCode NVARCHAR(MAX),  
-      @sStudentCode NVARCHAR(MAX) = NULL,  
+      @sConductCode Nnvarchar(max),  
+      @sStudentCode Nnvarchar(max) = NULL,  
       @iRollNo INT = NULL,
-      @sStudyMaterialNo NVARCHAR(MAX) = NULL  
+      @sStudyMaterialNo Nnvarchar(max) = NULL  
     )  
 AS   
     SET NOCOUNT ON    
     BEGIN TRY     
     
-        DECLARE @sLoginID VARCHAR(500)     
+        DECLARE @sLoginID nvarchar(max)     
         DECLARE @iStudentDetailId INT    
         DECLARE @iCenterID INT    
     
@@ -170,7 +170,7 @@ AS
     BEGIN CATCH    
  --Error occurred:      
         ROLLBACK TRANSACTION    
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()    

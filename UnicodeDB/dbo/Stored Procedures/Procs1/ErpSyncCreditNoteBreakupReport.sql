@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[ErpSyncCreditNoteBreakupReport]
     @iBrandID INT,
     @dtStartDate DATETIME = NULL,
@@ -20,12 +20,12 @@ BEGIN
 	BrandID int,
 	TransactionTypeID int,
 	StudentDetailID int,
-	StudentID varchar(max),
-	CostCentre varchar(max),
+	StudentID nvarchar(max),
+	CostCentre nvarchar(max),
 	Amount decimal(14,2),
 	TransactionDate datetime,
-	CreditNoteNo varchar(max),
-	FeeComponent varchar(max)
+	CreditNoteNo nvarchar(max),
+	FeeComponent nvarchar(max)
 	
 	)	
 

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetBatchDetailsForAPI](@BatchCode NVARCHAR(MAX))
+CREATE PROCEDURE [dbo].[uspGetBatchDetailsForAPI](@BatchCode Nnvarchar(max))
 AS
 BEGIN
 

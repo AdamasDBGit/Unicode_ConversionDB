@@ -1,20 +1,20 @@
-﻿  CREATE PROCEDURE [dbo].[uspGetIndividualStudentDueForAPI]
+  CREATE PROCEDURE [dbo].[uspGetIndividualStudentDueForAPI]
     (
-      @sBrandName NVARCHAR(MAX) ,
-      @StudentID NVARCHAR(MAX)
+      @sBrandName Nnvarchar(max) ,
+      @StudentID Nnvarchar(max)
     )
    AS
     BEGIN
    
    
    -- Add the parameters for the stored procedure here
-        DECLARE @sHierarchyList VARCHAR(MAX) 
+        DECLARE @sHierarchyList nvarchar(max) 
         DECLARE @iBrandID INT 
         DECLARE @dtUptoDate DATETIME 
-        DECLARE @sStatus VARCHAR(100) = 'ALL' 
-        DECLARE @sStdID VARCHAR(MAX)
+        DECLARE @sStatus nvarchar(max) = 'ALL' 
+        DECLARE @sStdID nvarchar(max)
         DECLARE @iStd INT
-        DECLARE @BrandName VARCHAR(MAX)
+        DECLARE @BrandName nvarchar(max)
    
         SET @BrandName = @sBrandName
    
@@ -159,22 +159,22 @@
         CREATE TABLE #temp
             (
               I_Invoice_Child_Header_ID INT ,
-              S_Mobile_No VARCHAR(50) ,
-              S_Student_ID VARCHAR(100) ,
+              S_Mobile_No nvarchar(max) ,
+              S_Student_ID nvarchar(max) ,
               I_Roll_No INT ,
-              S_Student_Name VARCHAR(200) ,
-              S_Invoice_No VARCHAR(100) ,
-              S_Receipt_No VARCHAR(100) ,
+              S_Student_Name nvarchar(max) ,
+              S_Invoice_No nvarchar(max) ,
+              S_Receipt_No nvarchar(max) ,
               Dt_Invoice_Date DATETIME ,
               I_Fee_Component_ID INT ,
-              S_Component_Name VARCHAR(100) ,
-              S_Batch_Name VARCHAR(100) ,
-              S_Course_Name VARCHAR(100) ,
+              S_Component_Name nvarchar(max) ,
+              S_Batch_Name nvarchar(max) ,
+              S_Course_Name nvarchar(max) ,
               I_Center_ID INT ,
-              S_Center_Name VARCHAR(100) ,
-              TypeofCentre VARCHAR(MAX) ,
-              S_Brand_Name VARCHAR(100) ,
-              S_Cost_Center VARCHAR(100) ,
+              S_Center_Name nvarchar(max) ,
+              TypeofCentre nvarchar(max) ,
+              S_Brand_Name nvarchar(max) ,
+              S_Cost_Center nvarchar(max) ,
               Due_Value REAL ,
               Dt_Installment_Date DATETIME ,
               I_Installment_No INT ,
@@ -484,22 +484,22 @@
         CREATE TABLE #temphistory
             (
               I_Invoice_Child_Header_ID INT ,
-              S_Mobile_No VARCHAR(50) ,
-              S_Student_ID VARCHAR(100) ,
+              S_Mobile_No nvarchar(max) ,
+              S_Student_ID nvarchar(max) ,
               I_Roll_No INT ,
-              S_Student_Name VARCHAR(200) ,
-              S_Invoice_No VARCHAR(100) ,
-              S_Receipt_No VARCHAR(100) ,
+              S_Student_Name nvarchar(max) ,
+              S_Invoice_No nvarchar(max) ,
+              S_Receipt_No nvarchar(max) ,
               Dt_Invoice_Date DATETIME ,
               I_Fee_Component_ID INT ,
-              S_Component_Name VARCHAR(100) ,
-              S_Batch_Name VARCHAR(100) ,
-              S_Course_Name VARCHAR(100) ,
+              S_Component_Name nvarchar(max) ,
+              S_Batch_Name nvarchar(max) ,
+              S_Course_Name nvarchar(max) ,
               I_Center_ID INT ,
-              S_Center_Name VARCHAR(100) ,
-              TypeofCentre VARCHAR(MAX) ,
-              S_Brand_Name VARCHAR(100) ,
-              S_Cost_Center VARCHAR(100) ,
+              S_Center_Name nvarchar(max) ,
+              TypeofCentre nvarchar(max) ,
+              S_Brand_Name nvarchar(max) ,
+              S_Cost_Center nvarchar(max) ,
               Due_Value REAL ,
               Dt_Installment_Date DATETIME ,
               I_Installment_No INT ,

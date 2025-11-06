@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspUpdateEnquiryDetails]
     (
       @iEnquiryID INT ,
@@ -8,51 +8,51 @@ CREATE PROCEDURE [dbo].[uspUpdateEnquiryDetails]
       @iEnquiryStatus INT = NULL ,
       @InfoSourceID INT ,
       @EnquiryTypeID INT ,
-      @IsCorporate NVARCHAR(MAX) ,
-      @EnquiryDesc NVARCHAR(MAX) ,
-      @Title NVARCHAR(MAX) ,
-      @FirstName NVARCHAR(MAX) ,
-      @MiddleName NVARCHAR(MAX) ,
-      @LastName NVARCHAR(MAX) ,
+      @IsCorporate Nnvarchar(max) ,
+      @EnquiryDesc Nnvarchar(max) ,
+      @Title Nnvarchar(max) ,
+      @FirstName Nnvarchar(max) ,
+      @MiddleName Nnvarchar(max) ,
+      @LastName Nnvarchar(max) ,
       @DtBirthDate DATETIME ,
-      @Age NVARCHAR(MAX) ,
+      @Age Nnvarchar(max) ,
       @casteID INT ,
       @QualificationNameID INT ,
       @SkipTest CHAR(1) ,
       @StreamID INT ,
-      @EmailID NVARCHAR(MAX) ,
-      @PhoneNo NVARCHAR(MAX) ,
-      @MobileNo NVARCHAR(MAX) ,
+      @EmailID Nnvarchar(max) ,
+      @PhoneNo Nnvarchar(max) ,
+      @MobileNo Nnvarchar(max) ,
       @CurrCityID INT ,
       @CurrStateID INT ,
       @CurrCountryID INT ,
-      @GuardianName NVARCHAR(MAX) ,
+      @GuardianName Nnvarchar(max) ,
       @GuardianOccupationID INT ,
-      @GuardianEmailID NVARCHAR(MAX) ,
-      @GuardianPhoneNo NVARCHAR(MAX) ,
-      @GuardianMobileNo NVARCHAR(MAX) ,
+      @GuardianEmailID Nnvarchar(max) ,
+      @GuardianPhoneNo Nnvarchar(max) ,
+      @GuardianMobileNo Nnvarchar(max) ,
       @IncomeGroupID INT ,
-      @CurrAddress1 NVARCHAR(MAX) ,
-      @CurrAddress2 NVARCHAR(MAX) = NULL ,
-      @CurrPincode NVARCHAR(MAX) ,
-      @CurrArea NVARCHAR(MAX) ,
-      @PermAddress1 NVARCHAR(MAX) ,
-      @PermAddress2 NVARCHAR(MAX) = NULL ,
-      @PermPincode NVARCHAR(MAX) ,
+      @CurrAddress1 Nnvarchar(max) ,
+      @CurrAddress2 Nnvarchar(max) = NULL ,
+      @CurrPincode Nnvarchar(max) ,
+      @CurrArea Nnvarchar(max) ,
+      @PermAddress1 Nnvarchar(max) ,
+      @PermAddress2 Nnvarchar(max) = NULL ,
+      @PermPincode Nnvarchar(max) ,
       @PermCityID INT ,
       @PermStateID INT ,
       @PermCountryID INT ,
-      @PermArea NVARCHAR(MAX) ,
-      @CrtdBy NVARCHAR(MAX) ,
+      @PermArea Nnvarchar(max) ,
+      @CrtdBy Nnvarchar(max) ,
       @DtCrtdOn DATETIME ,
-      @sSelectedCourseID NVARCHAR(MAX) ,
+      @sSelectedCourseID Nnvarchar(max) ,
       @dtFirstFollowUpDate DATETIME ,
       @iCorporateID INT ,
       @iCorporatePlanID INT ,
-      @sStudentPhoto NVARCHAR(MAX) ,
+      @sStudentPhoto Nnvarchar(max) ,
       @iResidenceArea INT ,
-      @sFatherName NVARCHAR(MAX) ,
-      @sMotherName NVARCHAR(MAX) ,    
+      @sFatherName Nnvarchar(max) ,
+      @sMotherName Nnvarchar(max) ,    
       --@bIsPreEnquiry bit,    
       @iSex INT ,
       @iNativeLanguage INT ,
@@ -63,39 +63,39 @@ CREATE PROCEDURE [dbo].[uspUpdateEnquiryDetails]
       @iFatherQualification INT ,
       @iFatherOccupation INT ,
       @iFatherBusinessType INT ,
-      @sFatherCompany NVARCHAR(MAX) ,
-      @sFatherDesignation NVARCHAR(MAX) ,
-      @sFatherOfficePhone NVARCHAR(MAX) ,
+      @sFatherCompany Nnvarchar(max) ,
+      @sFatherDesignation Nnvarchar(max) ,
+      @sFatherOfficePhone Nnvarchar(max) ,
       @iFatherIncomeGroup INT ,
-      @sFatherPhoto NVARCHAR(MAX) ,
-      @sFatherOfficeAddress NVARCHAR(MAX) ,
+      @sFatherPhoto Nnvarchar(max) ,
+      @sFatherOfficeAddress Nnvarchar(max) ,
       @iMotherQualification INT ,
       @iMotherOccupation INT ,
       @iMotherBusinessType INT ,
-      @sMotherCompany NVARCHAR(MAX) ,
-      @sMotherDesignation NVARCHAR(MAX) ,
-      @sMotherOfficePhone NVARCHAR(MAX) ,
+      @sMotherCompany Nnvarchar(max) ,
+      @sMotherDesignation Nnvarchar(max) ,
+      @sMotherOfficePhone Nnvarchar(max) ,
       @iMotherIncomeGroup INT ,
-      @sMotherPhoto NVARCHAR(MAX) ,
-      @sMotherOfficeAddress NVARCHAR(MAX) ,
-      @sGuardianRelation NVARCHAR(MAX) ,
-      @sGuardianAddress NVARCHAR(MAX) ,
+      @sMotherPhoto Nnvarchar(max) ,
+      @sMotherOfficeAddress Nnvarchar(max) ,
+      @sGuardianRelation Nnvarchar(max) ,
+      @sGuardianAddress Nnvarchar(max) ,
       @iMonthlyFamilyIncome INT ,
       @bCanSponsorEducation BIT ,
-      @sSiblingID NVARCHAR(MAX) ,
+      @sSiblingID Nnvarchar(max) ,
       @bHasGivenOtherExam BIT ,
       @iNoOfAttempts INT ,
-      @sOtherInstitute NVARCHAR(MAX) ,
+      @sOtherInstitute Nnvarchar(max) ,
       @nDuration DECIMAL(18, 2) ,
       @iSeatType INT ,
       @iEnrolmentType INT ,
-      @sEnrolmentNo NVARCHAR(MAX) ,
+      @sEnrolmentNo Nnvarchar(max) ,
       @iRankObtained INT ,
-      @sUniversityRegnNo NVARCHAR(MAX) ,
-      @sUnivRollNo NVARCHAR(MAX) ,
+      @sUniversityRegnNo Nnvarchar(max) ,
+      @sUnivRollNo Nnvarchar(max) ,
       @iScholarType INT ,
-      @sSecondLanguageOpted NVARCHAR(MAX) ,
-      @sPhysicalAilment NVARCHAR(MAX) = NULL ,
+      @sSecondLanguageOpted Nnvarchar(max) ,
+      @sPhysicalAilment Nnvarchar(max) = NULL ,
       @sQualificationXML XML ,
       @iPreEnquiryUpdate INT = NULL ,
       @IsLateral BIT = NULL ,
@@ -104,16 +104,16 @@ CREATE PROCEDURE [dbo].[uspUpdateEnquiryDetails]
       @EducationPostGrad INT = NULL ,
       @IndustryType INT = NULL ,
       @ITSkills INT = NULL ,
-      @YrsofExp NVARCHAR(MAX) = NULL ,
-      @JobRole NVARCHAR(MAX) = NULL ,
-      @JobSalary NVARCHAR(MAX) = NULL ,
-      @sSelectedAimID NVARCHAR(MAX) = NULL ,
-      @sSelectedFocusID NVARCHAR(MAX) = NULL ,
+      @YrsofExp Nnvarchar(max) = NULL ,
+      @JobRole Nnvarchar(max) = NULL ,
+      @JobSalary Nnvarchar(max) = NULL ,
+      @sSelectedAimID Nnvarchar(max) = NULL ,
+      @sSelectedFocusID Nnvarchar(max) = NULL ,
       @sReferenceXML XML = NULL ,
       @sFeedbackXML XML = NULL ,
-      @TestScore NVARCHAR(MAX) = NULL
-	   ,@sRefererName NVARCHAR(MAX)=null,
-	@sRefererMobileNo NVARCHAR(MAX)=null
+      @TestScore Nnvarchar(max) = NULL
+	   ,@sRefererName Nnvarchar(max)=null,
+	@sRefererMobileNo Nnvarchar(max)=null
     )
 AS
     BEGIN TRY            
@@ -122,7 +122,7 @@ AS
         DECLARE @iGetCourseIndex INT            
         DECLARE @iCourseListLength INT            
         DECLARE @iCourseID INT            
-        DECLARE @sSelectedCourseIDs VARCHAR(100)            
+        DECLARE @sSelectedCourseIDs nvarchar(max)            
         DECLARE @iCenterID INT    
         DECLARE @iEmployeeId INT            
              
@@ -319,7 +319,7 @@ AS
                           
                         )
                         SELECT  * , -- I_Aim_ID - int
-                                @CrtdBy , -- S_Crtd_By - varchar(max)
+                                @CrtdBy , -- S_Crtd_By - nvarchar(max)
                                 @DtCrtdOn ,
                                 @iEnquiryID
                         FROM    dbo.fnString2Rows(@sSelectedAimID, ',') FSR  
@@ -341,7 +341,7 @@ AS
                           
                         )
                         SELECT  * , -- I_Counseling_Focus_ID - int
-                                @CrtdBy , -- S_Crtd_By - varchar(max)
+                                @CrtdBy , -- S_Crtd_By - nvarchar(max)
                                 @DtCrtdOn ,
                                 @iEnquiryID
                         FROM    dbo.fnString2Rows(@sSelectedFocusID, ',') FSR
@@ -358,7 +358,7 @@ AS
                         )
                 VALUES  ( @iEnquiryID , -- I_Enquiry_Regn_ID - int
                           @EducationCurrentStatus , -- I_Education_CurrentStatus_ID - int
-                          @CrtdBy , -- S_Crtd_By - varchar(max)
+                          @CrtdBy , -- S_Crtd_By - nvarchar(max)
                           @DtCrtdOn -- Dt_Crtd_On - datetime
            
                         )
@@ -374,7 +374,7 @@ AS
                         )
                 VALUES  ( @iEnquiryID , -- I_Enquiry_Regn_ID - int
                           @EducationStream , -- I_Education_Stream_ID - int
-                          @CrtdBy , -- S_Crtd_By - varchar(max)
+                          @CrtdBy , -- S_Crtd_By - nvarchar(max)
                           @DtCrtdOn  -- Dt_Crtd_On - datetime
             
                         )
@@ -389,7 +389,7 @@ AS
                         )
                 VALUES  ( @iEnquiryID , -- I_Enquiry_Regn_ID - int
                           @EducationPostGrad , -- I_Education_Qualification_ID - int
-                          @CrtdBy , -- S_Crtd_By - varchar(max)
+                          @CrtdBy , -- S_Crtd_By - nvarchar(max)
                           @DtCrtdOn  -- Dt_Crtd_On - datetime
             
                         )
@@ -405,7 +405,7 @@ AS
                         )
                 VALUES  ( @iEnquiryID , -- I_Enquiry_Regn_ID - int
                           @IndustryType , -- I_Employment_Details_ID - int
-                          @CrtdBy , -- S_Crtd_By - varchar(max)
+                          @CrtdBy , -- S_Crtd_By - nvarchar(max)
                           @DtCrtdOn  -- Dt_Crtd_On - datetime
             
                         )                      
@@ -431,7 +431,7 @@ AS
                         )
                 VALUES  ( @iEnquiryID , -- I_Enquiry_Regn_ID - int
                           @ITSkills , -- I_IT_Skills_ID - int
-                          @CrtdBy , -- S_Crtd_By - varchar(max)
+                          @CrtdBy , -- S_Crtd_By - nvarchar(max)
                           @DtCrtdOn -- Dt_Crtd_On - datetime
            
                         )
@@ -447,9 +447,9 @@ AS
                           S_Address
                         )
                         SELECT  @iEnquiryID ,
-                                T.c.value('@S_Name', 'varchar(MAX)') ,
-                                T.c.value('@S_Contact_No', 'varchar(MAX)') ,
-                                T.c.value('@S_Address', 'varchar(MAX)')
+                                T.c.value('@S_Name', 'nvarchar(max)') ,
+                                T.c.value('@S_Contact_No', 'nvarchar(max)') ,
+                                T.c.value('@S_Address', 'nvarchar(max)')
                         FROM    @sReferenceXML.nodes('/Root/Reference') T ( c )
                         
                         
@@ -462,7 +462,7 @@ AS
                           I_Points
                         )
                         SELECT  @iEnquiryID ,
-                                T.c.value('@S_Question', 'varchar(MAX)') ,
+                                T.c.value('@S_Question', 'nvarchar(max)') ,
                                 CAST(T.c.value('@S_Points', 'varchar(MAX)') AS INT)
                         FROM    @sFeedbackXML.nodes('/Root/Feedback') T ( c )    
                    
@@ -494,18 +494,18 @@ AS
                           S_Institution   
                         )
                         SELECT  @iEnquiryID ,
-                                T.c.value('@S_Name_Of_Exam', 'varchar(200)') ,
-                                T.c.value('@S_University_Name', 'varchar(200)') ,
-                                T.c.value('@S_Year_From', 'varchar(4)') ,
-                                T.c.value('@S_Year_To', 'varchar(4)') ,
-                                T.c.value('@S_Subject_Name', 'varchar(200)') ,
+                                T.c.value('@S_Name_Of_Exam', 'nvarchar(max)') ,
+                                T.c.value('@S_University_Name', 'nvarchar(max)') ,
+                                T.c.value('@S_Year_From', 'nvarchar(max)') ,
+                                T.c.value('@S_Year_To', 'nvarchar(max)') ,
+                                T.c.value('@S_Subject_Name', 'nvarchar(max)') ,
                                 T.c.value('@N_Marks_Obtained', 'decimal(18,2)') ,
                                 T.c.value('@N_Percentage', 'decimal(18, 2)') ,
-                                T.c.value('@S_Division', 'varchar(50)') ,
+                                T.c.value('@S_Division', 'nvarchar(max)') ,
                                 1 ,
                                 @CrtdBy ,
                                 @DtCrtdOn ,
-                                T.c.value('@S_Institution', 'varchar(MAX)')
+                                T.c.value('@S_Institution', 'nvarchar(max)')
                         FROM    @sQualificationXML.nodes('/Root/Qualification') T ( c )     
                     
                 IF @iPreEnquiryUpdate = 1
@@ -555,7 +555,7 @@ AS
     BEGIN CATCH            
  --Error occurred:              
         ROLLBACK TRANSACTION            
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()            

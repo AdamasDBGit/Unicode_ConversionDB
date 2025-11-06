@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspGetPaymentDetailsFromRICEAPI]
+CREATE PROCEDURE [dbo].[uspGetPaymentDetailsFromRICEAPI]
     (
-      @sBrandName NVARCHAR(MAX) ,
-      @sStudentID NVARCHAR(MAX) ,
+      @sBrandName Nnvarchar(max) ,
+      @sStudentID Nnvarchar(max) ,
       --@iInvoiceHeaderID INT ,
       @dReceiptDate DATETIME ,
       @iCentreId INT ,
@@ -9,9 +9,9 @@
       @ReceiptTaxAmount NUMERIC(18, 2) ,
       @iReceiptType INT = 2 ,
       @sPaymentDetailsXML XML ,
-      @sTransactionCode NVARCHAR(MAX) ,
-      @sExtReceiptNo NVARCHAR(MAX) ,
-      @sSource NVARCHAR(MAX)
+      @sTransactionCode Nnvarchar(max) ,
+      @sExtReceiptNo Nnvarchar(max) ,
+      @sSource Nnvarchar(max)
     )
 AS
     SET NOCOUNT ON 
@@ -32,7 +32,7 @@ AS
         
 
         
-        DECLARE @sReceiptNo VARCHAR(MAX)= NULL
+        DECLARE @sReceiptNo nvarchar(max)= NULL
         DECLARE @iStudentDetailID INT
         DECLARE @iReceiptHeader INT= NULL
         DECLARE @chkdue DECIMAL(14, 2)= 0.00
@@ -137,21 +137,21 @@ AS
                 
                 CREATE TABLE #CHKDUE
                     (
-                      S_Brand_Name VARCHAR(MAX) ,
+                      S_Brand_Name nvarchar(max) ,
                       I_Center_ID INT ,
-                      S_Center_Name VARCHAR(MAX) ,
-                      S_Course_Name VARCHAR(MAX) ,
-                      S_Batch_Name VARCHAR(MAX) ,
-                      S_Student_ID VARCHAR(MAX) ,
-                      S_Student_Name VARCHAR(MAX) ,
+                      S_Center_Name nvarchar(max) ,
+                      S_Course_Name nvarchar(max) ,
+                      S_Batch_Name nvarchar(max) ,
+                      S_Student_ID nvarchar(max) ,
+                      S_Student_Name nvarchar(max) ,
                       I_Invoice_Header_ID INT ,
-                      S_Invoice_No VARCHAR(MAX) ,
+                      S_Invoice_No nvarchar(max) ,
                       I_Invoice_Child_Header_ID INT ,
                       I_Invoice_Detail_ID INT ,
                       Dt_Installment_Date DATETIME ,
                       I_Installment_No INT ,
                       I_Fee_Component_ID INT ,
-                      S_Component_Name VARCHAR(MAX) ,
+                      S_Component_Name nvarchar(max) ,
                       BaseAmountDue DECIMAL(14, 2) ,
                       TaxDue DECIMAL(14, 2) ,
                       TotalAmtPayable DECIMAL(14, 2) ,
@@ -162,8 +162,8 @@ AS
                     )
        
                 INSERT  INTO #CHKDUE
-                        EXEC dbo.uspGetIndividualStudentDueForRICEAPI @sBrandName = @sBrandName, -- varchar(max)
-                            @StudentID = @sStudentID -- varchar(max)
+                        EXEC dbo.uspGetIndividualStudentDueForRICEAPI @sBrandName = @sBrandName, -- nvarchar(max)
+                            @StudentID = @sStudentID -- nvarchar(max)
                             
                             
                             
@@ -253,7 +253,7 @@ AS
                                         
                                         BEGIN
                                 
-                                        EXEC dbo.uspInsertReceiptHeaderFromAPI @sReceiptNo, -- varchar(20)
+                                        EXEC dbo.uspInsertReceiptHeaderFromAPI @sReceiptNo, -- nvarchar(max)
                                             @InvoiceHeaderID, -- int
                                             @rdate, -- datetime
                                             @iStudentDetailID, -- int
@@ -262,18 +262,18 @@ AS
                                             @ReceiptAmt, -- numeric
                                             @TaxAmt, -- numeric
                                             'N', -- char(1)
-                                            'rice-group-admin', -- varchar(20)
+                                            'rice-group-admin', -- nvarchar(max)
                                             @rdate, -- datetime
                                             NULL, -- numeric
-                                            NULL, -- varchar(12)
-                                            NULL, -- varchar(500)
-                                            NULL, -- varchar(20)
-                                            NULL, -- varchar(12)
-                                            NULL, -- varchar(50)
-                                            NULL, -- varchar(20)
+                                            NULL, -- nvarchar(max)
+                                            NULL, -- nvarchar(max)
+                                            NULL, -- nvarchar(max)
+                                            NULL, -- nvarchar(max)
+                                            NULL, -- nvarchar(max)
+                                            NULL, -- nvarchar(max)
                                             2, -- int
                                             @iBrandID, -- int
-                                            '', -- varchar(500)
+                                            '', -- nvarchar(max)
                                             @InvXML, @iReceiptHeader OUTPUT
                                             
                                             
@@ -326,13 +326,13 @@ AS
                                                         VALUES
                                                               (
                                                               @iReceiptHeader , -- I_Receipt_Header_ID - int
-                                                              NULL , -- S_Receipt_No - varchar(max)
-                                                              @sTransactionCode , -- S_Transaction_No - varchar(max)
-                                                              @sExtReceiptNo , -- S_Ext_Receipt_No - varchar(max)
+                                                              NULL , -- S_Receipt_No - nvarchar(max)
+                                                              @sTransactionCode , -- S_Transaction_No - nvarchar(max)
+                                                              @sExtReceiptNo , -- S_Ext_Receipt_No - nvarchar(max)
                                                               @ReceiptAmt ,
                                                               @TaxAmt ,
                                                               @currDate , -- Dt_Crtd_On - datetime
-                                                              @sSource ,  -- Dt_Crtd_By - varchar(max)
+                                                              @sSource ,  -- Dt_Crtd_By - nvarchar(max)
                                                               @dReceiptDate
                                                               )
                                                               
@@ -477,13 +477,13 @@ AS
                                                               VALUES
                                                               (
                                                               @iReceiptHeader , -- I_Receipt_Header_ID - int
-                                                              NULL , -- S_Receipt_No - varchar(max)
-                                                              @sTransactionCode , -- S_Transaction_No - varchar(max)
-                                                              @sExtReceiptNo , -- S_Ext_Receipt_No - varchar(max)
+                                                              NULL , -- S_Receipt_No - nvarchar(max)
+                                                              @sTransactionCode , -- S_Transaction_No - nvarchar(max)
+                                                              @sExtReceiptNo , -- S_Ext_Receipt_No - nvarchar(max)
                                                               @ReceiptAmt ,
                                                               @TaxAmt ,
                                                               @currDate , -- Dt_Crtd_On - datetime
-                                                              @sSource ,  -- Dt_Crtd_By - varchar(max)
+                                                              @sSource ,  -- Dt_Crtd_By - nvarchar(max)
                                                               @dReceiptDate
                                                               )
                                                               
@@ -607,14 +607,14 @@ AS
         COMMIT TRANSACTION
         
         EXEC dbo.uspSendSMSForOnlinePayments @iBrandID = @iBrandID, -- int
-            @sTransactionNo = @sTransactionCode -- varchar(max) 
+            @sTransactionNo = @sTransactionCode -- nvarchar(max) 
         
     END TRY
     BEGIN CATCH
 
  --Error occurred:      
         ROLLBACK TRANSACTION    
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()    

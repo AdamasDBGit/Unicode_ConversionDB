@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetAllFacultyByBrand]
+CREATE PROCEDURE [dbo].[uspGetAllFacultyByBrand]
 (
 @iBrandID INT = 107
 )
@@ -30,7 +30,7 @@ END TRY
 
 BEGIN CATCH
 	ROLLBACK TRANSACTION
-    DECLARE @ErrMsg NVARCHAR(4000),@ErrSeverity INT
+    DECLARE @ErrMsg Nnvarchar(max),@ErrSeverity INT
     SELECT  @ErrMsg = ERROR_MESSAGE(),@ErrSeverity = ERROR_SEVERITY()
     RAISERROR ( @ErrMsg, @ErrSeverity, 1 )
 

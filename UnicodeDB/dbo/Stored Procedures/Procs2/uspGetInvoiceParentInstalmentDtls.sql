@@ -1,13 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[uspGetInvoiceParentInstalmentDtls]
+CREATE PROCEDURE [dbo].[uspGetInvoiceParentInstalmentDtls]
 AS
 BEGIN
 
-CREATE TABLE #temp1 ( InvoiceNo VARCHAR(MAX) )
+CREATE TABLE #temp1 ( InvoiceNo nvarchar(max) )
 CREATE TABLE #temp2
     (
-      RevisedInvoiceNo VARCHAR(MAX) ,
+      RevisedInvoiceNo nvarchar(max) ,
       InvoiceHeaderID INT ,
-      InvoiceNo VARCHAR(MAX) ,
+      InvoiceNo nvarchar(max) ,
       InvoiceChildHeaderID INT ,
       InstalmentDate DATE ,
       InstalmentNo INT ,
@@ -656,7 +656,7 @@ INSERT  INTO #temp1
         ( InvoiceNo )
 VALUES  ( '83642' )
 
-DECLARE @InvNo VARCHAR(MAX)
+DECLARE @InvNo nvarchar(max)
 
 DECLARE Inv CURSOR
 FOR SELECT InvoiceNo FROM #temp1

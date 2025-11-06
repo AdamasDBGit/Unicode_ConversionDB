@@ -1,6 +1,6 @@
-﻿CREATE  PROCEDURE [dbo].[SPGetModuleMasterData_INT]
+CREATE  PROCEDURE [dbo].[SPGetModuleMasterData_INT]
 (
-	@UpdateON			NVARCHAR(MAX) =NULL,
+	@UpdateON			Nnvarchar(max) =NULL,
 	@MaxID				INT			=NULL
 )
 AS

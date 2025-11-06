@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspPopulateUserLoginIDs] 
+CREATE PROCEDURE [dbo].[uspPopulateUserLoginIDs] 
 	@flagCompany int
 AS
 BEGIN TRY
@@ -62,7 +62,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

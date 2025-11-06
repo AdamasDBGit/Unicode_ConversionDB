@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspModifySessionModuleMap] 
+CREATE PROCEDURE [dbo].[uspModifySessionModuleMap] 
 (
 	-- Add the parameters for the stored procedure here
 	@iModuleID int,
 	@iTotalSessions int,
 	@sSessionModuleMap text,
-	@sModifiedBy NVARCHAR(MAX),
+	@sModifiedBy Nnvarchar(max),
 	@dModifiedOn datetime
 )
 
@@ -49,14 +49,14 @@ BEGIN TRY
 		I_Sequence int,
 		I_Status int, 
 		Dt_Valid_From datetime,
-		S_Crtd_By varchar(20), 
+		S_Crtd_By nvarchar(max), 
 		Dt_Crtd_On datetime	)
 	COMMIT TRANSACTION	
 END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

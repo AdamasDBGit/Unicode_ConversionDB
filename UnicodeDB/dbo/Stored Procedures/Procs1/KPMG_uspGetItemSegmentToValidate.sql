@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGetItemSegmentToValidate]
 AS
 BEGIN TRY 
@@ -8,7 +8,7 @@ SELECT Fld_KPMG_Segment FROM TBL_KPMG_SM_LIST WHERE Fld_KPMG_IsValid='N'AND Fld_
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

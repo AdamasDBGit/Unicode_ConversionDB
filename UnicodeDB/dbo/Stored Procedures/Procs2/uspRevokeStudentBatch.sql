@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspRevokeStudentBatch]    
 (  
  @iBatchId INT  
@@ -13,7 +13,7 @@ BEGIN
 	select @ioldFeePlanID=I_Course_Fee_Plan_ID,@CenterID=I_Centre_Id from T_Center_Batch_Details where I_Batch_ID=@iBatchId
 	select @BrandID = I_Brand_ID from T_Brand_Center_Details where I_Centre_Id=@CenterID and I_Status=1
 
-	Declare @BatchFeeplanJson varchar(Max)=NULL
+	Declare @BatchFeeplanJson nvarchar(max)=NULL
 	SELECT @BatchFeeplanJson ='['+ STUFF((
                 SELECT ',{"I_Batch_ID":"' + CONVERT(NVARCHAR(MAX),t1.I_Batch_ID) + '",'+
 							+'"I_Centre_Id":"'+CONVERT(NVARCHAR(MAX),t1.I_Centre_Id) + '",'+
@@ -37,7 +37,7 @@ BEGIN
 						+'"S_BatchTime":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_BatchTime),'NULL') + '"}'
 				   FROM (select * from T_Center_Batch_Details where I_Batch_ID=@iBatchId) t1 
 					FOR XML PATH(''), TYPE
-                  ).value('.', 'varchar(max)'),1,1,''
+                  ).value('.', 'nvarchar(max)'),1,1,''
               ) + ']' ;
 
 

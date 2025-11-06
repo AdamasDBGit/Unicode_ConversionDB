@@ -1,7 +1,7 @@
-﻿      
+      
 CREATE PROCEDURE [dbo].[uspGetOAInvoice] --exec uspGetOAInvoice 'RC19-17BS-00001'     
 (      
-  @OAInvoiceNo NVARCHAR(MAX)          
+  @OAInvoiceNo Nnvarchar(max)          
 )      
 AS       
       

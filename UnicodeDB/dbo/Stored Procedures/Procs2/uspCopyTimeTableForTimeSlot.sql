@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspCopyTimeTableForTimeSlot] 
+CREATE PROCEDURE [dbo].[uspCopyTimeTableForTimeSlot] 
     (    
       @ICenterID INT ,    
       @DtSelected DATETIME ,   
       @SCopyTimeTableForTimeSlotXML XML = NULL ,   
       @ISrcTimeSlotID INT ,    
-      @sCrtdBy NVARCHAR(MAX) ,    
+      @sCrtdBy Nnvarchar(max) ,    
       @DtCrtdOn DATETIME          
     )    
 AS     
@@ -17,10 +17,10 @@ AS
      I_TimeSlot_ID int ,  
      I_Batch_ID int ,  
      I_Room_ID int ,  
-     S_Remarks varchar(500) ,  
+     S_Remarks nvarchar(max) ,  
      I_Session_ID int ,  
-     S_SessionName VARCHAR(500) ,  
-     S_SessionTopic VARCHAR(500) ,  
+     S_SessionName nvarchar(max) ,  
+     S_SessionTopic nvarchar(max) ,  
      I_ModuleId INT ,  
      I_TermId INT        
             )    
@@ -30,10 +30,10 @@ AS
                 SELECT  T.c.value('@I_TimeSlot_ID', 'int') ,  
       T.c.value('@I_Batch_ID', 'int') ,  
                         T.c.value('@I_Room_ID', 'int') ,                         
-                        CASE WHEN T.c.value('@S_Remarks','varchar(500)') = '' THEN NULL ELSE T.c.value('@S_Remarks','varchar(500)') END,  
+                        CASE WHEN T.c.value('@S_Remarks','nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_Remarks','nvarchar(max)') END,  
                         T.c.value('@I_Session_ID', 'int') ,  
-                        T.c.value('@S_SessionName', 'VARCHAR(500)') ,  
-                        CASE WHEN T.c.value('@S_SessionTopic', 'varchar(500)') = '' THEN NULL ELSE T.c.value('@S_SessionTopic', 'varchar(500)') END,  
+                        T.c.value('@S_SessionName', 'nvarchar(max)') ,  
+                        CASE WHEN T.c.value('@S_SessionTopic', 'nvarchar(max)') = '' THEN NULL ELSE T.c.value('@S_SessionTopic', 'nvarchar(max)') END,  
                         T.c.value('@I_ModuleId', 'INT') ,                          
                         T.c.value('@I_TermId', 'INT')  
                 FROM    @SCopyTimeTableForTimeSlotXML.nodes('/Root/TimeTableCopy') T ( c )                 
@@ -176,7 +176,7 @@ AS
     BEGIN CATCH                        
  --Error occurred:                          
         ROLLBACK TRANSACTION T1                       
-        DECLARE @ErrMsg NVARCHAR(4000) ,    
+        DECLARE @ErrMsg Nnvarchar(max) ,    
             @ErrSeverity INT                        
         SELECT  @ErrMsg = ERROR_MESSAGE() ,    
                 @ErrSeverity = ERROR_SEVERITY()                        

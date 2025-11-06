@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentResult]
+CREATE PROCEDURE [dbo].[uspGetStudentResult]
 (
- @sStudentID nvarchar(50)= null
+ @sStudentID nnvarchar(max)= null
 ,@iIsLatest int = null
 )
 AS

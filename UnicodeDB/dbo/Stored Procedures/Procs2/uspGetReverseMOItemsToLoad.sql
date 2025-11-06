@@ -1,9 +1,9 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetReverseMOItemsToLoad] 
 (
-	@ItemCode NVARCHAR(MAX),
+	@ItemCode Nnvarchar(max),
 	@MoveOrderNo INT,
-	@Context NVARCHAR(50)
+	@Context Nnvarchar(max)
 )
 
 AS

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetFeePlanDiscountDetails]
+CREATE PROCEDURE [dbo].[uspGetFeePlanDiscountDetails]
 (
 @feeplanid int,
 @paymentmode int,
@@ -10,7 +10,7 @@ BEGIN
 
 	declare @discountperc decimal(14,2)=0
 	declare @discountamount decimal(14,2)=0
-	declare @sfromInstalment varchar(2)
+	declare @sfromInstalment nvarchar(max)
 	declare @ifromInstalment int=0
 	declare @dincrement INT=1
 	declare @dcount INT=0
@@ -37,7 +37,7 @@ BEGIN
 			N_Discount decimal(14,2),
 			I_Installment_No INT,
 			I_Sequence INT,
-			C_Is_LumpSum varchar(1),
+			C_Is_LumpSum nvarchar(max),
 			I_Display_Fee_Component_ID INT,
 			InstalmentDate Datetime,
 			ActualInstalmentNo INT
@@ -51,8 +51,8 @@ BEGIN
 	DiscountRate Decimal(14,2),
 	DiscountAmount decimal(14,2),
 	IsApplicableOn INT,
-	sFormInstalment Varchar(2),
-	sFeeComponent varchar(max)
+	sFormInstalment nvarchar(max),
+	sFeeComponent nvarchar(max)
 	)
 
 	DECLARE @TblFeePlanTaxDtl TABLE
@@ -97,7 +97,7 @@ BEGIN
 	while(@dincrement<=@dcount)
 	begin
 
-		declare @sFeeComponent varchar(max)=''
+		declare @sFeeComponent nvarchar(max)=''
 
 		declare @tblFeeComponent TABLE
 		(

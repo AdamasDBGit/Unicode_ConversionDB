@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyConfigDetails] 
+CREATE PROCEDURE [dbo].[uspModifyConfigDetails] 
 (
 	@iCenterID INT,
 	@iBrandID int,	
 	@sConfigXML xml,
-	@sCreatedBy NVARCHAR(MAX),
+	@sCreatedBy Nnvarchar(max),
 	@sCreatedOn datetime,
 	@iFlag int,	
 	@iCenterDiscountId int,
@@ -27,8 +27,8 @@ BEGIN TRY
 	
 	DECLARE @AdjPosition SMALLINT, @AdjCount SMALLINT
 	DECLARE	@InnerDetailXML XML
-	DECLARE @sConfigCode varchar(50)
-	DECLARE @sConfigValue varchar(50)
+	DECLARE @sConfigCode nvarchar(max)
+	DECLARE @sConfigValue nvarchar(max)
 
 	BEGIN TRANSACTION
 	SET @AdjPosition = 1
@@ -36,8 +36,8 @@ BEGIN TRY
 	WHILE(@AdjPosition<=@AdjCount)
 	BEGIN
 		SET @InnerDetailXML = @sConfigXML.query('/Values/Modified/Items[position()=sql:variable("@AdjPosition")]')
-		SELECT	@sConfigCode = T.a.value('@ConfigCode','varchar(50)'),
-				@sConfigValue = T.a.value('@ConfigValue','varchar(50)')
+		SELECT	@sConfigCode = T.a.value('@ConfigCode','nvarchar(max)'),
+				@sConfigValue = T.a.value('@ConfigValue','nvarchar(max)')
 		FROM @InnerDetailXML.nodes('/Items') T(a)
 					
 		UPDATE 	dbo.T_Center_Configuration	
@@ -110,7 +110,7 @@ END TRY
 
 BEGIN CATCH    
  ROLLBACK TRANSACTION   
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     

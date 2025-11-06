@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateRegistrationDetail]
+CREATE PROCEDURE [dbo].[uspUpdateRegistrationDetail]
 (
 @iCourseId INT,
 @iEnquiryId INT,
 @iBatchID INT,
 @iReceiptID INT,
 @dtFirstFollowUpDate datetime,
-@UpdatedBy NVARCHAR(MAX),
+@UpdatedBy Nnvarchar(max),
 @DtUpdatedOn DATETIME,
 @iDestCenterID INT,
 @iApplicableFeePlanID INT,
@@ -42,7 +42,7 @@ Crtd_On
 @dReferralAmount,
 /* I_Receipt_Header_ID - int */ @iReceiptID,
 /* I_Status - int */ 1,
-/* Crtd_By - varchar(50) */ @UpdatedBy,
+/* Crtd_By - nvarchar(max) */ @UpdatedBy,
 /* Crtd_On - datetime */ @DtUpdatedOn )
 
 IF EXISTS(SELECT I_Enquiry_Course_ID FROM T_ENQUIRY_COURSE WHERE I_Enquiry_Regn_ID = @iEnquiryId AND I_Course_ID = @iCourseId)
@@ -103,7 +103,7 @@ END TRY
 BEGIN CATCH
 --Error occurred:
 ROLLBACK TRANSACTION
-DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 SELECT @ErrMsg = ERROR_MESSAGE(),
 @ErrSeverity = ERROR_SEVERITY()
 

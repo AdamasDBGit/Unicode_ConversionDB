@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspGetCenterManegerDtl]  
+CREATE PROCEDURE [dbo].[uspGetCenterManegerDtl]  
 (  
  @iCenterID int,  
- @srole NVARCHAR(MAX) = null  
+ @srole Nnvarchar(max) = null  
 )  
 AS  
 BEGIN  

@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetUserLoginInformationAdmin]
+CREATE PROCEDURE [dbo].[usp_ERP_GetUserLoginInformationAdmin]
     (
-      @vLoginID NVARCHAR(MAX) ,
-      @vPassword NVARCHAR(200)
+      @vLoginID Nnvarchar(max) ,
+      @vPassword Nnvarchar(max)
     )
 AS
     BEGIN

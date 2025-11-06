@@ -1,8 +1,8 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[uspRemoveSubBatch]  
  @I_Sub_Batch_ID int 
- ,@UpdtBy  NVARCHAR(MAX) =NULL
+ ,@UpdtBy  Nnvarchar(max) =NULL
   ,@UpdtOn  datetime=NULL 
 AS  
    

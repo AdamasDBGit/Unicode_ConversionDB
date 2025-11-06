@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_Exam_SetResultPublishStatus]
+CREATE PROCEDURE [dbo].[usp_ERP_Exam_SetResultPublishStatus]
 (
     @inExamScheduleDetailId INT = NULL,
     @ClassId INT = NULL
@@ -36,7 +36,7 @@ BEGIN TRY
 
 END TRY
 BEGIN CATCH
-    DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity INT
+    DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT
 
     SELECT @ErrMsg = ERROR_MESSAGE(),
            @ErrSeverity = ERROR_SEVERITY()

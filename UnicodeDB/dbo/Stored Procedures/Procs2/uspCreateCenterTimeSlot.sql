@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspCreateCenterTimeSlot]       
+CREATE PROCEDURE [dbo].[uspCreateCenterTimeSlot]       
 (         
-  @sTimeSlotCode NVARCHAR(MAX),
-  @sTimeSlotDesc NVARCHAR(MAX),        
-  @sCreatedBy NVARCHAR(MAX),
+  @sTimeSlotCode Nnvarchar(max),
+  @sTimeSlotDesc Nnvarchar(max),        
+  @sCreatedBy Nnvarchar(max),
   @dtCreatedOn DATETIME
 )        
 AS        
@@ -26,7 +26,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

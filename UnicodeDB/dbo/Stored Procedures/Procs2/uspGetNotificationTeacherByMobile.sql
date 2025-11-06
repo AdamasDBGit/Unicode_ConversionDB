@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspGetNotificationTeacherByMobile]
+CREATE PROCEDURE [dbo].[uspGetNotificationTeacherByMobile]
 (
-    @sToken NVARCHAR(MAX),
+    @sToken Nnvarchar(max),
     @iInterval INT,
-    @baseURL NVARCHAR(200)
+    @baseURL Nnvarchar(max)
 )
 AS 
 BEGIN TRY
@@ -48,7 +48,7 @@ END TRY
 
 BEGIN CATCH
     ROLLBACK TRANSACTION;
-    DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity INT;
+    DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT;
     SELECT @ErrMsg = ERROR_MESSAGE(), @ErrSeverity = ERROR_SEVERITY();
     RAISERROR (@ErrMsg, @ErrSeverity, 1);
 END CATCH;

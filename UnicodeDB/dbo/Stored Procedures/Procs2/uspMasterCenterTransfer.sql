@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspMasterCenterTransfer]                         
+CREATE PROCEDURE [dbo].[uspMasterCenterTransfer]                         
 (                         
-  @sLoginId NVARCHAR(MAX)                        
+  @sLoginId Nnvarchar(max)                        
  ,@iSourceCenterID INT = NULL                        
  ,@iDestinationCenterID INT = NULL                        
  ,@iStudentDetailId INT = NULL                        
- ,@sRemarks NVARCHAR(MAX)                        
+ ,@sRemarks Nnvarchar(max)                        
  ,@iCTStatus INT                        
  ,@iTransferRequestId INT = NULL                  
  ,@iCourseDuration INT = NULL                  

@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspValidateLoginDetails]
+CREATE PROCEDURE [dbo].[uspValidateLoginDetails]
 (
-	@vLoginID NVARCHAR(MAX),
+	@vLoginID Nnvarchar(max),
 	@iUserID INT
 )
 AS

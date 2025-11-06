@@ -1,4 +1,4 @@
-﻿  
+  
   CREATE PROCEDURE dbo.usp_ERP_OracleSync_Update
     @ID INT,
     @SyncBy INT,
@@ -54,7 +54,7 @@ SET Is_Sync_Complete = 1
 WHERE ID = @ID;
 END TRY
 BEGIN CATCH
-DECLARE @ErrMsg NVARCHAR(4000) = ERROR_MESSAGE();
+DECLARE @ErrMsg Nnvarchar(max) = ERROR_MESSAGE();
 DECLARE @ErrNumber INT = ERROR_NUMBER();
 
 

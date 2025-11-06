@@ -1,19 +1,19 @@
-﻿CREATE PROCEDURE [dbo].[uspGetEnquiryDetails_BKP_LANG]    
+CREATE PROCEDURE [dbo].[uspGetEnquiryDetails_BKP_LANG]    
     (    
       -- Add the parameters for the stored procedure here                              
       @iEnquiryRegnID INT = NULL ,    
       @dStartDate DATETIME = NULL ,    
       @dEndDate DATETIME = NULL ,    
       @iEnquiryStatus INT = NULL ,    
-      @sFirstName NVARCHAR(MAX) = NULL ,    
-      @sMiddleName NVARCHAR(MAX) = NULL ,    
-      @sLastName NVARCHAR(MAX) = NULL ,    
-      @sEnquiryNo NVARCHAR(MAX) = NULL ,    
-      @sCourseList NVARCHAR(MAX) = NULL ,    
+      @sFirstName Nnvarchar(max) = NULL ,    
+      @sMiddleName Nnvarchar(max) = NULL ,    
+      @sLastName Nnvarchar(max) = NULL ,    
+      @sEnquiryNo Nnvarchar(max) = NULL ,    
+      @sCourseList Nnvarchar(max) = NULL ,    
       @iCenterID INT = NULL ,    
       @dtFollowUpFromDate DATETIME = NULL ,    
       @dtFollowUpToDate DATETIME = NULL ,    
-      @sFormNo NVARCHAR(MAX) = NULL                             
+      @sFormNo Nnvarchar(max) = NULL                             
     )    
 AS     
     BEGIN                              

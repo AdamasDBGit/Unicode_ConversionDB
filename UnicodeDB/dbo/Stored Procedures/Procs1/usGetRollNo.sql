@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[usGetRollNo]   
-( @format NVARCHAR(MAX) )    
+CREATE PROCEDURE [dbo].[usGetRollNo]   
+( @format Nnvarchar(max) )    
 AS     
     BEGIN TRY    
         IF ( CHARINDEX('/', @format) > 0 )     
@@ -34,7 +34,7 @@ AS
     BEGIN CATCH    
 --Error occurred:    
     
-        DECLARE @ErrMsg NVARCHAR(4000) ,    
+        DECLARE @ErrMsg Nnvarchar(max) ,    
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,    
                 @ErrSeverity = ERROR_SEVERITY()    

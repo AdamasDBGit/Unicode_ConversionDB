@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspPopulateGlobalConfigDetails]
+CREATE PROCEDURE [dbo].[uspPopulateGlobalConfigDetails]
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -10,8 +10,8 @@ BEGIN
 	(
 		ID_IDENTITY INT IDENTITY(1,1),
 		I_CONFIG_ID INT,
-		S_CONFIG_CODE VARCHAR(50),
-		S_CONFIG_VALUE VARCHAR(50)
+		S_CONFIG_CODE nvarchar(max),
+		S_CONFIG_VALUE nvarchar(max)
 	)
 
 	INSERT INTO #TEMPTABLE 

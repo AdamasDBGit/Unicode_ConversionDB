@@ -1,19 +1,19 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyCourierMaster] 
+CREATE PROCEDURE [dbo].[uspModifyCourierMaster] 
 (
 	@iCourierID int,
-	@sCourierCode NVARCHAR(MAX),
-    @sCourierName NVARCHAR(MAX),
+	@sCourierCode Nnvarchar(max),
+    @sCourierName Nnvarchar(max),
     @dtCourierStateDate datetime,
     @dtCourierEndDate datetime,
-    @sCourierAddress1 NVARCHAR(MAX),
-    @sCourierAddress2 NVARCHAR(MAX),
+    @sCourierAddress1 Nnvarchar(max),
+    @sCourierAddress2 Nnvarchar(max),
     @iCourierCountry int,
     @iCourierState int,
     @iCourierCity int,
-    @sCourierPincode NVARCHAR(MAX),
-    @sCourierTelephone NVARCHAR(MAX),
-    @sCourierContactPerson NVARCHAR(MAX),
-	@sUpdatedBy NVARCHAR(MAX),
+    @sCourierPincode Nnvarchar(max),
+    @sCourierTelephone Nnvarchar(max),
+    @sCourierContactPerson Nnvarchar(max),
+	@sUpdatedBy Nnvarchar(max),
 	@dtUpdatedOn datetime,
     @iFlag int
 )
@@ -92,7 +92,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

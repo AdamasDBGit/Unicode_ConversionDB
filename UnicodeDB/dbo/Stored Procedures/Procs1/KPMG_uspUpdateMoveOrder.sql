@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspUpdateMoveOrder]
 @XmlData XML
 AS
@@ -10,7 +10,7 @@ DECLARE @TEMP_ORACLE_MO TABLE(Id INT identity, OracleMoLineId INT ,OracleMoNumbe
 INSERT INTO @TEMP_ORACLE_MO(OracleMoLineId,OracleMoNumber,SMSMoId,SMSMoLineNo)
 SELECT 
                         T.c.value('OracleMoLineId[1]', 'INT') ,
-                        T.c.value('OracleMoNumber[1]', 'NVARCHAR(255)') ,
+                        T.c.value('OracleMoNumber[1]', 'Nnvarchar(max)') ,
                         T.c.value('SMSMoId[1]', 'INT') ,                        
                         T.c.value('SMSMoLineNo[1]', 'INT')                        
                 FROM    @XmlData.nodes('/ROOT/OracleMoveOrder') T ( c )   
@@ -29,7 +29,7 @@ DECLARE @CNTR INT = 1
 DECLARE @MOV_ID INT
 DECLARE @BRNCH_ID INT
 DECLARE @AMNT INT
-DECLARE @BRNCH_NAME VARCHAR(255)
+DECLARE @BRNCH_NAME nvarchar(max)
 SELECT @ROW_CNT = COUNT(1) FROM @TEMP_ORACLE_MO
 
 
@@ -56,7 +56,7 @@ END
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

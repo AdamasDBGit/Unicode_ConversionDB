@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertUpdateBusRouteDetails]   
+CREATE PROCEDURE [dbo].[uspInsertUpdateBusRouteDetails]   
     (  
       @IRouteID INT = NULL ,
-      @SRouteNo NVARCHAR(MAX) ,  
+      @SRouteNo Nnvarchar(max) ,  
       @IBrandID INT ,
       @IStatus INT ,  
-      @SCrtdby NVARCHAR(MAX) ,  
+      @SCrtdby Nnvarchar(max) ,  
       @DtCrtdOn DATETIME ,  
       @iFlag INT
     )  
@@ -61,7 +61,7 @@ AS
     END TRY             
     BEGIN CATCH              
  --Error occurred:                
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT              
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()              

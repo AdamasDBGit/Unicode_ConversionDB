@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspAddNewUserHierarchyDetails] 
+CREATE PROCEDURE [dbo].[uspAddNewUserHierarchyDetails] 
 (
 	@iUserHierarchyDetailId int,
 	@iUserId int,	
@@ -53,7 +53,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

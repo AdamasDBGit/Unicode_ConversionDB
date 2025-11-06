@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Student_Subject_Allocation] 
+CREATE PROCEDURE [dbo].[Student_Subject_Allocation] 
 -- =============================================
      -- Author: Tridip Chatterjee
 -- Create date: 14-09-2023
@@ -10,7 +10,7 @@
 @Session int,
 @Group int,
 @class int,
-@subject nvarchar(400)
+@subject nnvarchar(max)
 
 
 

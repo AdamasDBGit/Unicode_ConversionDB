@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[ToGetStudentSTCode]
+CREATE PROCEDURE [dbo].[ToGetStudentSTCode]
 -- =============================================
      -- Author: Tridip Chatterjee
 -- Create date: 29-09-2023
 -- Description:	To get Student ST Code
 -- =============================================
 -- Add the parameters for the stored procedure here
-@BrandName nvarchar(400)
+@BrandName nnvarchar(max)
 
 AS
 BEGIN

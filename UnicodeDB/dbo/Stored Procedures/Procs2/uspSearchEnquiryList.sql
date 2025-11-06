@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspSearchEnquiryList]
+CREATE PROCEDURE [dbo].[uspSearchEnquiryList]
     (
       @iCenterId INT ,
-      @sFname NVARCHAR(MAX) ,
-      @sMname NVARCHAR(MAX) ,
-      @sLName NVARCHAR(MAX) ,
-      @sEnquiryNo NVARCHAR(MAX)
+      @sFname Nnvarchar(max) ,
+      @sMname Nnvarchar(max) ,
+      @sLName Nnvarchar(max) ,
+      @sEnquiryNo Nnvarchar(max)
     )
 AS 
     BEGIN            

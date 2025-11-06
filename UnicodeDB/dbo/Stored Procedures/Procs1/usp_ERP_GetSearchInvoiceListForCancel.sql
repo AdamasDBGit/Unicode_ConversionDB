@@ -1,4 +1,4 @@
-﻿
+
 
 
 
@@ -6,16 +6,16 @@ CREATE PROCEDURE [dbo].[usp_ERP_GetSearchInvoiceListForCancel] -- 11,'','','sa',
     (      
       @iBrandId INT = NULL ,
 	  @iCenterId INT = NULL ,
-      @sInvoiceId NVARCHAR(MAX) = NULL ,      
-      @sStudentId NVARCHAR(MAX) = NULL ,      
-      @sStudentFirstName NVARCHAR(MAX) = NULL ,      
-      @sStudentSecondName NVARCHAR(MAX) = NULL ,      
-      @sStudentLastName NVARCHAR(MAX) = NULL          
+      @sInvoiceId Nnvarchar(max) = NULL ,      
+      @sStudentId Nnvarchar(max) = NULL ,      
+      @sStudentFirstName Nnvarchar(max) = NULL ,      
+      @sStudentSecondName Nnvarchar(max) = NULL ,      
+      @sStudentLastName Nnvarchar(max) = NULL          
     )      
 AS       
     BEGIN          
         SET NOCOUNT ON ;          
-        DECLARE @sStudentName VARCHAR(150)          
+        DECLARE @sStudentName nvarchar(max)          
         DECLARE @sStudentDetailId INT  
 		
 		select @iCenterId=I_Centre_Id from T_Brand_Center_Details where I_Brand_ID=@iBrandId

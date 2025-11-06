@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetAttendanceForInvoice] 
+CREATE PROCEDURE [dbo].[uspGetAttendanceForInvoice] 
 (  
  @iInvoiceID int  
 ) 
@@ -10,7 +10,7 @@ BEGIN
       (  
             Sequence int,  
             TermID int,    
-            TermName varchar(100)  
+            TermName nvarchar(max)  
       )  
 
       INSERT INTO @tblTerms  
@@ -28,7 +28,7 @@ BEGIN
       (  
             Sequence int,  
             TermID int,  
-            TermName varchar(100),  
+            TermName nvarchar(max),  
             TotalSessions int,  
             TotalSessionsAttended int,  
             PercentageAttended numeric(18,2)  

@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[uspAddExtraHOSession]     
+CREATE PROCEDURE [dbo].[uspAddExtraHOSession]     
 (    
  @iBatchScheduleID INT,    
  @iBatchId INT,    
  @TermID INT,    
  @iModuleID INT,    
  @SessionID INT = NULL,    
- @sSessionName NVARCHAR(MAX),    
- @sSessionTopic NVARCHAR(MAX),    
+ @sSessionName Nnvarchar(max),    
+ @sSessionTopic Nnvarchar(max),    
  @dtScheduledDate DATETIME,    
  @dtActualDate DATETIME,    
  @iEmployeeID INT,    
@@ -68,7 +68,7 @@ IF @iBatchScheduleID = 0
  SELECT @iBatchScheduleID    
 END TRY    
 BEGIN CATCH    
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyTransferredStudentInvoice] --21341,0,0.0,8819,11,12,'381516'    
+CREATE PROCEDURE [dbo].[uspModifyTransferredStudentInvoice] --21341,0,0.0,8819,11,12,'381516'    
     (
       @iInvoiceHeaderId INT ,
       @iInstallment INT ,
@@ -6,7 +6,7 @@
       @iStudentDetailId INT ,
       @iSourceCenterId INT ,
       @iDestinationCenterId INT ,
-      @sUser NVARCHAR(MAX)
+      @sUser Nnvarchar(max)
     )
 AS
     BEGIN                            
@@ -234,7 +234,7 @@ AS
                 
         EXEC SMManagement.uspCancelStudentEligibilitySchedule @StudentDetailID = @iStdDetailId, -- int
             @InvoiceID = @iCancelledInvoiceId, -- int
-            @UpdatedBy = @sUser -- varchar(max)           
+            @UpdatedBy = @sUser -- nvarchar(max)           
         
         EXEC uspInsertCreditNoteForInvoice @iCancelledInvoiceId
         

@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspGetUsersForOtherSalesOrganisation]
+CREATE PROCEDURE [dbo].[uspGetUsersForOtherSalesOrganisation]
 (
 	
-	@sLoginID NVARCHAR(MAX) = null,
-	@sFirstName NVARCHAR(MAX) = null,
-	@sMiddleName NVARCHAR(MAX) = null,
-	@sLastName NVARCHAR(MAX) = null,
+	@sLoginID Nnvarchar(max) = null,
+	@sFirstName Nnvarchar(max) = null,
+	@sMiddleName Nnvarchar(max) = null,
+	@sLastName Nnvarchar(max) = null,
 	@iSalesOrgID int
 )
 AS

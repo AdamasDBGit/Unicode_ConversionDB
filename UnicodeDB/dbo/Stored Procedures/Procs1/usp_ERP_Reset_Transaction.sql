@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_Reset_Transaction] 
+CREATE PROCEDURE [dbo].[usp_ERP_Reset_Transaction] 
 	-- Add the parameters for the stored procedure here
-	@sTransactionNo NVARCHAR(MAX),
+	@sTransactionNo Nnvarchar(max),
 	@iuserID int
 AS
 BEGIN
@@ -50,9 +50,9 @@ SET NOCOUNT ON;
 
 
 	exec [dbo].[usp_ERP_SaveTransactionCronJob]
-	@sTransactionNo,--@S_Transaction_No varchar(max),
+	@sTransactionNo,--@S_Transaction_No nvarchar(max),
 	@iTransactionMasterID,--@I_Transaction_Master_ID INT,
-	'Initiated',--@currentStatus varchar(max)=NULL,
+	'Initiated',--@currentStatus nvarchar(max)=NULL,
 	NULL,--@CompleteStatus bit=NULL,
 	NULL,--@CronCanBeProcess bit=NULL,
 	NULL,--@NoOfAttempt int=NULL,
@@ -62,12 +62,12 @@ SET NOCOUNT ON;
 	NULL,--@Is_Failed_User bit =NULL,
 	NULL,--@Requery_PG_LogID int=NULL,
 	NULL,--@Requery_Request_LogID int=NULL,
-	NULL,--@PG_Response varchar(max)=NULL,
-	NULL,--@ERP_Response varchar(max)=NULL,
-	NULL,--@PG_Remarks varchar(max)=NULL,
-	NULL,--@ERP_Remarks varchar(max)=NULL,
-	NULL,--@PG_Error varchar(max)=NULL,
-	NULL,--@ERP_Error varchar(max)=NULL,
+	NULL,--@PG_Response nvarchar(max)=NULL,
+	NULL,--@ERP_Response nvarchar(max)=NULL,
+	NULL,--@PG_Remarks nvarchar(max)=NULL,
+	NULL,--@ERP_Remarks nvarchar(max)=NULL,
+	NULL,--@PG_Error nvarchar(max)=NULL,
+	NULL,--@ERP_Error nvarchar(max)=NULL,
 	NULL,--@CanbeProcessForERPSattlement BIT=NULL,
 	'false'--@IsFromCron bit
 
@@ -79,7 +79,7 @@ SET NOCOUNT ON;
 	END TRY
     BEGIN CATCH
         -- Handle errors
-        DECLARE @ErrorMessage NVARCHAR(4000);
+        DECLARE @ErrorMessage Nnvarchar(max);
         DECLARE @ErrorSeverity INT;
         DECLARE @ErrorState INT;
 

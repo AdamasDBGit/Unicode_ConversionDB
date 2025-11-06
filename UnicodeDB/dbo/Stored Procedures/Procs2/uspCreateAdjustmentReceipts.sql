@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspCreateAdjustmentReceipts]
+CREATE PROCEDURE [dbo].[uspCreateAdjustmentReceipts]
     (
       @iPositiveAdjustmentCenterID INT ,
       @iNegativeAdjustmentCenterID INT ,
       @nAmount DECIMAL(18, 2) ,
       @iEnquiryRegnID INT ,
       @iReceiptTypeID INT ,
-      @sAdjustmentText NVARCHAR(MAX),
+      @sAdjustmentText Nnvarchar(max),
       @iBrandID INT
     )
 AS 

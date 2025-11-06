@@ -1,4 +1,4 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[Temp_IssueMaterial]
 
@@ -8,10 +8,10 @@ AS
 BEGIN TRY 
 
 	DECLARE @BRANCH_ID INT 
-	DECLARE @StudentBarCodeNo nvarchar(255)
+	DECLARE @StudentBarCodeNo nnvarchar(max)
 	DECLARE @Student_Detail_ID INT
-	DECLARE @SM_BARCODE NVARCHAR(255)
-	DECLARE @ITEM_CODE NVARCHAR(255)
+	DECLARE @SM_BARCODE Nnvarchar(max)
+	DECLARE @ITEM_CODE Nnvarchar(max)
 	DECLARE @GENID INT
 
 	DECLARE @INSTALLMENTNO INT
@@ -68,7 +68,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

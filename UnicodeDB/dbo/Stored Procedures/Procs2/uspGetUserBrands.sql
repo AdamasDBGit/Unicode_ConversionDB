@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetUserBrands](@LoginID NVARCHAR(MAX))
+CREATE PROCEDURE [dbo].[uspGetUserBrands](@LoginID Nnvarchar(max))
 as
 begin
 

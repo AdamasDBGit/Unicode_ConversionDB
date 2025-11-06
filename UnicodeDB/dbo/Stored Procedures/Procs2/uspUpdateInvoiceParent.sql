@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateInvoiceParent]  
+CREATE PROCEDURE [dbo].[uspUpdateInvoiceParent]  
 (  
  @iStudentDetailId INT,  
  @iCenterId INT,  
  @dInvoiceAmount NUMERIC(18,2),  
- @sCreatedBy NVARCHAR(MAX),  
- @sInvoiceNo NVARCHAR(MAX),
+ @sCreatedBy Nnvarchar(max),  
+ @sInvoiceNo Nnvarchar(max),
  @iBrandID INT  
 )  
   
@@ -36,7 +36,7 @@ END TRY
 BEGIN CATCH  
  --Error occurred:    
   
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
   

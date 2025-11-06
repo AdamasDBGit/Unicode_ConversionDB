@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetAllResultByStudentId]  
+CREATE PROCEDURE [dbo].[uspGetAllResultByStudentId]  
 (  
  @iStudentResultID int = null  
 )  
@@ -141,7 +141,7 @@ SELECT
 END TRY  
 BEGIN CATCH  
    
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
   
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  

@@ -1,8 +1,8 @@
-﻿
+
 CREATE PROCEDURE [dbo].[usp_ERP_Get_Discount_Scheme_List_BKP_June_2025]
 	-- Add the parameters for the stored procedure here
 	@iERPFeeScheduleID int,
-	@FeeComponents NVARCHAR(MAX)=NULL
+	@FeeComponents Nnvarchar(max)=NULL
 
 AS
 BEGIN

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentDataForAPI](@StudentID NVARCHAR(MAX)=null,@BrandID INT,@BatchCode NVARCHAR(MAX)=NULL)
+CREATE PROCEDURE [dbo].[uspGetStudentDataForAPI](@StudentID Nnvarchar(max)=null,@BrandID INT,@BatchCode Nnvarchar(max)=NULL)
 AS
 BEGIN
 

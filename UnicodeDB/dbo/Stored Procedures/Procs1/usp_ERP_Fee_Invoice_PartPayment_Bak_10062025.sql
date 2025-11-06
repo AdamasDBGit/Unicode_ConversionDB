@@ -1,7 +1,7 @@
-﻿
 
 
-CREATE PROCEDURE [dbo].[usp_ERP_Fee_Invoice_PartPayment_Bak_10062025](@iBrandID INT,@sStudentID NVARCHAR(MAX))                      
+
+CREATE PROCEDURE [dbo].[usp_ERP_Fee_Invoice_PartPayment_Bak_10062025](@iBrandID INT,@sStudentID Nnvarchar(max))                      
 AS                      
 BEGIN                      
                       
@@ -13,7 +13,7 @@ BEGIN
                       
    DECLARE @CentreID INT                      
                       
-   DECLARE @MobileNo varchar(max) ,@I_StudentID int ,@RegID int                    
+   DECLARE @MobileNo nvarchar(max) ,@I_StudentID int ,@RegID int                    
                       
    select @CentreID=B.I_Centre_Id ,@MobileNo=TPM.S_Mobile_No ,@RegID=A.I_Enquiry_Regn_ID            
    from T_Student_Detail A                      
@@ -35,7 +35,7 @@ BEGIN
                         
                       
                       
-   DECLARE @FIYear VARCHAR(20)                          
+   DECLARE @FIYear nvarchar(max)                          
                           
    SELECT @FIYear = (CASE WHEN (MONTH(GETDATE())) <= 3 THEN convert(varchar(4), YEAR(GETDATE())-1) + '-' + convert(varchar(4), YEAR(GETDATE())%100)                          
        ELSE convert(varchar(4),YEAR(GETDATE()))+ '-' + convert(varchar(4),(YEAR(GETDATE())%100)+1)END)                          
@@ -52,29 +52,29 @@ BEGIN
         CREATE TABLE #INVDET                      
             (                      
      I_Centre_ID INT,                      
-              S_Center_Name VARCHAR(MAX) ,                      
-              TypeOfCentre VARCHAR(MAX) ,                      
-     S_Mobile_No VARCHAR(MAX) ,                      
+              S_Center_Name nvarchar(max) ,                      
+              TypeOfCentre nvarchar(max) ,                      
+     S_Mobile_No nvarchar(max) ,                      
      I_Course_ID INT,                      
-              S_Course_Name VARCHAR(MAX) ,                      
-     S_Course_Name_Current VARCHAR(MAX),                      
-     S_Student_Photo NVARCHAR(MAX),                      
-              S_Batch_Name VARCHAR(MAX) ,                      
-     S_Batch_Name_Current VARCHAR(MAX) ,                      
-              S_Student_ID VARCHAR(MAX) ,                      
-              StudentName VARCHAR(MAX) ,                      
-              ContactNo VARCHAR(MAX) ,                      
+              S_Course_Name nvarchar(max) ,                      
+     S_Course_Name_Current nvarchar(max),                      
+     S_Student_Photo Nnvarchar(max),                      
+              S_Batch_Name nvarchar(max) ,                      
+     S_Batch_Name_Current nvarchar(max) ,                      
+              S_Student_ID nvarchar(max) ,                      
+              StudentName nvarchar(max) ,                      
+              ContactNo nvarchar(max) ,                      
               I_RollNo INT ,                      
               I_Invoice_Header_ID INT ,                      
-              S_Invoice_No VARCHAR(MAX) ,                      
-     FeeScheduleNo VARCHAR(MAX) ,                      
+              S_Invoice_No nvarchar(max) ,                      
+     FeeScheduleNo nvarchar(max) ,                      
      InvoiceCreationDate DATETIME,                      
               I_Invoice_Detail_ID INT ,                      
               I_Installment_No INT ,                      
      I_Sequence INT,                      
               Dt_Installment_Date DATETIME ,                      
      I_FeeComponent_ID INT,                      
-              S_Component_Name VARCHAR(MAX) ,                      
+              S_Component_Name nvarchar(max) ,                      
 N_Amount_Due DECIMAL(14, 2) ,                      
               TaxDue DECIMAL(14, 2) ,                      
               TaxPaidAdvBeforeGST DECIMAL(14, 2) ,                     
@@ -82,14 +82,14 @@ N_Amount_Due DECIMAL(14, 2) ,
               TotalTax DECIMAL(14, 2) ,                      
               ReceiptCompAmount DECIMAL(14, 2) ,                      
               ReceiptCompTax DECIMAL(14, 2) ,                      
-              CreditNoteNo VARCHAR(MAX) ,                      
+              CreditNoteNo nvarchar(max) ,                      
         CreditNoteDate DATE ,                      
               CreditNoteAmt DECIMAL(14, 2) ,                      
               CreditNoteTax DECIMAL(14, 2) ,                      
  BaseAmtDiff DECIMAL(14, 2) ,                      
               TaxDiff DECIMAL(14, 2) ,                      
               TotalDiff DECIMAL(14, 2),                      
-     DueType VARCHAR(MAX) ,              
+     DueType nvarchar(max) ,              
   CGST_Amt Numeric(18,2),                    
   CGST_Per Numeric(10,2),                    
   SGST_Amt numeric(18,2),                    
@@ -548,7 +548,7 @@ BEGIN
 END;          
 Create Table #StudentFine(          
           
-StudentID Varchar(20),          
+StudentID nvarchar(max),          
 InvoiceID Bigint,          
 T_Invoice_Child_Header bigint,          
 Dt_Installment_Date date,          
@@ -560,7 +560,7 @@ StudentID,InvoiceID,T_Invoice_Child_Header,Dt_Installment_Date,InstallmentNo,Fin
 )          
 EXEC usp_ERP_Fine_CalculateBased_On_Frequency @iBrandID,@sStudentID,@F_paymentdate  
 
-  Declare @finecomponentID int,@AdhocCompName Varchar(100)        
+  Declare @finecomponentID int,@AdhocCompName nvarchar(max)        
    SEt @finecomponentID= (select top 1 I_Status_Value from T_Status_Master         
    where I_Brand_ID=@iBrandID and Status_Type=2)  -----If Status_Type=2 Then Fine ,If Status_Type=1 Then  Prospectus      
    Set @AdhocCompName=(select Top 1 S_Status_Desc from T_Status_Master       

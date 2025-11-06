@@ -1,6 +1,6 @@
-﻿  
+  
 CREATE PROCEDURE [dbo].[KPMG_uspInsertReceiptMaterialsInCCW_renamed]
-    @OraclePoId NVARCHAR(MAX) ,
+    @OraclePoId Nnvarchar(max) ,
     @XMLData XML
 AS
     BEGIN TRY   
@@ -10,16 +10,16 @@ AS
         DECLARE @TempTable TABLE
             (
               ID INT IDENTITY ,
-              LineId VARCHAR(100) ,
-              BarCode VARCHAR(100) ,
-              ItemId VARCHAR(100)
+              LineId nvarchar(max) ,
+              BarCode nvarchar(max) ,
+              ItemId nvarchar(max)
             )
          
               
         DECLARE @ItemTable TABLE
             (
               ID INT IDENTITY ,
-              ItemId VARCHAR(100)
+              ItemId nvarchar(max)
             )  
         IF EXISTS ( SELECT  1
                     FROM    Tbl_KPMG_PoDetails
@@ -32,9 +32,9 @@ AS
                           BarCode ,
                           ItemId
                         )
-                        SELECT  T.c.value('LineId[1]', 'NVARCHAR(255)') ,
-                                T.c.value('SerialNo[1]', 'NVARCHAR(255)') ,
-                                T.c.value('ItemId[1]', 'NVARCHAR(255)')
+                        SELECT  T.c.value('LineId[1]', 'Nnvarchar(max)') ,
+                                T.c.value('SerialNo[1]', 'Nnvarchar(max)') ,
+                                T.c.value('ItemId[1]', 'Nnvarchar(max)')
                         FROM    @XMLData.nodes('/Root/TestRTemp') T ( c )   
  
                 DELETE  FROM @TempTable
@@ -59,7 +59,7 @@ AS
         DECLARE @GENID INT  
         DECLARE @Row_Count INT  
         DECLARE @Counter INT  
-        DECLARE @ItemCode VARCHAR(100)  
+        DECLARE @ItemCode nvarchar(max)  
    
         INSERT  INTO @ItemTable
                 ( ItemId
@@ -144,7 +144,7 @@ AS
     END TRY  
     BEGIN CATCH  
    
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT  
   
         SELECT  @ErrMsg = ERROR_MESSAGE() ,

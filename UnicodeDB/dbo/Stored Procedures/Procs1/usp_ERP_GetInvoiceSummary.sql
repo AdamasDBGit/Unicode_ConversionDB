@@ -1,11 +1,11 @@
-﻿
+
 CREATE PROCEDURE [dbo].[usp_ERP_GetInvoiceSummary]  --exec uspGetInvoiceSummary 168173      
     (  
       @iInvoiceID INT  
     )  
 AS   
 
-DECLARE @SACCode NVARCHAR(50) = ''
+DECLARE @SACCode Nnvarchar(max) = ''
 SELECT 
 @SACCode = GCM.S_SAC_Code
 FROM dbo.T_GST_Code_Master AS GCM
@@ -26,8 +26,8 @@ CREATE TABLE #FSTN
 (
 	I_Invoice_Header_ID INT,
 	I_Invoice_CHILD_Header_ID INT,
-	S_Tax_Code NVARCHAR(50),
-	S_Tax_Desc NVARCHAR(50),
+	S_Tax_Code Nnvarchar(max),
+	S_Tax_Desc Nnvarchar(max),
 	N_Tax_Value NUMERIC (18,2)
 )
 
@@ -97,7 +97,7 @@ END TRY
 BEGIN CATCH                    
 --Error occurred:                      
 	                    
-	DECLARE @ErrMsg NVARCHAR(4000) ,  
+	DECLARE @ErrMsg Nnvarchar(max) ,  
 		@ErrSeverity INT                    
 	SELECT  @ErrMsg = ERROR_MESSAGE() ,  
 			@ErrSeverity = ERROR_SEVERITY()                    

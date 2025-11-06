@@ -1,13 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_SaveDiscountSchemeDetails]
+CREATE PROCEDURE [dbo].[usp_ERP_SaveDiscountSchemeDetails]
 (
-	@DiscountSchemeID NVARCHAR(MAX),
+	@DiscountSchemeID Nnvarchar(max),
 	@DiscountRate DECIMAL(14,2)=NULL,
 	@DiscountAmount DECIMAL(14,2)=NULL,
 	@IsApplicableOn INT,
-	@FromInstalment NVARCHAR(MAX)=NULL,
-	@FeeComponentID NVARCHAR(MAX)=NULL,
+	@FromInstalment Nnvarchar(max)=NULL,
+	@FeeComponentID Nnvarchar(max)=NULL,
 	@NoOfInstallment int=null,
-	@CreatedBy NVARCHAR(MAX)='rice-group-admin'
+	@CreatedBy Nnvarchar(max)='rice-group-admin'
 	
 )
 AS

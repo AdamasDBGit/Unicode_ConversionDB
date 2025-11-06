@@ -1,18 +1,18 @@
-﻿CREATE PROCEDURE [dbo].[uspGetFacultyDayCentreMapDetails](@EmployeeID INT)
+CREATE PROCEDURE [dbo].[uspGetFacultyDayCentreMapDetails](@EmployeeID INT)
 AS
 begin
 
 	create table #temp
 	(
 	EmployeeID INT,
-	ClassDay VARCHAR(MAX),
-	Centres VARCHAR(MAX)
+	ClassDay nvarchar(max),
+	Centres nvarchar(max)
 	)
 
 
 	DECLARE @empid int
-	DECLARE @classday varchar(max)
-	DECLARE @centres varchar(max)
+	DECLARE @classday nvarchar(max)
+	DECLARE @centres nvarchar(max)
 
 
 	DECLARE bcursor CURSOR FOR 

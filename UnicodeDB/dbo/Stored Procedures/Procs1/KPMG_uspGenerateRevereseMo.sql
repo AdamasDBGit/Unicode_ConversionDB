@@ -1,11 +1,11 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGenerateRevereseMo]
 	
 AS   
 	BEGIN Try	
-		DECLARE @TEMP_STOCK TABLE(Id INT Identity,StockId INT, BranchId INT , ItemCode varchar(50))
-		DECLARE @TEMP_BRANCH_ITEMS TABLE(Id INT Identity, BranchId INT , ItemCode varchar(50))
-		DECLARE @TEMP_BARCODECHECK TABLE (Id INT IDENTITY, ItemCode varchar(100), BarCode varchar(255), MoId INT , ParentMoId INT, FldStatus varchar(100))
+		DECLARE @TEMP_STOCK TABLE(Id INT Identity,StockId INT, BranchId INT , ItemCode nvarchar(max))
+		DECLARE @TEMP_BRANCH_ITEMS TABLE(Id INT Identity, BranchId INT , ItemCode nvarchar(max))
+		DECLARE @TEMP_BARCODECHECK TABLE (Id INT IDENTITY, ItemCode nvarchar(max), BarCode nvarchar(max), MoId INT , ParentMoId INT, FldStatus nvarchar(max))
 		
 		DECLARE @ROW_CNT INT
 		DECLARE @COUNTER INT
@@ -32,7 +32,7 @@ AS
 		DECLARE @ThrshldCount INT
 		DECLARE @Stock_Id INT
 		DECLARE @Branch_Id INT
-		DECLARE @Item_Code varchar(100)
+		DECLARE @Item_Code nvarchar(max)
 		DECLARE @GEN_MOV_ID INT
 		print '1'
 		SELECT @ROW_CNT = COUNT(1) FROM @TEMP_BRANCH_ITEMS
@@ -96,7 +96,7 @@ AS
 	BEGIN CATCH            
 	--Error occurred:              
 
-		DECLARE @ErrMsg NVARCHAR(4000) ,  
+		DECLARE @ErrMsg Nnvarchar(max) ,  
 		@ErrSeverity INT            
 		SELECT  @ErrMsg = ERROR_MESSAGE() ,  
 			@ErrSeverity = ERROR_SEVERITY()            

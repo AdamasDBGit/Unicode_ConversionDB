@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentActivityPerformanceByStudentID] --[uspGetStudentActivityPerformanceByStudentID] 1280,8645
+CREATE PROCEDURE [dbo].[uspGetStudentActivityPerformanceByStudentID] --[uspGetStudentActivityPerformanceByStudentID] 1280,8645
     (
       @iTermID INT ,
       @iStudentDetailID INT   
@@ -41,8 +41,8 @@ AS
         WHILE @@FETCH_STATUS = 0 
             BEGIN
         
-                DECLARE @cols NVARCHAR(2000)    
-                DECLARE @query NVARCHAR(4000)    
+                DECLARE @cols Nnvarchar(max)    
+                DECLARE @query Nnvarchar(max)    
 		    
                 SELECT  @cols = STUFF(( SELECT DISTINCT TOP 100 PERCENT
                                                 '],[' + t.S_Evaluation_Name
@@ -75,7 +75,7 @@ AS pvt'
     END TRY    
     BEGIN CATCH    
      
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT    
     
         SELECT  @ErrMsg = ERROR_MESSAGE() ,

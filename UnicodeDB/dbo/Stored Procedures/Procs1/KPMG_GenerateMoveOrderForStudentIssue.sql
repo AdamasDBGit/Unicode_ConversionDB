@@ -1,15 +1,15 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_GenerateMoveOrderForStudentIssue]
 
-@StudentBarCodeNo nvarchar(255),
-@Context NVARCHAR(255),
-@MaterialBarCode nvarchar(255)
+@StudentBarCodeNo nnvarchar(max),
+@Context Nnvarchar(max),
+@MaterialBarCode nnvarchar(max)
 
 AS
 DECLARE @CENTER_ID INT
 DECLARE @STUDENTID INT
 DECLARE @GENID INT
-DECLARE @ITEM_CODE VARCHAR(255)
+DECLARE @ITEM_CODE nvarchar(max)
 BEGIN TRY 
 SELECT @STUDENTID= I_Student_Detail_ID from T_Student_Detail where S_Student_ID=@StudentBarCodeNo
 SELECT @CENTER_ID= I_Centre_Id FROM T_Invoice_Parent WHERE I_Student_Detail_ID=@STUDENTID
@@ -49,7 +49,7 @@ INSERT INTO Tbl_KPMG_MoMaster(Fld_KPMG_Branch_Id,Fld_KPMG_Context,Fld_KPMG_ISCol
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspInsertProjection]
 (
 @Month INT,
@@ -26,7 +26,7 @@ DECLARE @idmaster INT
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            

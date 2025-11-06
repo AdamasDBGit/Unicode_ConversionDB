@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspAssignDiscountToLevel]
+CREATE PROCEDURE [dbo].[uspAssignDiscountToLevel]
 
 	(
-		@sSelectedCenters NVARCHAR(MAX),
-		@sSelectedDiscountID NVARCHAR(MAX),
-		@sLoginID NVARCHAR(MAX)
+		@sSelectedCenters Nnvarchar(max),
+		@sSelectedDiscountID Nnvarchar(max),
+		@sLoginID Nnvarchar(max)
 	)
 
 
@@ -16,7 +16,7 @@ DECLARE @iLength int
 DECLARE @iDiscountListLength int
 DECLARE @iCenterID int
 DECLARE @iDiscountID int
-DECLARE @sSelectedDiscountIDs varchar(100)
+DECLARE @sSelectedDiscountIDs nvarchar(max)
 
 SET @iGetCenterIndex = CHARINDEX(',',LTRIM(RTRIM(@sSelectedCenters)),1)
 
@@ -55,7 +55,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

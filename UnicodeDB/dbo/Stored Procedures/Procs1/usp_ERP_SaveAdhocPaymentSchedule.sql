@@ -1,4 +1,4 @@
-﻿CREATE  PROCEDURE [dbo].[usp_ERP_SaveAdhocPaymentSchedule]          
+CREATE  PROCEDURE [dbo].[usp_ERP_SaveAdhocPaymentSchedule]          
 (          
     @AdhocPaymentScheduleHeaderID INT = NULL,           
     @AdHocFeeComponentID INT,          
@@ -8,9 +8,9 @@
     @EndDate DATETIME,          
     @BrandID INT,          
     @SessionID INT,          
-    @Description NVARCHAR(MAX) = NULL,          
+    @Description Nnvarchar(max) = NULL,          
     @IsCollectWithHighPriority BIT = 0,     
-    @NotifyRecipient BIT = 0,   -- ✅ new parameter  
+    @NotifyRecipient BIT = 0,   -- ? new parameter  
     @ScheduleDetails UT_AdhocScheduleDetail READONLY,           
     @StudentDetails UT_AdhocStudentDetail READONLY            
 )          
@@ -27,13 +27,13 @@ BEGIN
             (          
                 inAdHocFeeComponentID, nAmount, inSchoolProgramID,           
                 dtStartDate, dtEndDate, inBrandID, inSessionID, sDescription,          
-                IsCollectWithHighPriority, NotifyRecipient   -- ✅ included  
+                IsCollectWithHighPriority, NotifyRecipient   -- ? included  
             )          
             VALUES           
             (          
                 @AdHocFeeComponentID, @Amount, @SchoolProgramID,           
                 @StartDate, @EndDate, @BrandID, @SessionID, @Description,          
-                @IsCollectWithHighPriority, @NotifyRecipient   -- ✅ included  
+                @IsCollectWithHighPriority, @NotifyRecipient   -- ? included  
             );          
           
             SET @AdhocPaymentScheduleHeaderID = SCOPE_IDENTITY();          
@@ -52,7 +52,7 @@ BEGIN
                 inSessionID = @SessionID,          
                 sDescription = @Description,          
                 IsCollectWithHighPriority = @IsCollectWithHighPriority,  
-                NotifyRecipient = @NotifyRecipient   -- ✅ included  
+                NotifyRecipient = @NotifyRecipient   -- ? included  
             WHERE inAdhocPaymentScheduleHeaderID = @AdhocPaymentScheduleHeaderID;          
         END          
           
@@ -135,12 +135,12 @@ BEGIN
           
         COMMIT TRANSACTION;          
           
-        -- ✅ Return Status Response          
+        -- ? Return Status Response          
         SELECT 1 AS StatusFlag, 'Adhoc Schedule Created or Updated Successfully' AS Message,@AdhocPaymentScheduleHeaderID AS Id;          
     END TRY          
     BEGIN CATCH          
         ROLLBACK TRANSACTION;          
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();          
+        DECLARE @ErrorMessage Nnvarchar(max) = ERROR_MESSAGE();          
         -- Return Error Message          
         SELECT 0 AS StatusFlag, @ErrorMessage AS Message;          
     END CATCH;          

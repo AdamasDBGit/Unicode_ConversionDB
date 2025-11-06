@@ -1,5 +1,5 @@
-﻿Create PROCEDURE [dbo].[usp_ERP_Get_Transaction_History_BKP_AUG_2025]      
-    @sStudentID NVARCHAR(MAX) = NULL,      
+Create PROCEDURE [dbo].[usp_ERP_Get_Transaction_History_BKP_AUG_2025]      
+    @sStudentID Nnvarchar(max) = NULL,      
     @dtValidFrom DATETIME = NULL,      
     @dtValidTo DATETIME = NULL,      
     @BrandID INT = NULL,      
@@ -7,7 +7,7 @@
     @iPaymentStatusID INT = NULL,    
     @iReceiptType INT = NULL,    
     @bIsAdhoc BIT = NULL ,  
- @sStudentName NVARCHAR(MAX) = NULL  
+ @sStudentName Nnvarchar(max) = NULL  
 AS      
 BEGIN      
     SET NOCOUNT ON;      
@@ -15,21 +15,21 @@ BEGIN
     CREATE TABLE #Transaction_History      
     (      
         ID INT IDENTITY(1,1),      
-        StudentID VARCHAR(MAX),      
-        S_First_Name VARCHAR(MAX),      
-        S_Middle_Name VARCHAR(MAX),      
-        S_Last_Name VARCHAR(MAX),      
-        EnquiryNo VARCHAR(MAX),      
+        StudentID nvarchar(max),      
+        S_First_Name nvarchar(max),      
+        S_Middle_Name nvarchar(max),      
+        S_Last_Name nvarchar(max),      
+        EnquiryNo nvarchar(max),      
         ReceiptHeaderID INT,      
         ReceiptNo INT,      
-        ReceiptType VARCHAR(MAX),      
-        TransactionNo VARCHAR(MAX),      
-        PaymentMethod VARCHAR(MAX),      
-        PaymentMode VARCHAR(MAX),      
+        ReceiptType nvarchar(max),      
+        TransactionNo nvarchar(max),      
+        PaymentMethod nvarchar(max),      
+        PaymentMode nvarchar(max),      
         SMSPaymentModeID INT,      
-        SMSPaymentMode VARCHAR(MAX),      
+        SMSPaymentMode nvarchar(max),      
         isAdhoc BIT,      
-        AdhocInvoiceNo VARCHAR(MAX),      
+        AdhocInvoiceNo nvarchar(max),      
         TransactionDate DATETIME,      
         ReceiptDate DATETIME,      
         TotalTransactionAmount DECIMAL(8,2),      
@@ -38,19 +38,19 @@ BEGIN
         PaymentStatus INT,      
         ReceiptStatus INT,      
         SattlementDate DATETIME,      
-        SattlementBankAccount VARCHAR(MAX),      
+        SattlementBankAccount nvarchar(max),      
         PaymnentGatewayID INT,      
         BrandID INT,      
-        ExternalPurchasedMobileNo VARCHAR(MAX),      
-        OrderID VARCHAR(MAX),      
-        ReceiptStatusType VARCHAR(MAX)      
+        ExternalPurchasedMobileNo nvarchar(max),      
+        OrderID nvarchar(max),      
+        ReceiptStatusType nvarchar(max)      
     );      
     
     DECLARE @PaymentStatusTable TABLE       
     (      
         PaymentStatusID INT,      
-        StatusDescription VARCHAR(255),      
-        StatusColour VARCHAR(255)      
+        StatusDescription nvarchar(max),      
+        StatusColour nvarchar(max)      
     );      
     
     INSERT INTO @PaymentStatusTable      

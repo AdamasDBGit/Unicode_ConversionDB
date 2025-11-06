@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateStudentBatch_Before_BatchFeePlanLog_2023March]       
+CREATE PROCEDURE [dbo].[uspUpdateStudentBatch_Before_BatchFeePlanLog_2023March]       
 (     
   @iBatchId INT,    
   @iDeliveryPatternID INT,
@@ -6,10 +6,10 @@
   @dtBatchStartDate DATETIME,
   @dtCourseExpectedEndDate DATETIME,
   @iStatus INT,
-  @sUpdatedBy NVARCHAR(MAX),
+  @sUpdatedBy Nnvarchar(max),
   @sUpdatedOn DATETIME,
   @iFacultyId int,
-  @sBatchName NVARCHAR(MAX)	
+  @sBatchName Nnvarchar(max)	
 )        
 AS        
 BEGIN TRY 
@@ -30,7 +30,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

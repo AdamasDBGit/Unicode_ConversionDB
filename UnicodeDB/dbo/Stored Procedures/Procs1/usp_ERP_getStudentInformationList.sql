@@ -1,17 +1,17 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_getStudentInformationList]
+CREATE PROCEDURE [dbo].[usp_ERP_getStudentInformationList]
 	@brandid INT,
 	@Session INT,
 	@SchoolGroup INT,
 	@class INT,
 	@section INT = NULL,
 	@stream INT = NULL,
-	@StudentID NVARCHAR(MAX) = NULL,
-	@StudentName NVARCHAR(MAX) = NULL,
+	@StudentID Nnvarchar(max) = NULL,
+	@StudentName Nnvarchar(max) = NULL,
 	@Limit INT,
     @Offset INT,
     @SortCol INT,
-    @SortDir NVARCHAR(MAX),
-    @Search NVARCHAR(MAX) = NULL
+    @SortDir Nnvarchar(max),
+    @Search Nnvarchar(max) = NULL
 AS
 BEGIN
 	SET NOCOUNT ON;

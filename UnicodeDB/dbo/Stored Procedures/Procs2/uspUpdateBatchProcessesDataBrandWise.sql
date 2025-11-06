@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateBatchProcessesDataBrandWise]  
+CREATE PROCEDURE [dbo].[uspUpdateBatchProcessesDataBrandWise]  
 (  
-	@S_Batch_Process_Name NVARCHAR(MAX)=null,
-	@S_Last_Run_Status NVARCHAR(MAX) =null  
+	@S_Batch_Process_Name Nnvarchar(max)=null,
+	@S_Last_Run_Status Nnvarchar(max) =null  
 )  
 AS  
 

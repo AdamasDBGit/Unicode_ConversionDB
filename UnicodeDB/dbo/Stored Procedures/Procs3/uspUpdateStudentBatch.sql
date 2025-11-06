@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspUpdateStudentBatch]       
 (     
   @iBatchId INT,    
@@ -7,13 +7,13 @@ CREATE PROCEDURE [dbo].[uspUpdateStudentBatch]
   @dtBatchStartDate DATETIME,
   @dtCourseExpectedEndDate DATETIME,
   @iStatus INT,
-  @sUpdatedBy NVARCHAR(MAX),
+  @sUpdatedBy Nnvarchar(max),
   @sUpdatedOn DATETIME,
   @iFacultyId int,
-  @sBatchName NVARCHAR(MAX),	
+  @sBatchName Nnvarchar(max),	
   /*Added by susmita : 2023March10 : Added for get the value of new selected fee plan and reason of modify and passing to procedure for log and modify */
   @iNewFeePlanID INT = NULL,
-  @ReasonOfModify NVARCHAR(MAX)=NULL
+  @ReasonOfModify Nnvarchar(max)=NULL
   /*-------------------------------------------------------------------------------------*/
 
 )        
@@ -51,7 +51,7 @@ select @BrandID = I_Brand_ID from T_Brand_Center_Details where I_Centre_Id=@Cent
 
 
 
-Declare @actionstatus varchar(max)=null
+Declare @actionstatus nvarchar(max)=null
 
 
 
@@ -74,7 +74,7 @@ if (@iNewFeePlanID > 0 and @BrandID = 109)
 	where I_Batch_ID=@iBatchId
 
 
-	Declare @BatchFeeplanJson varchar(Max)=NULL
+	Declare @BatchFeeplanJson nvarchar(max)=NULL
 	SELECT @BatchFeeplanJson ='['+ STUFF((
                 SELECT ',{"I_Batch_ID":"' + CONVERT(NVARCHAR(MAX),t1.I_Batch_ID) + '",'+
 							+'"I_Centre_Id":"'+CONVERT(NVARCHAR(MAX),t1.I_Centre_Id) + '",'+
@@ -98,7 +98,7 @@ if (@iNewFeePlanID > 0 and @BrandID = 109)
 						+'"S_BatchTime":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_BatchTime),'NULL') + '"}'
 				   FROM (select * from T_Center_Batch_Details where I_Batch_ID=@iBatchId) t1 
 					FOR XML PATH(''), TYPE
-                  ).value('.', 'varchar(max)'),1,1,''
+                  ).value('.', 'nvarchar(max)'),1,1,''
               ) + ']' ;
 
 
@@ -166,7 +166,7 @@ if (@iNewFeePlanID > 0 and @BrandID = 109)
 						+'"S_BatchTime":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_BatchTime),'NULL') + '"}'
 				   FROM (select * from T_Center_Batch_Details where I_Batch_ID=@iBatchId) t1 
 					FOR XML PATH(''), TYPE
-                  ).value('.', 'varchar(max)'),1,1,''
+                  ).value('.', 'nvarchar(max)'),1,1,''
               ) + ']' ;
 
 
@@ -212,7 +212,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspDeleteStudent]
+CREATE PROCEDURE [dbo].[uspDeleteStudent]
 (
 	@iStudentDetailID INT,
 	@iDeleteOtherReceiptsFlag int, -- Flag = 1, delete other types of receipt, 
@@ -252,7 +252,7 @@ END TRY
 
 BEGIN CATCH    
  ROLLBACK TRANSACTION   
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     

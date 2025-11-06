@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertReceiptDetails_Bulkupload]    
+CREATE PROCEDURE [dbo].[uspInsertReceiptDetails_Bulkupload]    
 (    
  @sReceiptDetail XML    
 )    
@@ -20,7 +20,7 @@ DECLARE @CompanyShare NUMERIC(18,2)
 DECLARE @TaxShare NUMERIC(18,2)    
 DECLARE @bUseCenterServiceTax BIT    
 DECLARE @iInvoiceParentId INT    
-DECLARE @iInvoiceNo VARCHAR(256)    
+DECLARE @iInvoiceNo nvarchar(max)    
     
 DECLARE @iInvoiceChildHeaderID int    
 DECLARE @iInvoiceHeaderID int    
@@ -167,7 +167,7 @@ END TRY
 BEGIN CATCH    
  --Error occurred:      
  ROLLBACK TRANSACTION    
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     

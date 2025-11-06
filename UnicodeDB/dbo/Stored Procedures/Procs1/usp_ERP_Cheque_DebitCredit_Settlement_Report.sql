@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE dbo.usp_ERP_Cheque_DebitCredit_Settlement_Report
-    @BrandIDs NVARCHAR(MAX),  
+CREATE PROCEDURE dbo.usp_ERP_Cheque_DebitCredit_Settlement_Report
+    @BrandIDs Nnvarchar(max),  
     @StartDate DATE = NULL,
     @EndDate   DATE = NULL
 AS

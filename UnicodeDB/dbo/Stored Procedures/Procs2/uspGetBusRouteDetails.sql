@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetBusRouteDetails] ( @SRouteNo NVARCHAR(MAX) = NULL,@iBrandID INT )
+CREATE PROCEDURE [dbo].[uspGetBusRouteDetails] ( @SRouteNo Nnvarchar(max) = NULL,@iBrandID INT )
 AS 
     BEGIN    
         SET NOCOUNT ON  

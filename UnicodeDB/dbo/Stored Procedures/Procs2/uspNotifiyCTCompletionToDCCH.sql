@@ -1,16 +1,16 @@
-﻿CREATE PROCEDURE [dbo].[uspNotifiyCTCompletionToDCCH]    
+CREATE PROCEDURE [dbo].[uspNotifiyCTCompletionToDCCH]    
 (    
   @iTaskMasterId INT
  ,@iStudentDetailId INT    
  ,@iSourceCenterId INT 
  ,@iDestinationCenterId INT
- ,@sUserID NVARCHAR(MAX)   
+ ,@sUserID Nnvarchar(max)   
 )    
 AS    
 BEGIN  
 
 DECLARE @ID INT
-DECLARE @info VARCHAR(500)
+DECLARE @info nvarchar(max)
 DECLARE @USERID TABLE (I_User_Id INT)
 --------------
  

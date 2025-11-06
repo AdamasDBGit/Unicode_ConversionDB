@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Role_Add_Update]
+CREATE PROCEDURE [dbo].[Role_Add_Update]
 -- =============================================
 ------- Author:  Tridip Chatterjee		
 -- Create date:  13-09-2023
@@ -7,8 +7,8 @@
 -- Add the parameters for the stored procedure here
 -- =============================================
 @Role_ID int =null,
-@Role_Name nvarchar(255)=null,
-@Role_Desc nvarchar(255)=null,
+@Role_Name nnvarchar(max)=null,
+@Role_Desc nnvarchar(max)=null,
 @CreatedBy int =null,
 @Status int=null
 

@@ -1,14 +1,14 @@
-﻿CREATE PROCEDURE [dbo].[ERP_uspInsertStudentMedicalDetails]      
+CREATE PROCEDURE [dbo].[ERP_uspInsertStudentMedicalDetails]      
     (  
        @EnquiryRegnID int = NULL,
 	   @StudentID int =NULL
 	  ,@IsAllergies int=null
-	  ,@SAllergies nvarchar(MAX)=null
+	  ,@SAllergies nnvarchar(max)=null
 	  ,@IsChronic int = null
-	  ,@SChronic nvarchar(MAX)=null
+	  ,@SChronic nnvarchar(max)=null
 	  ,@IsDisabilities int=null
-	  ,@SDisabilities nvarchar(MAX)=null
-	  ,@SAdditional nvarchar(MAX)=null
+	  ,@SDisabilities nnvarchar(max)=null
+	  ,@SAdditional nnvarchar(max)=null
     )  
 AS   
  SET NOCOUNT ON        
@@ -76,7 +76,7 @@ AS
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
 				@ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()                    

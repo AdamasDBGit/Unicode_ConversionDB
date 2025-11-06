@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspCreateBatch_BKP_LANG]                   
+CREATE PROCEDURE [dbo].[uspCreateBatch_BKP_LANG]                   
 (                     
-  @sBatchCode NVARCHAR(MAX),            
+  @sBatchCode Nnvarchar(max),            
   @iCourseID INT,            
   @iDeliveryPatternID INT,            
   --@iTimeSlotId INT,            
@@ -8,20 +8,20 @@
   @dtBatchStartDate DATETIME,            
   @iStatus INT,            
   @dtCourseExpectedEndDate DATETIME,            
-  @sCreatedBy NVARCHAR(MAX),            
+  @sCreatedBy Nnvarchar(max),            
   @dtCreatedOn DATETIME,            
   @FacultyId INT,            
-  @sBatchName NVARCHAR(MAX),          
+  @sBatchName Nnvarchar(max),          
   @bIsApproved BIT,        
   @iAdmissionGraceDays INT,      
   @bIsCorporate BIT,    
   @iLateFeeGraceDays INT  ,  
   @dtBatchIntroductionDate DATETIME = NULL,  
-  @sBatchIntroductionTime NVARCHAR(MAX) = NULL           
+  @sBatchIntroductionTime Nnvarchar(max) = NULL           
 )                    
 AS                    
 BEGIN TRY            
-DECLARE @sBatchCodeMax VARCHAR(50)            
+DECLARE @sBatchCodeMax nvarchar(max)            
 SELECT TOP 1 @sBatchCodeMax = @sBatchCode + RIGHT('000' + CAST(SUBSTRING(S_Batch_Code,10,3)+1 AS varchar(3)), 3)             
 FROM T_Student_Batch_Master WHERE S_Batch_Code             
 LIKE @sBatchCode+'%' ORDER BY S_Batch_Code DESC            
@@ -71,7 +71,7 @@ END TRY
 BEGIN CATCH            
  --Error occurred:              
             
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int            
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int            
  SELECT @ErrMsg = ERROR_MESSAGE(),            
    @ErrSeverity = ERROR_SEVERITY()            
             

@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateTransportHostelForStudent]    
+CREATE PROCEDURE [dbo].[uspUpdateTransportHostelForStudent]    
 -- Add the parameters for the stored procedure here    
     @iStudentId INT ,
     @iTransportId INT ,
     @iRoomId INT ,
     @iBusRouteId INT = NULL ,
     @dtDeactivation DATETIME = NULL ,
-    @S_CrtdBy NVARCHAR(MAX) ,
+    @S_CrtdBy Nnvarchar(max) ,
     @Dt_CrtdOn DATETIME
 AS 
     BEGIN TRY    
@@ -63,7 +63,7 @@ AS
     BEGIN CATCH    
  --Error occurred:      
         ROLLBACK TRANSACTION  
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()    

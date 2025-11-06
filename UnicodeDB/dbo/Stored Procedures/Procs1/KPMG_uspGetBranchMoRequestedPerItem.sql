@@ -1,15 +1,15 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGetBranchMoRequestedPerItem]
-@FromDate NVARCHAR(MAX),
-@ToDate NVARCHAR(MAX),
+@FromDate Nnvarchar(max),
+@ToDate Nnvarchar(max),
 @BranchName xml,
-@ItemCode NVARCHAR(MAX)
+@ItemCode Nnvarchar(max)
 AS
 BEGIN
 	
 	SET NOCOUNT ON;
 	
-	Declare @tempTable table (Id int identity,MoveOrderId int, CreatedDate varchar(50),BranchName varchar(50), BranchId varchar(50),QtyRequested varchar(100),QtyReceived varchar(100),QtyInTransit varchar(100))
+	Declare @tempTable table (Id int identity,MoveOrderId int, CreatedDate nvarchar(max),BranchName nvarchar(max), BranchId nvarchar(max),QtyRequested nvarchar(max),QtyReceived nvarchar(max),QtyInTransit nvarchar(max))
 	
 	
 	INSERT INTO @tempTable (MoveOrderId,CreatedDate,BranchName,BranchId,QtyRequested)
@@ -25,14 +25,14 @@ BEGIN
 		on Tbl_KPMG_MoMaster.Fld_KPMG_Mo_Id = Tbl_KPMG_MoItems.Fld_KPMG_Mo_Id
 	where [Fld_KPMG_Created Date] between @FromDate and @ToDate
 	and  T_Center_Hierarchy_Name_Details.S_Center_Name  IN 
-		(   SELECT c.value('(.)', 'VARCHAR(50)')FROM @BranchName.nodes('root/name') t(c))
+		(   SELECT c.value('(.)', 'nvarchar(max)')FROM @BranchName.nodes('root/name') t(c))
 	AND  Tbl_KPMG_MoItems.Fld_KPMG_Itemcode = @ItemCode
 --	select distinct(Fld_KPMG_ItemCode) as ItemId from Tbl_KPMG_SM_List (nolock)	
 
 	DECLARE @rowCount int 
 	DECLARE @counter int
-	DECLARE @moveOrderId varchar(100)
-	DECLARE @branchId varchar(100)
+	DECLARE @moveOrderId nvarchar(max)
+	DECLARE @branchId nvarchar(max)
 	DECLARE @stockId INT
 	DECLARE @inTransStockId INT
 	SELECT @rowCount = COUNT(1) from @tempTable	

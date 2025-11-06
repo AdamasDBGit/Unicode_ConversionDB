@@ -1,17 +1,17 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERPGetAdmissionList_oldSMS_POC]          
+CREATE PROCEDURE [dbo].[usp_ERPGetAdmissionList_oldSMS_POC]          
  -- Add the parameters for the stored procedure here          
  (          
-  @Enquiry_No NVARCHAR(MAX) = null,          
-  @Full_Name NVARCHAR(MAX) = null,          
-  @S_FatherName NVARCHAR(MAX) = NULL,        
-  @S_MotherName NVARCHAR(MAX) = NULL,          
-  @Mobile NVARCHAR(MAX) = null,          
+  @Enquiry_No Nnvarchar(max) = null,          
+  @Full_Name Nnvarchar(max) = null,          
+  @S_FatherName Nnvarchar(max) = NULL,        
+  @S_MotherName Nnvarchar(max) = NULL,          
+  @Mobile Nnvarchar(max) = null,          
   @AdmissionStageID int = null,      
   @Limit INT,      
   @Offset INT,      
   @SortCol INT,      
-  @SortDir NVARCHAR(MAX),      
-  @Search NVARCHAR(MAX) = NULL,
+  @SortDir Nnvarchar(max),      
+  @Search Nnvarchar(max) = NULL,
   @sessionID int =null,
   @PaymentDate datetime=null
  )          

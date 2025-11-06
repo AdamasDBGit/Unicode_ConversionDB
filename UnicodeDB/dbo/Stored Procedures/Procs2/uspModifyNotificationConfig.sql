@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyNotificationConfig] 
+CREATE PROCEDURE [dbo].[uspModifyNotificationConfig] 
 (
-@TaskName NVARCHAR(MAX),
-@HierarchyName NVARCHAR(MAX)
+@TaskName Nnvarchar(max),
+@HierarchyName Nnvarchar(max)
 )
 AS
 BEGIN

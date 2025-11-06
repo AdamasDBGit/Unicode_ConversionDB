@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertMSTeamStudentDetails]
+CREATE PROCEDURE [dbo].[uspInsertMSTeamStudentDetails]
 (
-@StudentID NVARCHAR(MAX),
-@EmailID NVARCHAR(MAX)
+@StudentID Nnvarchar(max),
+@EmailID Nnvarchar(max)
 )
 AS
 BEGIN
@@ -15,8 +15,8 @@ BEGIN
 		    S_MS_Email_ID
 		)
 		VALUES
-		(   @StudentID, -- S_Student_ID - varchar(max)
-		    @EmailID  -- S_MS_Email_ID - varchar(max)
+		(   @StudentID, -- S_Student_ID - nvarchar(max)
+		    @EmailID  -- S_MS_Email_ID - nvarchar(max)
 		    )
 
 	END

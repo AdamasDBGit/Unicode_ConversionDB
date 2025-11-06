@@ -1,8 +1,8 @@
-﻿    
+    
       
 CREATE PROCEDURE [dbo].[usp_ERP_Fine_CalculateBased_On_Frequency_Bak_10062025]        
     @BrandID INT,        
-    @s_StudentID NVARCHAR(MAX),        
+    @s_StudentID Nnvarchar(max),        
     @Paymentdate date = Null        
 AS        
 BEGIN        
@@ -15,7 +15,7 @@ BEGIN
     --Select @Paymentdate        
     DECLARE @FineTotal DECIMAL(18, 2) = 0;        
     Declare @FrequencyID int,        
-            @FrequencyCode Varchar(50),        
+            @FrequencyCode nvarchar(max),        
             @FineTagID int,        
             @waiveoff bit,        
             @InvoiceHeaderID bigint        

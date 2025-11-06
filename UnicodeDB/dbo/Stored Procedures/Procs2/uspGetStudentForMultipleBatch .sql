@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentForMultipleBatch ] -- [dbo].[uspGetStudentForMultipleBatch] '178,'
+CREATE PROCEDURE [dbo].[uspGetStudentForMultipleBatch ] -- [dbo].[uspGetStudentForMultipleBatch] '178,'
 ( 
-	@iBatchID NVARCHAR(MAX) 
+	@iBatchID Nnvarchar(max) 
 )
 AS 
     BEGIN          

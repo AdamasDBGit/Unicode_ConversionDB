@@ -1,20 +1,20 @@
-ï»¿CREATE PROCEDURE [dbo].[usp_ERP_Get_Student_Payable_List_AcademicSession_Wise_Bak_Abhik_08102025]     
+CREATE PROCEDURE [dbo].[usp_ERP_Get_Student_Payable_List_AcademicSession_Wise_Bak_Abhik_08102025]     
  -- Add the parameters for the stored procedure here    
  @iAcademicSessionID int=NULL,    
  @iSchoolGroupID int=NULL,    
  @iClassID int=NULL,    
  @iSectionID int=NULL,    
  @iSteamID int=NULL,    
- @sStudentName NVARCHAR(MAX)=NULL,    
- @sStudentID NVARCHAR(MAX)=NULL,    
- @sMobileNo NVARCHAR(MAX)=NULL,    
+ @sStudentName Nnvarchar(max)=NULL,    
+ @sStudentID Nnvarchar(max)=NULL,    
+ @sMobileNo Nnvarchar(max)=NULL,    
  @iswithDue bit=NULL,    
  @Limit INT=NULL,    
     @Offset INT=NULL,    
     @SortCol INT=NULL,    
-    @SortDir NVARCHAR(MAX)=NULL,    
+    @SortDir Nnvarchar(max)=NULL,    
  @Id INT = NULL,    
- @SearchValue NVARCHAR(MAX) = NULL    
+ @SearchValue Nnvarchar(max) = NULL    
 AS    
 BEGIN    
  -- SET NOCOUNT ON added to prevent extra result sets from    
@@ -25,24 +25,24 @@ BEGIN
  Create table #StudentPayableList    
  (    
  StudentDetailID int,    
- StudentID varchar(max),    
- StudentName varchar(max),    
- sMobileNo varchar(max),    
+ StudentID nvarchar(max),    
+ StudentName nvarchar(max),    
+ sMobileNo nvarchar(max),    
  AcademicSessionID int,    
- AcademicLabel varchar(max),    
+ AcademicLabel nvarchar(max),    
  SchoolGroupID int,    
- SchoolGroupName varchar(max),    
+ SchoolGroupName nvarchar(max),    
  ClassID int,    
- ClassName varchar(max),    
+ ClassName nvarchar(max),    
  SectionID int,    
- SectionName varchar(max),    
+ SectionName nvarchar(max),    
  StreamID int,    
- StreamName varchar(max),    
+ StreamName nvarchar(max),    
  InvoiceHeaderID int,    
  MappedFeeStructureID int,    
- MappedFeeStructureName varchar(max),    
+ MappedFeeStructureName nvarchar(max),    
  MappedDiscountSchemeID int,    
- MappedDiscountSchemeName varchar(max),    
+ MappedDiscountSchemeName nvarchar(max),    
  TotalAmountPayable decimal(10,2),    
  TotalAmountPaid decimal(10,2),    
  LastPaymentDate datetime,    
@@ -55,10 +55,10 @@ BEGIN
  IsWritedOff bit,    
  IsCancelled bit,    
  IsRevised bit,    
- CurrentStatus varchar(max),    
+ CurrentStatus nvarchar(max),    
  CurrentDue decimal(10,2),    
- LastPaymentMode varchar(max),    
- CurrentStatusDesc varchar(max)    
+ LastPaymentMode nvarchar(max),    
+ CurrentStatusDesc nvarchar(max)    
  )    
     
     
@@ -457,8 +457,8 @@ WHERE RowNum BETWEEN @Offset + 1 AND @Offset + @Limit;
 CASE     
  WHEN TIP.I_Status=1 THEN 'View Dues'    
  WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NOT NULL and childInvoice.invoiceAmount <= 0 THEN 'All dues have been written off. Total Paid and Remaining Due are adjusted to INR 0.00 as part of the Revise Invoice process."'    
- WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NOT NULL and childInvoice.invoiceAmount > 0 THEN 'This studentâ€™s invoices have been cancelled via the Revise Invoice process. No payable record exists currently'    
- WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NULL THEN 'This studentâ€™s invoices have been cancelled via the Cancelled Invoice process. No payable record exists currently.'    
+ WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NOT NULL and childInvoice.invoiceAmount > 0 THEN 'This student’s invoices have been cancelled via the Revise Invoice process. No payable record exists currently'    
+ WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NULL THEN 'This student’s invoices have been cancelled via the Cancelled Invoice process. No payable record exists currently.'    
  ELSE    
  '-' END    
  from     

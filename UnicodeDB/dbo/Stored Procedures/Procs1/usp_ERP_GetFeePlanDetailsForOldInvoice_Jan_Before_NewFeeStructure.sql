@@ -1,4 +1,4 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[usp_ERP_GetFeePlanDetailsForOldInvoice_Jan_Before_NewFeeStructure] --uspGetFeePlanDetailsForOldInvoice 168864, 37602
 ( 
@@ -40,7 +40,7 @@ EXEC ERP_get_FEE_Structure_GST_Generation @Fee_Structure_ID,@PaymentType
 
 
 
-DECLARE @NewFeeStructureName varchar(max)=NULL
+DECLARE @NewFeeStructureName nvarchar(max)=NULL
 
 
   SELECT IDENTITY(INT, 1, 1) AS ID,                
@@ -86,9 +86,9 @@ DECLARE @NewFeeStructureName varchar(max)=NULL
 							ID int Identity(1, 1),             
 						 I_Fee_Structure_Installment_Component_ID int,          
 							Fee_Structure_ID int,           
-						 S_Fee_Structure_Name VARCHAR(MAX),          
+						 S_Fee_Structure_Name nvarchar(max),          
 							Fee_ComponentID int,           
-						 S_Fee_Component_Name VARCHAR(MAX),          
+						 S_Fee_Component_Name nvarchar(max),          
 							Seq int,              
 							Installmentdt date,                
 							Installment_Amt Numeric(18, 2),    
@@ -109,9 +109,9 @@ DECLARE @NewFeeStructureName varchar(max)=NULL
 
 						Declare @FeeStructureInstallmentComponentID int,          
 					   @FeeStrucID int,              
-					   @FeeStrucName VARCHAR(MAX),          
+					   @FeeStrucName nvarchar(max),          
 								@Fee_ComponentID int,           
-					   @Fee_ComponentName VARCHAR(MAX),          
+					   @Fee_ComponentName nvarchar(max),          
 								@seq int,              
 								@ComponentAmt Numeric(18, 2),    
 					   @ComponentAmt_IncludeTAX numeric(18,2),    
@@ -773,7 +773,7 @@ DECLARE @NewFeeStructureName varchar(max)=NULL
 	----- Start :  Pending Dues Master ------
 
 	DECLARE @OldInvoiceAmount numeric(8,2)=0
-	DECLARE @OldFeeStructureName varchar(max)=NULL
+	DECLARE @OldFeeStructureName nvarchar(max)=NULL
 
 
     INSERT INTO #IWFPD    -----------------Pending Dues

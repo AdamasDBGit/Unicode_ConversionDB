@@ -1,16 +1,16 @@
-﻿CREATE PROCEDURE [dbo].[uspAuditNotification]
+CREATE PROCEDURE [dbo].[uspAuditNotification]
 (
-	@sLoginID NVARCHAR(MAX)
+	@sLoginID Nnvarchar(max)
 	,@iTaskID INT
 	,@iID INT
-	,@sMessage NVARCHAR(MAX)
+	,@sMessage Nnvarchar(max)
 )
 
 AS
 BEGIN
 
 DECLARE @id INT
-DECLARE @sCenterName VARCHAR(100)
+DECLARE @sCenterName nvarchar(max)
 DECLARE @iCenterId int
 
 	IF ( @iTaskID = 84 OR @iTaskID = 80 OR @iTaskID = 81 OR @iTaskID = 82)
@@ -35,7 +35,7 @@ DECLARE @iCenterId int
 	BEGIN
 
 	
-	DECLARE @sNCCode VARCHAR(100)
+	DECLARE @sNCCode nvarchar(max)
 
 			SELECT @sCenterName =  CM.S_Center_Name
 			FROM AUDIT.T_Audit_Result AR

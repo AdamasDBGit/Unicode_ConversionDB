@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspGetIDTConversionDetails]
+CREATE PROCEDURE [dbo].[uspGetIDTConversionDetails]
 (
 @iBrandID INT,
-@sHierarchyListID NVARCHAR(MAX),
+@sHierarchyListID Nnvarchar(max),
 @dtStartDate DATETIME,
 @dtEndDate DATETIME
 )

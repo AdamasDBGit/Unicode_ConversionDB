@@ -1,13 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateBatchSchedule] 
+CREATE PROCEDURE [dbo].[uspUpdateBatchSchedule] 
 (
 	@iBatchScheduleID INT,
-	@sBatchScheduleIDList NVARCHAR(MAX) = NULL,
+	@sBatchScheduleIDList Nnvarchar(max) = NULL,
 	@iBatchId INT,
 	@TermID INT,
 	@iModuleID INT,
 	@SessionID INT = NULL,
-	@sSessionName NVARCHAR(MAX),
-	@sSessionTopic NVARCHAR(MAX),
+	@sSessionName Nnvarchar(max),
+	@sSessionTopic Nnvarchar(max),
 	@dtScheduledDate DATETIME,
 	@dtActualDate DATETIME,
 	@iEmployeeID INT,
@@ -34,8 +34,8 @@ BEGIN
      /* I_Term_ID - int */ @TermID,      
      /* I_Module_ID - int */ @iModuleID,      
      /* I_Session_ID - int */ @SessionID,      
-     /* S_Session_Name - varchar(500) */ @sSessionName,      
-     /* S_Session_Topic - varchar(500) */ @sSessionTopic)       
+     /* S_Session_Name - nvarchar(max) */ @sSessionName,      
+     /* S_Session_Topic - nvarchar(max) */ @sSessionTopic)       
     SET @iBatchScheduleID = @@IDENTITY      
   END      
   UPDATE dbo.T_Student_Batch_Schedule       
@@ -44,7 +44,7 @@ BEGIN
 END     
 ELSE    
  BEGIN    
-  DECLARE @sqlquery VARCHAR(MAX)    
+  DECLARE @sqlquery nvarchar(max)    
   SET @sqlquery = 'UPDATE dbo.T_Student_Batch_Schedule       
   SET Dt_Schedule_Date ='''+ CAST(@dtScheduledDate AS VARCHAR(100))+''',Dt_Actual_Date ='''+ CAST(@dtActualDate AS VARCHAR(100))+''',I_Employee_ID ='+     
   CAST(@iEmployeeID AS VARCHAR(100))+',I_Is_Complete ='+ CAST(@iIsComplete AS VARCHAR(5)) + 'WHERE I_Batch_Schedule_ID IN  ('+@sBatchScheduleIDList+')'    
@@ -55,7 +55,7 @@ ELSE
      
 END TRY      
 BEGIN CATCH      
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int      
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int      
  SELECT @ErrMsg = ERROR_MESSAGE(),      
    @ErrSeverity = ERROR_SEVERITY()      
       

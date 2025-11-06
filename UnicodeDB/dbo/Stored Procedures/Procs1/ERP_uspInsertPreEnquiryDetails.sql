@@ -1,42 +1,42 @@
-﻿CREATE PROCEDURE [dbo].[ERP_uspInsertPreEnquiryDetails]      
+CREATE PROCEDURE [dbo].[ERP_uspInsertPreEnquiryDetails]      
     (  
       --@Centre INT , 
 
-	  @sFirstName NVARCHAR(MAX) = NULL, --
-	  @sMiddleName NVARCHAR(MAX) = NULL, --
-	  @sLastName NVARCHAR(MAX) = NULL, --
+	  @sFirstName Nnvarchar(max) = NULL, --
+	  @sMiddleName Nnvarchar(max) = NULL, --
+	  @sLastName Nnvarchar(max) = NULL, --
 	  @DtBirthDate DATETIME = NULL, --
-	  @sMobileNo NVARCHAR(MAX) = NULL, --
+	  @sMobileNo Nnvarchar(max) = NULL, --
 	  @iEnquiryStatusCode int = NULL, --
 	  @CreatedBy INT = NULL,      --
 
 	  @iRelationId INT  = NULL, --
-	  @FatherFirstName nvarchar(100) = NULL,  --
-	  @FatherMiddleName nvarchar(100) = NULL, --
-	  @FatherLastName nvarchar(100) = NULL,   --
-	  @FatherEmailId nvarchar(100) = NULL,    --
-	  @FatherMobileNo nvarchar(50) = NULL,    --
+	  @FatherFirstName nnvarchar(max) = NULL,  --
+	  @FatherMiddleName nnvarchar(max) = NULL, --
+	  @FatherLastName nnvarchar(max) = NULL,   --
+	  @FatherEmailId nnvarchar(max) = NULL,    --
+	  @FatherMobileNo nnvarchar(max) = NULL,    --
 
-	  @MotherFirstName nvarchar(100) = NULL,  --
-	  @MotherMiddleName nvarchar(100) = NULL, --
-	  @MotherLastName nvarchar(100) = NULL,   --
-	  @MotherEmailId nvarchar(100) = NULL,    --
-	  @MotherMobileNo nvarchar(50) = NULL,    --
+	  @MotherFirstName nnvarchar(max) = NULL,  --
+	  @MotherMiddleName nnvarchar(max) = NULL, --
+	  @MotherLastName nnvarchar(max) = NULL,   --
+	  @MotherEmailId nnvarchar(max) = NULL,    --
+	  @MotherMobileNo nnvarchar(max) = NULL,    --
 	  -- current address
-	  @sAddressLine1 NVARCHAR(MAX) = NULL, --
-	  @sAddressLine2 NVARCHAR(MAX) = NULL, --
+	  @sAddressLine1 Nnvarchar(max) = NULL, --
+	  @sAddressLine2 Nnvarchar(max) = NULL, --
 	  @iCountryId int = NULL,  --
 	  @iStateId int = NULL,   --
 	  @iCityId int = NULL,  --
-	  @sPinCode NVARCHAR(MAX) = NULL,  --
+	  @sPinCode Nnvarchar(max) = NULL,  --
 
 	  -- permanent address
-	  @sPAddressLine1 NVARCHAR(MAX) = NULL, --
-	  @sPAddressLine2 NVARCHAR(MAX) = NULL, --
+	  @sPAddressLine1 Nnvarchar(max) = NULL, --
+	  @sPAddressLine2 Nnvarchar(max) = NULL, --
 	  @iPCountryId int = NULL,  --
 	  @iPStateId int = NULL,   --
 	  @iPCityId int = NULL,  --
-	  @sPPinCode NVARCHAR(MAX) = NULL,  --
+	  @sPPinCode Nnvarchar(max) = NULL,  --
 
 	  @iEnquiryType int = NULL,
 	  @SchoolGroupID int = NULL,
@@ -81,10 +81,10 @@
         @EducationCurrentStatus INT=NULL,
 	--  @EmailID NVARCHAR(MAX)=NULL,
 	--  @GenderID INT=NULL
-	  @sRefererName NVARCHAR(MAX) = null,
-	  @sRefererMobileNo NVARCHAR(MAX) = null,
+	  @sRefererName Nnvarchar(max) = null,
+	  @sRefererMobileNo Nnvarchar(max) = null,
 	  @EnqTypeSourceMappingID int=null,
-	  @SReferal nvarchar(MAX)=null
+	  @SReferal nnvarchar(max)=null
     )  
 AS   
     BEGIN TRY                    
@@ -93,7 +93,7 @@ AS
         DECLARE @iEnquiryID INT                    
                            
         DECLARE @iEmployeeId INT       
-        DECLARE @sSelectedCourseIDs VARCHAR(100)       
+        DECLARE @sSelectedCourseIDs nvarchar(max)       
 		
 		DECLARE @Centre INT
 
@@ -120,13 +120,13 @@ AS
 
 		
 
-		DECLARE @user_ID VARCHAR(100) = NULL
+		DECLARE @user_ID nvarchar(max) = NULL
 		SELECT @user_ID = S_Login_ID from T_User_Master where I_User_ID = @CreatedBy
 		
 
 
-		declare @FatherFullName varchar(300)
-		declare @MotherFullName varchar(300)
+		declare @FatherFullName nvarchar(max)
+		declare @MotherFullName nvarchar(max)
 		set @FatherFullName = CONCAT(COALESCE(LTRIM(RTRIM(@FatherFirstName))+' ', ''), COALESCE(LTRIM(RTRIM(@FatherMiddleName))+' ', ''), COALESCE(LTRIM(RTRIM(@FatherLastName)), ''));
 		set @MotherFullName = CONCAT(COALESCE(LTRIM(RTRIM(@MotherFirstName))+' ', ''), COALESCE(LTRIM(RTRIM(@MotherMiddleName))+' ', ''), COALESCE(LTRIM(RTRIM(@MotherLastName)), ''));
 		IF LEN(@FatherFullName) = 0
@@ -338,7 +338,7 @@ END
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
 				@ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()                    

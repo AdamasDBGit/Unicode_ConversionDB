@@ -1,8 +1,8 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspReceiveRejectedMaterialAtCW]
 (		
 @MoveOrderNo INT,
-@Context NVARCHAR(100),
+@Context Nnvarchar(max),
 @MoveOrderXML XML,
 @OracleMoveOrderXML XML=''
 
@@ -10,8 +10,8 @@ CREATE PROCEDURE [dbo].[KPMG_uspReceiveRejectedMaterialAtCW]
 AS
 BEGIN Try
 
-	DECLARE @MATERIAL_TEMP TABLE(BarCode NVARCHAR(255),CourseName NVARCHAR(255),ItemCode NVARCHAR(255),MoveOrderNo INT, Slno NVARCHAR(255),Defaulter NVARCHAR(255))
-	DECLARE @TBL_STOCK TABLE(UUID INT IDENTITY(1,1),ItemCode NVARCHAR(255),Quantity INT,OracleMoNumber NVARCHAR (255),OracleMoLineId NVARCHAR (255)) 
+	DECLARE @MATERIAL_TEMP TABLE(BarCode Nnvarchar(max),CourseName Nnvarchar(max),ItemCode Nnvarchar(max),MoveOrderNo INT, Slno Nnvarchar(max),Defaulter Nnvarchar(max))
+	DECLARE @TBL_STOCK TABLE(UUID INT IDENTITY(1,1),ItemCode Nnvarchar(max),Quantity INT,OracleMoNumber Nnvarchar(max),OracleMoLineId Nnvarchar(max)) 
 	DECLARE @TEMP_ORACLE_MO TABLE(OracleMoLineId INT ,OracleMoNumber INT,SMSMoId INT,SMSMoLineNo INT)
 	DECLARE @COUNT INT
 	DECLARE @BranchId INTEGER 	
@@ -20,13 +20,13 @@ BEGIN Try
 	DECLARE @loopCount INT
 	DECLARE @GENID INT
 	DECLARE @GEN_MOV_ID INT
-	DECLARE @MoType VARCHAR(50)
+	DECLARE @MoType nvarchar(max)
 	
 
 	INSERT INTO @TEMP_ORACLE_MO(OracleMoLineId,OracleMoNumber,SMSMoId,SMSMoLineNo)
 	SELECT 
 		T.c.value('OracleMoLineId[1]', 'INT') ,
-		T.c.value('OracleMoNumber[1]', 'NVARCHAR(255)') ,
+		T.c.value('OracleMoNumber[1]', 'Nnvarchar(max)') ,
 		T.c.value('SMSMoId[1]', 'INT') ,                        
 		T.c.value('SMSMoLineNo[1]', 'INT')                                                                      
 	FROM    @OracleMoveOrderXML.nodes('/ROOT/OracleMoveOrder') T ( c )   
@@ -34,12 +34,12 @@ BEGIN Try
 	                
 	INSERT INTO @MATERIAL_TEMP(BarCode,CourseName,ItemCode,MoveOrderNo,Slno,Defaulter)
 	SELECT 
-		T.c.value('BarCode[1]', 'NVARCHAR(255)') ,
-		T.c.value('courseName[1]', 'NVARCHAR(255)') ,
-		T.c.value('itemCode[1]', 'NVARCHAR(255)') ,
+		T.c.value('BarCode[1]', 'Nnvarchar(max)') ,
+		T.c.value('courseName[1]', 'Nnvarchar(max)') ,
+		T.c.value('itemCode[1]', 'Nnvarchar(max)') ,
 		@MoveOrderNo ,
-		T.c.value('slno[1]', 'NVARCHAR(255)'),
-		T.c.value('defaulter[1]', 'NVARCHAR(255)')                                                                      
+		T.c.value('slno[1]', 'Nnvarchar(max)'),
+		T.c.value('defaulter[1]', 'Nnvarchar(max)')                                                                      
 	FROM    @MoveOrderXML.nodes('/ROOT/Material') T ( c )   
 
 
@@ -48,7 +48,7 @@ BEGIN Try
 	where Fld_KPMG_Mo_Id=@MoveOrderNo AND Fld_KPMG_Status = 0
 	IF ISNULL(@MoType,'') <> 'REV_MO'
 	BEGIN
-		DECLARE @ErrMsg1 NVARCHAR(4000) ,  
+		DECLARE @ErrMsg1 Nnvarchar(max) ,  
         @ErrSeverity1 INT            
 		SELECT  @ErrMsg1 = ERROR_MESSAGE() ,  
 				@ErrSeverity1 = ERROR_SEVERITY()            
@@ -171,7 +171,7 @@ END TRY
 BEGIN CATCH            
 --Error occurred:              
         
-    DECLARE @ErrMsg NVARCHAR(4000) ,  
+    DECLARE @ErrMsg Nnvarchar(max) ,  
         @ErrSeverity INT            
     SELECT  @ErrMsg = ERROR_MESSAGE() ,  
             @ErrSeverity = ERROR_SEVERITY()            

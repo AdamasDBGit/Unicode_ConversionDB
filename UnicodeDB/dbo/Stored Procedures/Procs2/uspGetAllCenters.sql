@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetAllCenters]
+CREATE PROCEDURE [dbo].[uspGetAllCenters]
 (
 	@iSelectedHierarchyId int,
 	@iSelectedBrandId int
@@ -9,7 +9,7 @@ AS
 
 BEGIN
 	SET NOCOUNT ON;
-	DECLARE @sSearchCriteria varchar(20)
+	DECLARE @sSearchCriteria nvarchar(max)
 	
 	SELECT @sSearchCriteria= S_Hierarchy_Chain from T_Hierarchy_Mapping_Details where I_Hierarchy_detail_id = @iSelectedHierarchyId  
 	

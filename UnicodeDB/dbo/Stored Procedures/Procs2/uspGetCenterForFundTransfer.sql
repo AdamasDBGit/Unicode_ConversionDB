@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetCenterForFundTransfer]
+CREATE PROCEDURE [dbo].[uspGetCenterForFundTransfer]
 	(
 		@iSelectedHierarchyId int,
 		@iSelectedBrandId int,
@@ -10,7 +10,7 @@ AS
 
 BEGIN
 	SET NOCOUNT ON
-	DECLARE @sSearchCriteria varchar(max)
+	DECLARE @sSearchCriteria nvarchar(max)
 	
 	CREATE TABLE #TempCenter 
 	( 
@@ -51,10 +51,10 @@ BEGIN
 		Amount Numeric(18,2),
 		TaxAmount Numeric(18,2),
 		Receipt INT,
-		S_Center_Code varchar(20),
-		S_Center_Name varchar(50),
+		S_Center_Code nvarchar(max),
+		S_Center_Name nvarchar(max),
 		I_Centre_Id int,
-		S_Brand_Name varchar(50),
+		S_Brand_Name nvarchar(max),
 		I_Currency_ID int
 	)
 

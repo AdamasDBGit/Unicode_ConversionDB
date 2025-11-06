@@ -1,6 +1,6 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGetMonthlyConsumptionPerBranch]
-@BranchId NVARCHAR(MAX),
+@BranchId Nnvarchar(max),
 @StartMonth INT,
 @EndMonth INT
 AS
@@ -10,8 +10,8 @@ BEGIN
 	--DECLARE @BranchId INT
 	DECLARE @rowCount INT
 	DECLARE @counter INT
-	Declare @tempTable table (Id int identity,StockId int, ItemCode varchar(50), MoveOrderId varchar(50), MonthVal INT)
-	Declare @finalTable table (Id int identity,StockId int, ItemCode varchar(50),CourseName varchar(100), MoveOrderId varchar(50), MonthVal INT, TotalAmount INT)
+	Declare @tempTable table (Id int identity,StockId int, ItemCode nvarchar(max), MoveOrderId nvarchar(max), MonthVal INT)
+	Declare @finalTable table (Id int identity,StockId int, ItemCode nvarchar(max),CourseName nvarchar(max), MoveOrderId nvarchar(max), MonthVal INT, TotalAmount INT)
 	
 	--SELECT @BranchId = I_Center_ID FROM T_Center_Hierarchy_Name_Details WHERE S_Center_Name = ISNULL(@BranchName,'')
 	print '1'
@@ -27,7 +27,7 @@ BEGIN
 		DECLARE @stockId INT
 		DECLARE @itemCode INT
 		DECLARE @monthVal INT
-		DECLARE @courseName varchar(255)
+		DECLARE @courseName nvarchar(max)
 		SELECT @rowCount =  COUNT(1) FROM @tempTable
 		SET @counter = 1
 		WHILE @counter <= @rowCount

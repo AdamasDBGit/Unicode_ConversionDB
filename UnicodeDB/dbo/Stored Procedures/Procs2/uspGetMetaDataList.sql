@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetMetaDataList] 
+CREATE PROCEDURE [dbo].[uspGetMetaDataList] 
 (
-    @Name NVARCHAR(MAX) = NULL
+    @Name Nnvarchar(max) = NULL
 )	
 
 AS

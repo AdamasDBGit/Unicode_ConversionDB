@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_UpdateAdhocPaymentScheduleNotification]
+CREATE PROCEDURE [dbo].[usp_ERP_UpdateAdhocPaymentScheduleNotification]
 (
     @AdhocPaymentScheduleHeaderID INT,
     @inNotificationScheduleID INT
@@ -16,7 +16,7 @@ BEGIN
 
         COMMIT TRANSACTION;
 
-        -- ✅ Return Success Response
+        -- ? Return Success Response
         SELECT 
             1 AS StatusFlag, 
             'Notification Schedule ID updated successfully.' AS Message,
@@ -25,9 +25,9 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
 
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        DECLARE @ErrorMessage Nnvarchar(max) = ERROR_MESSAGE();
 
-        -- ✅ Return Error Response
+        -- ? Return Error Response
         SELECT 
             0 AS StatusFlag, 
             @ErrorMessage AS Message,

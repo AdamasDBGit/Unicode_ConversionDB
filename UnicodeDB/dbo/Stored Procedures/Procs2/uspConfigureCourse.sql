@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspConfigureCourse]   
+CREATE PROCEDURE [dbo].[uspConfigureCourse]   
 (  
  @iCourseID int = NULL,  
  @iGradingPatternID int = NULL,  
@@ -12,7 +12,7 @@
  @cSTApplicable CHAR(1) = NULL,  
  @iMinNoOfWeekForPlacement INT = 0,  
  @iMaxNoOfWeekForPlacement INT = 0,  
- @sCreatedBy NVARCHAR(MAX)= NULL ,  
+ @sCreatedBy Nnvarchar(max)= NULL ,  
  @dCreatedOn datetime = NULL   
 )  
   
@@ -41,7 +41,7 @@ END TRY
 BEGIN CATCH  
  --Error occurred:    
   
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
   

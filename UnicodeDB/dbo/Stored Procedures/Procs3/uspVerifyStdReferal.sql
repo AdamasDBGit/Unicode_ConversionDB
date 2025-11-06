@@ -1,15 +1,15 @@
-﻿CREATE PROCEDURE [dbo].[uspVerifyStdReferal]
+CREATE PROCEDURE [dbo].[uspVerifyStdReferal]
 (
-@StudentID NVARCHAR(MAX),
-@RefStudentID NVARCHAR(MAX),
+@StudentID Nnvarchar(max),
+@RefStudentID Nnvarchar(max),
 @CentreID INT
 )
 AS
 
 BEGIN
 
-	DECLARE @stdid VARCHAR(MAX)=NULL
-	DECLARE @refstdid VARCHAR(MAX)=NULL
+	DECLARE @stdid nvarchar(max)=NULL
+	DECLARE @refstdid nvarchar(max)=NULL
 	DECLARE @stdadmdt DATETIME=NULL
 	DECLARE @refstdadmdt DATETIME=NULL
 	DECLARE @CenterID INT=0

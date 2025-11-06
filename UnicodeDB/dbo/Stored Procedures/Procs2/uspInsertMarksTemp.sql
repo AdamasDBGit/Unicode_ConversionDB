@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertMarksTemp]
+CREATE PROCEDURE [dbo].[uspInsertMarksTemp]
 (
 @StdID INT,
 @TermID INT,
@@ -31,9 +31,9 @@ VALUES
         @ModuleID,         -- I_Module_ID - int
         @CompID,         -- I_Exam_Component_ID - int
         1,         -- I_Status - int
-        'rice-group-admin',        -- S_Crtd_By - varchar(20)
+        'rice-group-admin',        -- S_Crtd_By - nvarchar(max)
         GETDATE(), -- Dt_Crtd_On - datetime
-        NULL,        -- S_Updt_By - varchar(20)
+        NULL,        -- S_Updt_By - nvarchar(max)
         NULL, -- Dt_Updt_On - datetime
         NULL       -- B_Optional - bit
     )
@@ -59,13 +59,13 @@ VALUES
         @StdID,         -- I_Student_Detail_ID - int
         NULL,         -- I_Exam_ID - int
         NULL,      -- I_Exam_Total - numeric(8, 2)
-        'rice-group-admin',        -- S_Crtd_By - varchar(20)
-        NULL,        -- S_Upd_By - varchar(20)
+        'rice-group-admin',        -- S_Crtd_By - nvarchar(max)
+        NULL,        -- S_Upd_By - nvarchar(max)
         GETDATE(), -- Dt_Crtd_On - datetime
         NULL, -- Dt_Upd_On - datetime
         GETDATE(), -- Dt_Exam_Date - datetime
         @BatchExamID,         -- I_Batch_Exam_ID - int
-        '',        -- S_Remarks - varchar(1000)
+        '',        -- S_Remarks - nvarchar(max)
         1          -- I_Center_ID - int
     )
 

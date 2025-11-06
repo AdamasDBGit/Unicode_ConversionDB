@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[ERP_uspInsertClassWorkDetails]      
+CREATE PROCEDURE [dbo].[ERP_uspInsertClassWorkDetails]      
     (  
       --@Centre INT , 
 
 	   @RoutineID int = NULL
 	  ,@Date datetime
 	  ,@FacultyID int
-	  ,@ClassWork nvarchar(MAX)
-	  ,@CreatedBy nvarchar(50) = null
+	  ,@ClassWork nnvarchar(max)
+	  ,@CreatedBy nnvarchar(max) = null
 	  
     )  
 AS   
@@ -54,7 +54,7 @@ AS
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
 				@ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()                    

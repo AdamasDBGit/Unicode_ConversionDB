@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentBatchNew](@StudentID NVARCHAR(MAX), @BrandID INT=NULL)
+CREATE PROCEDURE [dbo].[uspGetStudentBatchNew](@StudentID Nnvarchar(max), @BrandID INT=NULL)
 AS
 BEGIN
 

@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[ERP_uspInsertErrorLog]
+CREATE PROCEDURE [dbo].[ERP_uspInsertErrorLog]
 -- Add the parameters for the stored procedure here
-	@sErrorMessage nvarchar(MAX),
-	@sErrorController nvarchar(50),
-	@sErrorAction nvarchar(50),
-	@userID nvarchar(50)
+	@sErrorMessage nnvarchar(max),
+	@sErrorController nnvarchar(max),
+	@sErrorAction nnvarchar(max),
+	@userID nnvarchar(max)
 	--@ErrorID 
 AS
 BEGIN TRY
@@ -29,7 +29,7 @@ BEGIN TRY
 			NEWID() ,
 			@userID
 		)
-		DECLARE @newLogID int,@errorID nvarchar(MAX)
+		DECLARE @newLogID int,@errorID nnvarchar(max)
 		SET @newLogID = SCOPE_IDENTITY()
 		SET @errorID = (select ErrorID from ERP_ErrorLogTable where ID=@newLogID)
 		select @errorID ErrorID
@@ -39,7 +39,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

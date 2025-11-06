@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[USP_ERP_Check_Student_And_Phone]      
+CREATE PROCEDURE [dbo].[USP_ERP_Check_Student_And_Phone]      
     @brandID INT ,      
-    @StudentID NVARCHAR(MAX)       
+    @StudentID Nnvarchar(max)       
 AS      
 BEGIN      
-    DECLARE @Studentexists INT, @phoneExists VARCHAR(20)      
+    DECLARE @Studentexists INT, @phoneExists nvarchar(max)      
           
     SET @Studentexists = NULL      
     SET @phoneExists = NULL      

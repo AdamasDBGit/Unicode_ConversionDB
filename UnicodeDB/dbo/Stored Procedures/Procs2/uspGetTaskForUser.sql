@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspGetTaskForUser]
+CREATE PROCEDURE [dbo].[uspGetTaskForUser]
     (
       @iUserID INT ,
-      @sLoginID NVARCHAR(MAX)
+      @sLoginID Nnvarchar(max)
     )
 AS
     BEGIN 

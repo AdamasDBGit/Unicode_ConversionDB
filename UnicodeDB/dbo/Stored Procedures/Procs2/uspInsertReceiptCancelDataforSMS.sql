@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertReceiptCancelDataforSMS]
+CREATE PROCEDURE [dbo].[uspInsertReceiptCancelDataforSMS]
     (
       @iReceiptHeaderID INT ,
       @iFlag INT
@@ -8,8 +8,8 @@ AS
 	
         DECLARE @iStatus INT ;
         DECLARE @iBrandID INT ;
-        DECLARE @MobileNo VARCHAR(MAX) ;
-        DECLARE @ChequeNo VARCHAR(MAX) ;
+        DECLARE @MobileNo nvarchar(max) ;
+        DECLARE @ChequeNo nvarchar(max) ;
         DECLARE @iStudentDetailID INT;
         DECLARE @iCentreID INT;
         
@@ -17,7 +17,7 @@ AS
         SELECT @iStudentDetailID=I_Student_Detail_ID FROM dbo.T_Receipt_Header TRH WHERE I_Receipt_Header_ID=@iReceiptHeaderID
         SELECT @iCentreID=I_Centre_Id FROM dbo.T_Receipt_Header TRH WHERE I_Receipt_Header_ID=@iReceiptHeaderID
                 
-        DECLARE @Bank VARCHAR(MAX) ;
+        DECLARE @Bank nvarchar(max) ;
         DECLARE @ChequeDate DATE ;
 
         SELECT  @iBrandID = I_Brand_ID
@@ -61,18 +61,18 @@ AS
                                   Dt_Crtd_On 
 	          
 	                          )
-                        VALUES  ( @MobileNo , -- S_MOBILE_NO - varchar(25)
+                        VALUES  ( @MobileNo , -- S_MOBILE_NO - nvarchar(max)
                                   @iStudentDetailID , -- I_SMS_STUDENT_ID - int
                                   7 , -- I_SMS_TYPE_ID - int
                                   'Dear Student, Your cheque No '
                                   + CAST(@ChequeNo AS VARCHAR) + ' drawn on '
                                   + CAST (@Bank AS VARCHAR) + ' dated '
                                   + CAST(CONVERT(DATE,@ChequeDate) AS VARCHAR)
-                                  + ' has been cancelled-Adamas' , -- S_SMS_BODY - varchar(160)
+                                  + ' has been cancelled-Adamas' , -- S_SMS_BODY - nvarchar(max)
                                   @iReceiptHeaderID , -- I_REFERENCE_ID - int
                                   1 , -- I_REFERENCE_TYPE_ID - int
                                   1 , -- I_Status - int
-                                  'dba' , -- S_Crtd_By - varchar(20)
+                                  'dba' , -- S_Crtd_By - nvarchar(max)
                                   GETDATE()  -- Dt_Crtd_On - datetime
 	          
 	                          )
@@ -91,18 +91,18 @@ AS
                                   Dt_Crtd_On 
 	          
 	                          )
-                        VALUES  ( @MobileNo , -- S_MOBILE_NO - varchar(25)
+                        VALUES  ( @MobileNo , -- S_MOBILE_NO - nvarchar(max)
                                   @iStudentDetailID , -- I_SMS_STUDENT_ID - int
                                   7 , -- I_SMS_TYPE_ID - int
                                   'Dear Student, Your cheque No '
                                   + CAST(@ChequeNo AS VARCHAR) + ' drawn on '
                                   + CAST (@Bank AS VARCHAR) + ' dated '
                                   + CAST(CONVERT(DATE,@ChequeDate) AS VARCHAR)
-                                  + ' has been cancelled-RICE' , -- S_SMS_BODY - varchar(160)
+                                  + ' has been cancelled-RICE' , -- S_SMS_BODY - nvarchar(max)
                                   @iReceiptHeaderID , -- I_REFERENCE_ID - int
                                   1 , -- I_REFERENCE_TYPE_ID - int
                                   1 , -- I_Status - int
-                                  'dba' , -- S_Crtd_By - varchar(20)
+                                  'dba' , -- S_Crtd_By - nvarchar(max)
                                   GETDATE()  -- Dt_Crtd_On - datetime
 	          
 	                          )

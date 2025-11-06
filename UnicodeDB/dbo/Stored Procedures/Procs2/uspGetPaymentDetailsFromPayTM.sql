@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspGetPaymentDetailsFromPayTM]
+CREATE PROCEDURE [dbo].[uspGetPaymentDetailsFromPayTM]
 (
-@sBrandName NVARCHAR(MAX),
-@sStudentID NVARCHAR(MAX),
+@sBrandName Nnvarchar(max),
+@sStudentID Nnvarchar(max),
 @iInvoiceHeaderID INT,
 @dReceiptDate DATETIME,
 @iCentreId INT,
@@ -17,7 +17,7 @@ AS
 BEGIN
 
 DECLARE @iBrandID INT
-DECLARE @sReceiptNo VARCHAR(MAX)=NULL
+DECLARE @sReceiptNo nvarchar(max)=NULL
 DECLARE @iStudentDetailID INT
 
 
@@ -26,7 +26,7 @@ IF @sBrandName='RICE'
 	
 SELECT @iStudentDetailID=TSD.I_Student_Detail_ID FROM dbo.T_Student_Detail AS TSD WHERE TSD.S_Student_ID=@sStudentID AND @sStudentID LIKE '%/RICE/%'
 
-EXEC dbo.uspInsertReceiptHeaderFromAPI @sReceiptNo = @sReceiptNo, -- varchar(20)
+EXEC dbo.uspInsertReceiptHeaderFromAPI @sReceiptNo = @sReceiptNo, -- nvarchar(max)
     @iInvoiceHeaderID = @iInvoiceHeaderID, -- int
     @dReceiptDate = @dReceiptDate, -- datetime
     @iStudentDetailID = @iStudentDetailID, -- int
@@ -35,18 +35,18 @@ EXEC dbo.uspInsertReceiptHeaderFromAPI @sReceiptNo = @sReceiptNo, -- varchar(20)
     @nReceiptAmount = @ReceiptAmount, -- numeric
     @nReceiptTaxAmount = @ReceiptTaxAmount, -- numeric
     @sFundTransferStatus = 'N', -- char(1)
-    @sCrtdBy = 'rice-group-admin', -- varchar(20)
+    @sCrtdBy = 'rice-group-admin', -- nvarchar(max)
     @dCreatedOn = @dReceiptDate, -- datetime
     @nCreditCardNo = NULL, -- numeric
-    @dCreditCardExpiry = NULL, -- varchar(12)
-    @sCreditCardIssuer = NULL, -- varchar(500)
-    @sChequeDDNo = NULL, -- varchar(20)
-    @dChequeDDDate = NULL, -- varchar(12)
-    @sBankName = NULL, -- varchar(50)
-    @sBranchName = NULL, -- varchar(20)
+    @dCreditCardExpiry = NULL, -- nvarchar(max)
+    @sCreditCardIssuer = NULL, -- nvarchar(max)
+    @sChequeDDNo = NULL, -- nvarchar(max)
+    @dChequeDDDate = NULL, -- nvarchar(max)
+    @sBankName = NULL, -- nvarchar(max)
+    @sBranchName = NULL, -- nvarchar(max)
     @iReceiptType = 2, -- int
     @iBrandID = @iBrandID, -- int
-    @sNarration = '', -- varchar(500)
+    @sNarration = '', -- nvarchar(max)
     @sReceiptDetailXML=@sPaymentDetailsXML
 
 

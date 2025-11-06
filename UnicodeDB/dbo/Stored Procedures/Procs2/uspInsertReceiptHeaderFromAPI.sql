@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertReceiptHeaderFromAPI]        
+CREATE PROCEDURE [dbo].[uspInsertReceiptHeaderFromAPI]        
     (        
-      @sReceiptNo NVARCHAR(MAX) ,        
+      @sReceiptNo Nnvarchar(max) ,        
       @iInvoiceHeaderID INT ,        
       @dReceiptDate DATETIME ,        
       @iStudentDetailID INT ,        
@@ -9,18 +9,18 @@
       @nReceiptAmount NUMERIC(18, 2) ,        
       @nReceiptTaxAmount NUMERIC(18, 2) ,        
       @sFundTransferStatus CHAR(1) ,        
-      @sCrtdBy NVARCHAR(MAX) ,        
+      @sCrtdBy Nnvarchar(max) ,        
       @dCreatedOn DATETIME ,        
       @nCreditCardNo NUMERIC(18, 0) ,        
-      @dCreditCardExpiry NVARCHAR(MAX) ,        
-      @sCreditCardIssuer NVARCHAR(MAX) ,        
-      @sChequeDDNo NVARCHAR(MAX) ,        
-      @dChequeDDDate NVARCHAR(MAX) ,        
-      @sBankName NVARCHAR(MAX) ,        
-      @sBranchName NVARCHAR(MAX) ,        
+      @dCreditCardExpiry Nnvarchar(max) ,        
+      @sCreditCardIssuer Nnvarchar(max) ,        
+      @sChequeDDNo Nnvarchar(max) ,        
+      @dChequeDDDate Nnvarchar(max) ,        
+      @sBankName Nnvarchar(max) ,        
+      @sBranchName Nnvarchar(max) ,        
       @iReceiptType INT,        
       @iBrandID INT = NULL  ,      
-      @sNarration NVARCHAR(MAX),      
+      @sNarration Nnvarchar(max),      
       @sReceiptDetailXML XML,      
       @iReceiptHeaderID INT OUTPUT         
     )        
@@ -30,7 +30,7 @@ AS
     INSERT INTO dbo.T_SP_Transaction_Log      
         ( CreatedOn, LogText )      
 VALUES  ( GETDATE(), -- CreatedOn - datetime      
-          'Starting inside Receipt Header' -- LogText - varchar(max)      
+          'Starting inside Receipt Header' -- LogText - nvarchar(max)      
                 
           )      
           
@@ -41,7 +41,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
         INSERT INTO dbo.T_SP_Transaction_Log      
         ( CreatedOn, LogText )      
 VALUES  ( GETDATE(), -- CreatedOn - datetime      
-          'Starting inside Receipt Header TRY BLOCK' -- LogText - varchar(max)      
+          'Starting inside Receipt Header TRY BLOCK' -- LogText - nvarchar(max)      
                 
           )          
         BEGIN TRANSACTION        
@@ -49,7 +49,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
                 INSERT INTO dbo.T_SP_Transaction_Log      
         ( CreatedOn, LogText )      
 VALUES  ( GETDATE(), -- CreatedOn - datetime      
-          'Starting inside Receipt Header TRANSACTION BLOCK' -- LogText - varchar(max)      
+          'Starting inside Receipt Header TRANSACTION BLOCK' -- LogText - nvarchar(max)      
                 
           )      
                 
@@ -141,7 +141,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
          INSERT INTO dbo.T_SP_Transaction_Log      
         ( CreatedOn, LogText )      
 VALUES  ( GETDATE(), -- CreatedOn - datetime      
-          'Receipt Generated' -- LogText - varchar(max)      
+          'Receipt Generated' -- LogText - nvarchar(max)      
                 
           )      
               
@@ -150,7 +150,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
                   
         SET @iReceiptHeaderID=@iReceiptID         
               
-          DECLARE @ErrorMessage NVARCHAR(4000);    
+          DECLARE @ErrorMessage Nnvarchar(max);    
         DECLARE @ErrorSeverity INT;    
         DECLARE @ErrorState INT;    
     
@@ -178,7 +178,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
         --INSERT INTO ERP_ErrorLogTable (ErrorMessage, ErrorSeverity, ErrorState, ErrorProcedure)    
         --VALUES (@ErrorMessage, @ErrorSeverity, @ErrorState, 'uspInsertReceiptHeaderFromAPI');    
        ROLLBACK TRANSACTION          
-        DECLARE @ErrMsg NVARCHAR(4000) ,        
+        DECLARE @ErrMsg Nnvarchar(max) ,        
             @ErrSeverity INT          
         SELECT  @ErrMsg = ERROR_MESSAGE() ,        
                 @ErrSeverity = ERROR_SEVERITY()          

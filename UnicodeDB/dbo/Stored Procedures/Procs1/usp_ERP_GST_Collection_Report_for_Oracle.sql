@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GST_Collection_Report_for_Oracle]
+CREATE PROCEDURE [dbo].[usp_ERP_GST_Collection_Report_for_Oracle]
     @iBrandID INT,
     @dtGSTStartDate DATETIME = '2017-07-01',
     @dtStartDate DATETIME = NULL,
@@ -17,20 +17,20 @@ BEGIN
         CREATE TABLE #Adv
         (
             I_Student_Detail_ID INT ,
-            S_Mobile_No VARCHAR(50) ,
-            S_Student_ID VARCHAR(100) ,
+            S_Mobile_No nvarchar(max) ,
+            S_Student_ID nvarchar(max) ,
             I_Roll_No INT ,
-            S_Student_Name VARCHAR(200) ,
-            S_Invoice_No VARCHAR(100) ,
-            S_Receipt_No VARCHAR(100) ,
+            S_Student_Name nvarchar(max) ,
+            S_Invoice_No nvarchar(max) ,
+            S_Receipt_No nvarchar(max) ,
             Dt_Invoice_Date DATETIME ,
-            S_Component_Name VARCHAR(100) ,
-            S_Batch_Name VARCHAR(100) ,
-            S_Course_Name VARCHAR(100) ,
+            S_Component_Name nvarchar(max) ,
+            S_Batch_Name nvarchar(max) ,
+            S_Course_Name nvarchar(max) ,
             I_Center_ID INT ,
-            S_Center_Name VARCHAR(100) ,
-            S_Brand_Name VARCHAR(100) ,
-            S_Cost_Center VARCHAR(100) ,
+            S_Center_Name nvarchar(max) ,
+            S_Brand_Name nvarchar(max) ,
+            S_Cost_Center nvarchar(max) ,
             Due_Value REAL ,
             Dt_Installment_Date DATETIME ,
             I_Installment_No INT ,
@@ -43,12 +43,12 @@ BEGIN
             Tax_Paid DECIMAL(14, 2) ,
             Total_Paid DECIMAL(14, 2),
             Effective_Advance DECIMAL(14, 2),
-            MonthYear VARCHAR(MAX),
-            instanceChain VARCHAR(MAX),
-            OrgInvoiceNo VARCHAR(MAX),
-            AdvanceInvoiceNo VARCHAR(MAX),
-            StateNameAndCode VARCHAR(MAX),
-            TaxType VARCHAR(MAX),
+            MonthYear nvarchar(max),
+            instanceChain nvarchar(max),
+            OrgInvoiceNo nvarchar(max),
+            AdvanceInvoiceNo nvarchar(max),
+            StateNameAndCode nvarchar(max),
+            TaxType nvarchar(max),
             AdvanceInvoiceDate DATETIME,
             CGST DECIMAL(14,2),
             SGST DECIMAL(14,2)
@@ -56,10 +56,10 @@ BEGIN
 
         CREATE TABLE #GSTCollectable
         (
-          BrandName VARCHAR(MAX) ,
-          StateNameAndCode VARCHAR(MAX) ,
+          BrandName nvarchar(max) ,
+          StateNameAndCode nvarchar(max) ,
           TaxType INT ,
-          InvoiceOrReceiptNumber VARCHAR(MAX) ,
+          InvoiceOrReceiptNumber nvarchar(max) ,
           InvoiceDate DATE ,
           TaxableAmount DECIMAL(18, 2) ,
           AmountPaidinAdvanceBeforeGST DECIMAL(18, 2) ,
@@ -68,7 +68,7 @@ BEGIN
           SGST DECIMAL(18, 2) ,
           CGST DECIMAL(18, 2) ,
           AdvanceAdjusted DECIMAL(18, 2) ,
-          InvoiceType VARCHAR(MAX)
+          InvoiceType nvarchar(max)
         );
 
         -- populate #Adv via existing report proc (brand passed as parameter)

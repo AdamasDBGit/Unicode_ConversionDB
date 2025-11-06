@@ -1,32 +1,32 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertUpdateDeleteUser] 
+CREATE PROCEDURE [dbo].[uspInsertUpdateDeleteUser] 
 (
 	@iMode				INT = 0,
 	@iFacultyMasterID	INT = NULL,
-	@sEmployeeCode		NVARCHAR(50) = NULL,
-	@sEmployeeName		NVARCHAR(50) = NULL,
-	@sEmployeeType		NVARCHAR(50) = NULL,
-	@sMobileNo			NVARCHAR(50) = NULL,
+	@sEmployeeCode		Nnvarchar(max) = NULL,
+	@sEmployeeName		Nnvarchar(max) = NULL,
+	@sEmployeeType		Nnvarchar(max) = NULL,
+	@sMobileNo			Nnvarchar(max) = NULL,
 	@dtDOB				DATETIME = NULL,
 	@dtDOJ				DATETIME = NULL,
-	@sGender			NVARCHAR(10) = NULL,
+	@sGender			Nnvarchar(max) = NULL,
 	@iReligionID		INT = NULL,
 	@iMaritialID		INT = NULL,
-	@sPhoto				NVARCHAR(MAX) = NULL,
-	@sSignature			NVARCHAR(MAX) = NULL,
-	@sPAN				NVARCHAR(50) = NULL,
-	@sAadhar			NVARCHAR(50) = NULL,
-	@sEMail				NVARCHAR(50)=NULL,
-	@sPresentAddress	NVARCHAR(MAX) = NULL,
-	@sPermanentAddress	NVARCHAR(MAX) = NULL,
+	@sPhoto				Nnvarchar(max) = NULL,
+	@sSignature			Nnvarchar(max) = NULL,
+	@sPAN				Nnvarchar(max) = NULL,
+	@sAadhar			Nnvarchar(max) = NULL,
+	@sEMail				Nnvarchar(max)=NULL,
+	@sPresentAddress	Nnvarchar(max) = NULL,
+	@sPermanentAddress	Nnvarchar(max) = NULL,
 	@iStatus			INT = 1,
 	@iBrandID			INT = NULL,
 	@iCreatedBy			INT = NULL,
 	@ProvideUserAceess  INT=1,
 	@UserID				INT = NULL,
-	@UserName			NVARCHAR(200)=NULL,
-	@Password			NVARCHAR(200) = NULL,
+	@UserName			Nnvarchar(max)=NULL,
+	@Password			Nnvarchar(max) = NULL,
 	@IsTeachingfaculty  BIT ='false',
-	@UserCode		    NVARCHAR(10)
+	@UserCode		    Nnvarchar(max)
 )
 AS
 begin transaction
@@ -88,14 +88,14 @@ DECLARE @LastUserID INT
 		END
 	ELSE 
 		BEGIN
-		DECLARE @FullName VARCHAR(200);
+		DECLARE @FullName nvarchar(max);
 				
 			SET @FullName=@sEmployeeName
 			DECLARE @FirstSpaceIndex INT, 
 					@LastSpaceIndex INT,
-					@FirstName VARCHAR(50),
-					@MiddleName VARCHAR(50),
-					@LastName VARCHAR(50);
+					@FirstName nvarchar(max),
+					@MiddleName nvarchar(max),
+					@LastName nvarchar(max);
 
 			SET @FirstSpaceIndex = CHARINDEX(' ', @FullName);
 			SET @LastSpaceIndex = LEN(@FullName) - CHARINDEX(' ', REVERSE(@FullName)) + 1;
@@ -507,7 +507,7 @@ DECLARE @LastUserID INT
 END TRY
 BEGIN CATCH
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity INT
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

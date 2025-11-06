@@ -1,21 +1,21 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateInvoiceReceiptConfigValues]          
+CREATE PROCEDURE [dbo].[uspUpdateInvoiceReceiptConfigValues]          
  @iFlag INT    
 ,@iHierarchyDetailID INT    
-,@sConfig NVARCHAR(MAX)    
-,@sUserID NVARCHAR(MAX)         
+,@sConfig Nnvarchar(max)    
+,@sUserID Nnvarchar(max)         
 AS          
 BEGIN TRY     
 -------------------------------------------------------------------------------    
 DECLARE @hDoc INT             
 EXEC SP_XML_PREPAREDOCUMENT @hDoc OUTPUT,@sConfig    
     
-DECLARE @ConfigTable TABLE (ROWID INT IDENTITY(1,1),CONFIG_CODE VARCHAR(50),CONFIG_VALUE VARCHAR(500))    
+DECLARE @ConfigTable TABLE (ROWID INT IDENTITY(1,1),CONFIG_CODE nvarchar(max),CONFIG_VALUE nvarchar(max))    
 INSERT INTO @ConfigTable(CONFIG_CODE,CONFIG_VALUE)    
 SELECT CONFIG_CODE,CONFIG_VALUE            
 FROM OPENXML (@hDoc,'/CONFIG/CONFIGTABLE',2)             
-WITH (CONFIG_CODE VARCHAR(50),CONFIG_VALUE VARCHAR(500))       
+WITH (CONFIG_CODE nvarchar(max),CONFIG_VALUE nvarchar(max))       
 -------------------------------------------------------------------------------    
-DECLARE @sSearchCriteria VARCHAR(100)    
+DECLARE @sSearchCriteria nvarchar(max)    
     
 DECLARE @TempCenter TABLE(ROWID INT IDENTITY(1,1),I_Center_ID INT)    
     
@@ -40,8 +40,8 @@ DECLARE @max1 INT
 DECLARE @min2 INT    
 DECLARE @max2 INT    
 DECLARE @iCenterID INT    
-DECLARE @sCode VARCHAR(50)    
-DECLARE @sValue VARCHAR(500)    
+DECLARE @sCode nvarchar(max)    
+DECLARE @sValue nvarchar(max)    
     
          
 IF ( @iFlag = 1 )    
@@ -122,7 +122,7 @@ END TRY
 BEGIN CATCH          
 --Error occurred:            
           
-DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int          
+DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int          
 SELECT @ErrMsg = ERROR_MESSAGE(),          
   @ErrSeverity = ERROR_SEVERITY()          
           

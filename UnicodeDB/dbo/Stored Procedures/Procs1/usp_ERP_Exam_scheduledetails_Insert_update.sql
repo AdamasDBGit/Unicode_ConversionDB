@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_Exam_scheduledetails_Insert_update](
+CREATE PROCEDURE [dbo].[usp_ERP_Exam_scheduledetails_Insert_update](
 @I_Result_Exam_Schedule_ID Int,
 @UTExam_Schedule_Subject_Details dbo.UT_Exam_Schedule_Subject_Details READONLY
 )
@@ -94,7 +94,7 @@ Print ''
         IF @@TRANCOUNT > 0
             ROLLBACK;
 
-        DECLARE @ErrMsg NVARCHAR(4000)
+        DECLARE @ErrMsg Nnvarchar(max)
               , @ErrSeverity int
 
         SELECT ERROR_MESSAGE() as Message

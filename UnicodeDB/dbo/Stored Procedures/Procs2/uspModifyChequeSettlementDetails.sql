@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyChequeSettlementDetails]  --[dbo].[uspModifyChequeSettlementDetails] '<Root><StudentCheque I_Student_ID="485" I_Cheque_No="379269" I_Deposite_Date="12/12/2012 12:00:00 AM" I_BankName="1" I_Receipt_Header_ID="1259937" /><StudentCheque I_Student_ID="486" I_Cheque_No="530969" I_Deposite_Date="12/12/2012 12:00:00 AM" I_BankName="1" I_Receipt_Header_ID="1259938" /></Root>' 
+CREATE PROCEDURE [dbo].[uspModifyChequeSettlementDetails]  --[dbo].[uspModifyChequeSettlementDetails] '<Root><StudentCheque I_Student_ID="485" I_Cheque_No="379269" I_Deposite_Date="12/12/2012 12:00:00 AM" I_BankName="1" I_Receipt_Header_ID="1259937" /><StudentCheque I_Student_ID="486" I_Cheque_No="530969" I_Deposite_Date="12/12/2012 12:00:00 AM" I_BankName="1" I_Receipt_Header_ID="1259938" /></Root>' 
 (  
   
  @sChequeXML xml 
@@ -13,9 +13,9 @@ BEGIN
         CREATE TABLE #temp1
             (
               I_Student_ID INT ,
-              S_Cheque_No VARCHAR(50) ,
+              S_Cheque_No nvarchar(max) ,
               Dt_Deposite_Date DATETIME ,
-              S_BankName VARCHAR(500) ,
+              S_BankName nvarchar(max) ,
               I_Receipt_Header_ID INT          
               )
 
@@ -33,9 +33,9 @@ BEGIN
 		
         INSERT  INTO #temp1
                 SELECT  T.c.value('@I_Student_ID', 'INT') ,
-                        T.c.value('@I_Cheque_No', 'VARCHAR(50)') ,
+                        T.c.value('@I_Cheque_No', 'nvarchar(max)') ,
                         T.c.value('@I_Deposite_Date', 'datetime') ,
-                        T.c.value('@I_BankName', 'VARCHAR(500)') ,                      
+                        T.c.value('@I_BankName', 'nvarchar(max)') ,                      
                         T.c.value('@I_Receipt_Header_ID', 'int') 
                 FROM    @sChequeXML.nodes('/Root/StudentCheque') T ( c )
                 
@@ -186,7 +186,7 @@ BEGIN
     END TRY      
     BEGIN CATCH      
         ROLLBACK TRANSACTION  
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()      

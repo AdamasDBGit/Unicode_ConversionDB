@@ -1,32 +1,32 @@
-﻿CREATE PROCEDURE [dbo].[uspGetUserCenterHierarchyDetails] --1262,2,'VOC301' ,'SANJAY',NULL,'KUMAR','ST '             
+CREATE PROCEDURE [dbo].[uspGetUserCenterHierarchyDetails] --1262,2,'VOC301' ,'SANJAY',NULL,'KUMAR','ST '             
 (                
   @iHierarchyDetailID INT = NULL,                
   @iBrandID INT = NULL,                 
-  @sLoginID NVARCHAR(MAX) = NULL ,                   
-  @sFirstName NVARCHAR(MAX) = NULL,                
-  @sMiddleName NVARCHAR(MAX) = NULL,                
-  @sLastName NVARCHAR(MAX) = NULL,      
-  @sUserType NVARCHAR(MAX) = NULL                  
+  @sLoginID Nnvarchar(max) = NULL ,                   
+  @sFirstName Nnvarchar(max) = NULL,                
+  @sMiddleName Nnvarchar(max) = NULL,                
+  @sLastName Nnvarchar(max) = NULL,      
+  @sUserType Nnvarchar(max) = NULL                  
                    
 )                    
 AS                
 BEGIN                
 SET NOCOUNT OFF;                    
                 
-DECLARE @sUserFName VARCHAR(50)                  
-DECLARE @sUserLName VARCHAR(50)                  
-DECLARE @sUserMName VARCHAR(50)                  
+DECLARE @sUserFName nvarchar(max)                  
+DECLARE @sUserLName nvarchar(max)                  
+DECLARE @sUserMName nvarchar(max)                  
                  
 DECLARE @tblUsers TABLE                
 (                
  I_User_Id INT,                
- S_Login_ID VARCHAR(500),                
- S_First_Name VARCHAR(50),                
- S_Middle_Name VARCHAR(50),                
- S_Last_Name VARCHAR(50),                
+ S_Login_ID nvarchar(max),                
+ S_First_Name nvarchar(max),                
+ S_Middle_Name nvarchar(max),                
+ S_Last_Name nvarchar(max),                
  Dt_DOB DATE,                
- S_Email_ID VARCHAR(100),      
- S_User_Type VARCHAR(20)                
+ S_Email_ID nvarchar(max),      
+ S_User_Type nvarchar(max)                
 )                
                 
 IF(@sFirstName IS NOT NULL)                  
@@ -65,7 +65,7 @@ WHERE I_Centre_Id IN (SELECT I_Center_ID FROM dbo.fnGetCenterIDFromHierarchy(@iH
     
 --SELECT * FROM @tblUsers    
         
-DECLARE @sSearchCriteria varchar(100)        
+DECLARE @sSearchCriteria nvarchar(max)        
 SELECT @sSearchCriteria= S_Hierarchy_Chain from T_Hierarchy_Mapping_Details where I_Hierarchy_detail_id = @iHierarchyDetailID              
               
 INSERT INTO @tblUsers                

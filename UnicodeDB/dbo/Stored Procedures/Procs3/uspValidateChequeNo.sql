@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspValidateChequeNo] 
+CREATE PROCEDURE [dbo].[uspValidateChequeNo] 
 (
-	@sChequeNo NVARCHAR(MAX),
+	@sChequeNo Nnvarchar(max),
 	@ChequeDt DATETIME
 )  
 AS   

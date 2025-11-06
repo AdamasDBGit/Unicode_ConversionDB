@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetCenterForSelectedHierarchy]  
+CREATE PROCEDURE [dbo].[uspGetCenterForSelectedHierarchy]  
   
  (  
   @iSelectedHierarchyId int,  
@@ -9,7 +9,7 @@ AS
   
 BEGIN  
  SET NOCOUNT ON;  
- DECLARE @sSearchCriteria varchar(max)  
+ DECLARE @sSearchCriteria nvarchar(max)  
    
  IF @iSelectedBrandId IS NULL  
  BEGIN  

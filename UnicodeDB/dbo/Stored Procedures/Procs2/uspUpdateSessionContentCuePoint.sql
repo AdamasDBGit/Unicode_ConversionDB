@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateSessionContentCuePoint]  
+CREATE PROCEDURE [dbo].[uspUpdateSessionContentCuePoint]  
 (  
 @I_Cue_Point_Details_ID INT,  
 @I_Batch_Content_Details_ID INT,  
-@S_Topic_Name NVARCHAR(MAX),  
+@S_Topic_Name Nnvarchar(max),  
 @dt_Time DATETIME,  
-@S_Crtd_By NVARCHAR(MAX)=NULL,  
+@S_Crtd_By Nnvarchar(max)=NULL,  
 @Dt_Crtd_On DATETIME=NULL,  
-@S_Upd_By NVARCHAR(MAX)=NULL,  
+@S_Upd_By Nnvarchar(max)=NULL,  
 @Dt_Upd_By DATETIME=NULL,  
 @Flag BIT  
 )  
@@ -25,7 +25,7 @@ BEGIN TRY
             Dt_Crtd_On  
           )  
   VALUES  ( @I_Batch_Content_Details_ID , -- I_Batch_Content_Details_ID - int  
-            @S_Topic_Name , -- S_Topic_Name - varchar(250)  
+            @S_Topic_Name , -- S_Topic_Name - nvarchar(max)  
             @dt_Time,  -- dt_Time - datetime  
             @S_Crtd_By,  
             @Dt_Crtd_On  
@@ -48,7 +48,7 @@ BEGIN TRY
  SELECT @I_Cue_Point_Details_ID  
 END TRY  
 BEGIN CATCH   
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     

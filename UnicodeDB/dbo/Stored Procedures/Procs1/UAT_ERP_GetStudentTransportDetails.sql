@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[UAT_ERP_GetStudentTransportDetails]
-    @StudentID NVARCHAR(MAX),
+CREATE PROCEDURE [dbo].[UAT_ERP_GetStudentTransportDetails]
+    @StudentID Nnvarchar(max),
     @BrandID INT
 AS
 BEGIN

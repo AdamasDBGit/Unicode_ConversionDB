@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[uspValidateCenterCourseDeliveryPattern] 
+CREATE PROCEDURE [dbo].[uspValidateCenterCourseDeliveryPattern] 
 (
-	@slstCenterId NVARCHAR(MAX),
-	@sCourseID NVARCHAR(MAX),
-	@sDeliveryPatternID NVARCHAR(MAX)
+	@slstCenterId Nnvarchar(max),
+	@sCourseID Nnvarchar(max),
+	@sDeliveryPatternID Nnvarchar(max)
 )
 AS
 BEGIN TRY
-DECLARE @query VARCHAR(MAX) 
+DECLARE @query nvarchar(max) 
 SET @query = 'SELECT I_Centre_Id
 FROM dbo.T_Course_Center_Detail A
 INNER JOIN dbo.T_Course_Delivery_Map B
@@ -30,7 +30,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

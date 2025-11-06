@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[aaaaaa_CreateDataLoadScript] 
-@TblName NVARCHAR(MAX),
-@schemaName NVARCHAR(MAX)
+CREATE PROCEDURE [dbo].[aaaaaa_CreateDataLoadScript] 
+@TblName Nnvarchar(max),
+@schemaName Nnvarchar(max)
 as
 
-	create table #a (id int identity (1,1), ColType int, ColName varchar(128))
+	create table #a (id int identity (1,1), ColType int, ColName nvarchar(max))
 
 	insert 	#a (ColType, ColName)
 	select case when DATA_TYPE like '%char%' then 1 else 0 end ,
@@ -22,8 +22,8 @@ as
 
 	declare	@id int ,
 	@maxid int ,
-	@cmd1 varchar(7000) ,
-	@cmd2 varchar(7000)
+	@cmd1 nvarchar(max) ,
+	@cmd2 nvarchar(max)
 
 	select 	@id = 0 ,
 		@maxid = max(id)

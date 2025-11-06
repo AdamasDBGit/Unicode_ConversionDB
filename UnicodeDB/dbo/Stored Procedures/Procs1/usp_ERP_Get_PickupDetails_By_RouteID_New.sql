@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_Get_PickupDetails_By_RouteID_New]    
+CREATE PROCEDURE [dbo].[usp_ERP_Get_PickupDetails_By_RouteID_New]    
     @RouteID INT    
 AS    
 BEGIN    
@@ -35,7 +35,7 @@ BEGIN
     END TRY        
     BEGIN CATCH        
         -- Error handling here    
-        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();    
+        DECLARE @ErrorMessage Nnvarchar(max) = ERROR_MESSAGE();    
         DECLARE @ErrorSeverity INT = ERROR_SEVERITY();    
         DECLARE @ErrorState INT = ERROR_STATE();    
             

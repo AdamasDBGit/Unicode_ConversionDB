@@ -1,13 +1,13 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspUpdateBranchLevelStock]
 @MoveOrderNo INT,
-@Context NVARCHAR(100),
+@Context Nnvarchar(max),
 @MoveOrderXML XML,
 @OracleMoveOrderXML XML=''
 AS
 
 BEGIN TRY 
-DECLARE @MATERIAL_TEMP TABLE(BarCode NVARCHAR(255),CourseName NVARCHAR(255),ItemCode NVARCHAR(255),MoveOrderNo INT, Slno NVARCHAR(255),Defaulter NVARCHAR(255))
+DECLARE @MATERIAL_TEMP TABLE(BarCode Nnvarchar(max),CourseName Nnvarchar(max),ItemCode Nnvarchar(max),MoveOrderNo INT, Slno Nnvarchar(max),Defaulter Nnvarchar(max))
 DECLARE @COUNT INT
 DECLARE @BranchId INTEGER 
 DECLARE @ITEM_CODE INTEGER 
@@ -16,25 +16,25 @@ DECLARE @loopCount INT
 DECLARE @GENID INT
 DECLARE @GEN_MOV_ID INT
 DECLARE @TEMP_ORACLE_MO TABLE(OracleMoLineId INT ,OracleMoNumber INT,SMSMoId INT,SMSMoLineNo INT)
-DECLARE @TBL_STOCK_REJECTION TABLE(UUID INT IDENTITY(1,1),ItemCode NVARCHAR(255),Quantity INT)
+DECLARE @TBL_STOCK_REJECTION TABLE(UUID INT IDENTITY(1,1),ItemCode Nnvarchar(max),Quantity INT)
 INSERT INTO @TEMP_ORACLE_MO(OracleMoLineId,OracleMoNumber,SMSMoId,SMSMoLineNo)
 SELECT 
                         T.c.value('OracleMoLineId[1]', 'INT') ,
-                        T.c.value('OracleMoNumber[1]', 'NVARCHAR(255)') ,
+                        T.c.value('OracleMoNumber[1]', 'Nnvarchar(max)') ,
                         T.c.value('SMSMoId[1]', 'INT') ,                        
                         T.c.value('SMSMoLineNo[1]', 'INT')                                                                      
                 FROM    @OracleMoveOrderXML.nodes('/ROOT/OracleMoveOrder') T ( c )   
                 
                 
-DECLARE @TBL_STOCK TABLE(UUID INT IDENTITY(1,1),ItemCode NVARCHAR(255),Quantity INT,OracleMoNumber NVARCHAR (255),OracleMoLineId NVARCHAR (255)) 
+DECLARE @TBL_STOCK TABLE(UUID INT IDENTITY(1,1),ItemCode Nnvarchar(max),Quantity INT,OracleMoNumber Nnvarchar(max),OracleMoLineId Nnvarchar(max)) 
 INSERT INTO @MATERIAL_TEMP(BarCode,CourseName,ItemCode,MoveOrderNo,Slno,Defaulter)
 SELECT 
-                        T.c.value('BarCode[1]', 'NVARCHAR(255)') ,
-                        T.c.value('courseName[1]', 'NVARCHAR(255)') ,
-                        T.c.value('itemCode[1]', 'NVARCHAR(255)') ,
+                        T.c.value('BarCode[1]', 'Nnvarchar(max)') ,
+                        T.c.value('courseName[1]', 'Nnvarchar(max)') ,
+                        T.c.value('itemCode[1]', 'Nnvarchar(max)') ,
                         @MoveOrderNo ,
-                        T.c.value('slno[1]', 'NVARCHAR(255)'),
-                        T.c.value('defaulter[1]', 'NVARCHAR(255)')                                                                      
+                        T.c.value('slno[1]', 'Nnvarchar(max)'),
+                        T.c.value('defaulter[1]', 'Nnvarchar(max)')                                                                      
                 FROM    @MoveOrderXML.nodes('/ROOT/Material') T ( c )   
 
 
@@ -86,7 +86,7 @@ BEGIN
 SELECT @nodeCount= MAX(UUID) FROM @TBL_STOCK 
     SELECT @loopCount= MIN(UUID) FROM @TBL_STOCK 
     select @nodeCount,@loopCount
-    DECLARE @defaulter varchar(255)
+    DECLARE @defaulter nvarchar(max)
     
 	WHILE @loopCount <= @nodeCount
 	BEGIN
@@ -139,7 +139,7 @@ BEGIN
 
 	DECLARE @FromBranchId INT = 0
 	DECLARE @ToBranchId INT	= @BranchId
-	DECLARE @LoadContext varchar(255)
+	DECLARE @LoadContext nvarchar(max)
 	
 	IF EXISTS(SELECT 1 FROM Tbl_KPMG_MoMaster WHERE Fld_KPMG_Mo_Id = @MoveOrderNo)
 	BEGIN
@@ -157,8 +157,8 @@ BEGIN
     select @nodeCount,@loopCount
 	WHILE @loopCount <= @nodeCount
 	BEGIN
-		DECLARE @OracleMo NVARCHAR(255)
-		DECLARE @OracleMoLineNo NVARCHAR(255)							
+		DECLARE @OracleMo Nnvarchar(max)
+		DECLARE @OracleMoLineNo Nnvarchar(max)							
 		PRINT 1
 		select @ITEM_CODE=ItemCode,@OracleMo= ISNULL(OracleMoNumber,''),@OracleMoLineNo=ISNULL(OracleMoLineId,'') 
 		from @TBL_STOCK where UUID=@loopCount
@@ -189,10 +189,10 @@ BEGIN
 	
 	IF ISNULL(@GENID,0) > 0
 	BEGIN
-		DECLARE @msg varchar(max)
-		DECLARE @tskmsg varchar(max)
+		DECLARE @msg nvarchar(max)
+		DECLARE @tskmsg nvarchar(max)
 		DECLARE @brnch_id INT
-		DECLARE @brnch_name	varchar(100)
+		DECLARE @brnch_name	nvarchar(max)
 		SET @brnch_id = CASE @FromBranchId WHEN 0 THEN @ToBranchId ELSE @FromBranchId END
 		SELECT @brnch_name = S_Center_Name FROM T_Center_Hierarchy_Name_Details WHERE I_Center_ID = @brnch_id
 		SET @msg =  'Materials has been loaded from ' +  CASE @FromBranchId WHEN 0 THEN 'Central WareHouse' ELSE 'Branch - ' +@brnch_name  END  +' against Move Order MOV_' + CONVERT(varchar(50),@MoveOrderNo)
@@ -301,7 +301,7 @@ END
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

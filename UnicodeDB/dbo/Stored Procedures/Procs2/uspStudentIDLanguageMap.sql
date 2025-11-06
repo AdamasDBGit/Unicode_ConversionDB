@@ -1,4 +1,4 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[uspStudentIDLanguageMap] 
 (
@@ -12,7 +12,7 @@ BEGIN
 
 		BEGIN
 
-			DECLARE @S_Upd_By VARCHAR(20),@Dt_Upd_On DATETIME,@Enquiry_status INT
+			DECLARE @S_Upd_By nvarchar(max),@Dt_Upd_On DATETIME,@Enquiry_status INT
 
 			select @S_Upd_By=SD.S_Crtd_By,@Dt_Upd_On=SD.Dt_Crtd_On,@Enquiry_status=ERD.I_Enquiry_Status_Code from 
 			T_Student_Detail as SD

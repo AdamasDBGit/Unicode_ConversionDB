@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[ERP_uspGetWorkDetails]      
+CREATE PROCEDURE [dbo].[ERP_uspGetWorkDetails]      
     (  
       --@Centre INT , 
 
@@ -19,7 +19,7 @@ AS
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
 				@ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()                    

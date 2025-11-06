@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE  [dbo].[GetMethodologyActivities]
+CREATE PROCEDURE  [dbo].[GetMethodologyActivities]
 -- =============================================
      -- Author:	Tridip Chatterjee
 -- Create date: 28-09-2023
@@ -9,8 +9,8 @@
 @BrandID int =null,
 @MethodologyActivityID int =null,
 @MethodologyCategoryID int =null,
-@MethodologyActivityName nvarchar(400)=null,
-@MeasureUnit nvarchar(400) =null,
+@MethodologyActivityName nnvarchar(max)=null,
+@MeasureUnit nnvarchar(max) =null,
 @Status int =null
 
 AS

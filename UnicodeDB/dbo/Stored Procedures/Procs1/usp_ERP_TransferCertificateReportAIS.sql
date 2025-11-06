@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_TransferCertificateReportAIS]  
+CREATE PROCEDURE [dbo].[usp_ERP_TransferCertificateReportAIS]  
 (  
   
 @dtStart AS DATETIME,  
 @dtEnd AS DATETIME,  
 @iBrandId INT,      
-@sHierarchyList VARCHAR(MAX)=NULL   
+@sHierarchyList nvarchar(max)=NULL   
 )  
 AS  
 BEGIN  
@@ -12,15 +12,15 @@ BEGIN
   
 CREATE TABLE #temp  
 (  
- STUDENT_CODE VARCHAR(100),  
+ STUDENT_CODE nvarchar(max),  
  STUDENT_ID INT,  
- FIRST_NAME VARCHAR(100),  
- MIDDLE_NAME VARCHAR(100),  
- LAST_NAME VARCHAR(100),  
- BATCH_NAME VARCHAR(100),  
+ FIRST_NAME nvarchar(max),  
+ MIDDLE_NAME nvarchar(max),  
+ LAST_NAME nvarchar(max),  
+ BATCH_NAME nvarchar(max),  
  TC_DATE DATETIME,  
- GUARDIAN_NAME VARCHAR(100),  
- NARRATION VARCHAR(500)  
+ GUARDIAN_NAME nvarchar(max),  
+ NARRATION nvarchar(max)  
 )  
   
 INSERT INTO #temp(STUDENT_ID,TC_DATE,NARRATION)  

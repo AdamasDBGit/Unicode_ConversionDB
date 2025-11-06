@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetCenterFeePlans]
+CREATE PROCEDURE [dbo].[uspGetCenterFeePlans]
     (
       @iHierarchyDetailID INT ,
       @iBrandID INT ,
@@ -9,7 +9,7 @@ AS
     BEGIN TRY  
         SET NOCOUNT ON  
    
-        DECLARE @sSearchCriteria VARCHAR(MAX)  
+        DECLARE @sSearchCriteria nvarchar(max)  
         DECLARE @iMax INT  
         DECLARE @iCount INT  
    
@@ -21,8 +21,8 @@ AS
             (
               seq INT IDENTITY(1, 1) ,
               centerID INT ,
-              centerCode VARCHAR(20) ,
-              centerName VARCHAR(100)
+              centerCode nvarchar(max) ,
+              centerName nvarchar(max)
             )  
   
         CREATE TABLE #tempFeePlan
@@ -31,13 +31,13 @@ AS
               courseFeePlanID INT ,
               centerID INT ,
               courseID INT ,
-              courseCode VARCHAR(50) ,
-              courseName VARCHAR(250) ,
-              courseFeePlanName VARCHAR(40) ,
+              courseCode nvarchar(max) ,
+              courseName nvarchar(max) ,
+              courseFeePlanName nvarchar(max) ,
               feePlanLumpsumTotal NUMERIC(18, 0) ,
               feePlanInstallmentTotal NUMERIC(18, 0) ,
               deliveryPatternID INT ,
-              deliveryPatternName VARCHAR(50)
+              deliveryPatternName nvarchar(max)
             )   
    
         SET @iMax = 0  
@@ -178,7 +178,7 @@ AS
     BEGIN CATCH  
  --Error occurred:    
   
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT  
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()  

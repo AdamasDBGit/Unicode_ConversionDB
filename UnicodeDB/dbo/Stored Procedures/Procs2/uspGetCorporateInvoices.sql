@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspGetCorporateInvoices]
+CREATE PROCEDURE [dbo].[uspGetCorporateInvoices]
 (
-	@strCorpStudentId NVARCHAR(MAX)
+	@strCorpStudentId Nnvarchar(max)
 )
 AS
 BEGIN  
-DECLARE @command VARCHAR(MAX)
+DECLARE @command nvarchar(max)
 SET @command = 'SELECT * FROM dbo.T_Invoice_Parent WHERE I_Student_Detail_ID IN ('+@strCorpStudentId+')'
 
 EXEC (@command)

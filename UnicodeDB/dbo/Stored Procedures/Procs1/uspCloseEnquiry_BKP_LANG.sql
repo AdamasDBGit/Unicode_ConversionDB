@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspCloseEnquiry_BKP_LANG]           
+CREATE PROCEDURE [dbo].[uspCloseEnquiry_BKP_LANG]           
 (             
   @iCenterID INT,    
   @iEnquiryID INT,      
   @iEnquiryStatus INT,         
-  @sUpdatedBy NVARCHAR(MAX),    
+  @sUpdatedBy Nnvarchar(max),    
   @dtUpdatedOn DATETIME ,
-  @iNewEnquiryID NVARCHAR(MAX)     
+  @iNewEnquiryID Nnvarchar(max)     
 )            
 AS            
 BEGIN TRY    
@@ -18,7 +18,7 @@ WHERE   I_Enquiry_Regn_ID = @iEnquiryID
   AND I_Centre_Id = @iCenterID    
   
   
-DECLARE @sFormNo varchar(100)	
+DECLARE @sFormNo nvarchar(max)	
 
 SELECT  @sFormNo = S_Form_No FROM dbo.T_Enquiry_Regn_Detail WHERE I_Enquiry_Regn_ID=@iEnquiryID 
   UPDATE  dbo.T_Enquiry_Regn_Detail      
@@ -28,7 +28,7 @@ END TRY
 BEGIN CATCH    
  --Error occurred:      
     
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     

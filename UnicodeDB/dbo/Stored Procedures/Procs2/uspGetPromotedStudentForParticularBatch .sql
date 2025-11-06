@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspGetPromotedStudentForParticularBatch ]
+CREATE PROCEDURE [dbo].[uspGetPromotedStudentForParticularBatch ]
     (
       @iBatchID INT = NULL ,
-      @sStudentCode NVARCHAR(MAX) = NULL ,
-      @sFname NVARCHAR(MAX) = NULL ,
-      @sMname NVARCHAR(MAX) = NULL ,
-      @sLname NVARCHAR(MAX) = NULL ,
+      @sStudentCode Nnvarchar(max) = NULL ,
+      @sFname Nnvarchar(max) = NULL ,
+      @sMname Nnvarchar(max) = NULL ,
+      @sLname Nnvarchar(max) = NULL ,
       @iCenterID INT = NULL          
             
     )
@@ -49,7 +49,7 @@ AS
         BEGIN CATCH    
  --Error occurred:      
     
-            DECLARE @ErrMsg NVARCHAR(4000) ,
+            DECLARE @ErrMsg Nnvarchar(max) ,
                 @ErrSeverity INT    
             SELECT  @ErrMsg = ERROR_MESSAGE() ,
                     @ErrSeverity = ERROR_SEVERITY()    

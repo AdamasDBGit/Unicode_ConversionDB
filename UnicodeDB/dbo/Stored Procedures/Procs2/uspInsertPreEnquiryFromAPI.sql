@@ -1,37 +1,37 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspInsertPreEnquiryFromAPI]
 (
-@ExtApplicationID NVARCHAR(MAX)=NULL,
-@Centre NVARCHAR(MAX),
-@FirstName NVARCHAR(MAX),
-@MiddleName NVARCHAR(MAX)='',
-@LastName NVARCHAR(MAX),
-@DateofBirth NVARCHAR(MAX),
+@ExtApplicationID Nnvarchar(max)=NULL,
+@Centre Nnvarchar(max),
+@FirstName Nnvarchar(max),
+@MiddleName Nnvarchar(max)='',
+@LastName Nnvarchar(max),
+@DateofBirth Nnvarchar(max),
 @Age INT,
-@MobileNo NVARCHAR(MAX),
-@PhoneNo NVARCHAR(MAX)='',
-@EmailID NVARCHAR(MAX),
-@SalesDisposition NVARCHAR(MAX),
+@MobileNo Nnvarchar(max),
+@PhoneNo Nnvarchar(max)='',
+@EmailID Nnvarchar(max),
+@SalesDisposition Nnvarchar(max),
 @DateofMaturityCC DATETIME=NULL,
 @DateofMaturitySales DATETIME=NULL,
 @DateofMaturity DATETIME,
-@Counsellor NVARCHAR(MAX),
-@LeadCreatedBy NVARCHAR(MAX),
-@LeadOrigin NVARCHAR(MAX),
-@PrimaryTrafficChannel NVARCHAR(MAX),
-@Publisher NVARCHAR(MAX),
-@InfoSource NVARCHAR(MAX),
-@Source NVARCHAR(MAX),
-@Medium NVARCHAR(MAX),
-@Campaign NVARCHAR(MAX),
-@HighestEduQualification NVARCHAR(MAX),
-@Country NVARCHAR(MAX),
-@State NVARCHAR(MAX),
-@District NVARCHAR(MAX)=NULL,
-@City NVARCHAR(MAX),
-@Address NVARCHAR(MAX),
-@Pincode NVARCHAR(MAX),
-@Course NVARCHAR(MAX),
+@Counsellor Nnvarchar(max),
+@LeadCreatedBy Nnvarchar(max),
+@LeadOrigin Nnvarchar(max),
+@PrimaryTrafficChannel Nnvarchar(max),
+@Publisher Nnvarchar(max),
+@InfoSource Nnvarchar(max),
+@Source Nnvarchar(max),
+@Medium Nnvarchar(max),
+@Campaign Nnvarchar(max),
+@HighestEduQualification Nnvarchar(max),
+@Country Nnvarchar(max),
+@State Nnvarchar(max),
+@District Nnvarchar(max)=NULL,
+@City Nnvarchar(max),
+@Address Nnvarchar(max),
+@Pincode Nnvarchar(max),
+@Course Nnvarchar(max),
 @UserRegnDate DATETIME
 )
 AS
@@ -81,10 +81,10 @@ BEGIN
 		    I_Brand_ID
 		)
 		VALUES
-		(   @HighestEduQualification,        -- S_Education_CurrentStatus_Description - varchar(max)
+		(   @HighestEduQualification,        -- S_Education_CurrentStatus_Description - nvarchar(max)
 		    1,         -- I_Status - int
-		    'rice-group-admin',        -- S_Crtd_By - varchar(max)
-		    NULL,        -- S_Upd_By - varchar(max)
+		    'rice-group-admin',        -- S_Crtd_By - nvarchar(max)
+		    NULL,        -- S_Upd_By - nvarchar(max)
 		    GETDATE(), -- Dt_Crtd_On - datetime
 		    NULL, -- Dt_Upd_On - datetime
 		    109          -- I_Brand_ID - int
@@ -126,12 +126,12 @@ BEGIN
 		    I_State_ID
 		)
 		VALUES
-		(   SUBSTRING(@City,0,3),        -- S_City_Code - varchar(10)
-		    @City,        -- S_City_Name - varchar(50)
+		(   SUBSTRING(@City,0,3),        -- S_City_Code - nvarchar(max)
+		    @City,        -- S_City_Name - nvarchar(max)
 		    @CountryID,         -- I_Country_ID - int
 		    1,        -- I_Status - char(1)
-		    'rice-group-admin',        -- S_Crtd_By - varchar(20)
-		    NULL,        -- S_Upd_By - varchar(20)
+		    'rice-group-admin',        -- S_Crtd_By - nvarchar(max)
+		    NULL,        -- S_Upd_By - nvarchar(max)
 		    GETDATE(), -- Dt_Crtd_On - datetime
 		    NULL, -- Dt_Upd_On - datetime
 		    @StateID          -- I_State_ID - int
@@ -191,34 +191,34 @@ BEGIN
 		)
 		VALUES
 		(   0,         -- PreEnquiryID - int
-		    @ExtApplicationID,        -- ExtApplicationID - varchar(max)
-		    @FirstName,        -- FirstName - varchar(max)
-		    @MiddleName,        -- MiddleName - varchar(max)
-		    @LastName,        -- LastName - varchar(max)
-		    @Centre,        -- Centre - varchar(max)
-		    @MobileNo,        -- MobileNo - varchar(max)
-		    @EmailID,        -- EmailID - varchar(max)
-		    @PhoneNo,        -- AlternateMobileNo - varchar(max)
+		    @ExtApplicationID,        -- ExtApplicationID - nvarchar(max)
+		    @FirstName,        -- FirstName - nvarchar(max)
+		    @MiddleName,        -- MiddleName - nvarchar(max)
+		    @LastName,        -- LastName - nvarchar(max)
+		    @Centre,        -- Centre - nvarchar(max)
+		    @MobileNo,        -- MobileNo - nvarchar(max)
+		    @EmailID,        -- EmailID - nvarchar(max)
+		    @PhoneNo,        -- AlternateMobileNo - nvarchar(max)
 		    @DateofBirth, -- DateofBirth - datetime
-		    @SalesDisposition,        -- SalesDisposition - varchar(max)
+		    @SalesDisposition,        -- SalesDisposition - nvarchar(max)
 		    @DateofMaturityCC, -- DateofMaturityCC - datetime
 		    @DateofMaturitySales, -- DateofMaturitySales - datetime
-		    @Counsellor,        -- Counsellor - varchar(max)
-		    @LeadCreatedBy,        -- LeadCreatedBy - varchar(max)
-		    @LeadOrigin,        -- Origin - varchar(max)
-		    @PrimaryTrafficChannel,        -- PrimaryTrafficChannel - varchar(max)
-		    @Source,        -- InfoSource - varchar(max)
-		    @Medium,        -- InfoMedium - varchar(max)
-		    @Campaign,        -- InfoCampaign - varchar(max)
-		    @HighestEduQualification,        -- HighestQualification - varchar(max)
-		    @Country,        -- Country - varchar(max)
-		    @State,        -- State - varchar(max)
-		    @District,        -- District - varchar(max)
-		    @City,        -- City - varchar(max)
-		    @Pincode,        -- Pincode - varchar(max)
+		    @Counsellor,        -- Counsellor - nvarchar(max)
+		    @LeadCreatedBy,        -- LeadCreatedBy - nvarchar(max)
+		    @LeadOrigin,        -- Origin - nvarchar(max)
+		    @PrimaryTrafficChannel,        -- PrimaryTrafficChannel - nvarchar(max)
+		    @Source,        -- InfoSource - nvarchar(max)
+		    @Medium,        -- InfoMedium - nvarchar(max)
+		    @Campaign,        -- InfoCampaign - nvarchar(max)
+		    @HighestEduQualification,        -- HighestQualification - nvarchar(max)
+		    @Country,        -- Country - nvarchar(max)
+		    @State,        -- State - nvarchar(max)
+		    @District,        -- District - nvarchar(max)
+		    @City,        -- City - nvarchar(max)
+		    @Pincode,        -- Pincode - nvarchar(max)
 		    @UserRegnDate, -- UserRegistrationDate - datetime
-		    @InfoSource,        -- ExtSource - varchar(max)
-		    'rice-group-admin',        -- CreatedBy - varchar(max)
+		    @InfoSource,        -- ExtSource - nvarchar(max)
+		    'rice-group-admin',        -- CreatedBy - nvarchar(max)
 		    GETDATE()  -- CreatedOn - datetime
 		    )
 
@@ -236,40 +236,40 @@ BEGIN
 
 		EXEC dbo.uspInsertPreEnquiryDetailsFromAPI @Centre = @CentreID,                                  -- int
 		                                    @IEnquiryStatusCode = NULL,                      -- int
-		                                    @FirstName = @FirstName,                              -- varchar(50)
-		                                    @MiddleName = @MiddleName,                             -- varchar(50)
-		                                    @LastName = @LastName,                               -- varchar(50)
+		                                    @FirstName = @FirstName,                              -- nvarchar(max)
+		                                    @MiddleName = @MiddleName,                             -- nvarchar(max)
+		                                    @LastName = @LastName,                               -- nvarchar(max)
 		                                    @DtBirthDate = @DateofBirth,         -- datetime
-		                                    @Age = @Age,                                    -- varchar(20)
+		                                    @Age = @Age,                                    -- nvarchar(max)
 		                                    @casteID = NULL,                                 -- int
 		                                    @MobileNo = @MobileNo,
-											@EmailID=@EmailID,-- varchar(20)
+											@EmailID=@EmailID,-- nvarchar(max)
 											@PhoneNo=@PhoneNo,
 		                                    @CurrCityID = @CityID,                              -- int
 		                                    @CurrStateID = @StateID,                             -- int
 		                                    @CurrCountryID = @CountryID,                           -- int
-		                                    @CurrAddress1 = @Address,                           -- varchar(200)
-		                                    @CurrAddress2 = '',                           -- varchar(200)
-		                                    @CurrPincode = @Pincode,                            -- varchar(20)
-		                                    @FatherName = '',                             -- varchar(200)
-		                                    @MotherName = '',                             -- varchar(200)
-		                                    @EnquiryDesc = '',                            -- varchar(500)
+		                                    @CurrAddress1 = @Address,                           -- nvarchar(max)
+		                                    @CurrAddress2 = '',                           -- nvarchar(max)
+		                                    @CurrPincode = @Pincode,                            -- nvarchar(max)
+		                                    @FatherName = '',                             -- nvarchar(max)
+		                                    @MotherName = '',                             -- nvarchar(max)
+		                                    @EnquiryDesc = '',                            -- nvarchar(max)
 		                                    @IsPreEnquiry = 1,                         -- bit
-		                                    @CrtdBy = 'rice-group-admin',                                 -- varchar(20)
+		                                    @CrtdBy = 'rice-group-admin',                                 -- nvarchar(max)
 		                                    @DtCrtdOn = @dtDate,            -- datetime
-		                                    @sSelectedCourseID = @sSelectedCourseID,                      -- varchar(100)
+		                                    @sSelectedCourseID = @sSelectedCourseID,                      -- nvarchar(max)
 		                                    @InfoSourceID = @InfoSourceID,                            -- int
 		                                    @bHasGivenOtherExam = NULL,                   -- bit
 		                                    @sQualificationXML = @xmldata,                    -- xml
 		                                    @iSeatType = NULL,                               -- int
 		                                    @iEnrolmentType = NULL,                          -- int
-		                                    @sEnrolmentNo = NULL,                           -- varchar(50)
+		                                    @sEnrolmentNo = NULL,                           -- nvarchar(max)
 		                                    @iRankObtained = NULL,                           -- int
 		                                    @dtFirstFollowUpDate = @dtDate, -- datetime
 		                                    @IsLateral = NULL,                            -- bit
 		                                    @IPreEnquiryFor = 1,                          -- int
-		                                    @GuardianName = '',                           -- varchar(200)
-		                                    @GuardianPhoneNo = '',                        -- varchar(20)
+		                                    @GuardianName = '',                           -- nvarchar(max)
+		                                    @GuardianPhoneNo = '',                        -- nvarchar(max)
 		                                    @iFatherIncomeGroup = 1,                      -- int
 		                                    @EducationCurrentStatus = @HighestQualificationID ,                  -- int
 											@ExtAdditionalDetailsID=@ExtID
@@ -290,7 +290,7 @@ BEGIN
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()                    

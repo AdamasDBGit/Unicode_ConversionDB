@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspGetDistinctBatchContents]      
+CREATE PROCEDURE [dbo].[uspGetDistinctBatchContents]      
 AS       
 BEGIN TRY      
- DECLARE @V_DISTINCTBATCHCONTENTS VARCHAR(3000)    
- DECLARE @V_BATCHID VARCHAR(10)    
+ DECLARE @V_DISTINCTBATCHCONTENTS nvarchar(max)    
+ DECLARE @V_BATCHID nvarchar(max)    
  SET @V_DISTINCTBATCHCONTENTS =''    
  SET @V_BATCHID =''    
  DECLARE CUR_DISTINCTBATCHCONTENTS CURSOR FOR    
@@ -23,7 +23,7 @@ BEGIN TRY
  SELECT @V_DISTINCTBATCHCONTENTS      
 END TRY      
 BEGIN CATCH      
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int      
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int      
  SELECT @ErrMsg = ERROR_MESSAGE(),      
  @ErrSeverity = ERROR_SEVERITY()      
  RAISERROR(@ErrMsg, @ErrSeverity, 1)      

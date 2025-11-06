@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetEmailIDsForTask] 
+CREATE PROCEDURE [dbo].[uspGetEmailIDsForTask] 
 (	
-	@sLoginID NVARCHAR(MAX),
+	@sLoginID Nnvarchar(max),
 	@iHierarchyMasterID int,	
 	@iSrcHierarchyDetailID int,
 	@iSelectedHierarchyDetailID int = null
@@ -17,19 +17,19 @@ BEGIN
  DECLARE @iGetIndex int  
  DECLARE @iLength int  
  DECLARE @iTempHierarchyDetailID int  
- DECLARE @sUserHierarchyChain varchar(100)  
- DECLARE @sTempHierarchyChain varchar(100)  
+ DECLARE @sUserHierarchyChain nvarchar(max)  
+ DECLARE @sTempHierarchyChain nvarchar(max)  
    
  DECLARE @tblUserList TABLE  
  (   
   [ID] int identity(1,1),  
   iHierarchyDetailID int,  
   iUserID int,  
-  sEmailID varchar(200),  
-  sHierarchyChain varchar(100),  
+  sEmailID nvarchar(max),  
+  sHierarchyChain nvarchar(max),  
   iStatus int,
-  sLoginId varchar(200),
-  sUserType varchar(20)   
+  sLoginId nvarchar(max),
+  sUserType nvarchar(max)   
  )  
   
  -- Select the UserID for the User who has initiated the Task  

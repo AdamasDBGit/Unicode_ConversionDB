@@ -1,46 +1,46 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertStudentDetails] 
+CREATE PROCEDURE [dbo].[uspInsertStudentDetails] 
 (
 	@Centre int,
 	@OccupationID int,
 	@PrefCareerID int,
 	@InfoSourceID int,
 	@EnquiryTypeID int,
-	@EnquiryNo NVARCHAR(MAX),
-	@IsCorporate NVARCHAR(MAX),
-	@EnquiryDesc NVARCHAR(MAX),
-	@Title NVARCHAR(MAX),
-	@FirstName NVARCHAR(MAX),
-	@MiddleName NVARCHAR(MAX),
-	@LastName NVARCHAR(MAX),
+	@EnquiryNo Nnvarchar(max),
+	@IsCorporate Nnvarchar(max),
+	@EnquiryDesc Nnvarchar(max),
+	@Title Nnvarchar(max),
+	@FirstName Nnvarchar(max),
+	@MiddleName Nnvarchar(max),
+	@LastName Nnvarchar(max),
 	@DtBirthDate datetime,
-	@Age NVARCHAR(MAX),
+	@Age Nnvarchar(max),
 	@QualificationNameID int,
 	@SkipTest char(1),
 	@StreamID int,
-	@EmailID NVARCHAR(MAX),
-	@PhoneNo NVARCHAR(MAX),
-	@MobileNo NVARCHAR(MAX),
+	@EmailID Nnvarchar(max),
+	@PhoneNo Nnvarchar(max),
+	@MobileNo Nnvarchar(max),
 	@CurrCityID int,
 	@CurrStateID int,
 	@CurrCountryID int,
-	@GuardianName NVARCHAR(MAX),
+	@GuardianName Nnvarchar(max),
 	@GuardianOccupationID int,
-	@GuardianEmailID NVARCHAR(MAX),
-	@GuardianPhoneNo NVARCHAR(MAX),
-	@GuardianMobileNo NVARCHAR(MAX),
+	@GuardianEmailID Nnvarchar(max),
+	@GuardianPhoneNo Nnvarchar(max),
+	@GuardianMobileNo Nnvarchar(max),
 	@IncomeGroupID int,
-	@CurrAddress1 NVARCHAR(MAX),
-	@CurrAddress2 NVARCHAR(MAX),
-	@CurrPincode NVARCHAR(MAX),
-	@CurrArea NVARCHAR(MAX),
-	@PermAddress1 NVARCHAR(MAX),
-	@PermAddress2 NVARCHAR(MAX),
-	@PermPincode NVARCHAR(MAX),
+	@CurrAddress1 Nnvarchar(max),
+	@CurrAddress2 Nnvarchar(max),
+	@CurrPincode Nnvarchar(max),
+	@CurrArea Nnvarchar(max),
+	@PermAddress1 Nnvarchar(max),
+	@PermAddress2 Nnvarchar(max),
+	@PermPincode Nnvarchar(max),
 	@PermCityID int,
 	@PermStateID int,
 	@PermCountryID int,
-	@PermArea NVARCHAR(MAX),
-	@CrtdBy NVARCHAR(MAX),
+	@PermArea Nnvarchar(max),
+	@CrtdBy Nnvarchar(max),
 	@DtCrtdOn datetime
 )
 
@@ -51,10 +51,10 @@ BEGIN TRY
 	DECLARE @iGetCourseIndex int
 	DECLARE @iCourseListLength int
 	DECLARE @iCourseID int
-	DECLARE @sSelectedCourseIDs varchar(100)
+	DECLARE @sSelectedCourseIDs nvarchar(max)
 	DECLARE @iEnquiryID int
 	DECLARE @iCenterID int
-	DECLARE @sLoginID varchar(500)
+	DECLARE @sLoginID nvarchar(max)
 	DECLARE @iUserID int
 	DECLARE @iStudentDetailId int
 	
@@ -168,7 +168,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

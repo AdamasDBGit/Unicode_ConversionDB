@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentInformationDetails] -- [dbo].[uspGetStudentInformationDetails] null,null,2,14               
+CREATE PROCEDURE [dbo].[uspGetStudentInformationDetails] -- [dbo].[uspGetStudentInformationDetails] null,null,2,14               
     (
       -- Add the parameters for the stored procedure here                  
       @iEnquiryRegnID INT = NULL ,
-      @sEmailId NVARCHAR(MAX) = NULL ,
+      @sEmailId Nnvarchar(max) = NULL ,
       @iApplicationId INT = NULL ,
-      @sStudentCode NVARCHAR(MAX) = NULL          
+      @sStudentCode Nnvarchar(max) = NULL          
     )
 AS 
     BEGIN            

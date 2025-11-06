@@ -1,4 +1,4 @@
-﻿  
+  
 CREATE PROCEDURE [dbo].[usp_ERP_GetInvoiceDetail_April_205]  --[dbo].[uspGetInvoiceDetail] 168173         
     (  
       @iInvoiceHeaderID INT              
@@ -12,8 +12,8 @@ AS
               I_Tax_ID INT ,  
               I_Invoice_Detail_ID INT ,  
               N_Tax_Value NUMERIC(18, 6) ,  
-              TAX_CODE VARCHAR(20) ,  
-              TAX_DESC VARCHAR(50) ,  
+              TAX_CODE nvarchar(max) ,  
+              TAX_DESC nvarchar(max) ,  
               TAX_CHECK INT  
             )              
  -- TABLE[0] RETURNS ALL THE INFORMATION FROM T_INVOICE_PARENT               
@@ -41,7 +41,7 @@ AS
         FROM Nullify_Installments_Details AS sub   
         WHERE sub.Invoice_Header_ID = main.Invoice_Header_ID   
           AND CAST(sub.CreatedOn AS DATE) = CAST(main.CreatedOn AS DATE)  -- Optimized conversion  
-        FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 3, ''), 'No Remarks') AS Merged_Remarks  
+        FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 3, ''), 'No Remarks') AS Merged_Remarks  
 FROM Nullify_Installments_Details AS main   
 WHERE Isdone = 1 AND Remarks IS NOT NULL  
 GROUP BY Invoice_Header_ID, CAST(CreatedOn AS DATE)  -- Ensure it matches SELECT  

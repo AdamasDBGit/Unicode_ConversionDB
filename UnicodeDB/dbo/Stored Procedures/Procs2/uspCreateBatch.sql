@@ -1,7 +1,7 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspCreateBatch]                   
 (                     
-  @sBatchCode NVARCHAR(MAX),            
+  @sBatchCode Nnvarchar(max),            
   @iCourseID INT,            
   @iDeliveryPatternID INT,            
   --@iTimeSlotId INT,            
@@ -9,29 +9,29 @@ CREATE PROCEDURE [dbo].[uspCreateBatch]
   @dtBatchStartDate DATETIME,            
   @iStatus INT,            
   @dtCourseExpectedEndDate DATETIME,            
-  @sCreatedBy NVARCHAR(MAX),            
+  @sCreatedBy Nnvarchar(max),            
   @dtCreatedOn DATETIME,            
   @FacultyId INT,            
-  @sBatchName NVARCHAR(MAX),          
+  @sBatchName Nnvarchar(max),          
   @bIsApproved BIT,        
   @iAdmissionGraceDays INT,      
   @bIsCorporate BIT,    
   @iLateFeeGraceDays INT  ,  
   @dtBatchIntroductionDate DATETIME = NULL,  
-  @sBatchIntroductionTime NVARCHAR(MAX) = NULL ,
+  @sBatchIntroductionTime Nnvarchar(max) = NULL ,
   @BatchCategoryID INT=1 --added by susmita 
   --@BatchLanguageID INT =2,--added by susmita for language 27-07-2022 value delete when front end correct
   --@BatchLangauageName NVARCHAR(MAX)='Bengali & English'----added by susmita for language 27-07-2022 value when front end correct
 )                    
 AS                    
 BEGIN TRY            
-DECLARE @sBatchCodeMax VARCHAR(50)           
+DECLARE @sBatchCodeMax nvarchar(max)           
 SELECT TOP 1 @sBatchCodeMax = @sBatchCode + RIGHT('000' + CAST(SUBSTRING(S_Batch_Code,10,3)+1 AS varchar(3)), 3)             
 FROM T_Student_Batch_Master WHERE S_Batch_Code             
 LIKE @sBatchCode+'%' ORDER BY S_Batch_Code DESC            
 SET @sBatchCode = ISNULL(@sBatchCodeMax, @sBatchCode+'001')  
  
-DECLARE @BatchLanguageName VARCHAR(200),@BatchLanguageID INT
+DECLARE @BatchLanguageName nvarchar(max),@BatchLanguageID INT
 SELECT TOP 1 @BatchLanguageName=I_Language_Name,@BatchLanguageID=I_Language_ID from T_Course_Master where I_Course_ID= @iCourseID
 
             
@@ -85,7 +85,7 @@ END TRY
 BEGIN CATCH            
  --Error occurred:              
             
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int            
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int            
  SELECT @ErrMsg = ERROR_MESSAGE(),            
    @ErrSeverity = ERROR_SEVERITY()            
             

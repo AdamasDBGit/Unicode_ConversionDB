@@ -1,22 +1,22 @@
-﻿
+
 CREATE PROCEDURE [dbo].[ERP_uspUpdateCandidateEnquiryDetails]   
 (  
  @iEnquiryRegnID int = NULL,  
- @sFirstName NVARCHAR(MAX) = NULL,  
- @sMiddleName NVARCHAR(MAX) = NULL,  
- @sLastName NVARCHAR(MAX) = NULL,  
+ @sFirstName Nnvarchar(max) = NULL,  
+ @sMiddleName Nnvarchar(max) = NULL,  
+ @sLastName Nnvarchar(max) = NULL,  
  @iGender int = NULL,  
  @DtBirthDate date = NULL,  
- @sMobileNo NVARCHAR(MAX) = NULL,  
+ @sMobileNo Nnvarchar(max) = NULL,  
  @iBloodGroup int = NULL,  
  @iNativeLanguage int = NULL,  
  @iNationality int = NULL,  
  @iReligion int = NULL,  
  @iCaste int = NULL,  
- @sEmail NVARCHAR(MAX) = NULL,  
- @sCandidatePhotoPath NVARCHAR(MAX) = NULL,  
- @iUpdatedBy NVARCHAR(MAX) = NULL,  
- @SSecondLanguageOpted nvarchar(50)=null,  
+ @sEmail Nnvarchar(max) = NULL,  
+ @sCandidatePhotoPath Nnvarchar(max) = NULL,  
+ @iUpdatedBy Nnvarchar(max) = NULL,  
+ @SSecondLanguageOpted nnvarchar(max)=null,  
  @ITabNo int = null  
 )   
 AS  
@@ -73,7 +73,7 @@ BEGIN
  END TRY  
  BEGIN CATCH  
   rollback transaction  
-  DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+  DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
   
   SELECT @ErrMsg = ERROR_MESSAGE(),  
     @ErrSeverity = ERROR_SEVERITY()  

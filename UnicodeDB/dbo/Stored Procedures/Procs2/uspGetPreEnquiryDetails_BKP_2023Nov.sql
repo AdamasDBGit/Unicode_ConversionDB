@@ -1,10 +1,10 @@
-﻿
+
 
 CREATE PROCEDURE [dbo].[uspGetPreEnquiryDetails_BKP_2023Nov] -- [dbo].[uspGetPreEnquiryDetails] 20393,'',17,2                  
     (
       -- Add the parameters for the stored procedure here                        
-      @sEnquiryNo NVARCHAR(MAX) = NULL ,
-      @sMobileNo NVARCHAR(MAX) = NULL ,
+      @sEnquiryNo Nnvarchar(max) = NULL ,
+      @sMobileNo Nnvarchar(max) = NULL ,
       @iCenterID INT = NULL ,
       @stuStatusFor INT = NULL                                 
     )

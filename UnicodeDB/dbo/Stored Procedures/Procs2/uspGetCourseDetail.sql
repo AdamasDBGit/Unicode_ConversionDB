@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetCourseDetail] -- [dbo].[uspGetCourseDetail] '05-0782',62    
+CREATE PROCEDURE [dbo].[uspGetCourseDetail] -- [dbo].[uspGetCourseDetail] '05-0782',62    
     (  
-      @sSelectedStudentCode NVARCHAR(MAX) ,  
+      @sSelectedStudentCode Nnvarchar(max) ,  
       @iInvoiceID INT = NULL,
       @iCenterID INT =NULL      
     )  
@@ -9,36 +9,36 @@ AS
         SET NOCOUNT ON ;      
        
         DECLARE @iStudentDetailId INT      
-        DECLARE @sCenterName VARCHAR(100)      
-        DECLARE @sStudentName VARCHAR(150)      
+        DECLARE @sCenterName nvarchar(max)      
+        DECLARE @sStudentName nvarchar(max)      
         DECLARE @iBatchID INT  
         DECLARE @iCourseID INT      
         DECLARE @iCourseFeePlanId INT      
-        DECLARE @sIsLumpSum VARCHAR(1)      
+        DECLARE @sIsLumpSum nvarchar(max)      
         DECLARE @iTotalLumpSum NUMERIC(18, 2)      
         DECLARE @iTotalInstallment NUMERIC(18, 2)       
       
         DECLARE @tblCourseDetail TABLE  
             (  
-              COURSE_NAME VARCHAR(250) ,  
+              COURSE_NAME nvarchar(max) ,  
               START_DATE DATETIME ,  
               FEEPLAN_ID INT ,  
-              FEEPLAN VARCHAR(200) ,  
-              BOOKLIST VARCHAR(1000) ,  
+              FEEPLAN nvarchar(max) ,  
+              BOOKLIST nvarchar(max) ,  
               TOTAL_LUMPSUM NUMERIC(18, 2) ,  
               TOTAL_INSTALLMENT NUMERIC(18, 2) ,  
-              IS_LUMPSUM VARCHAR(1) ,  
+              IS_LUMPSUM nvarchar(max) ,  
               COURSE_ID INT ,  
-              S_Course_Code VARCHAR(50) ,  
-              S_Course_Description VARCHAR(500) ,  
+              S_Course_Code nvarchar(max) ,  
+              S_Course_Description nvarchar(max) ,  
               I_Currency_ID INT ,  
-              S_Course_Family VARCHAR(50) ,  
+              S_Course_Family nvarchar(max) ,  
               I_Is_Completed BIT ,  
               I_Batch_ID INT  
             )       
       
-        DECLARE @sBookList VARCHAR(1000)      
-        DECLARE @sIndividualBook VARCHAR(100)      
+        DECLARE @sBookList nvarchar(max)      
+        DECLARE @sIndividualBook nvarchar(max)      
        
         SELECT  @iStudentDetailId = TSD.I_Student_Detail_ID  
         FROM    T_STUDENT_DETAIL TSD 

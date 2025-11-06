@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspSaveOfflineReceipts] 
+CREATE PROCEDURE [dbo].[uspSaveOfflineReceipts] 
 (	
 	@sReceiptsXML xml
 )
@@ -12,27 +12,27 @@ BEGIN TRY
 	DECLARE @ReceiptListPosition SMALLINT, @ReceiptListCount SMALLINT
 	DECLARE @ReceiptsXML XML
 	
-	DECLARE @sStudentNo VARCHAR(500)
-	DECLARE @sInvoiceNo VARCHAR(50)
+	DECLARE @sStudentNo nvarchar(max)
+	DECLARE @sInvoiceNo nvarchar(max)
 	DECLARE @dtReceiptDate DATETIME
-	DECLARE @sFirstName VARCHAR(50)
-	DECLARE @sLastName VARCHAR(50)
+	DECLARE @sFirstName nvarchar(max)
+	DECLARE @sLastName nvarchar(max)
 	DECLARE @iReceiptType INT
 	DECLARE @iPaymentMode INT
 	DECLARE @iCenterID INT
 	DECLARE @nReceiptAmount NUMERIC(18,2)
 	DECLARE @iStatus INT
 
-	DECLARE @sChequeNo VARCHAR(20)
-	DECLARE @sBankName VARCHAR(50)
-	DECLARE @sBranchName VARCHAR(20)
+	DECLARE @sChequeNo nvarchar(max)
+	DECLARE @sBankName nvarchar(max)
+	DECLARE @sBranchName nvarchar(max)
 	DECLARE @dtChequeDate DATETIME
 
 	DECLARE @nCreditCardNo NUMERIC(18,0)
-	DECLARE @sCreditCardIssuer VARCHAR(50)
+	DECLARE @sCreditCardIssuer nvarchar(max)
 	DECLARE @dtCreditCardExpiryDate DATETIME
 
-	DECLARE @sCreatedBy VARCHAR(50)
+	DECLARE @sCreatedBy nvarchar(max)
 	DECLARE @dtCreatedOn DATETIME
 
 	BEGIN TRANSACTION
@@ -55,25 +55,25 @@ BEGIN TRY
 
 			--Get the Receipt node for the Current Position
 			SET @ReceiptsXML = @sReceiptsXML.query('/ReceiptList/Receipt[position()=sql:variable("@ReceiptListPosition")]')
-			SELECT @sStudentNo = Receipt.a.value('@StudentNo','varchar(500)'),
+			SELECT @sStudentNo = Receipt.a.value('@StudentNo','nvarchar(max)'),
 				   @dtReceiptDate = Receipt.a.value('@ReceiptDate','datetime'),
-				   @sFirstName = Receipt.a.value('@FirstName','varchar(50)'),
-				   @sLastName = Receipt.a.value('@LastName','varchar(50)'),
+				   @sFirstName = Receipt.a.value('@FirstName','nvarchar(max)'),
+				   @sLastName = Receipt.a.value('@LastName','nvarchar(max)'),
 				   @iReceiptType = Receipt.a.value('@ReceiptType','INT'),
 				   @iPaymentMode = Receipt.a.value('@PaymentMode','INT'),
 				   @iCenterID = Receipt.a.value('@CenterId','INT'),
 				   @nReceiptAmount = Receipt.a.value('@ReceiptAmount','numeric(18,2)'),
 				   @iStatus = Receipt.a.value('@Status','INT'),
-				   @sCreatedBy = Receipt.a.value('@CreatedBy','varchar(50)'),
+				   @sCreatedBy = Receipt.a.value('@CreatedBy','nvarchar(max)'),
 				   @dtCreatedOn = Receipt.a.value('@CreatedOn','datetime')
 			
  			FROM @ReceiptsXML.nodes('/Receipt') Receipt(a)
 				   
 				   IF (@iPaymentMode = 2)
 				   BEGIN
-				    SELECT	@sChequeNo = Receipt.a.value('@ChequeNo','varchar(20)'),
-						@sBankName = Receipt.a.value('@BankName','varchar(50)'),
-						@sBranchName = Receipt.a.value('@BranchName','varchar(20)'),
+				    SELECT	@sChequeNo = Receipt.a.value('@ChequeNo','nvarchar(max)'),
+						@sBankName = Receipt.a.value('@BankName','nvarchar(max)'),
+						@sBranchName = Receipt.a.value('@BranchName','nvarchar(max)'),
 						@dtChequeDate = Receipt.a.value('@ChequeDate','datetime')
 					FROM @ReceiptsXML.nodes('/Receipt') Receipt(a)					   
 				   END
@@ -81,14 +81,14 @@ BEGIN TRY
 				   IF (@iPaymentMode = 3)
 				   BEGIN
 					SELECT @nCreditCardNo = Receipt.a.value('@CreditCardNo','numeric(18,0)'),
-					     @sCreditCardIssuer = Receipt.a.value('@CreditCardIssuer','varchar(50)'),
+					     @sCreditCardIssuer = Receipt.a.value('@CreditCardIssuer','nvarchar(max)'),
 					     @dtCreditCardExpiryDate = Receipt.a.value('@CreditCardExpiryDate','datetime')	
 					FROM @ReceiptsXML.nodes('/Receipt') Receipt(a)
 				   END
 			
 				   IF (@iReceiptType = 2)
 				   BEGIN
-					SELECT @sInvoiceNo = Receipt.a.value('@InvoiceNo','varchar(50)')
+					SELECT @sInvoiceNo = Receipt.a.value('@InvoiceNo','nvarchar(max)')
 				    FROM @ReceiptsXML.nodes('/Receipt') Receipt(a)
 				   END
 			
@@ -155,7 +155,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

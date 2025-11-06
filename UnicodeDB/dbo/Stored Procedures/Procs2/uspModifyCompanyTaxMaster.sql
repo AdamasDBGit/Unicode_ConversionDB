@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyCompanyTaxMaster] 
+CREATE PROCEDURE [dbo].[uspModifyCompanyTaxMaster] 
 	-- Add the parameters for the stored procedure here
 	@iIndex INT,	
 	@iBrandID INT,
 	@iCountryID INT,
-	@sTaxName NVARCHAR(MAX),
-	@sTaxDesc NVARCHAR(MAX),
-	@sCrtdBy NVARCHAR(MAX),
+	@sTaxName Nnvarchar(max),
+	@sTaxDesc Nnvarchar(max),
+	@sCrtdBy Nnvarchar(max),
 	@dtCrtdOn DATETIME,
 	@iFlag INT
 AS

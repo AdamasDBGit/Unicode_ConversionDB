@@ -1,6 +1,6 @@
-﻿CREATE   PROCEDURE [dbo].[usp_ERP_Get_Transaction_History_Bak_18072025]  
+CREATE   PROCEDURE [dbo].[usp_ERP_Get_Transaction_History_Bak_18072025]  
  -- Add the parameters for the stored procedure here  
- @sStudentID NVARCHAR(MAX)=NULL,  
+ @sStudentID Nnvarchar(max)=NULL,  
  @dtValidFrom datetime =NULL,  
  @dtValidTo datetime= NULL,  
  @BrandID INT=NULL,  
@@ -17,21 +17,21 @@ BEGIN
   Create Table #Transaction_History  
  (  
  ID INT IDENTITY(1,1),  
- StudentID varchar(max),  
- S_First_Name varchar(max),  
- S_Middle_Name varchar(max),  
- S_Last_Name varchar(max),  
- EnquiryNo varchar(max),  
+ StudentID nvarchar(max),  
+ S_First_Name nvarchar(max),  
+ S_Middle_Name nvarchar(max),  
+ S_Last_Name nvarchar(max),  
+ EnquiryNo nvarchar(max),  
  ReceiptHeaderID INT,  
  ReceiptNo INT,  
- ReceiptType varchar(max),  
- TransactionNo varchar(max),  
- PaymentMethod varchar(max),  
- PaymentMode varchar(max),  
+ ReceiptType nvarchar(max),  
+ TransactionNo nvarchar(max),  
+ PaymentMethod nvarchar(max),  
+ PaymentMode nvarchar(max),  
  SMSPaymentModeID INT,  
- SMSPaymentMode varchar(max),  
+ SMSPaymentMode nvarchar(max),  
  isAdhoc bit,  
- AdhocInvoiceNo varchar(max),  
+ AdhocInvoiceNo nvarchar(max),  
  TransactionDate datetime,  
  ReceiptDate datetime,  
  TotalTransactionAmount decimal(8,2),  
@@ -40,20 +40,20 @@ BEGIN
  PaymentStatus INT,  
  ReceiptStatus INT,  
  SattlementDate datetime,  
- SattlementBankAccount varchar(max),  
+ SattlementBankAccount nvarchar(max),  
  PaymnentGatewayID INT,  
  BrandID INT,  
- ExternalPurchasedMobileNo varchar(max),  
- OrderID varchar(max),  
- ReceiptStatusType varchar(max)  
+ ExternalPurchasedMobileNo nvarchar(max),  
+ OrderID nvarchar(max),  
+ ReceiptStatusType nvarchar(max)  
  )  
   
   
   DECLARE @PaymentStatusTable TABLE   
 (  
  PaymentStatusID INT,  
-    StatusDescription VARCHAR(255),  
-    StatusColour VARCHAR(255)  
+    StatusDescription nvarchar(max),  
+    StatusColour nvarchar(max)  
 );  
   
 ---- Step 2: Insert the function result into the table variable  

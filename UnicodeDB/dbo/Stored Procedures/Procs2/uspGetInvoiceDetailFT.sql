@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetInvoiceDetailFT]
+CREATE PROCEDURE [dbo].[uspGetInvoiceDetailFT]
 (
 	@iInvoiceHeaderID int,
 	@dtReceiptDate datetime
@@ -12,7 +12,7 @@ BEGIN
 	DECLARE @iCountryID INT
 	DECLARE @iCenterID INT
 
-	DECLARE @TempTable TABLE(I_Tax_ID INT, I_Invoice_Detail_ID INT, N_Tax_Value NUMERIC(18,6),TAX_CODE VARCHAR(20),TAX_DESC VARCHAR(50))
+	DECLARE @TempTable TABLE(I_Tax_ID INT, I_Invoice_Detail_ID INT, N_Tax_Value NUMERIC(18,6),TAX_CODE nvarchar(max),TAX_DESC nvarchar(max))
 	-- TABLE[0] RETURNS ALL THE INFORMATION FROM T_INVOICE_PARENT	
 	SELECT * FROM T_Invoice_Parent 
 	WHERE I_Invoice_Header_ID = @iInvoiceHeaderID

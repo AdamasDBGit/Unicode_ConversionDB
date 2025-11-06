@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentExaminationDetails]
+CREATE PROCEDURE [dbo].[uspGetStudentExaminationDetails]
 (
 @iTermID AS INT,
 @iBatchID AS INT,
@@ -13,15 +13,15 @@ BEGIN
 
 CREATE TABLE #temp
 (
-[CENTER_NAME] VARCHAR(100),
-[COURSE_NAME] VARCHAR(100),
-[BATCH_NAME] VARCHAR(100),
+[CENTER_NAME] nvarchar(max),
+[COURSE_NAME] nvarchar(max),
+[BATCH_NAME] nvarchar(max),
 [TERM_ID] INT,
-[TERM_NAME] VARCHAR(100),
+[TERM_NAME] nvarchar(max),
 [STUDENT_ID] INT,
-[STUDENT_CODE] VARCHAR(100),
-[STUDENT_NAME] VARCHAR(100),
-[SUBJECT] VARCHAR(100),
+[STUDENT_CODE] nvarchar(max),
+[STUDENT_NAME] nvarchar(max),
+[SUBJECT] nvarchar(max),
 [MARKS_OBTAINED] INT,
 [FULL_MARKS] INT,
 [TOTAL_MARKS_OBTAINED] INT,

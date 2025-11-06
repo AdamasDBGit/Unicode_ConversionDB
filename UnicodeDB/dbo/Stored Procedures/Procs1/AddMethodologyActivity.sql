@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[AddMethodologyActivity] 
+CREATE PROCEDURE [dbo].[AddMethodologyActivity] 
 -- =============================================
      -- Author:	Tridip Chatterjee
 -- Create date: 29-09-2023
@@ -6,10 +6,10 @@
 -- =============================================
 -- Add the parameters for the stored procedure here
 @MethodologyCategoryID int,
-@MethodologyActivityName nvarchar(400),
-@MethodologyActivityDescription nvarchar(400),
-@MeasureUnit nvarchar(400),
-@CreatedBy nvarchar(200)
+@MethodologyActivityName nnvarchar(max),
+@MethodologyActivityDescription nnvarchar(max),
+@MeasureUnit nnvarchar(max),
+@CreatedBy nnvarchar(max)
 
 AS
 BEGIN

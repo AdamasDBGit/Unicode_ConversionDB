@@ -1,14 +1,14 @@
-﻿  
+  
 CREATE PROCEDURE dbo.usp_ERP_UpdatePassword     
     @inUserId INT,      
-    @stCurrentPassword NVARCHAR(200),  
-    @stNewPassword NVARCHAR(200)  
+    @stCurrentPassword Nnvarchar(max),  
+    @stNewPassword Nnvarchar(max)  
 AS      
 BEGIN      
   
         SET NOCOUNT ON;  
   
-        DECLARE @oldPassword NVARCHAR(200);  
+        DECLARE @oldPassword Nnvarchar(max);  
   
         SELECT   
             @oldPassword = S_Password   

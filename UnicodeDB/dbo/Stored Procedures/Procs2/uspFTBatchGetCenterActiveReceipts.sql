@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspFTBatchGetCenterActiveReceipts] --492
+CREATE PROCEDURE [dbo].[uspFTBatchGetCenterActiveReceipts] --492
 	@iCenterID INT
 
 AS
@@ -144,7 +144,7 @@ BEGIN
 	CREATE TABLE #ReceiptList
 	(
 		I_Receipt_Header_ID INT,
-		S_Receipt_No VARCHAR(20),
+		S_Receipt_No nvarchar(max),
 		Dt_Receipt_Date DATETIME
 	)
 

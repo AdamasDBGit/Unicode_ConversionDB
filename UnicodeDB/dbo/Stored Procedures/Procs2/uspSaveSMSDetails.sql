@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspSaveSMSDetails](@MobileNo NVARCHAR(MAX),@Message NVARCHAR(MAX), @UniqueID NVARCHAR(MAX), @BrandID INT, @ReferenceID INT)
+CREATE PROCEDURE [dbo].[uspSaveSMSDetails](@MobileNo Nnvarchar(max),@Message Nnvarchar(max), @UniqueID Nnvarchar(max), @BrandID INT, @ReferenceID INT)
 AS
 BEGIN
 

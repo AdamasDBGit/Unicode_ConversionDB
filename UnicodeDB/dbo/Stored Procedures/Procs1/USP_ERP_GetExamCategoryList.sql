@@ -1,13 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[USP_ERP_GetExamCategoryList]  
+CREATE PROCEDURE [dbo].[USP_ERP_GetExamCategoryList]  
 (  
-    @ExamCategoryName NVARCHAR(100) = NULL,    
+    @ExamCategoryName Nnvarchar(max) = NULL,    
     @ExamTypeID INT = NULL,    
     @BrandID INT = NULL,    
     @SchoolGroupID INT = NULL,   
     @SchoolSessionID INT = NULL,    
     @IsActive BIT = NULL,   
     @SortColumn INT = NULL,    
-    @SortOrder NVARCHAR(4) = 'ASC',
+    @SortOrder Nnvarchar(max) = 'ASC',
 	@inPageNo INT = 1,   
 	@inPageSize INT = 10,
 	@inUserId INT = NULL
@@ -16,8 +16,8 @@ AS
 BEGIN  
     SET NOCOUNT ON;  
     
-    DECLARE @SQL AS NVARCHAR(MAX);
-    DECLARE @stSort NVARCHAR(MAX) = 'inExamCategoryId';   
+    DECLARE @SQL AS Nnvarchar(max);
+    DECLARE @stSort Nnvarchar(max) = 'inExamCategoryId';   
     DECLARE @inStart INT, @inEnd INT;   
 
     SET @SortOrder = UPPER(ISNULL(@SortOrder, 'ASC'));

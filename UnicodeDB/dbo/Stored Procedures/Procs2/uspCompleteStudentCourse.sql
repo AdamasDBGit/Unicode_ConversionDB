@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspCompleteStudentCourse]    
+CREATE PROCEDURE [dbo].[uspCompleteStudentCourse]    
 (    
  @I_Student_Detail_ID int,    
  @I_Batch_ID INT,   
- @S_Upd_By NVARCHAR(MAX)    
+ @S_Upd_By Nnvarchar(max)    
 )    
 AS    
 BEGIN    

@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertSMSReceiptHeader]  
+CREATE PROCEDURE [dbo].[uspInsertSMSReceiptHeader]  
     (  
-      @sReceiptNo NVARCHAR(MAX) ,  
+      @sReceiptNo Nnvarchar(max) ,  
       @iInvoiceHeaderID INT ,  
       @dReceiptDate DATETIME ,  
       @iStudentDetailID INT ,  
@@ -9,18 +9,18 @@
       @nReceiptAmount NUMERIC(18, 2) ,  
       @nReceiptTaxAmount NUMERIC(18, 2) ,  
       @sFundTransferStatus CHAR(1) ,  
-      @sCrtdBy NVARCHAR(MAX) ,  
+      @sCrtdBy Nnvarchar(max) ,  
       @dCreatedOn DATETIME ,  
       @nCreditCardNo NUMERIC(18, 0) ,  
-      @dCreditCardExpiry NVARCHAR(MAX) ,  
-      @sCreditCardIssuer NVARCHAR(MAX) ,  
-      @sChequeDDNo NVARCHAR(MAX) ,  
-      @dChequeDDDate NVARCHAR(MAX) ,  
-      @sBankName NVARCHAR(MAX) ,  
-      @sBranchName NVARCHAR(MAX) ,  
+      @dCreditCardExpiry Nnvarchar(max) ,  
+      @sCreditCardIssuer Nnvarchar(max) ,  
+      @sChequeDDNo Nnvarchar(max) ,  
+      @dChequeDDDate Nnvarchar(max) ,  
+      @sBankName Nnvarchar(max) ,  
+      @sBranchName Nnvarchar(max) ,  
       @iReceiptType INT,  
       @iBrandID INT = NULL  ,
-      @sNarration NVARCHAR(MAX) =null   
+      @sNarration Nnvarchar(max) =null   
     )  
 AS   
     SET NOCOUNT ON    
@@ -115,7 +115,7 @@ AS
     BEGIN CATCH    
  --Error occurred:      
         ROLLBACK TRANSACTION    
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()    

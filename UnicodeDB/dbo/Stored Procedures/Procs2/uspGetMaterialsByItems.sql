@@ -1,12 +1,12 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetMaterialsByItems] 
 (
-	@ItemCode NVARCHAR(MAX),
+	@ItemCode Nnvarchar(max),
 	@MoveOrderNo INT
 )
 
 AS
-	DECLARE @TEMPTABLE TABLE(SLNo INT IDENTITY(1,1),StockId INT ,BarCode NVARCHAR(255),StockDetailId INT,IsIssued INT,ItemCode NVARCHAR(255))
+	DECLARE @TEMPTABLE TABLE(SLNo INT IDENTITY(1,1),StockId INT ,BarCode Nnvarchar(max),StockDetailId INT,IsIssued INT,ItemCode Nnvarchar(max))
 	DECLARE @INT_STOCK_ID INT
 BEGIN TRY 
 	IF (ISNULL(@ItemCode,'')<>'')
@@ -55,7 +55,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

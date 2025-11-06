@@ -1,0 +1,180 @@
+﻿CREATE PROCEDURE dbo.usp_ERP_Cheque_DebitCredit_Settlement_Report
+    @BrandIDs NVARCHAR(MAX),  
+    @StartDate DATE = NULL,
+    @EndDate   DATE = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @BrandList TABLE (BrandID INT PRIMARY KEY);
+
+    IF @BrandIDs IS NOT NULL AND LTRIM(RTRIM(@BrandIDs)) <> ''
+    BEGIN
+        INSERT INTO @BrandList(BrandID)
+        SELECT DISTINCT TRY_CAST(LTRIM(RTRIM(x.value('.', 'VARCHAR(50)'))) AS INT)
+        FROM (SELECT CAST('<i>' + REPLACE(@BrandIDs, ',', '</i><i>') + '</i>' AS XML) AS xmlData) AS t
+        CROSS APPLY xmlData.nodes('/i') AS split(x)
+        WHERE TRY_CAST(LTRIM(RTRIM(x.value('.', 'VARCHAR(50)'))) AS INT) IS NOT NULL;
+    END
+
+    --settled cheque
+
+    SELECT S_Brand_Name, tcm.S_Center_Name, a.*,
+           ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0) AS total
+    FROM T_Receipt_Header a
+    INNER JOIN T_Brand_Center_Details b ON a.I_Centre_Id = b.I_Centre_Id
+    INNER JOIN T_Brand_Master tbm ON b.I_Brand_ID = tbm.I_Brand_ID
+    INNER JOIN T_Centre_Master tcm ON a.I_Centre_Id = tcm.I_Centre_Id
+    INNER JOIN T_PaymentMode_Master c ON a.I_PaymentMode_ID = c.I_PaymentMode_ID
+    WHERE a.I_PaymentMode_ID IN (2,3,4,27,31)
+      AND ( CONVERT(DATE, Dt_Deposit_Date) BETWEEN @StartDate AND @EndDate )
+      AND b.I_Brand_ID IN (SELECT BrandID FROM @BrandList);
+
+    --bounce cheque
+
+    SELECT S_Brand_Name, tcm.S_Center_Name, a.*,
+           ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0) AS total
+    FROM T_Receipt_Header a
+    INNER JOIN T_Brand_Center_Details b ON a.I_Centre_Id = b.I_Centre_Id
+    INNER JOIN T_Brand_Master tbm ON b.I_Brand_ID = tbm.I_Brand_ID
+    INNER JOIN T_Centre_Master tcm ON a.I_Centre_Id = tcm.I_Centre_Id
+    INNER JOIN T_PaymentMode_Master c ON a.I_PaymentMode_ID = c.I_PaymentMode_ID
+    WHERE a.I_PaymentMode_ID IN (2,3,4,27,31)
+      AND a.I_Status = 0
+      AND ( CONVERT(DATE, a.Dt_Upd_On) BETWEEN @StartDate AND @EndDate )
+      AND Dt_Deposit_Date IS NOT NULL
+      AND b.I_Brand_ID IN (SELECT BrandID FROM @BrandList);
+
+    --unsettle cheque
+
+    SELECT S_Brand_Name, tcm.S_Center_Name, a.N_Receipt_Amount, a.N_Tax_Amount, a.*,
+           ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0) AS total
+    FROM T_Receipt_Header a
+    INNER JOIN T_Brand_Center_Details b ON a.I_Centre_Id = b.I_Centre_Id
+    INNER JOIN T_Brand_Master tbm ON b.I_Brand_ID = tbm.I_Brand_ID
+    INNER JOIN T_Centre_Master tcm ON a.I_Centre_Id = tcm.I_Centre_Id
+    INNER JOIN T_PaymentMode_Master c ON a.I_PaymentMode_ID = c.I_PaymentMode_ID
+    WHERE a.I_PaymentMode_ID IN (2,3,4,27,31)
+      AND ( CONVERT(DATE, Dt_Receipt_Date) BETWEEN @StartDate AND @EndDate )
+      AND (Dt_Deposit_Date IS NULL OR CONVERT(DATE, Dt_Deposit_Date) > @EndDate)
+      AND (a.I_Status = 1 OR (a.I_Status = 0 AND CONVERT(DATE, a.Dt_Upd_On) > @EndDate))
+      AND b.I_Brand_ID IN (SELECT BrandID FROM @BrandList);
+
+    --collection deposit whose collection is prior to startdate
+    SELECT S_Brand_Name, tcm.S_Center_Name, a.N_Receipt_Amount, a.N_Tax_Amount, a.*,
+           ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0) AS total
+    FROM T_Receipt_Header a
+    INNER JOIN T_Brand_Center_Details b ON a.I_Centre_Id = b.I_Centre_Id
+    INNER JOIN T_Brand_Master tbm ON b.I_Brand_ID = tbm.I_Brand_ID
+    INNER JOIN T_Centre_Master tcm ON a.I_Centre_Id = tcm.I_Centre_Id
+    INNER JOIN T_PaymentMode_Master c ON a.I_PaymentMode_ID = c.I_PaymentMode_ID
+    WHERE a.I_PaymentMode_ID IN (2,3,4,27,31)
+      AND ( CONVERT(DATE, Dt_Receipt_Date) < @StartDate )
+      AND ( CONVERT(DATE, Dt_Deposit_Date) BETWEEN @StartDate AND @EndDate )
+      AND (a.I_Status = 1 OR (a.I_Status = 0 AND CONVERT(DATE, a.Dt_Upd_On) >= @StartDate))
+      AND b.I_Brand_ID IN (SELECT BrandID FROM @BrandList);
+
+    --collection reversal whose collection prior to startdate and is not deposited
+
+    SELECT S_Brand_Name, tcm.S_Center_Name, a.N_Receipt_Amount, a.N_Tax_Amount, a.*,
+           ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0) AS total
+    FROM T_Receipt_Header a
+    INNER JOIN T_Brand_Center_Details b ON a.I_Centre_Id = b.I_Centre_Id
+    INNER JOIN T_Brand_Master tbm ON b.I_Brand_ID = tbm.I_Brand_ID
+    INNER JOIN T_Centre_Master tcm ON a.I_Centre_Id = tcm.I_Centre_Id
+    INNER JOIN T_PaymentMode_Master c ON a.I_PaymentMode_ID = c.I_PaymentMode_ID
+    WHERE a.I_PaymentMode_ID IN (2,3,4,27,31)
+      AND ( CONVERT(DATE, Dt_Receipt_Date) < @StartDate )
+      AND Dt_Deposit_Date IS NULL
+      AND ((a.I_Status = 0 AND CONVERT(DATE, a.Dt_Upd_On) BETWEEN @StartDate AND @EndDate))
+      AND b.I_Brand_ID IN (SELECT BrandID FROM @BrandList);
+
+    --settled Debit/Credit
+
+    SELECT S_Brand_Name, tcm.S_Center_Name, a.*,
+           ISNULL(dbo.fnGetReceiptAmtExcldConvenienceCharge(
+                  (ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0)),
+                  tbm.i_brand_id, a.Dt_Receipt_Date, a.I_PaymentMode_ID, NULL),
+                  ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0)) AS total
+    FROM T_Receipt_Header a
+    INNER JOIN T_Brand_Center_Details b ON a.I_Centre_Id = b.I_Centre_Id
+    INNER JOIN T_Brand_Master tbm ON b.I_Brand_ID = tbm.I_Brand_ID
+    INNER JOIN T_Centre_Master tcm ON a.I_Centre_Id = tcm.I_Centre_Id
+    INNER JOIN T_PaymentMode_Master c ON a.I_PaymentMode_ID = c.I_PaymentMode_ID
+    WHERE a.I_PaymentMode_ID IN (13,14,15,16,17,19,20,21,22,23,24,25,28,29,30,32,34)
+      AND ( CONVERT(DATE, Dt_Deposit_Date) BETWEEN @StartDate AND @EndDate )
+      AND b.I_Brand_ID IN (SELECT BrandID FROM @BrandList);
+
+    --bounce Debit/Credit
+
+    SELECT S_Brand_Name, tcm.S_Center_Name, a.*,
+           ISNULL(dbo.fnGetReceiptAmtExcldConvenienceCharge(
+                  (ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0)),
+                  tbm.i_brand_id, a.Dt_Receipt_Date, a.I_PaymentMode_ID, NULL),
+                  ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0)) AS total
+    FROM T_Receipt_Header a
+    INNER JOIN T_Brand_Center_Details b ON a.I_Centre_Id = b.I_Centre_Id
+    INNER JOIN T_Brand_Master tbm ON b.I_Brand_ID = tbm.I_Brand_ID
+    INNER JOIN T_Centre_Master tcm ON a.I_Centre_Id = tcm.I_Centre_Id
+    INNER JOIN T_PaymentMode_Master c ON a.I_PaymentMode_ID = c.I_PaymentMode_ID
+    WHERE a.I_PaymentMode_ID IN (13,14,15,16,17,19,20,21,22,23,24,25,28,29,30,32,34)
+      AND a.I_Status = 0
+      AND ( CONVERT(DATE, a.Dt_Upd_On) BETWEEN @StartDate AND @EndDate )
+      AND Dt_Deposit_Date IS NOT NULL
+      AND b.I_Brand_ID IN (SELECT BrandID FROM @BrandList);
+
+    --unsettled Debit/Credits
+
+    SELECT S_Brand_Name, tcm.S_Center_Name, a.N_Receipt_Amount, a.N_Tax_Amount, a.*,
+           ISNULL(dbo.fnGetReceiptAmtExcldConvenienceCharge(
+                  (ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0)),
+                  tbm.i_brand_id, a.Dt_Receipt_Date, a.I_PaymentMode_ID, NULL),
+                  ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0)) AS total
+    FROM T_Receipt_Header a
+    INNER JOIN T_Brand_Center_Details b ON a.I_Centre_Id = b.I_Centre_Id
+    INNER JOIN T_Brand_Master tbm ON b.I_Brand_ID = tbm.I_Brand_ID
+    INNER JOIN T_Centre_Master tcm ON a.I_Centre_Id = tcm.I_Centre_Id
+    INNER JOIN T_PaymentMode_Master c ON a.I_PaymentMode_ID = c.I_PaymentMode_ID
+    WHERE a.I_PaymentMode_ID IN (13,14,15,16,17,19,20,21,22,23,24,25,28,29,30,32,34)
+      AND ( CONVERT(DATE, Dt_Receipt_Date) BETWEEN @StartDate AND @EndDate )
+      AND (Dt_Deposit_Date IS NULL OR CONVERT(DATE, Dt_Deposit_Date) > @EndDate)
+      AND (a.I_Status = 1 OR (a.I_Status = 0 AND CONVERT(DATE, a.Dt_Upd_On) > @EndDate))
+      AND b.I_Brand_ID IN (SELECT BrandID FROM @BrandList);
+
+    --collection deposit whose collection is prior to startdate (debitcredit)
+
+    SELECT S_Brand_Name, tcm.S_Center_Name, a.N_Receipt_Amount, a.N_Tax_Amount, a.*,
+           ISNULL(dbo.fnGetReceiptAmtExcldConvenienceCharge(
+                  (ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0)),
+                  tbm.i_brand_id, a.Dt_Receipt_Date, a.I_PaymentMode_ID, NULL),
+                  ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0)) AS total
+    FROM T_Receipt_Header a
+    INNER JOIN T_Brand_Center_Details b ON a.I_Centre_Id = b.I_Centre_Id
+    INNER JOIN T_Brand_Master tbm ON b.I_Brand_ID = tbm.I_Brand_ID
+    INNER JOIN T_Centre_Master tcm ON a.I_Centre_Id = tcm.I_Centre_Id
+    INNER JOIN T_PaymentMode_Master c ON a.I_PaymentMode_ID = c.I_PaymentMode_ID
+    WHERE a.I_PaymentMode_ID IN (13,14,15,16,17,19,20,21,22,23,24,25,28,29,30,32,34)
+      AND ( CONVERT(DATE, Dt_Receipt_Date) < @StartDate )
+      AND ( CONVERT(DATE, Dt_Deposit_Date) BETWEEN @StartDate AND @EndDate )
+      AND (a.I_Status = 1 OR (a.I_Status = 0 AND CONVERT(DATE, a.Dt_Upd_On) >= @StartDate))
+      AND b.I_Brand_ID IN (SELECT BrandID FROM @BrandList);
+
+    --collection reversal whose collection prior to startdate and is not deposited (debitcredit)
+
+    SELECT S_Brand_Name, tcm.S_Center_Name, a.N_Receipt_Amount, a.N_Tax_Amount, a.*,
+           ISNULL(dbo.fnGetReceiptAmtExcldConvenienceCharge(
+                  (ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0)),
+                  tbm.i_brand_id, a.Dt_Receipt_Date, a.I_PaymentMode_ID, NULL),
+                  ISNULL(a.N_Receipt_Amount,0) + ISNULL(a.N_Tax_Amount,0)) AS total
+    FROM T_Receipt_Header a
+    INNER JOIN T_Brand_Center_Details b ON a.I_Centre_Id = b.I_Centre_Id
+    INNER JOIN T_Brand_Master tbm ON b.I_Brand_ID = tbm.I_Brand_ID
+    INNER JOIN T_Centre_Master tcm ON a.I_Centre_Id = tcm.I_Centre_Id
+    INNER JOIN T_PaymentMode_Master c ON a.I_PaymentMode_ID = c.I_PaymentMode_ID
+    WHERE a.I_PaymentMode_ID IN (13,14,15,16,17,19,20,21,22,23,24,25,28,29,30,32,34)
+      AND ( CONVERT(DATE, Dt_Receipt_Date) < @StartDate )
+      AND Dt_Deposit_Date IS NULL
+      AND ((a.I_Status = 0 AND CONVERT(DATE, a.Dt_Upd_On) BETWEEN @StartDate AND @EndDate))
+      AND b.I_Brand_ID IN (SELECT BrandID FROM @BrandList);
+
+END
+

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentActivityPerformance] --1136,485
+CREATE PROCEDURE [dbo].[uspGetStudentActivityPerformance] --1136,485
 (	
 	@iTermID INT,
 	@iStudentDetailID INT
@@ -10,13 +10,13 @@ BEGIN
 	
 	--DECLARE @tblStudentActivity TABLE (ID INT IDENTITY(1,1), StudentID INT, ActivityID INT, StudentActivityID INT)
 	CREATE TABLE #tblEvalCriteria  (ID INT IDENTITY(1,1), ActivityID INT, EvalCriteriaID INT)
-	DECLARE @tblStudentActivity TABLE (ID INT IDENTITY(1,1), StudentID INT,  StudentName VARCHAR(150), ActivityID INT, ActivityName VARCHAR(50), StudentActivityID INT, 
-	EvaluationID1 INT, EvaluationName1 VARCHAR(50), EvalGrade1 VARCHAR(50),
-	EvaluationID2 INT, EvaluationName2 VARCHAR(50), EvalGrade2 VARCHAR(50),
-	EvaluationID3 INT, EvaluationName3 VARCHAR(50), EvalGrade3 VARCHAR(50),
-	EvaluationID4 INT, EvaluationName4 VARCHAR(50), EvalGrade4 VARCHAR(50),
-	EvaluationID5 INT, EvaluationName5 VARCHAR(50), EvalGrade5 VARCHAR(50),
-	EvaluationID6 INT, EvaluationName6 VARCHAR(50), EvalGrade6 VARCHAR(50))
+	DECLARE @tblStudentActivity TABLE (ID INT IDENTITY(1,1), StudentID INT,  StudentName nvarchar(max), ActivityID INT, ActivityName nvarchar(max), StudentActivityID INT, 
+	EvaluationID1 INT, EvaluationName1 nvarchar(max), EvalGrade1 nvarchar(max),
+	EvaluationID2 INT, EvaluationName2 nvarchar(max), EvalGrade2 nvarchar(max),
+	EvaluationID3 INT, EvaluationName3 nvarchar(max), EvalGrade3 nvarchar(max),
+	EvaluationID4 INT, EvaluationName4 nvarchar(max), EvalGrade4 nvarchar(max),
+	EvaluationID5 INT, EvaluationName5 nvarchar(max), EvalGrade5 nvarchar(max),
+	EvaluationID6 INT, EvaluationName6 nvarchar(max), EvalGrade6 nvarchar(max))
 	
 	INSERT INTO @tblStudentActivity (StudentActivityID, StudentID, ActivityID)
 	SELECT tsad.I_Student_Activity_ID, tsad.I_Student_Detail_ID, tsad.I_Activity_ID FROM dbo.T_Student_Activity_Details AS tsad

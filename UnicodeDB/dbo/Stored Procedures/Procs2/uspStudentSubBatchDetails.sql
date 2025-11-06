@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspStudentSubBatchDetails]   --19,NULL,'CE',NULL,NULL         
+CREATE PROCEDURE [dbo].[uspStudentSubBatchDetails]   --19,NULL,'CE',NULL,NULL         
 (            
      @I_Batch_ID INT =NULL ,
      @CenterId INT =NULL,
-     @Flag NVARCHAR(MAX) =NULL,
-     @S_Student_ID NVARCHAR(MAX) =NULL 
+     @Flag Nnvarchar(max) =NULL,
+     @S_Student_ID Nnvarchar(max) =NULL 
             
            
 )            

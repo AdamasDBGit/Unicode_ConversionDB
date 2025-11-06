@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentExamMasterDataForAPI](@BrandID INT,@AcademicSession NVARCHAR(MAX)=NULL)
+CREATE PROCEDURE [dbo].[uspGetStudentExamMasterDataForAPI](@BrandID INT,@AcademicSession Nnvarchar(max)=NULL)
 AS
 BEGIN
 
-DECLARE @AcSes VARCHAR(10)=NULL
+DECLARE @AcSes nvarchar(max)=NULL
 
 IF (@AcademicSession IS NOT NULL)
 	SET @AcSes=SUBSTRING(@AcademicSession,0,5)

@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspGetInvoiceDiscountDetails](@iInvoiceID int)
+CREATE PROCEDURE [dbo].[uspGetInvoiceDiscountDetails](@iInvoiceID int)
 as
 begin
 
 
 
       declare @iBrandID INT=109 ,
-      @sHierarchyListID VARCHAR(MAX)='54' ,
+      @sHierarchyListID nvarchar(max)='54' ,
       @dtStartDate DATE ='2021-03-01',
       @dtEndDate DATE='2021-03-13'
 	  --@StudentID VARCHAR(MAX)='2021/RICE/1719'
@@ -34,20 +34,20 @@ begin
     
         CREATE TABLE #INVDET
             (
-              S_Center_Name VARCHAR(MAX) ,
-              TypeOfCentre VARCHAR(MAX) ,
-              S_Course_Name VARCHAR(MAX) ,
-              S_Batch_Name VARCHAR(MAX) ,
-              S_Student_ID VARCHAR(MAX) ,
-              StudentName VARCHAR(MAX) ,
-              ContactNo VARCHAR(MAX) ,
+              S_Center_Name nvarchar(max) ,
+              TypeOfCentre nvarchar(max) ,
+              S_Course_Name nvarchar(max) ,
+              S_Batch_Name nvarchar(max) ,
+              S_Student_ID nvarchar(max) ,
+              StudentName nvarchar(max) ,
+              ContactNo nvarchar(max) ,
               I_RollNo INT ,
               I_Invoice_Header_ID INT ,
-              S_Invoice_No VARCHAR(MAX) ,
+              S_Invoice_No nvarchar(max) ,
               I_Invoice_Detail_ID INT ,
               I_Installment_No INT ,
               Dt_Installment_Date DATETIME ,
-              S_Component_Name VARCHAR(MAX) ,
+              S_Component_Name nvarchar(max) ,
               N_Amount_Due DECIMAL(14, 2) ,
               TaxDue DECIMAL(14, 2) ,
               TaxPaidAdvBeforeGST DECIMAL(14, 2) ,
@@ -55,7 +55,7 @@ begin
               TotalTax DECIMAL(14, 2) ,
               ReceiptCompAmount DECIMAL(14, 2) ,
               ReceiptCompTax DECIMAL(14, 2) ,
-              CreditNoteNo VARCHAR(MAX) ,
+              CreditNoteNo nvarchar(max) ,
               CreditNoteDate DATE ,
               CreditNoteAmt DECIMAL(14, 2) ,
               CreditNoteTax DECIMAL(14, 2) ,

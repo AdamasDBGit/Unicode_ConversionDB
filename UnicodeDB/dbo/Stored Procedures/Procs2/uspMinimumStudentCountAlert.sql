@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspMinimumStudentCountAlert]          
+CREATE PROCEDURE [dbo].[uspMinimumStudentCountAlert]          
           
 AS          
 BEGIN          
@@ -27,7 +27,7 @@ DECLARE @CurrentDate DATETIME
           
 SELECT @CurrentDate = GETDATE()         
           
-DECLARE @MinimumDay VARCHAR(50)          
+DECLARE @MinimumDay nvarchar(max)          
           
 SELECT @MinimumDay = S_Config_Value          
 FROM dbo.T_Center_Configuration            
@@ -40,17 +40,17 @@ AND EnrolmentCount < ISNULL(I_Min_Strength,EnrolmentCount)
           
           
 DECLARE @iBatchID INT             
-DECLARE @sBatchCode VARCHAR(50)          
+DECLARE @sBatchCode nvarchar(max)          
 DECLARE @iCentreId INT          
 DECLARE @EnrolmentCount INT          
 DECLARE @iMinStrength INT          
 DECLARE @dtBatchStartDate DATETIME          
            
 DECLARE @iTaskMasterId INT=143       
-DECLARE @info VARCHAR(200)          
+DECLARE @info nvarchar(max)          
 DECLARE @ID INT           
 DECLARE @iTaskDetailId INT             
-DECLARE @sHierarchyChain VARCHAR(1000)                
+DECLARE @sHierarchyChain nvarchar(max)                
           
           
  OPEN Cursor_temptable                   

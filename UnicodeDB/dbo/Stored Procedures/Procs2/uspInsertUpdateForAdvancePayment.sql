@@ -1,4 +1,4 @@
-﻿CREATE   PROCEDURE [dbo].[uspInsertUpdateForAdvancePayment] --exec uspInsertUpdateForAdvancePayment 695056      
+CREATE   PROCEDURE [dbo].[uspInsertUpdateForAdvancePayment] --exec uspInsertUpdateForAdvancePayment 695056      
 (      
  @uspReceiptDetailId INT = NULL       
 )      
@@ -67,7 +67,7 @@ BEGIN
  DECLARE @AmountPaid NUMERIC(18,2)      
  DECLARE @AmountAdvColn NUMERIC(18,2)      
       
- DECLARE @iInvoiceNo VARCHAR(256)      
+ DECLARE @iInvoiceNo nvarchar(max)      
  DECLARE @TotAdvPerInv NUMERIC(18,2)      
       
  DECLARE @CHTotAdvAmt NUMERIC(18,2)      

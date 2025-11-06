@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Role_Master_Parameters] 
+CREATE PROCEDURE [dbo].[Role_Master_Parameters] 
 -- =============================================
      -- Author:	Tridip Chatterjee
 -- Create date: 14-09-2023
@@ -6,8 +6,8 @@
 -- =============================================
 -- Add the parameters for the stored procedure here
 @Role_ID int=null,
-@Role_Name nvarchar(255)=null,
-@Role_Desc nvarchar(255)=null,
+@Role_Name nnvarchar(max)=null,
+@Role_Desc nnvarchar(max)=null,
 @CreatedBy int=null,
 @Createdon date=null,
 @Status int=null

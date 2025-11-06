@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspUploadDocument] 
+CREATE PROCEDURE [dbo].[uspUploadDocument] 
 (
-	@sDocumentName NVARCHAR(MAX),
-	@sDocumentType NVARCHAR(MAX),
-	@sDocumentPath NVARCHAR(MAX),
-	@sDocumentURL NVARCHAR(MAX),
-	@sCreatedBy NVARCHAR(MAX) = null ,
+	@sDocumentName Nnvarchar(max),
+	@sDocumentType Nnvarchar(max),
+	@sDocumentPath Nnvarchar(max),
+	@sDocumentURL Nnvarchar(max),
+	@sCreatedBy Nnvarchar(max) = null ,
 	@dCreatedOn datetime = null
 )
 
@@ -50,7 +50,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

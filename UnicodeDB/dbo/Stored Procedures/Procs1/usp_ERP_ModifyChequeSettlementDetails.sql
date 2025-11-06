@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[usp_ERP_ModifyChequeSettlementDetails]  --[dbo].[uspModifyChequeSettlementDetails] '<Root><StudentCheque I_Student_ID="485" I_Cheque_No="379269" I_Deposite_Date="12/12/2012 12:00:00 AM" I_BankName="1" I_Receipt_Header_ID="1259937" /><StudentCheque I_Student_ID="486" I_Cheque_No="530969" I_Deposite_Date="12/12/2012 12:00:00 AM" I_BankName="1" I_Receipt_Header_ID="1259938" /></Root>' 
 (  
   
@@ -201,7 +201,7 @@ BEGIN
     END TRY      
     BEGIN CATCH      
         ROLLBACK TRANSACTION  
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()      

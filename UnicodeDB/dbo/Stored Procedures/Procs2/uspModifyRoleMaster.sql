@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyRoleMaster] 
+CREATE PROCEDURE [dbo].[uspModifyRoleMaster] 
 (
 	@iRoleID int,
-	@sRoleType NVARCHAR(MAX) = null,	
-    @sRoleCode NVARCHAR(MAX) = null,    
-    @sRoleDescription NVARCHAR(MAX) = null,
-	@sRoleBy NVARCHAR(MAX),
+	@sRoleType Nnvarchar(max) = null,	
+    @sRoleCode Nnvarchar(max) = null,    
+    @sRoleDescription Nnvarchar(max) = null,
+	@sRoleBy Nnvarchar(max),
 	@dRoleOn datetime,
     @iFlag int,
     @iHierarchyDetailID int = null
@@ -15,8 +15,8 @@ BEGIN TRY
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 	
-	DECLARE @sErrorCode varchar(20)
-	DECLARE @iOut varchar(20)
+	DECLARE @sErrorCode nvarchar(max)
+	DECLARE @iOut nvarchar(max)
 
     IF @iFlag = 1
 	BEGIN
@@ -56,7 +56,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

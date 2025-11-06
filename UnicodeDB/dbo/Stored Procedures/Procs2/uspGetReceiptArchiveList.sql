@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetReceiptArchiveList]  
+CREATE PROCEDURE [dbo].[uspGetReceiptArchiveList]  
 as  
 begin TRY    
 ;WITH    C ( I_Invoice_Header_ID, S_Invoice_No, Dt_Crtd_On, Dt_Upd_On, Dt_Invoice_Date, I_Parent_Invoice_ID, Parent_S_Invoice_No, Current_I_Invoice_Header_ID, I_Status, keyid, PKeyID )  
@@ -98,7 +98,7 @@ DROP TABLE #temp
      BEGIN CATCH    
 --Error occurred:    
     
-DECLARE @ErrMsg NVARCHAR(4000) ,    
+DECLARE @ErrMsg Nnvarchar(max) ,    
 @ErrSeverity INT    
 SELECT @ErrMsg = ERROR_MESSAGE() ,    
 @ErrSeverity = ERROR_SEVERITY()    

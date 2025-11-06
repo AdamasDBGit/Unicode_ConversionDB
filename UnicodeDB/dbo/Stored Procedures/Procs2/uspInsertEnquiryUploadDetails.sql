@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertEnquiryUploadDetails]
+CREATE PROCEDURE [dbo].[uspInsertEnquiryUploadDetails]
     (
       @sEnquiryMigrationXML XML = NULL     
     )
@@ -6,7 +6,7 @@ AS
     BEGIN TRY                  
         SET NOCOUNT OFF; 
         
-        DECLARE @AcademicYear VARCHAR(10)='2023'
+        DECLARE @AcademicYear nvarchar(max)='2023'
         
         BEGIN TRANSACTION                  
          
@@ -15,41 +15,41 @@ AS
             (
               ID INT IDENTITY(1, 1) ,
               CenterId INT ,
-              FirstName VARCHAR(50) ,
-              MiddleName VARCHAR(50) ,
-              LastName VARCHAR(50) ,
+              FirstName nvarchar(max) ,
+              MiddleName nvarchar(max) ,
+              LastName nvarchar(max) ,
               DOB DATETIME ,
-              Age VARCHAR(20) ,
-              MobileNo VARCHAR(12) ,
-              CourseAppliedFor VARCHAR(MAX) ,
-              FatherName VARCHAR(50) ,
-              FatherContact VARCHAR(12) ,
-              MotherName VARCHAR(50) ,
-              MotherContact VARCHAR(12) ,
-              [Address] VARCHAR(200) ,
-              Country VARCHAR(20) ,
-              [State] VARCHAR(20) ,
-              City VARCHAR(20) ,
-              Pincode VARCHAR(20) ,
-              MotherTongue VARCHAR(20) ,
-              Sex VARCHAR(20) ,
-              Religion VARCHAR(20) ,
-              Email VARCHAR(200) ,
-              Scholar VARCHAR(20) ,
-              BloodGrp VARCHAR(20) ,
-              Nationality VARCHAR(20) ,
-              SocialCategory VARCHAR(20) ,
-              FamilyIncome VARCHAR(20) ,
-              S_CrtdBy VARCHAR(20) ,
+              Age nvarchar(max) ,
+              MobileNo nvarchar(max) ,
+              CourseAppliedFor nvarchar(max) ,
+              FatherName nvarchar(max) ,
+              FatherContact nvarchar(max) ,
+              MotherName nvarchar(max) ,
+              MotherContact nvarchar(max) ,
+              [Address] nvarchar(max) ,
+              Country nvarchar(max) ,
+              [State] nvarchar(max) ,
+              City nvarchar(max) ,
+              Pincode nvarchar(max) ,
+              MotherTongue nvarchar(max) ,
+              Sex nvarchar(max) ,
+              Religion nvarchar(max) ,
+              Email nvarchar(max) ,
+              Scholar nvarchar(max) ,
+              BloodGrp nvarchar(max) ,
+              Nationality nvarchar(max) ,
+              SocialCategory nvarchar(max) ,
+              FamilyIncome nvarchar(max) ,
+              S_CrtdBy nvarchar(max) ,
               Dt_CrtdOn DATETIME ,
               I_Status_ID INT ,
-              FormNo VARCHAR(MAX) ,
+              FormNo nvarchar(max) ,
               Amount DECIMAL(14, 2) ,
-              TransactionNo VARCHAR(MAX) ,
-              ReceiptNo VARCHAR(MAX) ,
+              TransactionNo nvarchar(max) ,
+              ReceiptNo nvarchar(max) ,
               ExtReceiptDate DATETIME ,
-              [Source] VARCHAR(MAX) ,
-              DepositedAccNo VARCHAR(MAX)
+              [Source] nvarchar(max) ,
+              DepositedAccNo nvarchar(max)
             )  
             
         CREATE TABLE #InterfaceTable
@@ -57,41 +57,41 @@ AS
               ID INT IDENTITY(1, 1) ,
               EnquiryID INT ,
               CenterId INT ,
-              FirstName VARCHAR(50) ,
-              MiddleName VARCHAR(50) ,
-              LastName VARCHAR(50) ,
+              FirstName nvarchar(max) ,
+              MiddleName nvarchar(max) ,
+              LastName nvarchar(max) ,
               DOB DATETIME ,
-              Age VARCHAR(20) ,
-              MobileNo VARCHAR(12) ,
+              Age nvarchar(max) ,
+              MobileNo nvarchar(max) ,
               CourseAppliedFor INT ,
-              FatherName VARCHAR(50) ,
-              FatherContact VARCHAR(12) ,
-              MotherName VARCHAR(50) ,
-              MotherContact VARCHAR(12) ,
-              [Address] VARCHAR(200) ,
+              FatherName nvarchar(max) ,
+              FatherContact nvarchar(max) ,
+              MotherName nvarchar(max) ,
+              MotherContact nvarchar(max) ,
+              [Address] nvarchar(max) ,
               Country INT ,
               [State] INT ,
               City INT ,
-              Pincode VARCHAR(20) ,
+              Pincode nvarchar(max) ,
               MotherTongue INT ,
               Sex INT ,
               Religion INT ,
-              Email VARCHAR(200) ,
+              Email nvarchar(max) ,
               Scholar INT ,
               BloodGrp INT ,
               Nationality INT ,
               SocialCategory INT ,
               FamilyIncome INT ,
-              S_CrtdBy VARCHAR(20) ,
+              S_CrtdBy nvarchar(max) ,
               Dt_CrtdOn DATETIME ,
               I_Status_ID INT ,
-              FormNo VARCHAR(MAX) ,
+              FormNo nvarchar(max) ,
               Amount DECIMAL(14, 2) ,
-              TransactionNo VARCHAR(MAX) ,
-              ReceiptNo VARCHAR(MAX) ,
+              TransactionNo nvarchar(max) ,
+              ReceiptNo nvarchar(max) ,
               ExtReceiptDate DATETIME ,
-              [Source] VARCHAR(MAX) ,
-              DepositedAccNo VARCHAR(MAX)
+              [Source] nvarchar(max) ,
+              DepositedAccNo nvarchar(max)
             )    
             
         INSERT  INTO #tempInterfaceTable
@@ -133,122 +133,122 @@ AS
                   DepositedAccNo
                 )
                 SELECT  T.c.value('@CenterId', 'int') ,
-                        T.c.value('@FirstName', 'varchar(50)') ,
-                        T.c.value('@MiddleName', 'varchar(50)') ,
-                        T.c.value('@LastName', 'varchar(50)') ,
+                        T.c.value('@FirstName', 'nvarchar(max)') ,
+                        T.c.value('@MiddleName', 'nvarchar(max)') ,
+                        T.c.value('@LastName', 'nvarchar(max)') ,
                         T.c.value('@DOB', 'datetime') ,
-                        CASE WHEN T.c.value('@Age', 'varchar(10)') = ''
+                        CASE WHEN T.c.value('@Age', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@Age', 'varchar(10)')
+                             ELSE T.c.value('@Age', 'nvarchar(max)')
                         END ,
-                        T.c.value('@MobileNo', 'varchar(12)') ,
+                        T.c.value('@MobileNo', 'nvarchar(max)') ,
                         CASE WHEN T.c.value('@CourseAppliedFor',
-                                            'varchar(MAX)') = '' THEN NULL
+                                            'nvarchar(max)') = '' THEN NULL
                              ELSE T.c.value('@CourseAppliedFor',
-                                            'varchar(MAX)')
+                                            'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@FatherName', 'varchar(50)') = ''
+                        CASE WHEN T.c.value('@FatherName', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@FatherName', 'varchar(50)')
+                             ELSE T.c.value('@FatherName', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@FatherContact', 'varchar(12)') = ''
+                        CASE WHEN T.c.value('@FatherContact', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@FatherContact', 'varchar(12)')
+                             ELSE T.c.value('@FatherContact', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@MotherName', 'varchar(50)') = ''
+                        CASE WHEN T.c.value('@MotherName', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@MotherName', 'varchar(50)')
+                             ELSE T.c.value('@MotherName', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@MotherContact', 'varchar(12)') = ''
+                        CASE WHEN T.c.value('@MotherContact', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@MotherContact', 'varchar(12)')
+                             ELSE T.c.value('@MotherContact', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@Address', 'varchar(200)') = ''
+                        CASE WHEN T.c.value('@Address', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@Address', 'varchar(200)')
+                             ELSE T.c.value('@Address', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@Country', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@Country', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@Country', 'varchar(20)')
+                             ELSE T.c.value('@Country', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@State', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@State', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@State', 'varchar(20)')
+                             ELSE T.c.value('@State', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@City', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@City', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@City', 'varchar(20)')
+                             ELSE T.c.value('@City', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@Pincode', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@Pincode', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@Pincode', 'varchar(20)')
+                             ELSE T.c.value('@Pincode', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@MotherTongue', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@MotherTongue', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@MotherTongue', 'varchar(20)')
+                             ELSE T.c.value('@MotherTongue', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@Sex', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@Sex', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@Sex', 'varchar(20)')
+                             ELSE T.c.value('@Sex', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@Religion', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@Religion', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@Religion', 'varchar(20)')
+                             ELSE T.c.value('@Religion', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@Email', 'varchar(200)') = ''
+                        CASE WHEN T.c.value('@Email', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@Email', 'varchar(200)')
+                             ELSE T.c.value('@Email', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@Scholar', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@Scholar', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@Scholar', 'varchar(20)')
+                             ELSE T.c.value('@Scholar', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@BloodGrp', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@BloodGrp', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@BloodGrp', 'varchar(20)')
+                             ELSE T.c.value('@BloodGrp', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@Nationality', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@Nationality', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@Nationality', 'varchar(20)')
+                             ELSE T.c.value('@Nationality', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@SocialCategory', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@SocialCategory', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@SocialCategory', 'varchar(20)')
+                             ELSE T.c.value('@SocialCategory', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@FamilyIncome', 'varchar(20)') = ''
+                        CASE WHEN T.c.value('@FamilyIncome', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@FamilyIncome', 'varchar(20)')
+                             ELSE T.c.value('@FamilyIncome', 'nvarchar(max)')
                         END ,
-                        T.c.value('@S_CrtdBy', 'varchar(20)') ,
+                        T.c.value('@S_CrtdBy', 'nvarchar(max)') ,
                         T.c.value('@Dt_CrtdOn', 'datetime') ,
                         1 ,
-                        CASE WHEN T.c.value('@ApplicationNo', 'varchar(MAX)') = ''
+                        CASE WHEN T.c.value('@ApplicationNo', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@ApplicationNo', 'varchar(MAX)')
+                             ELSE T.c.value('@ApplicationNo', 'nvarchar(max)')
                         END ,
                         CAST( CASE WHEN T.c.value('@AmountPaid', 'varchar(MAX)') = ''
                              THEN NULL
-                             ELSE T.c.value('@AmountPaid', 'varchar(MAX)')
+                             ELSE T.c.value('@AmountPaid', 'nvarchar(max)')
                         END AS DECIMAL(14,2)) ,
-                        CASE WHEN T.c.value('@TransactionNo', 'varchar(MAX)') = ''
+                        CASE WHEN T.c.value('@TransactionNo', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@TransactionNo', 'varchar(MAX)')
+                             ELSE T.c.value('@TransactionNo', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@ReceiptNo', 'varchar(MAX)') = ''
+                        CASE WHEN T.c.value('@ReceiptNo', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@ReceiptNo', 'varchar(MAX)')
+                             ELSE T.c.value('@ReceiptNo', 'nvarchar(max)')
                         END ,
                         CASE WHEN T.c.value('@ReceiptDate', 'datetime') = ''
                              THEN NULL
                              ELSE T.c.value('@ReceiptDate', 'datetime')
                         END ,
-                        CASE WHEN T.c.value('@PaymentSource', 'varchar(MAX)') = ''
+                        CASE WHEN T.c.value('@PaymentSource', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@PaymentSource', 'varchar(MAX)')
+                             ELSE T.c.value('@PaymentSource', 'nvarchar(max)')
                         END ,
-                        CASE WHEN T.c.value('@DepositAccNo', 'varchar(MAX)') = ''
+                        CASE WHEN T.c.value('@DepositAccNo', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@DepositAccNo', 'varchar(MAX)')
+                             ELSE T.c.value('@DepositAccNo', 'nvarchar(max)')
                         END
                 FROM    @sEnquiryMigrationXML.nodes('/Root/EnquiryMigration') T ( c )
                 
@@ -287,7 +287,7 @@ AS
                         DECLARE @nationalityid INT= NULL
                         DECLARE @socialcategoryid INT= NULL
                         DECLARE @incomeid INT= NULL
-                        DECLARE @EmployeeId VARCHAR(MAX)= NULL
+                        DECLARE @EmployeeId nvarchar(max)= NULL
                         DECLARE @scholarid INT= NULL
                 
                         SELECT  @brandid = TCHND.I_Brand_ID
@@ -635,15 +635,15 @@ AS
                         
                         DECLARE @CenterID INT=NULL
                         DECLARE @Amount DECIMAL(14,2)=NULL
-                        DECLARE @CrtdBy VARCHAR(MAX)
+                        DECLARE @CrtdBy nvarchar(max)
                         DECLARE @CrtdOn DATETIME
                         DECLARE @iBrandID INT=NULL
-                        DECLARE @TransNo VARCHAR(MAX)=NULL
-                        DECLARE @ExtReceiptNo VARCHAR(MAX) =NULL
+                        DECLARE @TransNo nvarchar(max)=NULL
+                        DECLARE @ExtReceiptNo nvarchar(max) =NULL
                         DECLARE @ExtReceiptDate DATETIME=NULL
-                        DECLARE @Source VARCHAR(MAX)=NULL
-                        DECLARE @DepositAcc VARCHAR(MAX)=NULL
-                        DECLARE @FormNo VARCHAR(MAX)=NULL
+                        DECLARE @Source nvarchar(max)=NULL
+                        DECLARE @DepositAcc nvarchar(max)=NULL
+                        DECLARE @FormNo nvarchar(max)=NULL
                         
                         
                         SET @CenterID=(SELECT IT.CenterId FROM #InterfaceTable AS IT WHERE IT.ID=@idmin1 AND IT.I_Status_ID=1 AND IT.EnquiryID=@enquiryid)
@@ -666,14 +666,14 @@ AS
                             @iAmount = @Amount, -- numeric
                             @iReceiptDate = @CrtdOn, -- datetime
                             @iEnquiryID = @enquiryid, -- int
-                            @sFormNo = @FormNo, -- varchar(100)
+                            @sFormNo = @FormNo, -- nvarchar(max)
                             @iBrandID = @iBrandID, -- int
-                            @TransactionNo = @TransNo, -- varchar(max)
-                            @ExtReceiptNo = @ExtReceiptNo, -- varchar(max)
-                            @ExtReceiptDate = @ExtReceiptDate, -- varchar(max)
-                            @Source = @Source, -- varchar(max)
-                            @DepositAccNo = @DepositAcc, -- varchar(max)
-                            @CrtdBy = @CrtdBy, -- varchar(50)
+                            @TransactionNo = @TransNo, -- nvarchar(max)
+                            @ExtReceiptNo = @ExtReceiptNo, -- nvarchar(max)
+                            @ExtReceiptDate = @ExtReceiptDate, -- nvarchar(max)
+                            @Source = @Source, -- nvarchar(max)
+                            @DepositAccNo = @DepositAcc, -- nvarchar(max)
+                            @CrtdBy = @CrtdBy, -- nvarchar(max)
                             @CrtdOn = @CrtdOn -- datetime
                             
                          END
@@ -705,7 +705,7 @@ AS
                         UPDATE  #InterfaceTable
                         SET     I_Status_ID = 0
                         WHERE   ID = @idmin1
-                        DECLARE @errorstring VARCHAR(200)= 'Entry with the same mobile no. ('
+                        DECLARE @errorstring nvarchar(max)= 'Entry with the same mobile no. ('
                             + CAST(@MobNo AS VARCHAR) + ') already exists'
                 
                         RAISERROR(@errorstring,11,1) 
@@ -735,7 +735,7 @@ AS
     BEGIN CATCH                  
  --Error occurred:                    
         ROLLBACK TRANSACTION                   
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT                  
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()                  

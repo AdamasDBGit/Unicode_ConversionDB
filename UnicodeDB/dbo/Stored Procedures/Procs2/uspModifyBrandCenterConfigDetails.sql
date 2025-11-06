@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyBrandCenterConfigDetails]   
+CREATE PROCEDURE [dbo].[uspModifyBrandCenterConfigDetails]   
 (  
  @iBrandID int,   
  @sConfigXML xml,  
- @sCreatedBy NVARCHAR(MAX),  
+ @sCreatedBy Nnvarchar(max),  
  @sCreatedOn datetime,  
  @iFlag int,  
    
@@ -18,8 +18,8 @@ BEGIN
    
  DECLARE @AdjPosition SMALLINT, @AdjCount SMALLINT  
  DECLARE @InnerDetailXML XML  
- DECLARE @sConfigCode varchar(50)  
- DECLARE @sConfigValue varchar(50)  
+ DECLARE @sConfigCode nvarchar(max)  
+ DECLARE @sConfigValue nvarchar(max)  
   
  IF @iBrandID = 0 or @iBrandID is null  
  return;  
@@ -33,8 +33,8 @@ BEGIN
   WHILE(@AdjPosition<=@AdjCount)  
   BEGIN  
    SET @InnerDetailXML = @sConfigXML.query('/Values/Inserted/Items[position()=sql:variable("@AdjPosition")]')  
-   SELECT @sConfigCode = T.a.value('@ConfigCode','varchar(50)'),  
-     @sConfigValue = T.a.value('@ConfigValue','varchar(50)')   
+   SELECT @sConfigCode = T.a.value('@ConfigCode','nvarchar(max)'),  
+     @sConfigValue = T.a.value('@ConfigValue','nvarchar(max)')   
      FROM @InnerDetailXML.nodes('/Items') T(a)  
   
   
@@ -69,8 +69,8 @@ BEGIN
   WHILE(@AdjPosition<=@AdjCount)  
   BEGIN  
    SET @InnerDetailXML = @sConfigXML.query('/Values/Modified/Items[position()=sql:variable("@AdjPosition")]')  
-   SELECT @sConfigCode = T.a.value('@ConfigCode','varchar(50)'),  
-     @sConfigValue = T.a.value('@ConfigValue','varchar(50)')  
+   SELECT @sConfigCode = T.a.value('@ConfigCode','nvarchar(max)'),  
+     @sConfigValue = T.a.value('@ConfigValue','nvarchar(max)')  
    FROM @InnerDetailXML.nodes('/Items') T(a)  
         
    UPDATE  dbo.T_Center_Configuration   

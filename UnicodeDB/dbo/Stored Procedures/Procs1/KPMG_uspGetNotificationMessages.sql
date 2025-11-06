@@ -1,7 +1,7 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspGetNotificationMessages]
 
-@BranchId NVARCHAR(MAX)
+@BranchId Nnvarchar(max)
 AS
 BEGIN
 	

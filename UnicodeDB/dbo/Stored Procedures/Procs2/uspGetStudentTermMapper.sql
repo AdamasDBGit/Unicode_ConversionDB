@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentTermMapper]
+CREATE PROCEDURE [dbo].[uspGetStudentTermMapper]
 (
 @iBrandID INT,
 @CourseID INT
@@ -58,7 +58,7 @@ INTO @StudentID,@iCourseID,@iTermID,@iBatchID
                                   @iCourseID , -- I_Course_ID - int
                                   @StudentID , -- I_Student_Detail_ID - int
                                   0, -- I_Is_Completed - bit
-                                  'dba' , -- S_Crtd_By - varchar(20)
+                                  'dba' , -- S_Crtd_By - nvarchar(max)
                                   GETDATE() , -- Dt_Crtd_On - datetime
                                   @iBatchID  -- I_Batch_ID - int
                                   

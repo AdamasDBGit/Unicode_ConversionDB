@@ -1,8 +1,8 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspAssignBatchToCenter_Before_BatchFeePlanLog_2023March]   
 (  
  @iBatchId INT,  
- @CreatedBy NVARCHAR(MAX),  
+ @CreatedBy Nnvarchar(max),  
  @CreatedOn DATETIME,  
  @CenterID INT,  
  @CourseFeePlanID INT,  
@@ -12,12 +12,12 @@ CREATE PROCEDURE [dbo].[uspAssignBatchToCenter_Before_BatchFeePlanLog_2023March]
  @I_FacultyID INT,
  @MinStrength INT,
  @I_CenterDispatchScheme INT,
- @S_ClassDays NVARCHAR(MAX)='',
- @S_OfflineClassTime NVARCHAR(MAX)='',
- @S_OnlineClassTime NVARCHAR(MAX)='',
- @S_HandoutClassTime NVARCHAR(MAX)='',
- @S_ClassMode NVARCHAR(MAX)='',
- @S_BatchTime NVARCHAR(MAX)=''
+ @S_ClassDays Nnvarchar(max)='',
+ @S_OfflineClassTime Nnvarchar(max)='',
+ @S_OnlineClassTime Nnvarchar(max)='',
+ @S_HandoutClassTime Nnvarchar(max)='',
+ @S_ClassMode Nnvarchar(max)='',
+ @S_BatchTime Nnvarchar(max)=''
 )  
 AS  
 BEGIN TRY 
@@ -117,7 +117,7 @@ end
   @MinRegnAmt,  
   /* I_Status - int */ @I_Status,  
   @I_FacultyID,  
-  /* S_Crtd_By - varchar(20) */ @CreatedBy,  
+  /* S_Crtd_By - nvarchar(max) */ @CreatedBy,  
   /* Dt_Crtd_On - datetime */ @CreatedOn,
   @MinStrength,
   @I_CenterDispatchScheme,
@@ -130,7 +130,7 @@ end
   )   
 END TRY  
 BEGIN CATCH  
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
   

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspCloseFeePlanRequest] -- [uspCloseFeePlanRequest] null,2,4,72,1,14
+CREATE PROCEDURE [dbo].[uspCloseFeePlanRequest] -- [uspCloseFeePlanRequest] null,2,4,72,1,14
 (
 	-- Add the parameters for the stored procedure here
 	@iCurrencyID int = null,	
@@ -73,7 +73,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

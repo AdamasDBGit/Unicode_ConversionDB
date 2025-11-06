@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspGetTask]   
+CREATE PROCEDURE [dbo].[uspGetTask]   
     (  
       @iTaskDetailId INT = NULL ,  
       @sKeyValue XML = NULL ,  
       @iCondition INT = NULL ,  
       @iHierarchyMasterId INT = NULL ,  
-      @sHierarchyChain NVARCHAR(MAX) = NULL ,  
+      @sHierarchyChain Nnvarchar(max) = NULL ,  
       @iStatus INT    
     )  
 AS   
@@ -39,8 +39,8 @@ AS
                         CREATE TABLE #tempTableKeyValues  
                             (  
                               seq INT IDENTITY(1, 1) ,  
-                              S_Key VARCHAR(50),  
-                              S_Value VARCHAR(100),  
+                              S_Key nvarchar(max),  
+                              S_Value nvarchar(max),  
                               bStatus INT  
                             )     
        
@@ -48,8 +48,8 @@ AS
                                 ( S_Key ,  
                                   S_Value    
                                 )  
-                                SELECT  T.c.value('@S_Key', 'VARCHAR(50)') ,  
-                                        T.c.value('@S_Value', 'VARCHAR(50)')  
+                                SELECT  T.c.value('@S_Key', 'nvarchar(max)') ,  
+                                        T.c.value('@S_Value', 'nvarchar(max)')  
                                 FROM    @sKeyValue.nodes('/KeyValueList/KeyValue') T ( c )      
       
       

@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetStudentBatchListNew]  
+CREATE PROCEDURE [dbo].[usp_ERP_GetStudentBatchListNew]  
     (  
       @iBrandId INT ,  
-      @sHierarchyListID NVARCHAR(MAX)=NULL ,  
-      @sBatchList NVARCHAR(MAX) = NULL  
+      @sHierarchyListID Nnvarchar(max)=NULL ,  
+      @sBatchList Nnvarchar(max) = NULL  
     )  
 AS   
     BEGIN  
-	Declare @brandname varchar(100)
+	Declare @brandname nvarchar(max)
 	SET @brandname=(Select S_Brand_Name from T_Brand_Master where I_Brand_ID=@iBrandId)
   
         IF ( @sBatchList IS NOT NULL  

@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentAfterLogin_Bak_21032025]        
+CREATE PROCEDURE [dbo].[uspGetStudentAfterLogin_Bak_21032025]        
 (        
- @sToken nvarchar(MAX) =null        
+ @sToken nnvarchar(max) =null        
 )        
 AS        
 BEGIN        
-    Declare @currentyear varchar(4)    
+    Declare @currentyear nvarchar(max)    
  set @currentyear =(select YEAR(GETDATE()))  
 select distinct TPM.S_Mobile_No MobileNo        
 ,TSD.S_Student_ID as student_erp_id        

@@ -1,7 +1,7 @@
-﻿      
+      
 CREATE PROCEDURE [dbo].[uspGet_ERP_UserLoginInformationAdminForExternal]      
     (      
-      @EmailID NVARCHAR(MAX)       
+      @EmailID Nnvarchar(max)       
     )      
 AS      
     BEGIN      

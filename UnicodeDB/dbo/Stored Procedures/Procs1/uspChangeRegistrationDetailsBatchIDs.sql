@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspChangeRegistrationDetailsBatchIDs] 
-	@OldRegnIds NVARCHAR(MAX),
+CREATE PROCEDURE [dbo].[uspChangeRegistrationDetailsBatchIDs] 
+	@OldRegnIds Nnvarchar(max),
 	@NewBatchID INT,
-	@Updt_By NVARCHAR(MAX),
+	@Updt_By Nnvarchar(max),
 	@Updt_On DATETIME
  
 AS
@@ -22,7 +22,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

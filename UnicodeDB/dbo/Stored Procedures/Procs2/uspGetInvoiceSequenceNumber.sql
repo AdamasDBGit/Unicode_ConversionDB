@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspGetInvoiceSequenceNumber]
+CREATE PROCEDURE [dbo].[uspGetInvoiceSequenceNumber]
 (
 	@I_Brand_ID INT = NULL,
 	@I_State_ID INT = NULL,
-	@S_Invoice_Type NVARCHAR(MAX) = NULL
+	@S_Invoice_Type Nnvarchar(max) = NULL
 )
 AS
 BEGIN

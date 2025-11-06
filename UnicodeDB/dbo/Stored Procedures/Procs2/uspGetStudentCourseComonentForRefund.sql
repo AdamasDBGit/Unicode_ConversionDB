@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentCourseComonentForRefund]    --8573,296735
+CREATE PROCEDURE [dbo].[uspGetStudentCourseComonentForRefund]    --8573,296735
  @iInvoiceHeaderID INT ,
  @iBatchID INT           
 AS                      
@@ -53,7 +53,7 @@ BEGIN TRY
 BEGIN CATCH          
  --Error occurred:            
  ROLLBACK TRANSACTION           
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int          
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int          
  SELECT @ErrMsg = ERROR_MESSAGE(),          
    @ErrSeverity = ERROR_SEVERITY()          
           

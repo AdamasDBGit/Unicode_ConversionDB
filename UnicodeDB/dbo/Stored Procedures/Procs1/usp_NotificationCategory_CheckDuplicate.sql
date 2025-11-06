@@ -1,7 +1,7 @@
-﻿
+
 CREATE   PROCEDURE dbo.usp_NotificationCategory_CheckDuplicate
     @NotificationCategoryID INT = NULL,
-    @NotificationCategoryName NVARCHAR(255)
+    @NotificationCategoryName Nnvarchar(max)
 AS
 BEGIN
     SET NOCOUNT ON;

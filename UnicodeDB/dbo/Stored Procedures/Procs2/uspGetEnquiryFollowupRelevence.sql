@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetEnquiryFollowupRelevence]
+CREATE PROCEDURE [dbo].[uspGetEnquiryFollowupRelevence]
 (
-@iHierarchyDetailID NVARCHAR(MAX),
+@iHierarchyDetailID Nnvarchar(max),
 @dtFromDate DATETIME,
 @dtToDate DATETIME,
 @iBrandID INT,

@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[UAT_ERP_REMOVE_ROUTE]
+CREATE PROCEDURE [dbo].[UAT_ERP_REMOVE_ROUTE]
     @I_Brand_ID INT,
     @I_Route_ID INT,
     @StatusFlag INT OUTPUT,
-    @Message NVARCHAR(100) OUTPUT,
-    @ErrorMessage NVARCHAR(100) OUTPUT
+    @Message Nnvarchar(max) OUTPUT,
+    @ErrorMessage Nnvarchar(max) OUTPUT
 AS
 BEGIN
     -- Start a transaction

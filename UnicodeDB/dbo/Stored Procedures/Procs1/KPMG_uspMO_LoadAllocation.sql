@@ -1,14 +1,14 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspMO_LoadAllocation] 
 	
 AS
 BEGIN Try
 			
 	DECLARE @Qty INT
-DECLARE @ItemCode VARCHAR(255)
+DECLARE @ItemCode nvarchar(max)
 DECLARE @idMap INT
 DECLARE @idMaxLast INT
-DECLARE @ItmAmount_TEMP TABLE([Amount_Id] [int] IDENTITY(1,1) NOT NULL,ItemCode VARCHAR(255),Qunty INT, Calc_Date DateTime, ItemStatus INT)
+DECLARE @ItmAmount_TEMP TABLE([Amount_Id] [int] IDENTITY(1,1) NOT NULL,ItemCode nvarchar(max),Qunty INT, Calc_Date DateTime, ItemStatus INT)
 
 Insert Into @ItmAmount_TEMP(ItemCode,Qunty,Calc_Date,ItemStatus)
 Select MvOd.Fld_KPMG_Itemcode,MvOd.Quantity-Qty.Quantity as AllotQty,GETDATE() as InsertDate, 0 as Itm_Status from (
@@ -42,7 +42,7 @@ END TRY
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            

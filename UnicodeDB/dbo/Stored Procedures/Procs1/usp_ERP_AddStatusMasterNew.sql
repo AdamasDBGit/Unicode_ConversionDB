@@ -1,9 +1,9 @@
-﻿    
+    
     
     
 CREATE PROCEDURE [dbo].[usp_ERP_AddStatusMasterNew]               
-    @StatusDesc NVARCHAR(MAX) NULL,              
-    @StatusSMSDesc NVARCHAR(MAX) NULL,              
+    @StatusDesc Nnvarchar(max) NULL,              
+    @StatusSMSDesc Nnvarchar(max) NULL,              
     @StatusID INT NULL,              
     @Amount NUMERIC(18,2) NULL,              
     @Brandid INT NULL,              
@@ -157,7 +157,7 @@ SELECT 0 AS StatusFlag, 'Duplicate Status Master' AS Message;
     END TRY              
     BEGIN CATCH              
         ROLLBACK TRANSACTION;              
-        DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity INT;              
+        DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT;              
         SELECT @ErrMsg = ERROR_MESSAGE(),              
                @ErrSeverity = ERROR_SEVERITY();              
         SELECT 0 AS StatusFlag, @ErrMsg AS Message;              

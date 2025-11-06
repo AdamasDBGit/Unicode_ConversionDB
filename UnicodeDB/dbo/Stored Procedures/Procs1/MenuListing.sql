@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[MenuListing] 
+CREATE PROCEDURE [dbo].[MenuListing] 
 -- =============================================
 -- Author:		Tridip Chatterjee
 -- Create date: 20-09-2023
 -- Description:	To Search and get the menu list
 -- =============================================
 -- Add the parameters for the stored procedure here
-@Menuname NVARCHAR(MAX)=null,
+@Menuname Nnvarchar(max)=null,
 @MenuID int = null
 
 

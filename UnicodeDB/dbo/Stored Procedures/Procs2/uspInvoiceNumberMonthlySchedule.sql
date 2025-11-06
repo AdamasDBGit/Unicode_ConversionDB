@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspInvoiceNumberMonthlySchedule]
+CREATE PROCEDURE [dbo].[uspInvoiceNumberMonthlySchedule]
 AS
 BEGIN
 	CREATE TABLE #Temp
@@ -8,7 +8,7 @@ BEGIN
 		Dt_Installment_Date DATETIME,
 		I_Invoice_Detail_ID INT,
 		I_Installment_No INT,
-		InvoiceType VARCHAR(50)
+		InvoiceType nvarchar(max)
 	)
 
 	DECLARE @Month INT
@@ -42,9 +42,9 @@ BEGIN
 		@Dt_Installment_Date DATETIME,
 		@I_Invoice_Detail_ID INT,
 		@I_Installment_No INT,
-		@InvoiceType VARCHAR(50)
+		@InvoiceType nvarchar(max)
 
-	DECLARE @INVN VARCHAR(256)
+	DECLARE @INVN nvarchar(max)
 
 	WHILE (@row <= @count)
 	BEGIN

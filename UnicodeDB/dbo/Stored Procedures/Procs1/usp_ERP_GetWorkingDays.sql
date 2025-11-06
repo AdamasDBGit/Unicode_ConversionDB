@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_GetWorkingDays]     
+CREATE PROCEDURE [dbo].[usp_ERP_GetWorkingDays]     
 (   
 @GroupID int,  
 @ClassID int,  
@@ -77,7 +77,7 @@ Begin
     BEGIN CATCH      
 --Error occurred:      
       
-        DECLARE @ErrMsg NVARCHAR(4000) ,      
+        DECLARE @ErrMsg Nnvarchar(max) ,      
             @ErrSeverity INT      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,      
                 @ErrSeverity = ERROR_SEVERITY()      

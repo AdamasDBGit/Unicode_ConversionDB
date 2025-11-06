@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspSearchInvoiceList]
+CREATE PROCEDURE [dbo].[uspSearchInvoiceList]
 (
 	@iCenterId INT =NULL,
-	@sInvoiceId NVARCHAR(MAX)=NULL,
-	@sStudentId NVARCHAR(MAX)=NULL,
-	@sStudentFirstName NVARCHAR(MAX)=NULL,
-	@sStudentSecondName NVARCHAR(MAX)=NULL,
-	@sStudentLastName NVARCHAR(MAX)=NULL
+	@sInvoiceId Nnvarchar(max)=NULL,
+	@sStudentId Nnvarchar(max)=NULL,
+	@sStudentFirstName Nnvarchar(max)=NULL,
+	@sStudentSecondName Nnvarchar(max)=NULL,
+	@sStudentLastName Nnvarchar(max)=NULL
 )
 
 
@@ -13,7 +13,7 @@ AS
 
 BEGIN
 	SET NOCOUNT ON;
-	DECLARE @sStudentName VARCHAR(150)
+	DECLARE @sStudentName nvarchar(max)
 	DECLARE @sStudentDetailId INT
 
 	SELECT TIP.I_Student_Detail_ID, TIP.I_Invoice_Header_ID, ISNULL(TSD.S_First_Name,''), ISNULL(TSD.S_Middle_Name,'') , ISNULL(TSD.S_Last_Name,''),

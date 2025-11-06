@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspHoldResultUpdate]
 (
 	@iStudentResultID int = null
@@ -20,7 +20,7 @@ select 1 as StatusFlag,'Updated successfully' as Message
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

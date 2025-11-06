@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspSelectReceiptsforFT]
+CREATE PROCEDURE [dbo].[uspSelectReceiptsforFT]
 (
 	@iCenterID int,
 	@dtDateFrom DATETIME,
@@ -14,17 +14,17 @@ BEGIN
 	(
 		[ID] int identity(1,1),
 		I_ReceiptHeaderId int,
-		S_ReceiptNo varchar(20),
+		S_ReceiptNo nvarchar(max),
 		N_ReceiptAmount numeric(18,2),
 		N_ReceiptTaxAmount numeric(18,2),
 		Dt_ReceiptDate datetime,
 		I_InvoiceId int,
-		S_InvoiceNo varchar(50),
+		S_InvoiceNo nvarchar(max),
 		I_StudentId int,
-		S_Title varchar(10),
-		S_FirstName varchar(50),
-		S_MiddleName varchar(50),
-		S_LastName varchar(50),
+		S_Title nvarchar(max),
+		S_FirstName nvarchar(max),
+		S_MiddleName nvarchar(max),
+		S_LastName nvarchar(max),
 		I_PaymentModeId int,
 		I_ReceiptType int,
 		I_Status INT
@@ -36,7 +36,7 @@ BEGIN
 		I_ReceiptHeaderId int,
 		I_InvoiceDetailId int,
 		I_FeeComponentId int,
-		S_FeeComponent_Name varchar(50),
+		S_FeeComponent_Name nvarchar(max),
 		N_Amount numeric(18,0)
 	)
 	

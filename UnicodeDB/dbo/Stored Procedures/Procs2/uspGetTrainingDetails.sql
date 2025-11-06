@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetTrainingDetails]
 (
 	@iExamScheduleID int = null
@@ -20,7 +20,7 @@ WHERE TSR.I_Result_Exam_Schedule_ID = @iExamScheduleID
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

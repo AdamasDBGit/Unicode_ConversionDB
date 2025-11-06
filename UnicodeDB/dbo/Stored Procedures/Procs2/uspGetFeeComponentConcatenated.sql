@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetFeeComponentConcatenated]
+CREATE PROCEDURE [dbo].[uspGetFeeComponentConcatenated]
     (
       @iReceiptHeaderID INT
     )
@@ -7,10 +7,10 @@ AS
     
     CREATE TABLE #temp
     (
-    FeeComponentList VARCHAR(MAX)
+    FeeComponentList nvarchar(max)
     )
 
-        DECLARE @Names VARCHAR(8000)
+        DECLARE @Names nvarchar(max)
 
         SELECT  @Names = COALESCE(@Names + ',', '') + TT.Component
         FROM    ( SELECT DISTINCT

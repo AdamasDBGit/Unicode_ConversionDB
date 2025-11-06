@@ -1,9 +1,9 @@
-﻿                
+                
                 
 CREATE PROCEDURE [dbo].[ERP_uspInsertStudentBatchDetails_Bulkupload]      
     (      
       @sCoursesXMl XML ,      
-      @sCreatedBy NVARCHAR(MAX) ,      
+      @sCreatedBy Nnvarchar(max) ,      
       @dtCreatedDate DATETIME ,      
       @bIsFromPromoteBatch BIT = NULL ,      
       @iSourceBatchID INT = NULL                      
@@ -23,7 +23,7 @@ AS
         DECLARE @iCourseCenterDeliveryId INT                        
  --DECLARE @iTimeSlotId int                        
         DECLARE @cIsLumpSum CHAR(18)                        
-        DECLARE @sLoginID VARCHAR(50)                         
+        DECLARE @sLoginID nvarchar(max)                         
         DECLARE @AdjPosition SMALLINT , @AdjCount SMALLINT                         
         DECLARE @CourseDetailXML XML                        
         DECLARE @EnquiryXML XML                        
@@ -238,7 +238,7 @@ End
                                 @BatchID = @iBatchId, -- int      
                                 @CourseID = @iCourseId, -- int      
                                 @CenterID = @iCenterId, -- int      
-                                @CreatedBy = @sCreatedBy, -- varchar(max)      
+                                @CreatedBy = @sCreatedBy, -- nvarchar(max)      
                                 @CreatedDate = @dtCreatedDate -- datetime                
                     END                      
                 ELSE      
@@ -299,7 +299,7 @@ End
                                                 @BatchID = @iBatchId, -- int      
                                                 @CourseID = @iCourseId, -- int      
                                                 @CenterID = @iCenterId, -- int      
-                                                @CreatedBy = @sCreatedBy, -- varchar(max)      
+                                                @CreatedBy = @sCreatedBy, -- nvarchar(max)      
                                                 @CreatedDate = @dtCreatedDate -- datetime              
                                
                                         SET @iFlag = 1              
@@ -328,7 +328,7 @@ End
                                         @BatchID = @iBatchId, -- int      
                                         @CourseID = @iCourseId, -- int      
                                         @CenterID = @iCenterId, -- int      
-                                        @CreatedBy = @sCreatedBy, -- varchar(max)      
+                                        @CreatedBy = @sCreatedBy, -- nvarchar(max)      
                                         @CreatedDate = @dtCreatedDate -- datetime               
                                           
                                     END      
@@ -386,7 +386,7 @@ End
                                         @BatchID = @iBatchId, -- int      
                                         @CourseID = @iCourseId, -- int      
                                         @CenterID = @iCenterId, -- int      
-                                        @CreatedBy = @sCreatedBy, -- varchar(max)      
+                                        @CreatedBy = @sCreatedBy, -- nvarchar(max)      
                                         @CreatedDate = @dtCreatedDate -- datetime                            
                     END                 
                         
@@ -458,7 +458,7 @@ End
     BEGIN CATCH                        
  --Error occurred:                          
         ROLLBACK TRANSACTION                        
-        DECLARE @ErrMsg NVARCHAR(4000) ,      
+        DECLARE @ErrMsg Nnvarchar(max) ,      
             @ErrSeverity INT                        
         SELECT  @ErrMsg = ERROR_MESSAGE() ,      
                 @ErrSeverity = ERROR_SEVERITY()                        

@@ -1,0 +1,118 @@
+﻿CREATE PROCEDURE [dbo].[UAT_ERP_GetStudentTransportDetails]
+    @StudentID NVARCHAR(MAX),
+    @BrandID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @Status INT;
+    -- Check if data exists for route_id
+    IF EXISTS (
+        SELECT 1
+        FROM T_Student_Detail sd
+        LEFT JOIN T_Student_Transport_History tt ON sd.I_Student_Detail_ID = tt.I_Student_Detail_ID
+        LEFT JOIN T_Transport_Master tm ON tt.I_PickupPoint_ID = tm.I_PickupPoint_ID
+        WHERE sd.S_Student_ID = @StudentID AND tm.I_Brand_ID = @BrandID AND tt.I_Route_ID IS NOT NULL
+    )
+    BEGIN
+        SET @Status = 1;
+        SELECT
+            sd.I_RollNo AS roll_number,
+            sd.S_Student_ID AS student_erp_id,
+            REPLACE(
+                CONCAT(
+                    ISNULL(sd.S_First_Name, ''),
+                    ' ',
+                    ISNULL(sd.S_Middle_Name, ''),
+                    ' ',
+                    ISNULL(sd.S_Last_Name, '')
+                ),
+                '  ', ' '
+            ) AS student_name,            
+            sd.I_Student_Detail_ID,
+            sgc.I_Class_ID AS class_id,
+            ts.S_Section_Name AS section_name,
+            sg.S_School_Group_Code AS school_group,
+            strm.S_Stream AS school_stream,
+            scs.I_Brand_ID AS client_id,
+            tt.I_PickupPoint_ID AS pickup_id,
+            tt.I_Route_ID AS route_id,
+            pm.S_First_Name AS first_name,
+            REPLACE(
+                CONCAT(
+                    ISNULL(pm.S_Middile_Name, ''),
+                    ' ',
+                    ISNULL(pm.S_Last_Name, '')
+                ),
+                '  ', ' '
+            ) AS last_name,
+            pm.S_Mobile_No AS phone_number,
+            pm.I_Relation_ID AS relation_id,
+            pm.I_IsBusTravel AS is_primary,
+            pm.I_Parent_Master_ID AS main_parent_id
+			Into #tempStudentData
+        FROM T_Student_Detail sd
+        LEFT JOIN T_Student_Parent_Maps spm ON sd.I_Student_Detail_ID = spm.I_Student_Detail_ID
+        LEFT JOIN T_Parent_Master pm ON spm.I_Parent_Master_ID = pm.I_Parent_Master_ID
+        LEFT JOIN (
+            SELECT *,
+                   ROW_NUMBER() OVER (PARTITION BY I_Student_Detail_ID ORDER BY Dt_Crtd_On DESC) AS rn
+            FROM T_Student_Transport_History
+        ) tt ON tt.I_Student_Detail_ID = sd.I_Student_Detail_ID AND tt.rn = 1
+        LEFT JOIN T_Transport_Master tm ON tt.I_PickupPoint_ID = tm.I_PickupPoint_ID
+        LEFT JOIN T_Student_Class_Section scs ON sd.I_Student_Detail_ID = scs.I_Student_Detail_ID
+        LEFT JOIN T_School_Group_Class sgc ON scs.I_School_Group_Class_ID = sgc.I_School_Group_Class_ID
+        LEFT JOIN T_Class tc ON sgc.I_Class_ID = tc.I_Class_ID AND tc.I_Brand_ID = @BrandID
+        LEFT JOIN T_Section ts ON scs.I_Section_ID = ts.I_Section_ID
+        LEFT JOIN T_Stream strm ON scs.I_Stream_ID = strm.I_Stream_ID
+        LEFT JOIN T_School_Group sg ON sgc.I_School_Group_ID = sg.I_School_Group_ID
+        WHERE sd.S_Student_ID = @StudentID AND tm.I_Brand_ID = @BrandID;
+
+		-- if exist previous make inactive
+
+		update T_ERP_Students_Buzzed_Sync set I_Status_ID=0 where 
+		I_Student_detail_ID=(select top 1 I_Student_Detail_ID from #tempStudentData)
+
+
+		-----
+
+
+		 -- Insert data into T_ERP_Students_Buzzed_Sync
+        INSERT INTO T_ERP_Students_Buzzed_Sync 
+        (
+            I_Student_detail_ID, 
+            student_erp_id, 
+            buzzed_student_id, 
+            Erp_parent_id, 
+            Relation_ID, 
+            buzzed_parent_id, 
+            dt_Created_dt, 
+            dt_Modified_dt, 
+            is_Synced,
+			I_Status_ID
+        )
+        SELECT 
+            I_Student_Detail_ID,
+            student_erp_id,
+            NULL, -- Assuming buzzed_student_id is NULL for now
+            main_parent_id, 
+            relation_id,
+            NULL, 
+            GETDATE(),
+            NULL,
+            0, -- Assuming the new entry is not synced yet
+			1
+        FROM #tempStudentData;
+
+		SELECT * FROM #tempStudentData;
+        -- Drop the temp table
+        DROP TABLE #tempStudentData;
+    END
+    ELSE
+    BEGIN
+        SET @Status = 0;
+    END
+    -- Return status
+    SELECT @Status AS status;
+END;
+
+

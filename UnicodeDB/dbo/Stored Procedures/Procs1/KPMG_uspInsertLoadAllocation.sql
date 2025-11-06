@@ -1,12 +1,12 @@
-﻿
+
 CREATE PROCEDURE [dbo].[KPMG_uspInsertLoadAllocation]
 (
-	@Item_Code NVARCHAR(MAX)
+	@Item_Code Nnvarchar(max)
 )
 AS   
 BEGIN Try	    
-DECLARE @Ratio_TEMP TABLE(Ratio_Id [int] IDENTITY(1,1) NOT NULL,MoveOrderNo INT, BranchId INT, ItemCode NVARCHAR(255), MoQty INT, RtQty INT)
-DECLARE @Fl_TEMP TABLE(Ratio_Id [int] IDENTITY(1,1) NOT NULL,MoveOrderNo INT, BranchId INT, ItemCode NVARCHAR(255), MoQty INT)
+DECLARE @Ratio_TEMP TABLE(Ratio_Id [int] IDENTITY(1,1) NOT NULL,MoveOrderNo INT, BranchId INT, ItemCode Nnvarchar(max), MoQty INT, RtQty INT)
+DECLARE @Fl_TEMP TABLE(Ratio_Id [int] IDENTITY(1,1) NOT NULL,MoveOrderNo INT, BranchId INT, ItemCode Nnvarchar(max), MoQty INT)
 DECLARE @TotMoItem_Qty INT
 DECLARE @CWH_Qty INT
 DECLARE @CountRo INT
@@ -107,7 +107,7 @@ END TRY
 BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            

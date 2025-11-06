@@ -1,20 +1,20 @@
-﻿CREATE PROCEDURE [dbo].[uspGetInvoiceRegister] --uspGetInvoiceRegister 53,107,NULL,NULL,'2013-04-03','','','','04-0002',''     
+CREATE PROCEDURE [dbo].[uspGetInvoiceRegister] --uspGetInvoiceRegister 53,107,NULL,NULL,'2013-04-03','','','','04-0002',''     
     (      
       @iSelectedHierarchyId int,      
       @iSelectedBrandId int,      
       @dtDateTo datetime = null,      
       @dtDateFrom datetime = null,      
       @dtCurrentDate datetime,      
-      @sFName NVARCHAR(MAX) = null,      
-      @sMName NVARCHAR(MAX) = null,      
-      @sLName NVARCHAR(MAX) = NULL,    
-      @sStudentCode NVARCHAR(MAX) = NULL,    
-      @sInvoiceNo NVARCHAR(MAX) = NULL        
+      @sFName Nnvarchar(max) = null,      
+      @sMName Nnvarchar(max) = null,      
+      @sLName Nnvarchar(max) = NULL,    
+      @sStudentCode Nnvarchar(max) = NULL,    
+      @sInvoiceNo Nnvarchar(max) = NULL        
     )      
 AS       
     BEGIN      
         SET NOCOUNT ON ;      
-            DECLARE @sSearchCriteria varchar(100)      
+            DECLARE @sSearchCriteria nvarchar(max)      
         DECLARE @TempCenter TABLE ( I_Center_ID int )      
         SELECT  @sSearchCriteria = S_Hierarchy_Chain      
         from    T_Hierarchy_Mapping_Details      
@@ -60,21 +60,21 @@ AS
             END      
         DECLARE @InvoiceDetail TABLE      
             (      
-              S_Invoice_No VARCHAR(100),      
+              S_Invoice_No nvarchar(max),      
               I_Invoice_Header_ID INT,      
               N_Invoice_Amount NUMERIC(18, 2),      
               Dt_Invoice_Date DATETIME,      
               I_Student_Detail_ID INT,      
-              S_Student_ID VARCHAR(100),      
-              S_First_Name VARCHAR(100),      
-              S_Middle_Name VARCHAR(100),      
-              S_Last_Name VARCHAR(100),      
+              S_Student_ID nvarchar(max),      
+              S_First_Name nvarchar(max),      
+              S_Middle_Name nvarchar(max),      
+              S_Last_Name nvarchar(max),      
               I_Status INT,      
               I_Centre_Id INT,      
               I_Currency_ID INT,      
               N_Tax_Amount NUMERIC(18, 2),      
-              S_Center_Code VARCHAR(50),      
-              S_Center_Short_Name VARCHAR(50)      
+              S_Center_Code nvarchar(max),      
+              S_Center_Short_Name nvarchar(max)      
             )      
         INSERT  INTO @InvoiceDetail      
                 SELECT  IP.S_Invoice_No,      

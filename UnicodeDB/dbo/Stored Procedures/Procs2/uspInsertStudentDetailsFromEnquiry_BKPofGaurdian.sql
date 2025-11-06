@@ -1,19 +1,19 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspInsertStudentDetailsFromEnquiry_BKPofGaurdian]  
     (  
       @iEnquiryRegnID INT ,  
-      @CrtdBy NVARCHAR(MAX) ,  
+      @CrtdBy Nnvarchar(max) ,  
       @DtCrtdOn DATETIME ,  
-      @sConductCode NVARCHAR(MAX),  
-      @sStudentCode NVARCHAR(MAX) = NULL,  
+      @sConductCode Nnvarchar(max),  
+      @sStudentCode Nnvarchar(max) = NULL,  
       @iRollNo INT = NULL,
-      @sStudyMaterialNo NVARCHAR(MAX) = NULL  
+      @sStudyMaterialNo Nnvarchar(max) = NULL  
     )  
 AS   
     SET NOCOUNT ON    
     BEGIN TRY     
     
-        DECLARE @sLoginID VARCHAR(500)     
+        DECLARE @sLoginID nvarchar(max)     
         DECLARE @iStudentDetailId INT    
         DECLARE @iCenterID INT    
     
@@ -176,15 +176,15 @@ IF (@BrandID > 0)
 	BEGIN
 		DECLARE @GaudianDetails table (
 		I_Brand_ID INT,
-		S_Mobile_No varchar(max),
-		S_FullName varchar(max),
+		S_Mobile_No nvarchar(max),
+		S_FullName nvarchar(max),
 		I_RelationID INT,
 		I_IsPrimary INT,
-		S_Address varchar(max),
-		S_Pin_Code nvarchar(max)
+		S_Address nvarchar(max),
+		S_Pin_Code nnvarchar(max)
 		)
 
-		DECLARE @S_ADDRESS varchar(max),@S_Pin_Code nvarchar(max)
+		DECLARE @S_ADDRESS nvarchar(max),@S_Pin_Code nnvarchar(max)
 
 		select @S_ADDRESS=S_Curr_Address1,@S_Pin_Code=S_Curr_Pincode from T_Student_Detail where I_Enquiry_Regn_ID=@iEnquiryRegnID
 
@@ -207,12 +207,12 @@ IF (@BrandID > 0)
 
 
 		DECLARE @ipI_Brand_ID INT
-		DECLARE @ipS_Mobile_No varchar(max)
-		DECLARE @ipFullName varchar(max)
+		DECLARE @ipS_Mobile_No nvarchar(max)
+		DECLARE @ipFullName nvarchar(max)
 		DECLARE @ipRelationID INT
 		DECLARE @ipIsPrimary INT
-		DECLARE @ipAddress varchar(max)
-		DECLARE @ipPin_Code varchar(max)
+		DECLARE @ipAddress nvarchar(max)
+		DECLARE @ipPin_Code nvarchar(max)
 
 
 		 -- declare cursor for Parent details          
@@ -242,7 +242,7 @@ IF (@BrandID > 0)
             BEGIN 
 
 
-				DECLARE @FirstName varchar(max),@MiddleName varchar(max),@LastName varchar(max),@iparentID INT
+				DECLARE @FirstName nvarchar(max),@MiddleName nvarchar(max),@LastName nvarchar(max),@iparentID INT
 				SELECT 
 				@FirstName=Ltrim(SubString(@ipFullName, 1, Isnull(Nullif(CHARINDEX(' ', @ipFullName), 0), 1000))) 
 				,@MiddleName=Ltrim(SUBSTRING(@ipFullName, CharIndex(' ', @ipFullName), 
@@ -369,7 +369,7 @@ END
     BEGIN CATCH    
  --Error occurred:      
         ROLLBACK TRANSACTION    
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()    

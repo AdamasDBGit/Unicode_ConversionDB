@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetCourseFeePlanDetailsForCenter] ---743,2480,29,14    
+CREATE PROCEDURE [dbo].[uspGetCourseFeePlanDetailsForCenter] ---743,2480,29,14    
 (    
   @iCenterID int = NULL,    
   @iCourseID int = NULL,    
@@ -63,7 +63,7 @@ END TRY
 BEGIN CATCH    
  --Error occurred:      
     
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int    
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     

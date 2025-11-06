@@ -1,13 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[uspGetPaymentDetailsByTransactionCode]
+CREATE PROCEDURE [dbo].[uspGetPaymentDetailsByTransactionCode]
     (
-      @sBrandName NVARCHAR(MAX) ,
-      @sStudentID NVARCHAR(MAX) ,
-      @sTransactionCode NVARCHAR(MAX) ,
-      @sExtReceiptNo NVARCHAR(MAX) = NULL ,
-      @sSource NVARCHAR(MAX) ,
+      @sBrandName Nnvarchar(max) ,
+      @sStudentID Nnvarchar(max) ,
+      @sTransactionCode Nnvarchar(max) ,
+      @sExtReceiptNo Nnvarchar(max) = NULL ,
+      @sSource Nnvarchar(max) ,
       @RAmount DECIMAL(14, 2) ,
       @RTax DECIMAL(14, 2),
-      @sStatus NVARCHAR(MAX)=NULL
+      @sStatus Nnvarchar(max)=NULL
     )
 AS
     BEGIN

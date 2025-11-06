@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertErrorLog]
+CREATE PROCEDURE [dbo].[uspInsertErrorLog]
 -- Add the parameters for the stored procedure here
-	@sErrorCode NVARCHAR(MAX),
+	@sErrorCode Nnvarchar(max),
 	@sErrorDescription text,
-	@sLoginID NVARCHAR(MAX),
+	@sLoginID Nnvarchar(max),
 	@dtCrtdOn datetime
 AS
 BEGIN TRY
@@ -29,7 +29,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

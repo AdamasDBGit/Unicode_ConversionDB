@@ -1,19 +1,19 @@
-﻿CREATE PROCEDURE [dbo].[uspGetCollectionRegister]  
+CREATE PROCEDURE [dbo].[uspGetCollectionRegister]  
     (  
       @iSelectedHierarchyId INT ,  
       @iSelectedBrandId INT ,  
       @dtDateTo DATETIME ,  
       @dtDateFrom DATETIME ,  
-      @sFName NVARCHAR(MAX) ,  
-      @sMName NVARCHAR(MAX) ,  
-      @sLName NVARCHAR(MAX) ,  
-      @sStudentCode NVARCHAR(MAX) = NULL ,  
-      @sEnquiryNo NVARCHAR(MAX) = NULL           
+      @sFName Nnvarchar(max) ,  
+      @sMName Nnvarchar(max) ,  
+      @sLName Nnvarchar(max) ,  
+      @sStudentCode Nnvarchar(max) = NULL ,  
+      @sEnquiryNo Nnvarchar(max) = NULL           
     )  
 AS   
     BEGIN            
         SET NOCOUNT ON ;            
-        DECLARE @sSearchCriteria VARCHAR(100)            
+        DECLARE @sSearchCriteria nvarchar(max)            
              
         DECLARE @TempCenter TABLE ( I_Center_ID INT )            
              
@@ -66,18 +66,18 @@ AS
             (  
               N_Receipt_Amount NUMERIC(18, 2) ,  
               I_Receipt_Header_ID INT ,  
-              S_First_Name VARCHAR(50) ,  
-              S_Middle_Name VARCHAR(50) ,  
-              S_Last_Name VARCHAR(50) ,  
+              S_First_Name nvarchar(max) ,  
+              S_Middle_Name nvarchar(max) ,  
+              S_Last_Name nvarchar(max) ,  
               I_Enquiry_Regn_ID INT ,  
               I_Student_Detail_ID INT ,  
-              S_Receipt_No VARCHAR(20) ,  
+              S_Receipt_No nvarchar(max) ,  
               Dt_Receipt_Date DATETIME ,  
               I_Invoice_Header_ID INT ,  
               I_Receipt_Type INT ,  
               I_Status INT ,  
               I_Centre_Id INT ,
-              OnAccountInvoiceNo VARCHAR(100)
+              OnAccountInvoiceNo nvarchar(max)
             )            
        
         INSERT  INTO @tempTable  

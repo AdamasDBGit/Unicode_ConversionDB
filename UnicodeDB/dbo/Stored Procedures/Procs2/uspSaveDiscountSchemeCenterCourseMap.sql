@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspSaveDiscountSchemeCenterCourseMap]
+CREATE PROCEDURE [dbo].[uspSaveDiscountSchemeCenterCourseMap]
 (
 @DiscountSchemeID INT,
 @CenterID INT,
 @CourseID INT,
-@CreatedBy NVARCHAR(MAX)='rice-group-admin'
+@CreatedBy Nnvarchar(max)='rice-group-admin'
 )
 AS
 BEGIN

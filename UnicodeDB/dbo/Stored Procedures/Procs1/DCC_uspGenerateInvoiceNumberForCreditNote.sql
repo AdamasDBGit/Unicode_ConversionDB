@@ -1,15 +1,15 @@
-﻿CREATE PROCEDURE [dbo].[DCC_uspGenerateInvoiceNumberForCreditNote] --exec uspGenerateInvoiceNumberForCreditNote 176710,1,'2018-06-01 00:00:00.000','I'
+CREATE PROCEDURE [dbo].[DCC_uspGenerateInvoiceNumberForCreditNote] --exec uspGenerateInvoiceNumberForCreditNote 176710,1,'2018-06-01 00:00:00.000','I'
 (
 	@invoiceHeaderID INT,
 	@installmentNo INT,
 	@dtInstallmentDate DATETIME,
-	@InvoiceNumber NVARCHAR(MAX) OUTPUT
+	@InvoiceNumber Nnvarchar(max) OUTPUT
 )	
 AS
 BEGIN	
 	
 	DECLARE @invoiceSequence INT
-	DECLARE @brandCode VARCHAR(50),@stateCode VARCHAR(50),@stateID INT, @brandID INT
+	DECLARE @brandCode nvarchar(max),@stateCode nvarchar(max),@stateID INT, @brandID INT
 	
 	DECLARE @Month INT, @Year INT
 

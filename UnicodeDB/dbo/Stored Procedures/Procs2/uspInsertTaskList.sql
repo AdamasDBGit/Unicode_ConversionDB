@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertTaskList] 
+CREATE PROCEDURE [dbo].[uspInsertTaskList] 
 (	
 	@sTaskListXML xml
 )
@@ -11,21 +11,21 @@ BEGIN TRY
 	DECLARE @TaskListPosition SMALLINT, @TaskListCount SMALLINT
 	DECLARE @TaskListXML XML
 	DECLARE @iTaskMasterId int
-	DECLARE @sTaskDescription varchar(500)
-	DECLARE @sQueryString varchar(100)
+	DECLARE @sTaskDescription nvarchar(max)
+	DECLARE @sQueryString nvarchar(max)
 	DECLARE @iStatus int
-	DECLARE @swfInstanceId varchar(500)
+	DECLARE @swfInstanceId nvarchar(max)
 	DECLARE @dDueDate datetime
 	DECLARE @iHierarchyMasterID INT
-	DECLARE @sHierarchyChain varchar(100)
+	DECLARE @sHierarchyChain nvarchar(max)
 	DECLARE @sKeyValue xml	
 		
 	DECLARE @iTaskDetailId int
 	DECLARE @iDocHandle int
 	DECLARE @AdjPosition SMALLINT, @AdjCount SMALLINT
 	DECLARE	@KeyValueXml XML 
-	DECLARE @sKey VARCHAR(50) 
-	DECLARE @sValue VARCHAR(100)
+	DECLARE @sKey nvarchar(max) 
+	DECLARE @sValue nvarchar(max)
 
 	BEGIN TRANSACTION
 	
@@ -38,13 +38,13 @@ BEGIN TRY
 			--Get the Task node for the Current Position
 			SET @TaskListXML = @sTaskListXML.query('/TaskList/Task[position()=sql:variable("@TaskListPosition")]')
 			SELECT @iTaskMasterId = Task.a.value('@TaskMasterID','INT'),
-				   @sTaskDescription = Task.a.value('@Description','varchar(500)'),
-				   @sQueryString = Task.a.value('@Querystring','varchar(100)'),
+				   @sTaskDescription = Task.a.value('@Description','nvarchar(max)'),
+				   @sQueryString = Task.a.value('@Querystring','nvarchar(max)'),
 				   @iStatus = Task.a.value('@Status','int'),
-				   @swfInstanceId = Task.a.value('@WfInstanceID','varchar(500)'),
+				   @swfInstanceId = Task.a.value('@WfInstanceID','nvarchar(max)'),
 				   @dDueDate = Task.a.value('@DueDate','datetime'),
 				   @iHierarchyMasterID = Task.a.value('@HierarchyMasterID','INT'),
-				   @sHierarchyChain = Task.a.value('@HierarchyChain','varchar(100)')		   
+				   @sHierarchyChain = Task.a.value('@HierarchyChain','nvarchar(max)')		   
 				  -- @sKeyValue = Task.a.value('@KeyValueList','xml')
 			FROM @TaskListXML.nodes('/Task') Task(a)
 			
@@ -82,8 +82,8 @@ BEGIN TRY
 			BEGIN
 				--Get the Adjustment node for the Current Position
 					SET @KeyValueXml = @sKeyValue.query('/KeyValueList/KeyValue[position()=sql:variable("@AdjPosition")]')
-					SELECT	@sKey = T.a.value('@S_Key','varchar(50)'),
-							@sValue = T.a.value('@S_Value','varchar(100)')		
+					SELECT	@sKey = T.a.value('@S_Key','nvarchar(max)'),
+							@sValue = T.a.value('@S_Value','nvarchar(max)')		
 					FROM @KeyValueXml.nodes('/KeyValue') T(a)
 					
 					INSERT INTO T_Task_Mapping
@@ -105,7 +105,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

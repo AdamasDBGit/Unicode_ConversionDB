@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspSaveCourseCouponDiscount] --'<Root><CouponNumber sCouponNumber="TESTCUAUG25_1" /><CouponNumber sCouponNumber="TESTCUAUG25_2" /><CouponNumber sCouponNumber="TESTCUAUG25_3" /></Root>'  
+CREATE PROCEDURE [dbo].[uspSaveCourseCouponDiscount] --'<Root><CouponNumber sCouponNumber="TESTCUAUG25_1" /><CouponNumber sCouponNumber="TESTCUAUG25_2" /><CouponNumber sCouponNumber="TESTCUAUG25_3" /></Root>'  
 (                      
                   
- @sCouponNumbers NVARCHAR(MAX),  
+ @sCouponNumbers Nnvarchar(max),  
  @iStatus INT,          
- @sCouponCourseIds NVARCHAR(MAX),                
+ @sCouponCourseIds Nnvarchar(max),                
  @dtExpiryDate DATETIME=NULL,        
  @dDiscountAmount DECIMAL        
 )                      
@@ -17,7 +17,7 @@ BEGIN TRY
    
   CREATE TABLE #tempCouponNumber        
   (                    
-    couponNumber VARCHAR(50)    
+    couponNumber nvarchar(max)    
   )  
     
   EXEC sp_xml_preparedocument @xml_hndl OUTPUT, @sCouponNumbers        
@@ -31,12 +31,12 @@ BEGIN TRY
    OPENXML(@xml_hndl, '/Root/CouponNumber', 1)              
  With              
  (              
-    sCouponNumber VARCHAR(50) '@sCouponNumber'          
+    sCouponNumber nvarchar(max) '@sCouponNumber'          
   )              
       
     --SELECT * FROM #tempCouponNumber  
       
-    DECLARE @cn_COUPONNUMBER VARCHAR(50)        
+    DECLARE @cn_COUPONNUMBER nvarchar(max)        
       
     DECLARE INSERT_COUPONNUMBER CURSOR FOR        
     SELECT couponNumber FROM #tempCouponNumber  
@@ -57,7 +57,7 @@ BEGIN TRY
 			  D_Coupon_Discount        
 			   )        
 			 VALUES  (         
-			  @cn_COUPONNUMBER , -- S_Coupon_Number - varchar(50)        
+			  @cn_COUPONNUMBER , -- S_Coupon_Number - nvarchar(max)        
 			  @dtExpiryDate , -- Dt_Expiry_Date - datetime        
 			  @iStatus , -- I_Status - int        
 			  NULL , -- Dt_Discount_Date - datetime        
@@ -105,7 +105,7 @@ BEGIN CATCH
           
   ROLLBACK TRANSACTION              
                     
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int                        
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int                        
  SELECT @ErrMsg = ERROR_MESSAGE(),                        
  @ErrSeverity = ERROR_SEVERITY()                        
  RAISERROR(@ErrMsg, @ErrSeverity, 1)            

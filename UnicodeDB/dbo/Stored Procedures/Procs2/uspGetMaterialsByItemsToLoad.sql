@@ -1,13 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[uspGetMaterialsByItemsToLoad]   
+CREATE PROCEDURE [dbo].[uspGetMaterialsByItemsToLoad]   
 (  
- @ItemCode NVARCHAR(MAX),  
+ @ItemCode Nnvarchar(max),  
  @MoveOrderNo INT,  
- @Context NVARCHAR(50)  
+ @Context Nnvarchar(max)  
 )  
   
 AS  
- DECLARE @TEMPTABLE TABLE(SLNo INT IDENTITY(1,1),StockId INT ,BarCode NVARCHAR(255),StockDetailId INT,IsIssued INT,ItemCode NVARCHAR(255),IsRequired CHAR(1) default 'N')  
- DECLARE @ItemAmountTable Table (Id int identity, ItemCode varchar(255))  
+ DECLARE @TEMPTABLE TABLE(SLNo INT IDENTITY(1,1),StockId INT ,BarCode Nnvarchar(max),StockDetailId INT,IsIssued INT,ItemCode Nnvarchar(max),IsRequired CHAR(1) default 'N')  
+ DECLARE @ItemAmountTable Table (Id int identity, ItemCode nvarchar(max))  
  DECLARE @INT_STOCK_ID INT  
  --DECLARE @CHAR_ISCHILD_REVMO INT  
 BEGIN TRY   
@@ -56,7 +56,7 @@ BEGIN
    WHERE B.Fld_KPMG_MoId = @MoveOrderNo  
       
    DECLARE @nodeCount INT  
-   DECLARE @i_code varchar(50)  
+   DECLARE @i_code nvarchar(max)  
    DECLARE @cntr INT  
    DECLARE @totalItemCount INT  
    DECLARE @EXTRA_ITEMCOUNT INT  
@@ -105,7 +105,7 @@ END
 ELSE IF (@Context='RECEIVE_AT_BRANCH')  
 BEGIN  
  DECLARE @BranchId INT  
- DECLARE @MoType VARCHAR(50)  
+ DECLARE @MoType nvarchar(max)  
  SELECT @BranchId= Fld_KPMG_Branch_Id,@MoType = Fld_KPMG_Context from Tbl_KPMG_MoMaster where Fld_KPMG_Mo_Id=@MoveOrderNo  
  IF ISNULL(@MoType,'') = 'REV_MO'  
  BEGIN  
@@ -156,7 +156,7 @@ SELECT SLNo  ,BarCode ,StockDetailId ,IsIssued,ItemCode, C.S_Course_Name AS Cour
 END TRY  
 BEGIN CATCH  
    
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
   
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  

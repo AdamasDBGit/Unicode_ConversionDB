@@ -1,18 +1,18 @@
-﻿CREATE PROCEDURE [dbo].[uspSendSMSForOnlinePayments]
+CREATE PROCEDURE [dbo].[uspSendSMSForOnlinePayments]
     (
       @iBrandID INT ,
-      @sTransactionNo NVARCHAR(MAX)
+      @sTransactionNo Nnvarchar(max)
     )
 AS
     BEGIN
 
         DECLARE @Amount DECIMAL(14, 2)
-        DECLARE @Component VARCHAR(MAX)
-        DECLARE @studentname VARCHAR(MAX)
+        DECLARE @Component nvarchar(max)
+        DECLARE @studentname nvarchar(max)
         DECLARE @stdid INT
-        DECLARE @sReceiptIDs VARCHAR(MAX)
-        DECLARE @endgreeting VARCHAR(MAX)
-        DECLARE @ContactNo VARCHAR(MAX)
+        DECLARE @sReceiptIDs nvarchar(max)
+        DECLARE @endgreeting nvarchar(max)
+        DECLARE @ContactNo nvarchar(max)
 
 
         IF @iBrandID = 109

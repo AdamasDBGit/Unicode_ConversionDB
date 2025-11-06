@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetAllResultByExamScheduleId]  
+CREATE PROCEDURE [dbo].[uspGetAllResultByExamScheduleId]  
 (  
  @iExamScheduleID int = null  
 )  
@@ -145,7 +145,7 @@ group by TSR.I_Student_Result_ID,C.I_Activity_ID
 END TRY  
 BEGIN CATCH  
    
- DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
   
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  

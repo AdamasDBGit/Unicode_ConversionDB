@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[User_Add_Update] ---SP_NAME----
 
 -- =============================================
@@ -10,13 +10,13 @@ CREATE PROCEDURE [dbo].[User_Add_Update] ---SP_NAME----
 ----- SP Parameters------------Default value null------------
 -- =============================================
 @User_ID int=null,
-@Username NVARCHAR(MAX)=null,
-@Password NVARCHAR(MAX)=null,
-@Email NVARCHAR(MAX)=null,
-@First_Name NVARCHAR(MAX)=null,
-@Middle_Name NVARCHAR(MAX)=null,
-@Last_Name NVARCHAR(MAX)=null,
-@Mobile NVARCHAR(MAX)=null,
+@Username Nnvarchar(max)=null,
+@Password Nnvarchar(max)=null,
+@Email Nnvarchar(max)=null,
+@First_Name Nnvarchar(max)=null,
+@Middle_Name Nnvarchar(max)=null,
+@Last_Name Nnvarchar(max)=null,
+@Mobile Nnvarchar(max)=null,
 @Created_By int =Null,
 @Status int=null
 

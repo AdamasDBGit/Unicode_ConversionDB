@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetUserTerritory]
+CREATE PROCEDURE [dbo].[uspGetUserTerritory]
 (
-	@vLoginID NVARCHAR(MAX)
+	@vLoginID Nnvarchar(max)
 )
 AS
 BEGIN

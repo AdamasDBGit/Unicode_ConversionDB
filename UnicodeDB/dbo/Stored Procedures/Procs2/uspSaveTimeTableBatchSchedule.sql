@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspSaveTimeTableBatchSchedule]
+CREATE PROCEDURE [dbo].[uspSaveTimeTableBatchSchedule]
     (
       @sTimeTableXML XML = NULL       
     )
@@ -22,17 +22,17 @@ AS
               I_Batch_ID INT ,
               I_Room_ID INT ,
               I_Skill_ID INT ,
-              S_EmployeeId VARCHAR(MAX) ,
-              S_Remarks VARCHAR(500) ,
+              S_EmployeeId nvarchar(max) ,
+              S_Remarks nvarchar(max) ,
               I_Session_ID INT ,
-              S_SessionName VARCHAR(500) ,
-              S_SessionTopic VARCHAR(500) ,
+              S_SessionName nvarchar(max) ,
+              S_SessionTopic nvarchar(max) ,
               I_ModuleId INT ,
               I_TermId INT ,
               Dt_ActualDate DATETIME ,
               I_Is_Complete INT ,
               I_Status INT ,
-              S_Crtd_By VARCHAR(20) ,
+              S_Crtd_By nvarchar(max) ,
               Dt_Crtd_On DATETIME ,
               I_SessionTopic_Completed_Status_ID INT,
               I_ClassTest_Status_ID INT,
@@ -52,19 +52,19 @@ AS
                         CASE WHEN T.c.value('@I_SkillID', 'INT') = 0 THEN NULL
                              ELSE T.c.value('@I_SkillID', 'INT')
                         END ,
-                        T.c.value('@S_EmployeeId', 'varchar(max)') ,
-                        CASE WHEN T.c.value('@S_Remarks', 'varchar(500)') = ''
+                        T.c.value('@S_EmployeeId', 'nvarchar(max)') ,
+                        CASE WHEN T.c.value('@S_Remarks', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@S_Remarks', 'varchar(500)')
+                             ELSE T.c.value('@S_Remarks', 'nvarchar(max)')
                         END ,
                         CASE WHEN T.c.value('@I_SessionID', 'int') = '0'
                              THEN NULL
                              ELSE T.c.value('@I_SessionID', 'int')
                         END ,
-                        T.c.value('@S_SessionName', 'VARCHAR(500)') ,
-                        CASE WHEN T.c.value('@S_SessionTopic', 'varchar(500)') = ''
+                        T.c.value('@S_SessionName', 'nvarchar(max)') ,
+                        CASE WHEN T.c.value('@S_SessionTopic', 'nvarchar(max)') = ''
                              THEN NULL
-                             ELSE T.c.value('@S_SessionTopic', 'varchar(500)')
+                             ELSE T.c.value('@S_SessionTopic', 'nvarchar(max)')
                         END ,
                         T.c.value('@I_ModuleId', 'INT') ,
                         T.c.value('@I_TermId', 'INT') ,
@@ -78,7 +78,7 @@ AS
                              ELSE T.c.value('@I_Is_Complete', 'int')
                         END ,
                         T.c.value('@S_Status', 'int') ,
-                        T.c.value('@S_CrtdBy', 'varchar(20)') ,
+                        T.c.value('@S_CrtdBy', 'nvarchar(max)') ,
                         T.c.value('@Dt_CrtdOn', 'datetime') ,
                         T.c.value('@I_SessionTopic_Completed_Status_ID','INT'),
                         T.c.value('@I_ClassTest_Status_ID','INT'),
@@ -98,17 +98,17 @@ AS
         DECLARE @ipI_Batch_ID INT              
         DECLARE @ipI_Room_ID INT              
         DECLARE @ipI_Skill_ID INT              
-        DECLARE @ipS_EmployeeId VARCHAR(200)    
-        DECLARE @ipS_Remarks VARCHAR(500)   
+        DECLARE @ipS_EmployeeId nvarchar(max)    
+        DECLARE @ipS_Remarks nvarchar(max)   
         DECLARE @ipI_Session_ID INT  
-        DECLARE @ipS_SessionName VARCHAR(500)  
-        DECLARE @ipS_SessionTopic VARCHAR(500)  
+        DECLARE @ipS_SessionName nvarchar(max)  
+        DECLARE @ipS_SessionTopic nvarchar(max)  
         DECLARE @ipI_ModuleId INT  
         DECLARE @ipI_TermId INT  
         DECLARE @ipDt_ActualDate DATETIME  
         DECLARE @ipI_Is_Complete INT           
         DECLARE @ipI_Status INT                        
-        DECLARE @ipS_Crtd_By VARCHAR(20)              
+        DECLARE @ipS_Crtd_By nvarchar(max)              
         DECLARE @ipDt_Crtd_On DATETIME   
         DECLARE @ipI_Sub_Batch_ID INT 
         DECLARE @ipI_SessionTopic_Completed_Status_ID INT 
@@ -431,7 +431,7 @@ AS
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()                    

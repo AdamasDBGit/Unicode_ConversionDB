@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_Savings_SAAS]      
+CREATE PROCEDURE [dbo].[usp_ERP_Savings_SAAS]      
    @SAAS_UT [UT_SAAS] READONLY      
   
 AS          
@@ -30,7 +30,7 @@ select 1 StatusFlag , 'SAAS Configured' Message
         IF @@TRANCOUNT > 0          
             ROLLBACK;          
           
-        DECLARE @ErrMsg NVARCHAR(4000)       
+        DECLARE @ErrMsg Nnvarchar(max)       
               , @ErrSeverity int          
           
         SELECT ERROR_MESSAGE() as Message          

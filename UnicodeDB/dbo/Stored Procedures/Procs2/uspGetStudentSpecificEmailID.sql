@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentSpecificEmailID] 
+CREATE PROCEDURE [dbo].[uspGetStudentSpecificEmailID] 
 (	
-	@sStudentIDs NVARCHAR(MAX),
+	@sStudentIDs Nnvarchar(max),
 	@iHierarchyDetailID int	
 )
 AS
@@ -8,7 +8,7 @@ BEGIN
 	
 	SET NOCOUNT ON;
 	
-	DECLARE @sHierarchyChain varchar(100)
+	DECLARE @sHierarchyChain nvarchar(max)
 
 	SELECT @sHierarchyChain = S_Hierarchy_Chain
 	FROM dbo.T_Hierarchy_Mapping_Details 

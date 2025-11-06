@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertUpdateCenterTimeSlotDetails]   
+CREATE PROCEDURE [dbo].[uspInsertUpdateCenterTimeSlotDetails]   
     (  
       @ITimeSlotID INT = NULL ,  
       @IBrandID INT ,
@@ -6,9 +6,9 @@
       @DtStartTime DATETIME ,
       @DtEndTime DATETIME ,  
       @IStatus INT ,  
-      @SCrtdBy NVARCHAR(MAX) ,  
+      @SCrtdBy Nnvarchar(max) ,  
       @DtCrtdOn DATETIME , 
-      @SUpdtBy NVARCHAR(MAX) ,  
+      @SUpdtBy Nnvarchar(max) ,  
       @DtUpdtOn DATETIME,  
       @IFlag INT
       
@@ -40,9 +40,9 @@ AS
 						  @DtStartTime ,   --Dt_Start_Time - datetime 
 						  @DtEndTime,      --Dt_End_Time - datetime    
 						  @IStatus ,       --I_Status - int   
-						  @SCrtdBy ,       --S_Crtd_by - varchar(20)   
+						  @SCrtdBy ,       --S_Crtd_by - nvarchar(max)   
 						  @DtCrtdOn ,      --Dt_Crtd_On - datetime 
-						  @SUpdtBy ,       --S_Updt_By - varchar(20) 
+						  @SUpdtBy ,       --S_Updt_By - nvarchar(max) 
 						  @DtUpdtOn        --Dt_Updt_On - datetime 
 						)      
 				 SELECT  @@IDENTITY
@@ -67,7 +67,7 @@ AS
 	END TRY             
     BEGIN CATCH              
  --Error occurred:                
-        DECLARE @ErrMsg NVARCHAR(4000) ,  
+        DECLARE @ErrMsg Nnvarchar(max) ,  
             @ErrSeverity INT              
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()              

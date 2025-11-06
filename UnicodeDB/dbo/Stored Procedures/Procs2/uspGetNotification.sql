@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspGetNotification]    
+CREATE PROCEDURE [dbo].[uspGetNotification]    
 (    
     @NotificationTemplateId INT = NULL    
 )    
@@ -22,7 +22,7 @@ BEGIN
             INNER JOIN T_ERP_NotificationDelivery ND2   
                 ON ND2.I_NotificationDelivery_ID = CAST(DC.Value AS INT)  
             WHERE NT2.inNotificationTemplateID = NT.inNotificationTemplateID  
-            FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, '') AS DeliveryChannelName,  
+            FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 2, '') AS DeliveryChannelName,  
           
         NTT.S_NotificationType_Name AS NotificationTypeName,    
         EC.S_Event_Category AS NotificationCategory    

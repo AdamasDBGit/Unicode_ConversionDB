@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspUpdateTaxCountryReceiptType] 
+CREATE PROCEDURE [dbo].[uspUpdateTaxCountryReceiptType] 
 (
 	@iIndex INT,
 	@iTaxID INT,
@@ -7,7 +7,7 @@
 	@nTaxRate NUMERIC(18,2),
 	@dtValidFrom Datetime,
 	@dtValidTo DateTime,
-	@sCrtdBy NVARCHAR(MAX),
+	@sCrtdBy Nnvarchar(max),
 	@dtCrtdOn DATETIME,
 	@iFlag INT
 )

@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyCertificateMaster] 
+CREATE PROCEDURE [dbo].[uspModifyCertificateMaster] 
 (
 	@iCertificateID int,
 	@iBrandID int,	
-    @sCertificateName NVARCHAR(MAX),
-	@sCertificateDesc NVARCHAR(MAX),
-	@sCertificateType NVARCHAR(MAX),
+    @sCertificateName Nnvarchar(max),
+	@sCertificateDesc Nnvarchar(max),
+	@sCertificateType Nnvarchar(max),
 	@iCertificateTemplate int = NULL,
-	@sCertificateBy NVARCHAR(MAX),
+	@sCertificateBy Nnvarchar(max),
 	@dCertificateOn datetime,
     @iFlag int
 )
@@ -15,7 +15,7 @@ BEGIN TRY
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT OFF;
-	DECLARE @sErrorCode varchar(20)
+	DECLARE @sErrorCode nvarchar(max)
 
     IF @iFlag = 1
 	BEGIN
@@ -73,7 +73,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

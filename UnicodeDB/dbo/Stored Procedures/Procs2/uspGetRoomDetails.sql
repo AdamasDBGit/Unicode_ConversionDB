@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspGetRoomDetails]   
+CREATE PROCEDURE [dbo].[uspGetRoomDetails]   
 (  
- @SBuildingName NVARCHAR(MAX) ,
+ @SBuildingName Nnvarchar(max) ,
  @iBrandId INT = NULL,  
- @SBlockName NVARCHAR(MAX) ,  
- @SFloorName NVARCHAR(MAX),  
+ @SBlockName Nnvarchar(max) ,  
+ @SFloorName Nnvarchar(max),  
  @iCenterID INT  = null  
 )   
 AS    

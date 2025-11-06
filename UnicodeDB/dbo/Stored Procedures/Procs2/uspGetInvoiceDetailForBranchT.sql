@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetInvoiceDetailForBranchT]  --[dbo].[uspGetInvoiceDetailForBranchT] 162232     
     (    
       @iInvoiceHeaderID INT          
@@ -21,9 +21,9 @@ BEGIN
 	   ,I_Display_Fee_Component_ID int
 	   ,I_Sequence int
 	   ,N_Amount_Adv_Coln numeric(18,2)
-	   ,Flag_IsAdvanceTax varchar(1)
+	   ,Flag_IsAdvanceTax nvarchar(max)
 	   ,I_Receipt_Header_ID int
-	   ,S_Invoice_Number varchar(256)
+	   ,S_Invoice_Number nvarchar(max)
 	   ,Tmp_AutoIdTag int   
 	)
 	DECLARE @IDTTempTable TABLE    
@@ -31,8 +31,8 @@ BEGIN
       I_Tax_ID INT ,    
       I_Invoice_Detail_ID INT ,
       N_Tax_Value NUMERIC(18, 6),
-      TAX_CODE VARCHAR(20) ,
-      TAX_DESC VARCHAR(50),
+      TAX_CODE nvarchar(max) ,
+      TAX_DESC nvarchar(max),
       TAX_CHECK INT
     ) 
     

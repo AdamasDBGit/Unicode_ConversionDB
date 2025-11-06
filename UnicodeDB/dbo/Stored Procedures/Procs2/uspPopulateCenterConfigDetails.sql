@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspPopulateCenterConfigDetails]
+CREATE PROCEDURE [dbo].[uspPopulateCenterConfigDetails]
 (
 	@iCenterID int,
 	@dtDateTimeNow datetime	
@@ -15,8 +15,8 @@ BEGIN
 	(
 		ID_Identity INT IDENTITY(1,1),
 		I_Config_ID INT,
-		S_Config_Code VARCHAR(50),
-		S_Config_Value VARCHAR(50)
+		S_Config_Code nvarchar(max),
+		S_Config_Value nvarchar(max)
 	)
 
 	--Populating Global Configuration
@@ -32,7 +32,7 @@ BEGIN
 
 	DECLARE @iCount INT
 	DECLARE @iRowCount INT
-	DECLARE @sConfigCode VARCHAR(50)
+	DECLARE @sConfigCode nvarchar(max)
 	
 	SELECT @iRowCount = count(ID_Identity) FROM #tempTable
 	

@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[uspAssignFeePlanToSalesOrgLevels]
+CREATE PROCEDURE [dbo].[uspAssignFeePlanToSalesOrgLevels]
 (
 	@iSelectedHierarchyId int,
 	@iSelectedBrandId int,
 	@iCourseID int,
 	@iDeliveryID int,
 	@iFeePlanID int,
-	@sCreatedBy NVARCHAR(MAX),
+	@sCreatedBy Nnvarchar(max),
 	@dCreatedOn datetime
 )
 
@@ -15,7 +15,7 @@ BEGIN TRAN T1
 
 	SET NOCOUNT ON
 
-	DECLARE @sSearchCriteria varchar(max)
+	DECLARE @sSearchCriteria nvarchar(max)
 	DECLARE @iMax int
 	DECLARE @iCount int
 	DECLARE @iCourseCenterID int
@@ -200,7 +200,7 @@ END TRY
 BEGIN CATCH
 --Error occurred:
 	ROLLBACK  TRAN T1
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT @ErrMsg = ERROR_MESSAGE(),
 	@ErrSeverity = ERROR_SEVERITY()
 

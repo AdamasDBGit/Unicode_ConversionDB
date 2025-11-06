@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspGetStudentForDemotionForParticularBatch ]  --707,'04-0070',NULL,NULL,NULL,1  
+CREATE PROCEDURE [dbo].[uspGetStudentForDemotionForParticularBatch ]  --707,'04-0070',NULL,NULL,NULL,1  
     (
       @iBatchID INT ,
-      @sStudentCode NVARCHAR(MAX) = NULL ,
-      @sFname NVARCHAR(MAX) = NULL ,
-      @sMname NVARCHAR(MAX) = NULL ,
-      @sLname NVARCHAR(MAX) = NULL ,
+      @sStudentCode Nnvarchar(max) = NULL ,
+      @sFname Nnvarchar(max) = NULL ,
+      @sMname Nnvarchar(max) = NULL ,
+      @sLname Nnvarchar(max) = NULL ,
       @iCenterID INT = NULL          
             
     )

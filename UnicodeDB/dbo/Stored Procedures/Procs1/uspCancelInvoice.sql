@@ -1,10 +1,10 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspCancelInvoice]
     (
       @iInvoiceId INT ,
-      @sUpdatedBy NVARCHAR(MAX) ,
+      @sUpdatedBy Nnvarchar(max) ,
       @iCancellationReasonId INT = NULL ,
-	  @sCancellationRemarks NVARCHAR(MAX)=NULL
+	  @sCancellationRemarks Nnvarchar(max)=NULL
     )
 AS
     BEGIN TRY      
@@ -112,7 +112,7 @@ AS
                         
         EXEC SMManagement.uspCancelStudentEligibilitySchedule @StudentDetailID = @iStudentDetailID, -- int
             @InvoiceID = @iInvoiceId, -- int
-            @UpdatedBy = @sUpdatedBy -- varchar(max)
+            @UpdatedBy = @sUpdatedBy -- nvarchar(max)
                            
       
         IF ( @iCancellationReasonId IS NOT NULL )
@@ -142,7 +142,7 @@ AS
     BEGIN CATCH      
  --Error occurred:        
         ROLLBACK TRANSACTION      
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()      

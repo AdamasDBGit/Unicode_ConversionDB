@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_GetMonthRangeAlert]
+CREATE PROCEDURE [dbo].[usp_GetMonthRangeAlert]
     @BrandID INT,
     @StartMonth INT,
     @EndMonth INT = NULL
@@ -8,9 +8,9 @@ BEGIN
 
     DECLARE @SessionStartDate DATE, @SessionEndDate DATE;
     DECLARE @SelectedMonthCount INT, @ValidMonthCount INT;
-    DECLARE @StartMonthName NVARCHAR(20), @EndMonthName NVARCHAR(20);
-    DECLARE @FirstValidMonthName NVARCHAR(20), @LastValidMonthName NVARCHAR(20);
-    DECLARE @Message NVARCHAR(MAX);
+    DECLARE @StartMonthName Nnvarchar(max), @EndMonthName Nnvarchar(max);
+    DECLARE @FirstValidMonthName Nnvarchar(max), @LastValidMonthName Nnvarchar(max);
+    DECLARE @Message Nnvarchar(max);
 
     -- 1. Get current academic session
     SELECT 
@@ -77,9 +77,9 @@ BEGIN
     FROM @ValidMonths;
 
     -- 7. Build final message
-    SET @Message = N'⚠️ You''ve selected ' + @StartMonthName + N'–' + @EndMonthName + 
+    SET @Message = N'?? You''ve selected ' + @StartMonthName + N'�' + @EndMonthName + 
                    N' (' + CAST(@SelectedMonthCount AS NVARCHAR) + N' months), but the academic session ends in ' +
-                   DATENAME(MONTH, @SessionEndDate) + N'. Only ' + @FirstValidMonthName + N'–' + @LastValidMonthName +
+                   DATENAME(MONTH, @SessionEndDate) + N'. Only ' + @FirstValidMonthName + N'�' + @LastValidMonthName +
                    N' (' + CAST(@ValidMonthCount AS NVARCHAR) + N' months) will be considered in this session; create carefully to align with the academic session.';
 
     -- 8. Return result

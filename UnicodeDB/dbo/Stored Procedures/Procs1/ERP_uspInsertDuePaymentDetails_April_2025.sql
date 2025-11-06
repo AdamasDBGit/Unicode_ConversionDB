@@ -1,24 +1,24 @@
-﻿create PROCEDURE [dbo].[ERP_uspInsertDuePaymentDetails_April_2025]      
+create PROCEDURE [dbo].[ERP_uspInsertDuePaymentDetails_April_2025]      
     (      
-      @iBrandID NVARCHAR(MAX) ,      
-      @sStudentID NVARCHAR(MAX) ,      
+      @iBrandID Nnvarchar(max) ,      
+      @sStudentID Nnvarchar(max) ,      
       @iInvoiceHeaderID INT ,      
       @iCentreId INT ,      
       @ReceiptAmount NUMERIC(18, 2) ,      
       @ReceiptTaxAmount NUMERIC(18, 2) ,      
       @iReceiptType INT = 2 ,      
       @sPaymentDetailsXML XML ,      
-      @sTransactionCode NVARCHAR(MAX) ,      
-      @sSource NVARCHAR(MAX),    
+      @sTransactionCode Nnvarchar(max) ,      
+      @sSource Nnvarchar(max),    
    -------New Parameter Added for Payment Information-----        
       @nCreditCardNo NUMERIC(18, 0)=Null ,        
-      @dCreditCardExpiry NVARCHAR(MAX)=null ,        
-      @sCreditCardIssuer NVARCHAR(MAX) =null,        
-      @sChequeDDNo NVARCHAR(MAX) =null,        
-      @dChequeDDDate NVARCHAR(MAX)=null ,        
-      @sBankName NVARCHAR(MAX)=null ,        
-      @sBranchName NVARCHAR(MAX)=null ,        
-      @sNarration NVARCHAR(MAX)=null,    
+      @dCreditCardExpiry Nnvarchar(max)=null ,        
+      @sCreditCardIssuer Nnvarchar(max) =null,        
+      @sChequeDDNo Nnvarchar(max) =null,        
+      @dChequeDDDate Nnvarchar(max)=null ,        
+      @sBankName Nnvarchar(max)=null ,        
+      @sBranchName Nnvarchar(max)=null ,        
+      @sNarration Nnvarchar(max)=null,    
       @paymentmodeid int    
     )      
 AS      
@@ -38,7 +38,7 @@ AS
               
       
               
-        DECLARE @sReceiptNo VARCHAR(MAX)= NULL      
+        DECLARE @sReceiptNo nvarchar(max)= NULL      
         DECLARE @iStudentDetailID INT      
         DECLARE @iReceiptHeader INT= 0      
         --DECLARE @paymentmodeid INT      
@@ -86,7 +86,7 @@ AS
                                   
                               
                                       
-  EXEC dbo.uspInsertReceiptHeaderFromAPI @sReceiptNo, -- varchar(20)      
+  EXEC dbo.uspInsertReceiptHeaderFromAPI @sReceiptNo, -- nvarchar(max)      
    @iInvoiceHeaderID, -- int      
    @rdate, -- datetime      
    @iStudentDetailID, -- int      
@@ -95,13 +95,13 @@ AS
    @ReceiptAmount, -- numeric      
    @ReceiptTaxAmount, -- numeric      
    'N', -- char(1)      
-   'rice-group-admin', -- varchar(20)      
+   'rice-group-admin', -- nvarchar(max)      
    @rdate, -- datetime      
-   Null,--@nCreditCardNo, -- varchar(12)      
-   Null,--@dCreditCardExpiry, -- varchar(500)      
-   Null,--@sCreditCardIssuer, -- varchar(20)      
-   Null,--@sChequeDDNo, -- varchar(12)      
-   Null,--@dChequeDDDate, -- varchar(50)      
+   Null,--@nCreditCardNo, -- nvarchar(max)      
+   Null,--@dCreditCardExpiry, -- nvarchar(max)      
+   Null,--@sCreditCardIssuer, -- nvarchar(max)      
+   Null,--@sChequeDDNo, -- nvarchar(max)      
+   Null,--@dChequeDDDate, -- nvarchar(max)      
    Null,--@sBankName,    
    Null,--@sBranchName,    
    @iReceiptType,    
@@ -152,7 +152,7 @@ AS
     BEGIN CATCH      
       
  --Error occurred:   
-        DECLARE @ErrorMessage NVARCHAR(4000);  
+        DECLARE @ErrorMessage Nnvarchar(max);  
         DECLARE @ErrorSeverity INT;  
         DECLARE @ErrorState INT;  
   
@@ -163,7 +163,7 @@ AS
         --INSERT INTO ERP_ErrorLogTable (ErrorMessage, ErrorSeverity, ErrorState, ErrorProcedure)  
         --VALUES (@ErrorMessage, @ErrorSeverity, @ErrorState, 'ERP_uspInsertDuePaymentDetails');  
         ROLLBACK TRANSACTION          
-        DECLARE @ErrMsg NVARCHAR(4000) ,      
+        DECLARE @ErrMsg Nnvarchar(max) ,      
         @ErrSeverity INT          
         SELECT  @ErrMsg = ERROR_MESSAGE() ,      
                 @ErrSeverity = ERROR_SEVERITY()    

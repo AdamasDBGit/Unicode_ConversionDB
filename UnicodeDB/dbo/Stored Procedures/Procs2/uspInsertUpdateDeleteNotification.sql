@@ -1,19 +1,19 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertUpdateDeleteNotification]    
+CREATE PROCEDURE [dbo].[uspInsertUpdateDeleteNotification]    
 (    
     @inNotificationTemplateID INT = NULL,    
-    @stTemplateTitle NVARCHAR(200),    
-    @stEmailSubject NVARCHAR(200) = NULL,    
-    @stSMSTemplateMessage NVARCHAR(MAX) = NULL,    
-    @stPushTemplateMessage NVARCHAR(MAX) = NULL,    
-    @stEmailTemplateMessage NVARCHAR(MAX) = NULL,    
+    @stTemplateTitle Nnvarchar(max),    
+    @stEmailSubject Nnvarchar(max) = NULL,    
+    @stSMSTemplateMessage Nnvarchar(max) = NULL,    
+    @stPushTemplateMessage Nnvarchar(max) = NULL,    
+    @stEmailTemplateMessage Nnvarchar(max) = NULL,    
     @inNotificationTypeID INT,    
     @inNotificationCategoryID INT,    
-    @stDeliveryChannelID NVARCHAR(100),    
+    @stDeliveryChannelID Nnvarchar(max),    
     @inCreatedBy INT,    
     @Status INT,    
-    @stPushTitle NVARCHAR(100) = NULL,    
+    @stPushTitle Nnvarchar(max) = NULL,    
 
-    -- 🔹 Newly added fields
+    -- ?? Newly added fields
     @inNotificationType INT = NULL,    
     @inEvent INT = NULL    
 )    
@@ -22,7 +22,7 @@ BEGIN
     BEGIN TRY      
         BEGIN TRANSACTION      
 
-        -- 🔹 Common Validation: Check duplicate event
+        -- ?? Common Validation: Check duplicate event
         IF EXISTS (
             SELECT 1 
             FROM T_NotificationTemplate 

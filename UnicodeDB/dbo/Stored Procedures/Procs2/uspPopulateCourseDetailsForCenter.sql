@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspPopulateCourseDetailsForCenter]     
+CREATE PROCEDURE [dbo].[uspPopulateCourseDetailsForCenter]     
  @iHierarchyID int,    
- @sCourseIDs NVARCHAR(MAX),    
- @sCourseFamilyIDs NVARCHAR(MAX),    
- @sDurationIDs NVARCHAR(MAX),    
- @sCertificateIDs NVARCHAR(MAX)    
+ @sCourseIDs Nnvarchar(max),    
+ @sCourseFamilyIDs Nnvarchar(max),    
+ @sDurationIDs Nnvarchar(max),    
+ @sCertificateIDs Nnvarchar(max)    
 AS    
 BEGIN   
  SET NOCOUNT OFF    

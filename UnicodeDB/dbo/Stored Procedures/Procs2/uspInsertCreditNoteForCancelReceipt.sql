@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspInsertCreditNoteForCancelReceipt] --EXEC uspInsertCreditNoteForCancelReceipt 771407
 (
 	@uspReceiptDetailId INT
@@ -38,7 +38,7 @@ BEGIN
 		DECLARE @AmountPaid NUMERIC(18,2)
 		DECLARE @AmountAdvColn NUMERIC(18,2)
 		
-		DECLARE @S_Invoice_Number VARCHAR(100)
+		DECLARE @S_Invoice_Number nvarchar(max)
 		DECLARE @I_Credit_Note_Invoice_Child_Detail_ID INT
 		
 		DECLARE @TotAdvPerInv NUMERIC(18,2)

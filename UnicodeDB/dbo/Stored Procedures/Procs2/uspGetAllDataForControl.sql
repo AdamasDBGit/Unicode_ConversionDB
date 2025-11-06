@@ -1,13 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[uspGetAllDataForControl]
+CREATE PROCEDURE [dbo].[uspGetAllDataForControl]
 	-- Add the parameters for the stored procedure here
-			@sHierarchyList	NVARCHAR(MAX),
+			@sHierarchyList	Nnvarchar(max),
 			@iHierarchyMasterID int
  
 AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	declare  @s varchar(5000)
+	declare  @s nvarchar(max)
 
 set @s = 'select *
 		from T_Hierarchy_details hd

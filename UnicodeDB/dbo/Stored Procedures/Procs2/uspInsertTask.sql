@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[uspInsertTask] 
+CREATE PROCEDURE [dbo].[uspInsertTask] 
 (
 	@iTaskMasterId int,
-	@sTaskDescription NVARCHAR(MAX) = null,
-	@sQueryString NVARCHAR(MAX) = null,
+	@sTaskDescription Nnvarchar(max) = null,
+	@sQueryString Nnvarchar(max) = null,
 	@iHierarchyMasterId int,
-	@sHierarchyChain NVARCHAR(MAX),
+	@sHierarchyChain Nnvarchar(max),
 	@iStatus int,
-	@swfInstanceId NVARCHAR(MAX) = null,
+	@swfInstanceId Nnvarchar(max) = null,
 	@sKeyValue xml,
 	@dDueDate datetime
 )
@@ -20,8 +20,8 @@ BEGIN TRY
 	DECLARE @iDocHandle int
 	DECLARE @AdjPosition SMALLINT, @AdjCount SMALLINT
 	DECLARE	@KeyValueXml XML 
-	DECLARE @sKey VARCHAR(50) 
-	DECLARE @sValue VARCHAR(100)
+	DECLARE @sKey nvarchar(max) 
+	DECLARE @sValue nvarchar(max)
 
 	BEGIN TRANSACTION
 
@@ -59,8 +59,8 @@ BEGIN TRY
 	BEGIN
 		--Get the Adjustment node for the Current Position
 			SET @KeyValueXml = @sKeyValue.query('/KeyValueList/KeyValue[position()=sql:variable("@AdjPosition")]')
-			SELECT	@sKey = T.a.value('@S_Key','varchar(50)'),
-					@sValue = T.a.value('@S_Value','varchar(100)')		
+			SELECT	@sKey = T.a.value('@S_Key','nvarchar(max)'),
+					@sValue = T.a.value('@S_Value','nvarchar(max)')		
 			FROM @KeyValueXml.nodes('/KeyValue') T(a)
 			
 			INSERT INTO T_Task_Mapping
@@ -82,7 +82,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspSearchStudentListByTCstatus]   --794,NULL,NULL,NULL,NULL,0           
+CREATE PROCEDURE [dbo].[uspSearchStudentListByTCstatus]   --794,NULL,NULL,NULL,NULL,0           
     (  
       @iCenterId INT ,  
-      @sStudentId NVARCHAR(MAX) = NULL ,  
-      @sStudentFirstName NVARCHAR(MAX) = NULL ,  
-      @sStudentSecondName NVARCHAR(MAX) = NULL ,  
-      @sStudentLastName NVARCHAR(MAX) = NULL ,  
+      @sStudentId Nnvarchar(max) = NULL ,  
+      @sStudentFirstName Nnvarchar(max) = NULL ,  
+      @sStudentSecondName Nnvarchar(max) = NULL ,  
+      @sStudentLastName Nnvarchar(max) = NULL ,  
       @sTCStatus INT = NULL             
     )  
 AS   

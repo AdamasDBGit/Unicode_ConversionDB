@@ -1,25 +1,25 @@
-﻿CREATE PROCEDURE [dbo].[ERP_uspGenerateReceiptForOnAccountAPI]    
+CREATE PROCEDURE [dbo].[ERP_uspGenerateReceiptForOnAccountAPI]    
     (    
       @iCenterId INT ,    
       @iAmount NUMERIC(18, 2) ,    
       @iStudentDetailId INT = NULL ,    
       @iReceiptDate DATETIME ,    
       @iPaymentModeId INT =null,    
-      @sChequeDDno NVARCHAR(MAX)=null ,    
+      @sChequeDDno Nnvarchar(max)=null ,    
       @dChequeDate DATETIME=null ,    
-      @sBankName NVARCHAR(MAX)=null ,    
-      @sBranchName NVARCHAR(MAX) =null,    
+      @sBankName Nnvarchar(max)=null ,    
+      @sBranchName Nnvarchar(max) =null,    
       @iCreditCardNo NUMERIC(18, 0)=null ,    
-      @sCreditCardIssuer NVARCHAR(MAX)=null ,    
+      @sCreditCardIssuer Nnvarchar(max)=null ,    
       @dCardExpiryDate DATETIME=null ,    
-      @sCrtdBy NVARCHAR(MAX)=null ,    
+      @sCrtdBy Nnvarchar(max)=null ,    
       @iReceiptType INT ,    
       @dTaxAmount NUMERIC(12, 6) ,    
       @TaxXML XML ,    
       @iEnquiryID INT = NULL ,    
-      @sFormNo NVARCHAR(MAX) = NULL ,    
+      @sFormNo Nnvarchar(max) = NULL ,    
       @iBrandID INT = NULL ,    
-      @sNarration NVARCHAR(MAX) = NULL,  
+      @sNarration Nnvarchar(max) = NULL,  
       @iReceiptHeader INT OUTPUT           
     )    
 AS     
@@ -224,7 +224,7 @@ AS
     BEGIN CATCH              
  --Error occurred:                
         ROLLBACK TRANSACTION              
-        DECLARE @ErrMsg NVARCHAR(4000) ,    
+        DECLARE @ErrMsg Nnvarchar(max) ,    
             @ErrSeverity INT              
         SELECT  @ErrMsg = ERROR_MESSAGE() ,    
                 @ErrSeverity = ERROR_SEVERITY()              

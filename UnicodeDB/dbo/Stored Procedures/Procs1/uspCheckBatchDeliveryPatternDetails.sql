@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[uspCheckBatchDeliveryPatternDetails] -- [dbo].[uspCheckBatchDeliveryPatternDetails]  763,'0'
+CREATE PROCEDURE [dbo].[uspCheckBatchDeliveryPatternDetails] -- [dbo].[uspCheckBatchDeliveryPatternDetails]  763,'0'
 (
 	@iBatchID INT,
-	@SDayOfWeek NVARCHAR(MAX)
+	@SDayOfWeek Nnvarchar(max)
 ) 
 AS  
 BEGIN  

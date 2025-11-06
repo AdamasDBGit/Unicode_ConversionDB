@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspInsertReceiptArchive] 
 (
 	@iInvoiceId INT
@@ -178,7 +178,7 @@ AS
     BEGIN CATCH          
 
         ROLLBACK TRANSACTION          
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT          
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()          

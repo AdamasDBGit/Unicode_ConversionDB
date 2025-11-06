@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspPopulateBrandCenterConfigDetails]
+CREATE PROCEDURE [dbo].[uspPopulateBrandCenterConfigDetails]
 (
 	@iBrandID int,
 	@dtDateTimeNow datetime	
@@ -11,8 +11,8 @@ BEGIN
 	(
 		ID_Identity INT IDENTITY(1,1),
 		I_Config_ID INT,
-		S_Config_Code VARCHAR(50),
-		S_Config_Value VARCHAR(50)
+		S_Config_Code nvarchar(max),
+		S_Config_Value nvarchar(max)
 	)
 
 	INSERT INTO #tempTable (S_Config_Code,S_Config_Value,I_Config_ID)
@@ -37,7 +37,7 @@ BEGIN
 	Declare	@I_Center_Id Int
 	Declare @I_Hierarchy_Level_Id Int
 	Declare @I_Hierarchy_Detail_ID Int
-	Declare @S_Hierarchy_Name Varchar(100)
+	Declare @S_Hierarchy_Name nvarchar(max)
 	Declare @N_Discount_Percentage Numeric(8,2)
 	Declare @I_Discount_Amount Int
 	Declare @I_Center_Discount_Id Int
@@ -48,7 +48,7 @@ BEGIN
 		I_Center_Id Int,
 		I_Hierarchy_Level_Id Int,
 		I_Hierarchy_Detail_ID Int,
-		S_Hierarchy_Name Varchar(100),
+		S_Hierarchy_Name nvarchar(max),
 		N_Discount_Percentage Numeric(8,2),          
 		I_Discount_Amount Int,
 		I_Center_Discount_Id Int,

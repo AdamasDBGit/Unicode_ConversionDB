@@ -1,4 +1,4 @@
-﻿  
+  
 CREATE PROCEDURE [dbo].[usp_ERP_GetReceiptFromReceiptIDForPrint] --exec uspGetReceiptFromReceiptIDForFT 692452  
 (  
  @iReceiptID int  
@@ -11,7 +11,7 @@ BEGIN
 DECLARE @ReceiptDate DATETIME=NULL  
 DECLARE @isNewEnvironment bit='true'  
 DECLARE @DEFAULTCurrencyID INT  
-DECLARE @DEFAULTCurrencyCode varchar(max)  
+DECLARE @DEFAULTCurrencyCode nvarchar(max)  
   
   
   
@@ -83,7 +83,7 @@ ReceiptDetailID INT,
 AmountPaid numeric,  
 CompAmountRff numeric,  
 FeeComponentID int,  
-FeeComponentName varchar(max)  
+FeeComponentName nvarchar(max)  
 )  
   
   

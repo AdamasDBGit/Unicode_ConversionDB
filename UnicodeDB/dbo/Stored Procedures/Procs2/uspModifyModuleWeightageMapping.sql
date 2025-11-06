@@ -1,9 +1,9 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspModifyModuleWeightageMapping] 
 (
 	@iTermID INT,
 	@sModuleTermMap TEXT,
-	@sModifiedBy NVARCHAR(MAX),
+	@sModifiedBy Nnvarchar(max),
 	@dModifiedOn DATETIME
 )
 
@@ -22,7 +22,7 @@ BEGIN TRY
 		 I_Module_ID INT ,
 		 I_ModuleGroup_ID INT ,
 		 N_Weightage NUMERIC(8,2) ,
-         S_Remarks VARCHAR(200) ,
+         S_Remarks nvarchar(max) ,
 		 I_Status INT  
         )
 	EXEC sp_xml_preparedocument @iDocHandle OUTPUT,@sModuleTermMap
@@ -41,7 +41,7 @@ BEGIN TRY
 		I_Module_ID INT, 
 		I_ModuleGroup_ID INT, 
 		N_Weightage NUMERIC(8,2),
-		S_Remarks VARCHAR(200),
+		S_Remarks nvarchar(max),
 		I_Status INT)
 		
 	UPDATE MT
@@ -102,7 +102,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity INT
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

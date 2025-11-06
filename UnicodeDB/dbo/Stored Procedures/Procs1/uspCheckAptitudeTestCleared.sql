@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[uspCheckAptitudeTestCleared]  --[dbo].[uspCheckAptitudeTestCleared] 2133  ,0.0   
+CREATE PROCEDURE [dbo].[uspCheckAptitudeTestCleared]  --[dbo].[uspCheckAptitudeTestCleared] 2133  ,0.0   
     @iEnquiryID INT ,
     @iMarks INT
 AS 
@@ -76,7 +76,7 @@ AS
     BEGIN CATCH    
  --Error occurred:      
     
-        DECLARE @ErrMsg NVARCHAR(4000) ,
+        DECLARE @ErrMsg Nnvarchar(max) ,
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()    

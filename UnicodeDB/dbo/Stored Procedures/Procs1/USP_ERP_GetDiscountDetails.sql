@@ -1,7 +1,7 @@
-﻿CREATE procedure [dbo].[USP_ERP_GetDiscountDetails]      
+CREATE procedure [dbo].[USP_ERP_GetDiscountDetails]      
     @BrandID INT = NULL,    
-    @FeeComponent NVARCHAR(MAX) = NULL,    
-    @FromInstalment NVARCHAR(MAX) = NULL    
+    @FeeComponent Nnvarchar(max) = NULL,    
+    @FromInstalment Nnvarchar(max) = NULL    
 AS    
 BEGIN    
 SET NOCOUNT ON;    
@@ -12,15 +12,15 @@ SET NOCOUNT ON;
     (    
         I_Discount_Scheme_Detail_ID INT,    
         I_Discount_Scheme_ID INT,    
-        S_Discount_Scheme_Name VARCHAR(200),  
-        S_Discount_Scheme_Code VARCHAR(200),  
+        S_Discount_Scheme_Name nvarchar(max),  
+        S_Discount_Scheme_Code nvarchar(max),  
         I_Brand_ID INT,    
-        S_FeeComponents VARCHAR(200),    
+        S_FeeComponents nvarchar(max),    
         I_Fee_Component_ID INT,    
-        S_Component_Name VARCHAR(200),    
-        S_FromInstalment VARCHAR(200),    
-        I_Fee_Structure_ID VARCHAR(100),    
-        S_Fee_Structure_Name VARCHAR(300),    
+        S_Component_Name nvarchar(max),    
+        S_FromInstalment nvarchar(max),    
+        I_Fee_Structure_ID nvarchar(max),    
+        S_Fee_Structure_Name nvarchar(max),    
         N_Discount_Rate NUMERIC(18,2),    
         N_Discount_Amount NUMERIC(18,2),    
         I_IsApplicableOn INT,    
@@ -79,7 +79,7 @@ SET NOCOUNT ON;
     STUFF((SELECT DISTINCT ',' + T2.S_Component_Name      
            FROM #TempDiscountDetails T2      
            WHERE T2.I_Discount_Scheme_Detail_ID = T.I_Discount_Scheme_Detail_ID      
-           FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, '') AS S_Component_Names,    
+           FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 1, '') AS S_Component_Names,    
     CASE     
       WHEN T.S_FromInstalment = 0 THEN 'First'    
       WHEN T.S_FromInstalment = -1 THEN 'Last'    
@@ -94,11 +94,11 @@ END AS S_DiscountDescription,
      STUFF((SELECT DISTINCT ',' + T2.I_Fee_Structure_ID     
            FROM #TempDiscountDetails T2      
            WHERE T2.I_Discount_Scheme_Detail_ID = T.I_Discount_Scheme_Detail_ID      
-  FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, '') AS I_Fee_Structure_ID,    
+  FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 1, '') AS I_Fee_Structure_ID,    
      STUFF((SELECT DISTINCT ',' + T2.S_Fee_Structure_Name      
            FROM #TempDiscountDetails T2      
            WHERE T2.I_Discount_Scheme_Detail_ID = T.I_Discount_Scheme_Detail_ID      
-           FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, '') AS S_Fee_Structure_Name,    
+           FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 1, '') AS S_Fee_Structure_Name,    
     T.N_Discount_Rate,    
     T.N_Discount_Amount,    
     T.I_IsApplicableOn,    

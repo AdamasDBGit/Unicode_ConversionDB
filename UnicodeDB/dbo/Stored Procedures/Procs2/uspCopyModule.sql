@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[uspCopyModule]  
+CREATE PROCEDURE [dbo].[uspCopyModule]  
 (  
  @iSourceModuleID INT,  
- @sDestinationModuleCode NVARCHAR(MAX),  
- @sDestinationModuleName NVARCHAR(MAX),  
- @sUpdatedBy NVARCHAR(MAX),  
+ @sDestinationModuleCode Nnvarchar(max),  
+ @sDestinationModuleName Nnvarchar(max),  
+ @sUpdatedBy Nnvarchar(max),  
  @dUpdatedOn DATETIME,  
  @iDestinationBrandID INT,  
- @sSkillID NVARCHAR(MAX) = NULL        
+ @sSkillID Nnvarchar(max) = NULL        
 )  
   
 AS   
@@ -82,7 +82,7 @@ END TRY
   
 BEGIN CATCH  
  ROLLBACK TRANSACTION  
-    DECLARE @ErrMsg NVARCHAR(4000),@ErrSeverity INT  
+    DECLARE @ErrMsg Nnvarchar(max),@ErrSeverity INT  
     SELECT  @ErrMsg = ERROR_MESSAGE(),@ErrSeverity = ERROR_SEVERITY()  
     RAISERROR ( @ErrMsg, @ErrSeverity, 1 )  
   

@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspSearchAllStudentListForACenter] 
+CREATE PROCEDURE [dbo].[uspSearchAllStudentListForACenter] 
 (     
-      @sStudentCode NVARCHAR(MAX) =Null,
-      @sStudentFName NVARCHAR(MAX)=NULL,
-      @sStudentMName NVARCHAR(MAX)=NULL,
-      @sStudentLName NVARCHAR(MAX)=NULL,
-      @sInvoiceNo NVARCHAR(MAX)=NULL,
+      @sStudentCode Nnvarchar(max) =Null,
+      @sStudentFName Nnvarchar(max)=NULL,
+      @sStudentMName Nnvarchar(max)=NULL,
+      @sStudentLName Nnvarchar(max)=NULL,
+      @sInvoiceNo Nnvarchar(max)=NULL,
       @iCentreId INT
 )
 

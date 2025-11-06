@@ -1,4 +1,4 @@
-﻿
+
 CREATE PROCEDURE [dbo].[usp_ERP_InsertCreditNoteForInvoice] --exec uspInsertCreditNoteForInvoice 153624
 (
     @iInvoiceId INT
@@ -56,14 +56,14 @@ BEGIN
         Dt_Installment_Date DATETIME,
         N_Amount_Due NUMERIC(18,2),
         N_Amount_Adv NUMERIC(18,2),
-        S_Invoice_Number VARCHAR(100),
-        Flag_IsAdvanceTax VARCHAR(10)
+        S_Invoice_Number nvarchar(max),
+        Flag_IsAdvanceTax nvarchar(max)
     )
 
 	Create Table #NewEnviromentTAXID
 	(
 	I_Tax_ID INT,
-	S_Tax_Name varchar(max),
+	S_Tax_Name nvarchar(max),
 	I_Invoice_Detail_ID int,
 	N_Tax_Value decimal(8,2)
 	)
@@ -248,8 +248,8 @@ BEGIN
     DECLARE @Dt_Installment_Date DATETIME
     DECLARE @N_Amount_Due NUMERIC(18,2)
     DECLARE @N_Amount_Adv NUMERIC(18,2)
-    DECLARE @S_Invoice_Number VARCHAR(100)
-    DECLARE @Flag_IsAdvanceTax VARCHAR(10)
+    DECLARE @S_Invoice_Number nvarchar(max)
+    DECLARE @Flag_IsAdvanceTax nvarchar(max)
 
     ----- TAX DIFF -----
     --Declare @TotalInvTax NUMERIC(18,2)

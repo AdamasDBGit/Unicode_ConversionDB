@@ -1,4 +1,4 @@
-﻿
+
      
 CREATE PROCEDURE [dbo].[usp_ERP_Map_Fee_with_Student_BKP_May_2025]                                                  
     @h_I_Stud_Fee_Struct_CompMap_ID INT = NULL,                                                  
@@ -19,7 +19,7 @@ Begin
     BEGIN TRY                                                  
         BEGIN TRANSACTION;                             
                               
-  DECLARE @OutputInvNo Varchar(20),                                                  
+  DECLARE @OutputInvNo nvarchar(max),                                                  
                 @Inv_DT Date                                                  
             SET @Inv_DT = Convert(Date, Getdate())                           
    Declare @Currency_ID int                        
@@ -650,7 +650,7 @@ from T_ERP_Stud_Fee_Struct_Comp_Mapping_Details cd
         IF @@TRANCOUNT > 0                                                  
             ROLLBACK;                                                  
                                                   
-        DECLARE @ErrMsg NVARCHAR(4000),                          
+        DECLARE @ErrMsg Nnvarchar(max),                          
                 @ErrSeverity int                                                  
                                                   
         SELECT @ErrMsg as Message,                     

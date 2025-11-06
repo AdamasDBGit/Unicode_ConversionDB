@@ -1,12 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[USP_ERP_SaveDriverEscortMaster]
+CREATE PROCEDURE [dbo].[USP_ERP_SaveDriverEscortMaster]
 (
-    @I_Driver_Escort_ID INT = NULL,     -- If NULL or 0 → Insert, else Update
+    @I_Driver_Escort_ID INT = NULL,     -- If NULL or 0 ? Insert, else Update
     @I_Brand_ID         INT,
-    @S_Name             NVARCHAR(MAX),
-    @S_Phone            NVARCHAR(MAX) = NULL,
-    @S_Type             NVARCHAR(MAX) = NULL,      -- Optional
-    @S_Token            NVARCHAR(MAX) = NULL,     -- Optional
-    @S_Emp_No           NVARCHAR(MAX) = NULL     -- Optional
+    @S_Name             Nnvarchar(max),
+    @S_Phone            Nnvarchar(max) = NULL,
+    @S_Type             Nnvarchar(max) = NULL,      -- Optional
+    @S_Token            Nnvarchar(max) = NULL,     -- Optional
+    @S_Emp_No           Nnvarchar(max) = NULL     -- Optional
     -- @I_UserID           INT                     -- For audit (like bus SP)
 )
 AS

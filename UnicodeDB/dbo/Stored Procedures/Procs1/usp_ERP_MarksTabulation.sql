@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[usp_ERP_MarksTabulation] --[REPORT].[uspGetStudentsInternalMarks] 746,3,9,17,NULL,1,107,1         
+CREATE PROCEDURE [dbo].[usp_ERP_MarksTabulation] --[REPORT].[uspGetStudentsInternalMarks] 746,3,9,17,NULL,1,107,1         
     (  
       @iBatchID INT ,  
       @iTermID INT ,  
@@ -7,7 +7,7 @@
       @iStudentDetailID INT ,      
       --@iCenterID INT,  
       @iBrandId INT ,  
-      @sHierarchyList NVARCHAR(MAX)=NULL,  
+      @sHierarchyList Nnvarchar(max)=NULL,  
       @dCumulativeP DECIMAL(14,2)=NULL  
     )  
 AS   

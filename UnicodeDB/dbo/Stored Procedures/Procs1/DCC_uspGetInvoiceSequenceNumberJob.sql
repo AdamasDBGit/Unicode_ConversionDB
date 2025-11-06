@@ -1,8 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[DCC_uspGetInvoiceSequenceNumberJob]
+CREATE PROCEDURE [dbo].[DCC_uspGetInvoiceSequenceNumberJob]
 (
 	@I_Brand_ID INT = NULL,
 	@I_State_ID INT = NULL,
-	@S_Invoice_Type NVARCHAR(MAX) = NULL
+	@S_Invoice_Type Nnvarchar(max) = NULL
 )
 AS
 BEGIN

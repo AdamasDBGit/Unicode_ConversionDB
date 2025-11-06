@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[uspModifyLevelInstanceMaster]
+CREATE PROCEDURE [dbo].[uspModifyLevelInstanceMaster]
 (
 	@iLevelInstanceID int,
 	@iHierarchyLevelID int,
 	@iHierarchyMasterID int,
-	@sInstanceName NVARCHAR(MAX),
-    @sLevelInstanceBy NVARCHAR(MAX),
+	@sInstanceName Nnvarchar(max),
+    @sLevelInstanceBy Nnvarchar(max),
 	@dLevelInstanceOn datetime,
     @iFlag int
 )
@@ -112,7 +112,7 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 

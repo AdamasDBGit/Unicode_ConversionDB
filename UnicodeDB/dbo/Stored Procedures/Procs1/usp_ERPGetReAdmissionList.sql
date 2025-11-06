@@ -1,16 +1,16 @@
-﻿  
+  
 CREATE   PROCEDURE [dbo].[usp_ERPGetReAdmissionList]            
  -- Add the parameters for the stored procedure here            
  (            
-  @sStudentID NVARCHAR(MAX) = null,            
-  @Full_Name NVARCHAR(MAX) = null,          
-  @Mobile NVARCHAR(MAX) = null,            
+  @sStudentID Nnvarchar(max) = null,            
+  @Full_Name Nnvarchar(max) = null,          
+  @Mobile Nnvarchar(max) = null,            
   @ReAdmissionStageID int = null,        
   @Limit INT,        
   @Offset INT,        
   @SortCol INT,        
-  @SortDir NVARCHAR(MAX),        
-  @Search NVARCHAR(MAX) = NULL,  
+  @SortDir Nnvarchar(max),        
+  @Search Nnvarchar(max) = NULL,  
   @iSourceSessionID int =null,  
   @iSourceSchoolGroupID int=null,  
   @iSourceClassID int=null,  
@@ -31,7 +31,7 @@ BEGIN
  create table #ReAdmissionStatus  
  (  
  ReAdmissionStatusID int,  
- ReAdmissionStatusDesc varchar(max)  
+ ReAdmissionStatusDesc nvarchar(max)  
  )  
   
   

@@ -1,4 +1,4 @@
-﻿
+
     
                   
 create PROCEDURE [dbo].[ERP_uspInsertInvoice_April_2025]                 
@@ -49,7 +49,7 @@ AS
               I_Status INT ,                
               I_Discount_Scheme_ID INT,                
               I_Discount_Applied_At INT ,                
-              S_Crtd_By VARCHAR(20) ,                
+              S_Crtd_By nvarchar(max) ,                
               Dt_Crtd_On DATETIME                
             )                          
                           
@@ -66,7 +66,7 @@ AS
                         T.c.value('@I_Status', 'int') ,                
                         T.c.value('@I_Discount_Scheme_ID', 'int') ,                
                         T.c.value('@I_Discount_Applied_At', 'int') ,                
-                        T.c.value('@S_Crtd_By', 'varchar(20)') ,                
+                        T.c.value('@S_Crtd_By', 'nvarchar(max)') ,                
                         T.c.value('@Dt_Crtd_On', 'datetime')                
                 FROM    @sInvoice.nodes('/Invoice') T ( c )                          
                           
@@ -210,7 +210,7 @@ Set @NewFeeStructureID=(
         DECLARE @ipI_Status INT                          
         DECLARE @ipI_Discount_Scheme_ID INT                          
         DECLARE @ipI_Discount_Applied_At INT                          
-        DECLARE @ipS_Crtd_By VARCHAR(20)                          
+        DECLARE @ipS_Crtd_By nvarchar(max)                          
         DECLARE @ipDt_Crtd_On DATETIME                           
 --defination of the variables of the invoice child                          
         DECLARE @icI_Invoice_Child_Header_ID INT                          
@@ -237,8 +237,8 @@ Set @NewFeeStructureID=(
         DECLARE @insertedPre_InstallmentNo INT                
         DECLARE @insertedDt_Installment_Date DATETIME                
         DECLARE @insertedN_Amount_Due NUMERIC(18,2)                
-        DECLARE @InvoiceType VARCHAR(10)                
-        DECLARE @InvoiceNumber VARCHAR(10)                
+        DECLARE @InvoiceType nvarchar(max)                
+        DECLARE @InvoiceNumber nvarchar(max)                
         DECLARE @insertedI_Invoice_Header_ID INT                
                                  
 -- DEFINATION OF THE VARIABLE TO INSERT TAX DETAILS                          
@@ -620,7 +620,7 @@ Set @NewFeeStructureID=(
       DECLARE @Dt_Installment_Date DATETIME                
       DECLARE @I_Invoice_Detail_ID INT                
       DECLARE @I_Installment_No INT                
-      DECLARE @INVN VARCHAR(256)                
+      DECLARE @INVN nvarchar(max)                
                       
       SELECT @count = COUNT(I_Invoice_Detail_ID) FROM #tempInvoiceChildDetail                
                       
@@ -749,7 +749,7 @@ where I_Student_Detail_ID=@studentID
     BEGIN CATCH                          
 --Error occurred:                            
         ROLLBACK TRANSACTION                          
-        DECLARE @ErrMsg NVARCHAR(4000) ,                
+        DECLARE @ErrMsg Nnvarchar(max) ,                
             @ErrSeverity INT                          
         SELECT  @ErrMsg = ERROR_MESSAGE() + ' occurred at Line_Number: ' + CAST(ERROR_LINE() AS VARCHAR(50)),                
                 @ErrSeverity = ERROR_SEVERITY()                          

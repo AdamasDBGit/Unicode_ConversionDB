@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[uspGetChequeSettlement]  --[uspGetChequeSettlement] null,NULL,794,1     
+CREATE PROCEDURE [dbo].[uspGetChequeSettlement]  --[uspGetChequeSettlement] null,NULL,794,1     
     (
       @dtDateTo DATETIME = NULL ,
       @dtDateFrom DATETIME = NULL ,    
    --@iCenterID INT,
-      @sHierarchyDetailID NVARCHAR(MAX) ,
+      @sHierarchyDetailID Nnvarchar(max) ,
       @iBrandID INT = NULL ,
       @IsSettlement BIT 
     )

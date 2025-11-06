@@ -1,7 +1,7 @@
-﻿
+
 CREATE PROCEDURE [dbo].[uspGetStudyMaterialDetails]
 
-@MaterialBarCodeNo nvarchar(255)
+@MaterialBarCodeNo nnvarchar(max)
 --,@ItemCode nvarchar(255) 
 
 AS
@@ -9,11 +9,11 @@ BEGIN TRY
 
 
 
-DECLARE @TEMP_TABLE TABLE (ItemCode NVARCHAR(255), ItemDescription NVARCHAR(MAX),CourseName NVARCHAR(255)  ,BarCode NVARCHAR(255),Name NVARCHAR(MAX),StudentId INT,DamageStatus INT,OkStatus INT,DuplicateStatus INT,IssueDate DateTime)
-DECLARE @TEMP_STOCKDETAIL TABLE (ItemCode NVARCHAR(255) ,BarCode NVARCHAR(255),Status INT,Issued INT)
-DECLARE @ITEM_CODE NVARCHAR(255)
-DECLARE @ITEM_DESC NVARCHAR(MAX)
-DECLARE @COURSE NVARCHAR(MAX)
+DECLARE @TEMP_TABLE TABLE (ItemCode Nnvarchar(max), ItemDescription Nnvarchar(max),CourseName Nnvarchar(max)  ,BarCode Nnvarchar(max),Name Nnvarchar(max),StudentId INT,DamageStatus INT,OkStatus INT,DuplicateStatus INT,IssueDate DateTime)
+DECLARE @TEMP_STOCKDETAIL TABLE (ItemCode Nnvarchar(max) ,BarCode Nnvarchar(max),Status INT,Issued INT)
+DECLARE @ITEM_CODE Nnvarchar(max)
+DECLARE @ITEM_DESC Nnvarchar(max)
+DECLARE @COURSE Nnvarchar(max)
 --INSERT INTO @TEMP_TABLE (ItemCode,BarCode,DamageStatus,OkStatus,DuplicateStatus)
 --SELECT B.Fld_KPMG_ItemCode, Fld_KPMG_MaterialBarCode,Fld_KPMG_DamageStatus,Fld_KPMG_OkStatus,Fld_KPMG_DuplicateStatus
 --FROM Tbl_KPMG_StudyMaterialStatus C
@@ -93,7 +93,7 @@ SELECT * FROM @TEMP_TABLE
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int
+	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

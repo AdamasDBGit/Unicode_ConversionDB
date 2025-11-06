@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[USP_ERP_Insert_Update_ExamCategory]
+CREATE PROCEDURE [dbo].[USP_ERP_Insert_Update_ExamCategory]
     @I_EXAM_CATEGORY_ID INT = NULL,  
     @I_Exam_Type_Master_ID INT,  
-    @S_Exam_Category_Name NVARCHAR(MAX), 
+    @S_Exam_Category_Name Nnvarchar(max), 
     @I_Brand_ID INT, 
     @Is_Active BIT,  
     @I_School_Group_ID INT, 
