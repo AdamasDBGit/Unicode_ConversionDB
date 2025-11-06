@@ -3,22 +3,22 @@
     
 CREATE PROCEDURE [dbo].[KPMG_uspStudyMaterialIssue] 
     
-@StudentBarCodeNo nnvarchar(max),    
-@MaterialBarCode nnvarchar(max),    
-@ReplacedBarCode nnvarchar(max),    
-@ReissueReceiptNo nnvarchar(max),    
-@StudyMaterialName nnvarchar(max),    
-@Context nnvarchar(max)    
+@StudentBarCodeNo NVARCHAR(max),    
+@MaterialBarCode NVARCHAR(max),    
+@ReplacedBarCode NVARCHAR(max),    
+@ReissueReceiptNo NVARCHAR(max),    
+@StudyMaterialName NVARCHAR(max),    
+@Context NVARCHAR(max)    
     
 AS    
 BEGIN TRY     
-DECLARE @ERROR Nnvarchar(max)    
+DECLARE @ERROR NVARCHAR(max)    
 DECLARE @STUDENTID INT    
 DECLARE @INSTALLMENTNO INT    
 DECLARE @STUDYMATERIALID INT    
-DECLARE @STATUS Nnvarchar(max)    
-DECLARE @itemCode Nnvarchar(max)    
-DECLARE @ISSUED_STUDY_MATERIAL Nnvarchar(max)    
+DECLARE @STATUS NVARCHAR(max)    
+DECLARE @itemCode NVARCHAR(max)    
+DECLARE @ISSUED_STUDY_MATERIAL NVARCHAR(max)    
      
  IF (ISNULL(@StudentBarCodeNo,'')<>'')    
   BEGIN     
@@ -101,10 +101,11 @@ DECLARE @ISSUED_STUDY_MATERIAL Nnvarchar(max)
 END TRY    
 BEGIN CATCH    
      
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
     
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     
  RAISERROR(@ErrMsg, @ErrSeverity, 1)    
 END CATCH
+

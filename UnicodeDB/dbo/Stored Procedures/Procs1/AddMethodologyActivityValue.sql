@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[AddMethodologyActivityValue]
 -- Add the parameters for the stored procedure here
 
 @MethodologyActivityID int,
-@ActivityValue nnvarchar(max)
+@ActivityValue NVARCHAR(max)
 
 AS
 BEGIN
@@ -52,3 +52,4 @@ BEGIN
 
 
 END
+

@@ -3,7 +3,7 @@ CREATE PROCEDURE [dbo].[uspModifyConfigDetails]
 	@iCenterID INT,
 	@iBrandID int,	
 	@sConfigXML xml,
-	@sCreatedBy Nnvarchar(max),
+	@sCreatedBy NVARCHAR(max),
 	@sCreatedOn datetime,
 	@iFlag int,	
 	@iCenterDiscountId int,
@@ -110,11 +110,12 @@ END TRY
 
 BEGIN CATCH    
  ROLLBACK TRANSACTION   
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     
  RAISERROR(@ErrMsg, @ErrSeverity, 1)    
     
 END CATCH
+
 

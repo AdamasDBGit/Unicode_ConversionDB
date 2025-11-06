@@ -4,7 +4,7 @@ CREATE PROCEDURE [dbo].[uspUpdateBatchForCenter]
       @iCenterId INT = NULL ,
       @MaxStrength INT ,
       @MinRegnAmt DECIMAL(10, 2) ,
-      @UpdtBy Nnvarchar(max) ,
+      @UpdtBy NVARCHAR(max) ,
       @UpdtOn DATETIME ,
       @EmpID INT ,
       @Status INT ,              
@@ -15,17 +15,17 @@ CREATE PROCEDURE [dbo].[uspUpdateBatchForCenter]
       @iAdmissionGraceDays INT ,
       @MinStrength INT ,
       @iLateFeeGraceDays INT ,
-      @sBatchName Nnvarchar(max) ,
+      @sBatchName NVARCHAR(max) ,
       @DtBatchIntroductionDate DATETIME = NULL ,
-      @sIntroductionTime Nnvarchar(max) = NULL,
+      @sIntroductionTime NVARCHAR(max) = NULL,
 	  @DtMBatchStartDate DATETIME=NULL,
 	  @iBatchType INT=1,
-	  @S_ClassDays Nnvarchar(max)='',
-	  @S_OfflineClassTime Nnvarchar(max)='',
-	  @S_OnlineClassTime Nnvarchar(max)='',
-	  @S_HandoutClassTime Nnvarchar(max)='',
-	  @S_ClassMode Nnvarchar(max)='',
-	  @S_BatchTime Nnvarchar(max)=''
+	  @S_ClassDays NVARCHAR(max)='',
+	  @S_OfflineClassTime NVARCHAR(max)='',
+	  @S_OnlineClassTime NVARCHAR(max)='',
+	  @S_HandoutClassTime NVARCHAR(max)='',
+	  @S_ClassMode NVARCHAR(max)='',
+	  @S_BatchTime NVARCHAR(max)=''
     )
 AS
     BEGIN TRY                
@@ -326,7 +326,7 @@ AS
                  
     END TRY                
     BEGIN CATCH          
-        DECLARE @ErrorMessage Nnvarchar(max);            
+        DECLARE @ErrorMessage NVARCHAR(max);            
         DECLARE @ErrorSeverity INT;            
         DECLARE @ErrorState INT;            
             
@@ -342,4 +342,5 @@ AS
                @ErrorState -- State.            
                );            
     END CATCH
+
 

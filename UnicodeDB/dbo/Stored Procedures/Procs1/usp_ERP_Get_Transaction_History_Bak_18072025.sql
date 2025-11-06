@@ -1,6 +1,6 @@
 CREATE   PROCEDURE [dbo].[usp_ERP_Get_Transaction_History_Bak_18072025]  
  -- Add the parameters for the stored procedure here  
- @sStudentID Nnvarchar(max)=NULL,  
+ @sStudentID NVARCHAR(max)=NULL,  
  @dtValidFrom datetime =NULL,  
  @dtValidTo datetime= NULL,  
  @BrandID INT=NULL,  
@@ -273,3 +273,4 @@ WHERE
  drop table #Transaction_History  
   
 END
+

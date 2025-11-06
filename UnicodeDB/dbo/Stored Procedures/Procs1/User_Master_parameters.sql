@@ -1,17 +1,17 @@
 CREATE   PROCEDURE [dbo].[User_Master_parameters]    
 (   
  @User_ID INT = NULL,     
- @Username Nnvarchar(max) = NULL,     
- @Email Nnvarchar(max) = NULL,     
- @Name Nnvarchar(max) = NULL,       
- @Mobile Nnvarchar(max) = NULL,     
+ @Username NVARCHAR(max) = NULL,     
+ @Email NVARCHAR(max) = NULL,     
+ @Name NVARCHAR(max) = NULL,       
+ @Mobile NVARCHAR(max) = NULL,     
  @Status INT = NULL,   
  @isTeacher BIT = NULL,   
  @iBrandID INT = NULL,    @Offset INT = 0,   
  @Limit INT = 10,   
- @SortColumn Nnvarchar(max) = 'S_Username',   
- @SortDirection Nnvarchar(max) = 'asc',   
- @SearchValue Nnvarchar(max) = NULL   
+ @SortColumn NVARCHAR(max) = 'S_Username',   
+ @SortDirection NVARCHAR(max) = 'asc',   
+ @SearchValue NVARCHAR(max) = NULL   
 )   
 AS   
 BEGIN   
@@ -103,3 +103,4 @@ BEGIN
  )       
  SELECT * FROM UserData   
  WHERE RowNum BETWEEN @Offset + 1 AND @Offset + @Limit;   END   
+

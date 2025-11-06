@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspRevokeFeePlanFromCenter]    
 (    
   @iSelectedFeePlanID int,    
-  @sLoginID Nnvarchar(max)    
+  @sLoginID NVARCHAR(max)    
  )    
     
 AS    
@@ -94,10 +94,11 @@ BEGIN CATCH
  BEGIN    
   ROLLBACK TRANSACTION    
  END    
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     
  RAISERROR(@ErrMsg, @ErrSeverity, 1)    
 END CATCH
+
 

@@ -1,24 +1,24 @@
 create PROCEDURE [dbo].[ERP_uspInsertDuePaymentDetails_April_2025]      
     (      
-      @iBrandID Nnvarchar(max) ,      
-      @sStudentID Nnvarchar(max) ,      
+      @iBrandID NVARCHAR(max) ,      
+      @sStudentID NVARCHAR(max) ,      
       @iInvoiceHeaderID INT ,      
       @iCentreId INT ,      
       @ReceiptAmount NUMERIC(18, 2) ,      
       @ReceiptTaxAmount NUMERIC(18, 2) ,      
       @iReceiptType INT = 2 ,      
       @sPaymentDetailsXML XML ,      
-      @sTransactionCode Nnvarchar(max) ,      
-      @sSource Nnvarchar(max),    
+      @sTransactionCode NVARCHAR(max) ,      
+      @sSource NVARCHAR(max),    
    -------New Parameter Added for Payment Information-----        
       @nCreditCardNo NUMERIC(18, 0)=Null ,        
-      @dCreditCardExpiry Nnvarchar(max)=null ,        
-      @sCreditCardIssuer Nnvarchar(max) =null,        
-      @sChequeDDNo Nnvarchar(max) =null,        
-      @dChequeDDDate Nnvarchar(max)=null ,        
-      @sBankName Nnvarchar(max)=null ,        
-      @sBranchName Nnvarchar(max)=null ,        
-      @sNarration Nnvarchar(max)=null,    
+      @dCreditCardExpiry NVARCHAR(max)=null ,        
+      @sCreditCardIssuer NVARCHAR(max) =null,        
+      @sChequeDDNo NVARCHAR(max) =null,        
+      @dChequeDDDate NVARCHAR(max)=null ,        
+      @sBankName NVARCHAR(max)=null ,        
+      @sBranchName NVARCHAR(max)=null ,        
+      @sNarration NVARCHAR(max)=null,    
       @paymentmodeid int    
     )      
 AS      
@@ -152,7 +152,7 @@ AS
     BEGIN CATCH      
       
  --Error occurred:   
-        DECLARE @ErrorMessage Nnvarchar(max);  
+        DECLARE @ErrorMessage NVARCHAR(max);  
         DECLARE @ErrorSeverity INT;  
         DECLARE @ErrorState INT;  
   
@@ -163,7 +163,7 @@ AS
         --INSERT INTO ERP_ErrorLogTable (ErrorMessage, ErrorSeverity, ErrorState, ErrorProcedure)  
         --VALUES (@ErrorMessage, @ErrorSeverity, @ErrorState, 'ERP_uspInsertDuePaymentDetails');  
         ROLLBACK TRANSACTION          
-        DECLARE @ErrMsg Nnvarchar(max) ,      
+        DECLARE @ErrMsg NVARCHAR(max) ,      
         @ErrSeverity INT          
         SELECT  @ErrMsg = ERROR_MESSAGE() ,      
                 @ErrSeverity = ERROR_SEVERITY()    
@@ -172,4 +172,5 @@ AS
        RAISERROR(@ErrMsg, @ErrSeverity, 1)       
       
     END CATCH
+
 

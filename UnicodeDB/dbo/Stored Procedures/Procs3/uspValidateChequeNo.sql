@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspValidateChequeNo] 
 (
-	@sChequeNo Nnvarchar(max),
+	@sChequeNo NVARCHAR(max),
 	@ChequeDt DATETIME
 )  
 AS   
@@ -22,4 +22,5 @@ AS
             END  
          SELECT @Valid  
     END
+
 

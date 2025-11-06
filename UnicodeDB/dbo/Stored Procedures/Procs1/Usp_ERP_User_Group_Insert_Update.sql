@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[Usp_ERP_User_Group_Insert_Update]    
     @User_Group_Master_ID INT = NULL,    
-    @User_GroupName Nnvarchar(max),    
-    @Code Nnvarchar(max),    
+    @User_GroupName NVARCHAR(max),    
+    @Code NVARCHAR(max),    
     @BrandID int,    
     @Is_Active bit,  
     @CreatedBy  int
@@ -102,7 +102,7 @@ SET NOCOUNT ON;
     BEGIN CATCH    
         IF @@TRANCOUNT > 0    
             ROLLBACK;    
-DECLARE @ErrorMessage Nnvarchar(max);  
+DECLARE @ErrorMessage NVARCHAR(max);  
         SET @ErrorMessage = ERROR_MESSAGE();  
         -- Log the error message or handle it as needed  
   
@@ -110,4 +110,5 @@ DECLARE @ErrorMessage Nnvarchar(max);
         Select @ErrorMessage as Message  
     END CATCH    
 End
+
 

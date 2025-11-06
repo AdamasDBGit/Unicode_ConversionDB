@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspAssignDiscountToLevel]
 
 	(
-		@sSelectedCenters Nnvarchar(max),
-		@sSelectedDiscountID Nnvarchar(max),
-		@sLoginID Nnvarchar(max)
+		@sSelectedCenters NVARCHAR(max),
+		@sSelectedDiscountID NVARCHAR(max),
+		@sLoginID NVARCHAR(max)
 	)
 
 
@@ -55,10 +55,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

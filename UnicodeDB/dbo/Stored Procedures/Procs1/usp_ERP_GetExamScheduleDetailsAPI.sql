@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_ERP_GetExamScheduleDetailsAPI]
-    @token nnvarchar(max),
+    @token NVARCHAR(max),
     @MonthId INT
 AS
 BEGIN
@@ -48,3 +48,4 @@ BEGIN
         t1.stSubjectComponentName,
         t1.stSubjectTypeName;
 END;
+

@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[uspUpdateUserPassword] 
 (
 	@iEmpID int,
-	@sOldPassword nnvarchar(max),
-	@sNewPassword nnvarchar(max)
+	@sOldPassword NVARCHAR(max),
+	@sNewPassword NVARCHAR(max)
 	
 )
 
@@ -23,9 +23,10 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

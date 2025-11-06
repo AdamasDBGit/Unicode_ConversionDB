@@ -1,6 +1,6 @@
   
 CREATE PROCEDURE [dbo].[KPMG_uspInsertReceiptMaterialsInCCW_renamed]
-    @OraclePoId Nnvarchar(max) ,
+    @OraclePoId NVARCHAR(max) ,
     @XMLData XML
 AS
     BEGIN TRY   
@@ -32,9 +32,9 @@ AS
                           BarCode ,
                           ItemId
                         )
-                        SELECT  T.c.value('LineId[1]', 'Nnvarchar(max)') ,
-                                T.c.value('SerialNo[1]', 'Nnvarchar(max)') ,
-                                T.c.value('ItemId[1]', 'Nnvarchar(max)')
+                        SELECT  T.c.value('LineId[1]', 'NVARCHAR(max)') ,
+                                T.c.value('SerialNo[1]', 'NVARCHAR(max)') ,
+                                T.c.value('ItemId[1]', 'NVARCHAR(max)')
                         FROM    @XMLData.nodes('/Root/TestRTemp') T ( c )   
  
                 DELETE  FROM @TempTable
@@ -144,7 +144,7 @@ AS
     END TRY  
     BEGIN CATCH  
    
-        DECLARE @ErrMsg Nnvarchar(max) ,
+        DECLARE @ErrMsg NVARCHAR(max) ,
             @ErrSeverity INT  
   
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
@@ -152,4 +152,5 @@ AS
   
         RAISERROR(@ErrMsg, @ErrSeverity, 1)  
     END CATCH
+
 

@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[uspSearchEnquiryList]
     (
       @iCenterId INT ,
-      @sFname Nnvarchar(max) ,
-      @sMname Nnvarchar(max) ,
-      @sLName Nnvarchar(max) ,
-      @sEnquiryNo Nnvarchar(max)
+      @sFname NVARCHAR(max) ,
+      @sMname NVARCHAR(max) ,
+      @sLName NVARCHAR(max) ,
+      @sEnquiryNo NVARCHAR(max)
     )
 AS 
     BEGIN            
@@ -54,4 +54,5 @@ AS
                         AND (I_Enquiry_Status_Code <> 3 OR I_Enquiry_Status_Code IS NULL)
                         AND I_Centre_Id = @iCenterId )          
     END
+
 

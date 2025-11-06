@@ -2,8 +2,8 @@ CREATE PROCEDURE [dbo].[uspCopyTermToTermEvalStrategy]
 (
 	@iSourceCourseID Int,
 	@iSourceTermID Int,
-	@sDestinationCourseList Nnvarchar(max),
-	@sUpdatedBy Nnvarchar(max),
+	@sDestinationCourseList NVARCHAR(max),
+	@sUpdatedBy NVARCHAR(max),
 	@dUpdatedOn DateTime
 )
 
@@ -240,11 +240,12 @@ End Try
 
 Begin Catch
 	ROLLBACK TRANSACTION
-	Declare @ErrMsg Nnvarchar(max), @ErrSeverity int
+	Declare @ErrMsg NVARCHAR(max), @ErrSeverity int
 	Select	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RaisError(@ErrMsg, @ErrSeverity, 1)
 
 End Catch
+
 

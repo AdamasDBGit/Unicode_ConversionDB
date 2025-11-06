@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_ERP_AdminLoginInformation]
     (
-      @vLoginID Nnvarchar(max) ,
-      @vPassword Nnvarchar(max)
+      @vLoginID NVARCHAR(max) ,
+      @vPassword NVARCHAR(max)
     )
 AS
     BEGIN
@@ -10,7 +10,7 @@ AS
         SET NOCOUNT ON;
 	
         DECLARE @vUserType nvarchar(max)
-        DECLARE @vPasswordTemp Nnvarchar(max)
+        DECLARE @vPasswordTemp NVARCHAR(max)
        
 
       
@@ -40,4 +40,5 @@ AS
 						AND HBD.I_Status=1 -- susmita
 						AND HBD.I_Brand_ID in (107,110) --susmita 
           END
+
 

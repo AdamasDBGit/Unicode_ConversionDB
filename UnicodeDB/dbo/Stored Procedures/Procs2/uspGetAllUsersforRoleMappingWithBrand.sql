@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[uspGetAllUsersforRoleMappingWithBrand] --2,'','','','','',22
 	-- Add the parameters for the stored procedure here
 			@iSelectedHierarchyId int,
-			@vLoginID Nnvarchar(max),
-			@vFirstName Nnvarchar(max),
-			@vMiddleName Nnvarchar(max),
-			@vLastName Nnvarchar(max),
-			@sCriteron Nnvarchar(max),
+			@vLoginID NVARCHAR(max),
+			@vFirstName NVARCHAR(max),
+			@vMiddleName NVARCHAR(max),
+			@vLastName NVARCHAR(max),
+			@sCriteron NVARCHAR(max),
 			@iSelectedBrandID int
  			
 AS
@@ -118,4 +118,5 @@ BEGIN
 		AND ISNULL(um.S_Last_Name,'') LIKE ISNULL(@vLastName,'')+'%'
 	END
 END
+
 

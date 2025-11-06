@@ -15,7 +15,7 @@ DECLARE @TEMP_MovIdTbl  TABLE ( MovId INT)
 		SET ROWCOUNT 50
 		
 		--declare @sql nvarchar(max) = 'SELECT TOP ' +CONVERT(NVARCHAR(255), @TopCount)+ ' Fld_KPMG_Mo_Id FROM Tbl_KPMG_MoMaster WHERE  Fld_KPMG_Status=0 AND Fld_KPMG_ISCollected=''N'' ORDER BY [Fld_KPMG_Created Date] ';
-		declare @sql nnvarchar(max) = 'SELECT TOP 1 Fld_KPMG_Mo_Id FROM Tbl_KPMG_MoMaster WHERE  Fld_KPMG_Status=0 AND Fld_KPMG_ISCollected=''N'' ORDER BY [Fld_KPMG_Created Date] ';
+		declare @sql NVARCHAR(max) = 'SELECT TOP 1 Fld_KPMG_Mo_Id FROM Tbl_KPMG_MoMaster WHERE  Fld_KPMG_Status=0 AND Fld_KPMG_ISCollected=''N'' ORDER BY [Fld_KPMG_Created Date] ';
 		
 		
 		
@@ -62,10 +62,11 @@ DECLARE @TEMP_MovIdTbl  TABLE ( MovId INT)
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[uspInsertCenterSalesOrgDetails]
 		@iCourseID int,
 		@iDeliveryID int,
 		@iFeePlanID int,
-		@sCreatedBy Nnvarchar(max),
+		@sCreatedBy NVARCHAR(max),
 		@dCreatedOn datetime
 	)
 AS
@@ -80,4 +80,5 @@ BEGIN
 			
 		END
 END
+
 

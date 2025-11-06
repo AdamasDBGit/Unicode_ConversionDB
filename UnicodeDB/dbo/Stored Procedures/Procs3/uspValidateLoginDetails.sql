@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspValidateLoginDetails]
 (
-	@vLoginID Nnvarchar(max),
+	@vLoginID NVARCHAR(max),
 	@iUserID INT
 )
 AS
@@ -9,4 +9,5 @@ BEGIN
 	WHERE [TUM].[S_Login_ID] = @vLoginID
 	AND [TUM].[I_User_ID] != @iUserID
 END
+
 

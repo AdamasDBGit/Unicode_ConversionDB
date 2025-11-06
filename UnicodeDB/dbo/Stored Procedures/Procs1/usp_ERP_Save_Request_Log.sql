@@ -2,16 +2,16 @@
 
 CREATE PROCEDURE [dbo].[usp_ERP_Save_Request_Log]
 (
-	@InvokedRoute Nnvarchar(max)=NULL,
-	@sToken Nnvarchar(max),
-	@Source Nnvarchar(max),
-	@InvokedMethod Nnvarchar(max),
-	@UniqueAttributeName Nnvarchar(max)=NULL,
-	@UniqueAttributeValue Nnvarchar(max)=NULL,
-	@RequestParameters Nnvarchar(max)=NULL,
-	@RequestResult Nnvarchar(max)=NULL,
-	@ErrorMessage Nnvarchar(max)=NULL,
-	@MobileNo Nnvarchar(max)=NULL
+	@InvokedRoute NVARCHAR(max)=NULL,
+	@sToken NVARCHAR(max),
+	@Source NVARCHAR(max),
+	@InvokedMethod NVARCHAR(max),
+	@UniqueAttributeName NVARCHAR(max)=NULL,
+	@UniqueAttributeValue NVARCHAR(max)=NULL,
+	@RequestParameters NVARCHAR(max)=NULL,
+	@RequestResult NVARCHAR(max)=NULL,
+	@ErrorMessage NVARCHAR(max)=NULL,
+	@MobileNo NVARCHAR(max)=NULL
 )
 AS
 BEGIN
@@ -33,4 +33,5 @@ BEGIN
 	select @NewRow as NewRow
 
 END
+
 

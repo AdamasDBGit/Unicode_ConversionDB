@@ -1,6 +1,6 @@
 
 CREATE PROCEDURE [dbo].[usp_ERP_Get_Transaction_History_BKP_Sept_2025]      
-    @sStudentID Nnvarchar(max) = NULL,      
+    @sStudentID NVARCHAR(max) = NULL,      
     @dtValidFrom DATETIME = NULL,      
     @dtValidTo DATETIME = NULL,      
     @BrandID INT = NULL,      
@@ -8,7 +8,7 @@ CREATE PROCEDURE [dbo].[usp_ERP_Get_Transaction_History_BKP_Sept_2025]
     @iPaymentStatusID INT = NULL,    
     @iReceiptType INT = NULL,    
     @bIsAdhoc BIT = NULL ,  
- @sStudentName Nnvarchar(max) = NULL  
+ @sStudentName NVARCHAR(max) = NULL  
 AS      
 BEGIN      
     SET NOCOUNT ON;      
@@ -217,4 +217,5 @@ BEGIN
     
     DROP TABLE #Transaction_History;      
 END 
+
 

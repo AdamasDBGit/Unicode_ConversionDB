@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspUpdateEnquiryRelevence]
 (
-@sEnquiryNo Nnvarchar(max),
-@UpdBy Nnvarchar(max)
+@sEnquiryNo NVARCHAR(max),
+@UpdBy NVARCHAR(max)
 )
 AS
 BEGIN
@@ -23,4 +23,5 @@ BEGIN
 	END
 	
 END
+
 

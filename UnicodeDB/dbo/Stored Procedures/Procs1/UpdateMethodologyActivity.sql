@@ -7,9 +7,9 @@ CREATE PROCEDURE [dbo].[UpdateMethodologyActivity]
 -- Add the parameters for the stored procedure here
 @MethodologyActivityID int ,
 @Methodology_CategoryID int = null,
-@MethodologyActivityName nnvarchar(max)=null,
-@MethodologyActivityDescription nnvarchar(max)=null,
-@MeasureUnit nnvarchar(max)=null,
+@MethodologyActivityName NVARCHAR(max)=null,
+@MethodologyActivityDescription NVARCHAR(max)=null,
+@MeasureUnit NVARCHAR(max)=null,
 @Status int =null
 AS
 BEGIN
@@ -89,3 +89,4 @@ BEGIN
 
 
 END
+

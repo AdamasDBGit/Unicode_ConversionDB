@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_ERP_Exam_UpsertExamType]  
 (  
     @inExamTypeID INT = NULL,    
-    @stExamTypeName Nnvarchar(max),   
+    @stExamTypeName NVARCHAR(max),   
     @inTYPE INT,                 
     @inBrandID INT,               
     @IsMainExam BIT               
@@ -61,9 +61,10 @@ BEGIN
     END TRY  
     BEGIN CATCH  
         ROLLBACK TRANSACTION;   
-        DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT;  
+        DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity INT;  
         SELECT @ErrMsg = ERROR_MESSAGE(),  
                @ErrSeverity = ERROR_SEVERITY();  
         SELECT 0 AS StatusFlag, @ErrMsg AS Message;  
     END CATCH  
 END  
+

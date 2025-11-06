@@ -9,9 +9,10 @@ END TRY
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            
         RAISERROR(@ErrMsg, @ErrSeverity, 1)            
     END CATCH
+

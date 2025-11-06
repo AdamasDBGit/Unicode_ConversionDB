@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspInsertNewHierarchyDetails]               
 (              
-  @sLoginID    Nnvarchar(max)  
+  @sLoginID    NVARCHAR(max)  
  ,@iStudentDetailId  INT  
  ,@iTransferRequestId  INT 
 )              
@@ -38,4 +38,5 @@ END
 UPDATE T_Student_Attendance_Details SET I_Centre_Id = @iDestinationCenterID WHERE I_Student_Detail_id = @iStudentDetailId 
   
 END
+
 

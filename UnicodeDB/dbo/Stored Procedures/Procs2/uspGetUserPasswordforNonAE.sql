@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetUserPasswordforNonAE] --[dbo].[uspGetUserPasswordforNonAE] '05-0693  
 (  
- @sLoginID Nnvarchar(max)  
+ @sLoginID NVARCHAR(max)  
    
 )  
 AS  
@@ -34,4 +34,5 @@ BEGIN
     
    
 END
+
 

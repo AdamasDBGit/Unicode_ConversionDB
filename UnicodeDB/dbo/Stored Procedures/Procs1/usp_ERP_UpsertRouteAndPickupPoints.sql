@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[usp_ERP_UpsertRouteAndPickupPoints]  
     @I_Route_ID INT = NULL,  
-    @S_Route_No Nnvarchar(max),  
-    @S_Location Nnvarchar(max),  
+    @S_Route_No NVARCHAR(max),  
+    @S_Location NVARCHAR(max),  
     @ERP_User_ID INT,  
     @I_Brand_ID INT,  
-    @start_latitude Nnvarchar(max),  
-    @start_longitude Nnvarchar(max),  
+    @start_latitude NVARCHAR(max),  
+    @start_longitude NVARCHAR(max),  
     @pickup_points UT_Route_PickupMap READONLY  
 AS  
 BEGIN  
@@ -128,7 +128,7 @@ BEGIN
         SELECT ', ' + CAST(rp.I_Pickup_ID AS VARCHAR)
         FROM #RoutePickup rp
         WHERE rp.I_route_ID = r.I_route_ID
-        FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 2, '') AS Pickup_IDs
+        FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(max)'), 1, 2, '') AS Pickup_IDs
 FROM 
     #RoutePickup r
 GROUP BY 
@@ -145,4 +145,5 @@ GROUP BY
         THROW;  
     END CATCH;  
 END;
+
 

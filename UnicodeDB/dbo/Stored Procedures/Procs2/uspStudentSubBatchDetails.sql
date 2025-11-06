@@ -2,8 +2,8 @@ CREATE PROCEDURE [dbo].[uspStudentSubBatchDetails]   --19,NULL,'CE',NULL,NULL
 (            
      @I_Batch_ID INT =NULL ,
      @CenterId INT =NULL,
-     @Flag Nnvarchar(max) =NULL,
-     @S_Student_ID Nnvarchar(max) =NULL 
+     @Flag NVARCHAR(max) =NULL,
+     @S_Student_ID NVARCHAR(max) =NULL 
             
            
 )            
@@ -33,4 +33,5 @@ BEGIN
           ORDER BY S_Batch_Code 
       END        
 END
+
 

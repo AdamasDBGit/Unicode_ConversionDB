@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspGetUserLoginInformationAdmin]
     (
-      @vLoginID Nnvarchar(max) ,
-      @vPassword Nnvarchar(max)
+      @vLoginID NVARCHAR(max) ,
+      @vPassword NVARCHAR(max)
     )
 AS
     BEGIN
@@ -10,7 +10,7 @@ AS
         SET NOCOUNT ON;
 	
         DECLARE @vUserType nvarchar(max)
-        DECLARE @vPasswordTemp Nnvarchar(max)
+        DECLARE @vPasswordTemp NVARCHAR(max)
         DECLARE @iUserID INT
         DECLARE @bLDAPUser BIT
 
@@ -90,4 +90,5 @@ AS
             END
 
     END
+
 

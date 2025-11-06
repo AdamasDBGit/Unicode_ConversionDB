@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[usp_ERP_MarksTabulation] --[REPORT].[uspGetStudentsInter
       @iStudentDetailID INT ,      
       --@iCenterID INT,  
       @iBrandId INT ,  
-      @sHierarchyList Nnvarchar(max)=NULL,  
+      @sHierarchyList NVARCHAR(max)=NULL,  
       @dCumulativeP DECIMAL(14,2)=NULL  
     )  
 AS   
@@ -157,4 +157,5 @@ SELECT  I_Student_Detail_ID ,
   
   
   
+
 

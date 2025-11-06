@@ -3,7 +3,7 @@ CREATE PROCEDURE [dbo].[usp_ERP_FormSaleDetail]
       @dtStart DATETIME ,  
       @dtEnd DATETIME ,  
       @iBrandId INT ,  
-      @sHierarchyList Nnvarchar(max) =NULL 
+      @sHierarchyList NVARCHAR(max) =NULL 
     )  
 AS   
     BEGIN  
@@ -114,4 +114,5 @@ A.S_Mobile_No ,
         END          
     END  
   
+
 

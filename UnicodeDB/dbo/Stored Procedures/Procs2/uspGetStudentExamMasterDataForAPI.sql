@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[uspGetStudentExamMasterDataForAPI](@BrandID INT,@AcademicSession Nnvarchar(max)=NULL)
+CREATE PROCEDURE [dbo].[uspGetStudentExamMasterDataForAPI](@BrandID INT,@AcademicSession NVARCHAR(max)=NULL)
 AS
 BEGIN
 
@@ -180,4 +180,5 @@ END
 
 
 END
+
 

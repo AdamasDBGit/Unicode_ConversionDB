@@ -42,7 +42,7 @@ AS
         FROM Nullify_Installments_Details AS sub 
         WHERE sub.Invoice_Header_ID = main.Invoice_Header_ID 
           AND CAST(sub.CreatedOn AS DATE) = CAST(main.CreatedOn AS DATE)  -- Optimized conversion
-        FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 3, ''), 'No Remarks') AS Merged_Remarks
+        FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(max)'), 1, 3, ''), 'No Remarks') AS Merged_Remarks
 FROM Nullify_Installments_Details AS main 
 WHERE Isdone = 1 AND Remarks IS NOT NULL
 GROUP BY Invoice_Header_ID, CAST(CreatedOn AS DATE)  -- Ensure it matches SELECT
@@ -347,3 +347,4 @@ T_Invoice_Child_Header as ICH on ICD.I_Invoice_Child_Header_ID=ICH.I_Invoice_Chi
 
     END        
     
+

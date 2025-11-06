@@ -6,19 +6,19 @@ AS
         
 BEGIN TRY         
 --TRUNCATE TABLE Tbl_KPMG_MoStudentMap         
-DECLARE @TEMP_MO_ITEMS_FOR_INSTALLMENT TABLE(BranchId INT,ItemCode Nnvarchar(max),Quantity INT)        
-DECLARE @TEMP_MO_ITEMS_FOR_ADMISSION TABLE(BranchId INT,ItemCode Nnvarchar(max),Quantity INT)        
+DECLARE @TEMP_MO_ITEMS_FOR_INSTALLMENT TABLE(BranchId INT,ItemCode NVARCHAR(max),Quantity INT)        
+DECLARE @TEMP_MO_ITEMS_FOR_ADMISSION TABLE(BranchId INT,ItemCode NVARCHAR(max),Quantity INT)        
 DECLARE @TEMP_MO_INSTALLMENT TABLE(StudentId INT,BranchId INT, InstallmentNo INT, InstallmentPaid CHAR(1))        
 DECLARE @TEMP_MO_ITEMS_TO_CONSIDER TABLE(StudentId INT, InstallmentNo INT, BranchId INT)        
 DECLARE @TEMP_CENTERS TABLE ( UUID INT IDENTITY(1,1),BranchId INT)        
-DECLARE @TEMP_MO_ITEMS_FOR_SPL_SM TABLE(BranchId INT,ItemCode Nnvarchar(max),Quantity INT)        
+DECLARE @TEMP_MO_ITEMS_FOR_SPL_SM TABLE(BranchId INT,ItemCode NVARCHAR(max),Quantity INT)        
 DECLARE @MINCOUNT INT        
 DECLARE @MAXCOUNT INT        
         
 DECLARE @TempTable TABLE (Id INT IDENTITY, ItemCode nvarchar(max))        
       
 -----------------------------------------------------Lumpsum Changes------------------------------------------------------------------      
-DECLARE @TEMP_MO_ITEMS_FOR_LUMPSUM TABLE(BranchId INT,ItemCode Nnvarchar(max),Quantity INT)          
+DECLARE @TEMP_MO_ITEMS_FOR_LUMPSUM TABLE(BranchId INT,ItemCode NVARCHAR(max),Quantity INT)          
       
 INSERT INTO @TEMP_MO_ITEMS_FOR_LUMPSUM(BranchId,ItemCode,Quantity)         
 select  tip.I_Centre_Id,Fld_KPMG_ItemCode,COUNT(distinct tip.I_Invoice_Header_ID)       
@@ -32,7 +32,7 @@ where C_Is_LumpSum = 'Y' and tbcd.I_Brand_ID=109 AND tip.I_Status=1 and tich.I_C
 and Dt_Invoice_Date >= DATEADD(MM, -1, getdate()) and SM.Fld_KPMG_I_Installment_No>2      
 group by tip.I_Centre_Id,Fld_KPMG_ItemCode      
       
-DECLARE @TEMP_MO_ITEMS_OLD_LUMPSUM TABLE(BranchId INT,ItemCode Nnvarchar(max),Quantity INT)       
+DECLARE @TEMP_MO_ITEMS_OLD_LUMPSUM TABLE(BranchId INT,ItemCode NVARCHAR(max),Quantity INT)       
 DECLARE @COUNT INT =2       
 declare @startdate datetime      
 while (@COUNT<7)      
@@ -230,10 +230,11 @@ WHEN NOT MATCHED THEN
 END TRY        
 BEGIN CATCH        
          
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int        
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int        
         
  SELECT @ErrMsg = ERROR_MESSAGE(),        
    @ErrSeverity = ERROR_SEVERITY()        
         
  RAISERROR(@ErrMsg, @ErrSeverity, 1)        
 END CATCH
+

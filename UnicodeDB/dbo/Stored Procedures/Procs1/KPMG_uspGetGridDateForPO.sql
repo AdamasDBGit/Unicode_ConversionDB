@@ -1,6 +1,6 @@
 
 CREATE PROCEDURE [dbo].[KPMG_uspGetGridDateForPO]
-@POID	Nnvarchar(max),
+@POID	NVARCHAR(max),
 @ItemID	xml
 --@STR_PASSWORD	NVARCHAR(MAX)
 --@STR_USERSESSION	NVARCHAR(MAX)
@@ -55,4 +55,5 @@ BEGIN
     
 	
 END
+
 

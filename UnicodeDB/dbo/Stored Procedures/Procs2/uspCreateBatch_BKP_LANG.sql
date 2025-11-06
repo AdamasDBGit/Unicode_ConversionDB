@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspCreateBatch_BKP_LANG]                   
 (                     
-  @sBatchCode Nnvarchar(max),            
+  @sBatchCode NVARCHAR(max),            
   @iCourseID INT,            
   @iDeliveryPatternID INT,            
   --@iTimeSlotId INT,            
@@ -8,16 +8,16 @@ CREATE PROCEDURE [dbo].[uspCreateBatch_BKP_LANG]
   @dtBatchStartDate DATETIME,            
   @iStatus INT,            
   @dtCourseExpectedEndDate DATETIME,            
-  @sCreatedBy Nnvarchar(max),            
+  @sCreatedBy NVARCHAR(max),            
   @dtCreatedOn DATETIME,            
   @FacultyId INT,            
-  @sBatchName Nnvarchar(max),          
+  @sBatchName NVARCHAR(max),          
   @bIsApproved BIT,        
   @iAdmissionGraceDays INT,      
   @bIsCorporate BIT,    
   @iLateFeeGraceDays INT  ,  
   @dtBatchIntroductionDate DATETIME = NULL,  
-  @sBatchIntroductionTime Nnvarchar(max) = NULL           
+  @sBatchIntroductionTime NVARCHAR(max) = NULL           
 )                    
 AS                    
 BEGIN TRY            
@@ -71,10 +71,11 @@ END TRY
 BEGIN CATCH            
  --Error occurred:              
             
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int            
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int            
  SELECT @ErrMsg = ERROR_MESSAGE(),            
    @ErrSeverity = ERROR_SEVERITY()            
             
  RAISERROR(@ErrMsg, @ErrSeverity, 1)            
 END CATCH    
+
 

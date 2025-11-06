@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_ERP_Exam_GetTypeList]   
 (  
-    @ExamTypeName Nnvarchar(max) = NULL,    
+    @ExamTypeName NVARCHAR(max) = NULL,    
     @inTYPE INT = NULL,    
     @unTypeId UNIQUEIDENTIFIER = NULL,    
     @inBrandID INT = NULL  
@@ -10,7 +10,7 @@ BEGIN
     SET NOCOUNT ON;  
 
     -- Build the SQL query
-    DECLARE @stSQL AS Nnvarchar(max);
+    DECLARE @stSQL AS NVARCHAR(max);
     
     SET @stSQL = 'SELECT 
                       inExamTypeID, 
@@ -40,6 +40,7 @@ BEGIN
 
     -- Execute the SQL query with the parameters
     EXEC sp_executesql @stSQL,  
-        N'@ExamTypeName Nnvarchar(max), @inTYPE INT, @unTypeId UNIQUEIDENTIFIER, @inBrandID INT',  
+        N'@ExamTypeName NVARCHAR(max), @inTYPE INT, @unTypeId UNIQUEIDENTIFIER, @inBrandID INT',  
         @ExamTypeName, @inTYPE, @unTypeId, @inBrandID;  
 END  
+

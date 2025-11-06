@@ -1,17 +1,17 @@
 CREATE PROCEDURE [dbo].[uspInsertUpdateDeleteNotification]    
 (    
     @inNotificationTemplateID INT = NULL,    
-    @stTemplateTitle Nnvarchar(max),    
-    @stEmailSubject Nnvarchar(max) = NULL,    
-    @stSMSTemplateMessage Nnvarchar(max) = NULL,    
-    @stPushTemplateMessage Nnvarchar(max) = NULL,    
-    @stEmailTemplateMessage Nnvarchar(max) = NULL,    
+    @stTemplateTitle NVARCHAR(max),    
+    @stEmailSubject NVARCHAR(max) = NULL,    
+    @stSMSTemplateMessage NVARCHAR(max) = NULL,    
+    @stPushTemplateMessage NVARCHAR(max) = NULL,    
+    @stEmailTemplateMessage NVARCHAR(max) = NULL,    
     @inNotificationTypeID INT,    
     @inNotificationCategoryID INT,    
-    @stDeliveryChannelID Nnvarchar(max),    
+    @stDeliveryChannelID NVARCHAR(max),    
     @inCreatedBy INT,    
     @Status INT,    
-    @stPushTitle Nnvarchar(max) = NULL,    
+    @stPushTitle NVARCHAR(max) = NULL,    
 
     -- ?? Newly added fields
     @inNotificationType INT = NULL,    
@@ -121,3 +121,4 @@ BEGIN
         SELECT 0 AS statusFlag, 'Something went wrong!', ERROR_MESSAGE() AS errorMessage    
     END CATCH      
 END
+

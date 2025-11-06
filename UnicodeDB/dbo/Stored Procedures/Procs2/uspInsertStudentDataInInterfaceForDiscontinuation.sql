@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[uspInsertStudentDataInInterfaceForDiscontinuation]
     (
       @sDiscontinueXML XML ,
       @iFlag INT ,
-      @sLoginID Nnvarchar(max)
+      @sLoginID NVARCHAR(max)
     )
 AS
     BEGIN
@@ -47,7 +47,7 @@ AS
         END TRY      
         BEGIN CATCH      
             ROLLBACK TRANSACTION  
-            DECLARE @ErrMsg Nnvarchar(max) ,
+            DECLARE @ErrMsg NVARCHAR(max) ,
                 @ErrSeverity INT      
             SELECT  @ErrMsg = ERROR_MESSAGE() ,
                     @ErrSeverity = ERROR_SEVERITY()      
@@ -59,4 +59,5 @@ AS
 
 
     END
+
 

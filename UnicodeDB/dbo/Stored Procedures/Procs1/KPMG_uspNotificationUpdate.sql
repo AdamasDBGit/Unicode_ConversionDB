@@ -10,7 +10,7 @@ DECLARE @TEMP_ORACLE_MO TABLE(OracleMoLineId INT ,OracleMoNumber INT,SMSMoId INT
 INSERT INTO @TEMP_ORACLE_MO(OracleMoLineId,OracleMoNumber,SMSMoId,SMSMoLineNo)
 SELECT 
                         T.c.value('OracleMoLineId[1]', 'INT') ,
-                        T.c.value('OracleMoNumber[1]', 'Nnvarchar(max)') ,
+                        T.c.value('OracleMoNumber[1]', 'NVARCHAR(max)') ,
                         T.c.value('SMSMoId[1]', 'INT') ,                        
                         T.c.value('SMSMoLineNo[1]', 'INT')                        
                 FROM    @XmlData.nodes('/ROOT/OracleMoveOrder') T ( c )   
@@ -29,10 +29,11 @@ INNER JOIN @TEMP_ORACLE_MO C ON A.Fld_KPMG_MoItem_Id=C.SMSMoLineNo
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

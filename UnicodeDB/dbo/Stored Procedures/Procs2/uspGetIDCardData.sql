@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspGetIDCardData]
 (
 @BrandID int,
-@sHierarchyListID Nnvarchar(max),
+@sHierarchyListID NVARCHAR(max),
 @dtStartDate Datetime,
 @dtEndDate Datetime
 )
@@ -56,4 +56,5 @@ and (B.Dt_Valid_From>=@dtStartDate and B.Dt_Valid_From<DATEADD(d,1,@dtEndDate))
 and E.I_Center_ID in (select FGCR.centerID from fnGetCentersForReports(@sHierarchyListID,@BrandID) FGCR)
 
 end
+
 

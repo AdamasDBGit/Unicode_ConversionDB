@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[UspSearchList]
-@Session_ID nnvarchar(max),
-@Brand_ID nnvarchar(max)=null,
-@Student__Detail_ID nnvarchar(max)=Null,
-@School_Group_ID nnvarchar(max)=null,
-@Class_ID nnvarchar(max)=null,
-@Stream_ID nnvarchar(max)=null,
-@Section_ID nnvarchar(max)=Null
+@Session_ID NVARCHAR(max),
+@Brand_ID NVARCHAR(max)=null,
+@Student__Detail_ID NVARCHAR(max)=Null,
+@School_Group_ID NVARCHAR(max)=null,
+@Class_ID NVARCHAR(max)=null,
+@Stream_ID NVARCHAR(max)=null,
+@Section_ID NVARCHAR(max)=Null
 as
 SET NOCOUNT ON;  
 
@@ -51,3 +51,4 @@ and (TS.I_Stream_ID=@Stream_ID or @Stream_ID is null)
 and (TSS.I_Section_ID=@Section_ID or @Section_ID is null) ;
 
 
+

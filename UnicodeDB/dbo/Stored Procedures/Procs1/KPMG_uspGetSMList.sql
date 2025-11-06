@@ -8,10 +8,11 @@ BEGIN TRY
 END TRY    
 BEGIN CATCH    
      
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
     
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     
  RAISERROR(@ErrMsg, @ErrSeverity, 1)    
 END CATCH
+

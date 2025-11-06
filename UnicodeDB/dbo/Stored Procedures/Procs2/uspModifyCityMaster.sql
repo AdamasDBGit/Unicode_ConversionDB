@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[uspModifyCityMaster] 
 	-- Add the parameters for the stored procedure here
 	@iCityID INT,
-	@sCityCode Nnvarchar(max),
-	@sCityName Nnvarchar(max),
+	@sCityCode NVARCHAR(max),
+	@sCityName NVARCHAR(max),
 	@iCountryID INT,
 	@iStateID INT,
-	@sCityBy Nnvarchar(max),
+	@sCityBy NVARCHAR(max),
 	@dCityOn DATETIME,
 	@iFlag INT
 AS
@@ -62,10 +62,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

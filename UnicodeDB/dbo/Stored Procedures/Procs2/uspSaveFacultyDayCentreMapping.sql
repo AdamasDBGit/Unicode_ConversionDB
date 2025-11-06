@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[uspSaveFacultyDayCentreMapping](@EmployeeID int, @DayofWeek Nnvarchar(max), @CentreID INT, @TimeSlot Nnvarchar(max),@CreatedBy Nnvarchar(max))
+CREATE PROCEDURE [dbo].[uspSaveFacultyDayCentreMapping](@EmployeeID int, @DayofWeek NVARCHAR(max), @CentreID INT, @TimeSlot NVARCHAR(max),@CreatedBy NVARCHAR(max))
 AS
 begin
 
@@ -23,4 +23,5 @@ begin
 	--end
 
 end
+
 

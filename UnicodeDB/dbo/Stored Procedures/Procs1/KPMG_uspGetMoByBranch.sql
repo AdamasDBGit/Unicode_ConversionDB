@@ -1,8 +1,8 @@
 
 CREATE PROCEDURE [dbo].[KPMG_uspGetMoByBranch]
 (		
-	@CenterName Nnvarchar(max),
-	@Context Nnvarchar(max) = 'DEFAULT_MO'
+	@CenterName NVARCHAR(max),
+	@Context NVARCHAR(max) = 'DEFAULT_MO'
 )
 AS
 	BEGIN Try
@@ -30,10 +30,11 @@ AS
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            
         RAISERROR(@ErrMsg, @ErrSeverity, 1)            
     END CATCH
+
 

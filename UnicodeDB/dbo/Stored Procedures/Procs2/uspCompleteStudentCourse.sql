@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[uspCompleteStudentCourse]
 (    
  @I_Student_Detail_ID int,    
  @I_Batch_ID INT,   
- @S_Upd_By Nnvarchar(max)    
+ @S_Upd_By NVARCHAR(max)    
 )    
 AS    
 BEGIN    
@@ -30,4 +30,5 @@ BEGIN
  UPDATE dbo.T_Student_Detail SET I_Status=0 WHERE I_Student_Detail_ID=@I_Student_Detail_ID
     
 END
+
 

@@ -5,11 +5,11 @@ CREATE PROCEDURE [dbo].[usp_ERP_GetCollectionRegister_BKP_May_2025]
       @iSelectedBrandId INT,    
       @dtDateTo DATETIME=null ,      
       @dtDateFrom DATETIME=null ,      
-      @sFName Nnvarchar(max)=NULL,      
-      @sMName Nnvarchar(max)=NULL,      
-      @sLName Nnvarchar(max)=NULL,      
-      @sStudentCode Nnvarchar(max) = NULL ,      
-      @sEnquiryNo Nnvarchar(max) = NULL   ,
+      @sFName NVARCHAR(max)=NULL,      
+      @sMName NVARCHAR(max)=NULL,      
+      @sLName NVARCHAR(max)=NULL,      
+      @sStudentCode NVARCHAR(max) = NULL ,      
+      @sEnquiryNo NVARCHAR(max) = NULL   ,
 	  @iReceiptNo int=NULL
     )      
 AS       
@@ -62,7 +62,7 @@ BEGIN
         I_Status INT,      
         I_Centre_Id INT,    
         OnAccountInvoiceNo nvarchar(max)   ,
-		S_Cancellation_Reason nnvarchar(max)
+		S_Cancellation_Reason NVARCHAR(max)
     );                
 
     -- Insert Active Receipts
@@ -204,4 +204,5 @@ END AS ReceiptTypeDesc,
     ORDER BY T.I_Receipt_Header_ID DESC;                
 
 END
+
 

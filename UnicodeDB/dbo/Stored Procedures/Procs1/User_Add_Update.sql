@@ -10,13 +10,13 @@ CREATE PROCEDURE [dbo].[User_Add_Update] ---SP_NAME----
 ----- SP Parameters------------Default value null------------
 -- =============================================
 @User_ID int=null,
-@Username Nnvarchar(max)=null,
-@Password Nnvarchar(max)=null,
-@Email Nnvarchar(max)=null,
-@First_Name Nnvarchar(max)=null,
-@Middle_Name Nnvarchar(max)=null,
-@Last_Name Nnvarchar(max)=null,
-@Mobile Nnvarchar(max)=null,
+@Username NVARCHAR(max)=null,
+@Password NVARCHAR(max)=null,
+@Email NVARCHAR(max)=null,
+@First_Name NVARCHAR(max)=null,
+@Middle_Name NVARCHAR(max)=null,
+@Last_Name NVARCHAR(max)=null,
+@Mobile NVARCHAR(max)=null,
 @Created_By int =Null,
 @Status int=null
 
@@ -137,4 +137,5 @@ BEGIN CATCH
         
 END CATCH;
 END
+
 

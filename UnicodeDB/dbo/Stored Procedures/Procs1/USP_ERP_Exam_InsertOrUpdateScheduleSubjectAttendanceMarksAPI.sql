@@ -4,7 +4,7 @@ CREATE PROCEDURE [dbo].[USP_ERP_Exam_InsertOrUpdateScheduleSubjectAttendanceMark
 (
     @examScheduleSubjectDetailId INT = NULL,
     @AttendanceMarks dbo.UT_StudentExamDetails READONLY,
-    @token nnvarchar(max)
+    @token NVARCHAR(max)
 )
 AS
 BEGIN
@@ -118,3 +118,4 @@ BEGIN
             ERROR_MESSAGE() AS ErrorMessage;
     END CATCH
 END;
+

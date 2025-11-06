@@ -8,10 +8,11 @@ SELECT Fld_KPMG_ExaminationId AS ExaminationId,Fld_KPMG_ExaminationName AS Exami
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

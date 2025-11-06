@@ -4,11 +4,11 @@ CREATE PROCEDURE [dbo].[uspGetCollectionRegister]
       @iSelectedBrandId INT ,  
       @dtDateTo DATETIME ,  
       @dtDateFrom DATETIME ,  
-      @sFName Nnvarchar(max) ,  
-      @sMName Nnvarchar(max) ,  
-      @sLName Nnvarchar(max) ,  
-      @sStudentCode Nnvarchar(max) = NULL ,  
-      @sEnquiryNo Nnvarchar(max) = NULL           
+      @sFName NVARCHAR(max) ,  
+      @sMName NVARCHAR(max) ,  
+      @sLName NVARCHAR(max) ,  
+      @sStudentCode NVARCHAR(max) = NULL ,  
+      @sEnquiryNo NVARCHAR(max) = NULL           
     )  
 AS   
     BEGIN            
@@ -273,4 +273,5 @@ AS
                 INNER JOIN dbo.T_Receipt_Header RH ON T.I_Receipt_Header_ID = RH.I_Receipt_Header_ID  
         ORDER BY T.I_Receipt_Header_ID DESC            
     END
+
 

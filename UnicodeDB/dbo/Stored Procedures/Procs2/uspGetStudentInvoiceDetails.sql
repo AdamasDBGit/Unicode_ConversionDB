@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[uspGetStudentInvoiceDetails]
     (
-      @sStudentCode Nnvarchar(max) ,
-      @sStudentFName Nnvarchar(max) ,
-      @sStudentMName Nnvarchar(max) ,
-      @sStudentLName Nnvarchar(max) ,
-      @sInvoiceNo Nnvarchar(max) ,
+      @sStudentCode NVARCHAR(max) ,
+      @sStudentFName NVARCHAR(max) ,
+      @sStudentMName NVARCHAR(max) ,
+      @sStudentLName NVARCHAR(max) ,
+      @sInvoiceNo NVARCHAR(max) ,
       @iCentreId INT      
     )
 AS
@@ -48,4 +48,5 @@ AS
         ORDER BY B.S_Student_ID        
       
     END
+
 

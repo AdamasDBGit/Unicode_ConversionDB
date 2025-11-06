@@ -2,31 +2,31 @@ CREATE PROCEDURE [dbo].[uspInsertUpdateDeleteUser]
 (
 	@iMode				INT = 0,
 	@iFacultyMasterID	INT = NULL,
-	@sEmployeeCode		Nnvarchar(max) = NULL,
-	@sEmployeeName		Nnvarchar(max) = NULL,
-	@sEmployeeType		Nnvarchar(max) = NULL,
-	@sMobileNo			Nnvarchar(max) = NULL,
+	@sEmployeeCode		NVARCHAR(max) = NULL,
+	@sEmployeeName		NVARCHAR(max) = NULL,
+	@sEmployeeType		NVARCHAR(max) = NULL,
+	@sMobileNo			NVARCHAR(max) = NULL,
 	@dtDOB				DATETIME = NULL,
 	@dtDOJ				DATETIME = NULL,
-	@sGender			Nnvarchar(max) = NULL,
+	@sGender			NVARCHAR(max) = NULL,
 	@iReligionID		INT = NULL,
 	@iMaritialID		INT = NULL,
-	@sPhoto				Nnvarchar(max) = NULL,
-	@sSignature			Nnvarchar(max) = NULL,
-	@sPAN				Nnvarchar(max) = NULL,
-	@sAadhar			Nnvarchar(max) = NULL,
-	@sEMail				Nnvarchar(max)=NULL,
-	@sPresentAddress	Nnvarchar(max) = NULL,
-	@sPermanentAddress	Nnvarchar(max) = NULL,
+	@sPhoto				NVARCHAR(max) = NULL,
+	@sSignature			NVARCHAR(max) = NULL,
+	@sPAN				NVARCHAR(max) = NULL,
+	@sAadhar			NVARCHAR(max) = NULL,
+	@sEMail				NVARCHAR(max)=NULL,
+	@sPresentAddress	NVARCHAR(max) = NULL,
+	@sPermanentAddress	NVARCHAR(max) = NULL,
 	@iStatus			INT = 1,
 	@iBrandID			INT = NULL,
 	@iCreatedBy			INT = NULL,
 	@ProvideUserAceess  INT=1,
 	@UserID				INT = NULL,
-	@UserName			Nnvarchar(max)=NULL,
-	@Password			Nnvarchar(max) = NULL,
+	@UserName			NVARCHAR(max)=NULL,
+	@Password			NVARCHAR(max) = NULL,
 	@IsTeachingfaculty  BIT ='false',
-	@UserCode		    Nnvarchar(max)
+	@UserCode		    NVARCHAR(max)
 )
 AS
 begin transaction
@@ -507,7 +507,7 @@ DECLARE @LastUserID INT
 END TRY
 BEGIN CATCH
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity INT
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()

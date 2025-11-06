@@ -70,8 +70,8 @@ SELECT DISTINCT I_Tax_ID,S_Tax_Desc FROM #TaxTable
       
 DECLARE @min INT      
 DECLARE @max INT      
-DECLARE @strSQL Nnvarchar(max)      
-DECLARE @strSQL2 Nnvarchar(max)      
+DECLARE @strSQL NVARCHAR(max)      
+DECLARE @strSQL2 NVARCHAR(max)      
 DECLARE @sColumnName nvarchar(max)      
       
       
@@ -121,3 +121,4 @@ DROP TABLE #TaxTable
       
           
 END
+

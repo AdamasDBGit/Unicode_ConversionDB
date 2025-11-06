@@ -7,8 +7,8 @@ CREATE PROCEDURE [dbo].[Role_Add_Update]
 -- Add the parameters for the stored procedure here
 -- =============================================
 @Role_ID int =null,
-@Role_Name nnvarchar(max)=null,
-@Role_Desc nnvarchar(max)=null,
+@Role_Name NVARCHAR(max)=null,
+@Role_Desc NVARCHAR(max)=null,
 @CreatedBy int =null,
 @Status int=null
 
@@ -92,3 +92,4 @@ BEGIN CATCH
     ERROR_MESSAGE() AS ErrorMessage;
 END CATCH;
 END
+

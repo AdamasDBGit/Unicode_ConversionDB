@@ -1,7 +1,7 @@
 
 CREATE PROCEDURE [dbo].[uspCreateBatch]                   
 (                     
-  @sBatchCode Nnvarchar(max),            
+  @sBatchCode NVARCHAR(max),            
   @iCourseID INT,            
   @iDeliveryPatternID INT,            
   --@iTimeSlotId INT,            
@@ -9,16 +9,16 @@ CREATE PROCEDURE [dbo].[uspCreateBatch]
   @dtBatchStartDate DATETIME,            
   @iStatus INT,            
   @dtCourseExpectedEndDate DATETIME,            
-  @sCreatedBy Nnvarchar(max),            
+  @sCreatedBy NVARCHAR(max),            
   @dtCreatedOn DATETIME,            
   @FacultyId INT,            
-  @sBatchName Nnvarchar(max),          
+  @sBatchName NVARCHAR(max),          
   @bIsApproved BIT,        
   @iAdmissionGraceDays INT,      
   @bIsCorporate BIT,    
   @iLateFeeGraceDays INT  ,  
   @dtBatchIntroductionDate DATETIME = NULL,  
-  @sBatchIntroductionTime Nnvarchar(max) = NULL ,
+  @sBatchIntroductionTime NVARCHAR(max) = NULL ,
   @BatchCategoryID INT=1 --added by susmita 
   --@BatchLanguageID INT =2,--added by susmita for language 27-07-2022 value delete when front end correct
   --@BatchLangauageName NVARCHAR(MAX)='Bengali & English'----added by susmita for language 27-07-2022 value when front end correct
@@ -85,10 +85,11 @@ END TRY
 BEGIN CATCH            
  --Error occurred:              
             
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int            
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int            
  SELECT @ErrMsg = ERROR_MESSAGE(),            
    @ErrSeverity = ERROR_SEVERITY()            
             
  RAISERROR(@ErrMsg, @ErrSeverity, 1)            
 END CATCH
+
 

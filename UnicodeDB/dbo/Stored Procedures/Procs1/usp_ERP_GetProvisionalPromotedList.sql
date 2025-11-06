@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_ERP_GetProvisionalPromotedList]  
     (  
-      @sHierarchyListID Nnvarchar(max)=NULL ,  
+      @sHierarchyListID NVARCHAR(max)=NULL ,  
       @iBrandID INT ,  
-      @sCourseIDs Nnvarchar(max)=NULL  
+      @sCourseIDs NVARCHAR(max)=NULL  
     )  
 AS   
     BEGIN  
@@ -90,4 +90,5 @@ AS
   
   
     END  
+
 

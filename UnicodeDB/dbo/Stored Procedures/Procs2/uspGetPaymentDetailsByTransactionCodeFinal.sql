@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[uspGetPaymentDetailsByTransactionCodeFinal]
     (
-      @sBrandName Nnvarchar(max) ,
-      @sStudentID Nnvarchar(max) ,
-      @sTransactionCode Nnvarchar(max) ,
-      @sExtReceiptNo Nnvarchar(max) = NULL ,
-      @sSource Nnvarchar(max) ,
-      @sStatus Nnvarchar(max) = NULL
+      @sBrandName NVARCHAR(max) ,
+      @sStudentID NVARCHAR(max) ,
+      @sTransactionCode NVARCHAR(max) ,
+      @sExtReceiptNo NVARCHAR(max) = NULL ,
+      @sSource NVARCHAR(max) ,
+      @sStatus NVARCHAR(max) = NULL
     )
 AS
     BEGIN
@@ -74,4 +74,5 @@ AS
 
                
     END
+
 

@@ -5,13 +5,13 @@ CREATE PROCEDURE [dbo].[usp_ERP_getStudentInformationList]
 	@class INT,
 	@section INT = NULL,
 	@stream INT = NULL,
-	@StudentID Nnvarchar(max) = NULL,
-	@StudentName Nnvarchar(max) = NULL,
+	@StudentID NVARCHAR(max) = NULL,
+	@StudentName NVARCHAR(max) = NULL,
 	@Limit INT,
     @Offset INT,
     @SortCol INT,
-    @SortDir Nnvarchar(max),
-    @Search Nnvarchar(max) = NULL
+    @SortDir NVARCHAR(max),
+    @Search NVARCHAR(max) = NULL
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -147,3 +147,4 @@ BEGIN
 	OFFSET @Offset ROWS
 	FETCH NEXT @Limit ROWS ONLY;
 END
+

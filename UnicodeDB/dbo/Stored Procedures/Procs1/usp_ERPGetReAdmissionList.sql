@@ -2,15 +2,15 @@
 CREATE   PROCEDURE [dbo].[usp_ERPGetReAdmissionList]            
  -- Add the parameters for the stored procedure here            
  (            
-  @sStudentID Nnvarchar(max) = null,            
-  @Full_Name Nnvarchar(max) = null,          
-  @Mobile Nnvarchar(max) = null,            
+  @sStudentID NVARCHAR(max) = null,            
+  @Full_Name NVARCHAR(max) = null,          
+  @Mobile NVARCHAR(max) = null,            
   @ReAdmissionStageID int = null,        
   @Limit INT,        
   @Offset INT,        
   @SortCol INT,        
-  @SortDir Nnvarchar(max),        
-  @Search Nnvarchar(max) = NULL,  
+  @SortDir NVARCHAR(max),        
+  @Search NVARCHAR(max) = NULL,  
   @iSourceSessionID int =null,  
   @iSourceSchoolGroupID int=null,  
   @iSourceClassID int=null,  
@@ -220,3 +220,4 @@ SELECT @FilteredRecords = COUNT(*) FROM CountedRecords;
         
           
 END   
+

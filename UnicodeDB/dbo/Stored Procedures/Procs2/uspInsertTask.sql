@@ -1,12 +1,12 @@
 CREATE PROCEDURE [dbo].[uspInsertTask] 
 (
 	@iTaskMasterId int,
-	@sTaskDescription Nnvarchar(max) = null,
-	@sQueryString Nnvarchar(max) = null,
+	@sTaskDescription NVARCHAR(max) = null,
+	@sQueryString NVARCHAR(max) = null,
 	@iHierarchyMasterId int,
-	@sHierarchyChain Nnvarchar(max),
+	@sHierarchyChain NVARCHAR(max),
 	@iStatus int,
-	@swfInstanceId Nnvarchar(max) = null,
+	@swfInstanceId NVARCHAR(max) = null,
 	@sKeyValue xml,
 	@dDueDate datetime
 )
@@ -82,10 +82,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

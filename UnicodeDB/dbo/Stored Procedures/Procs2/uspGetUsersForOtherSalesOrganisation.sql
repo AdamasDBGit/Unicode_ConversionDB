@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[uspGetUsersForOtherSalesOrganisation]
 (
 	
-	@sLoginID Nnvarchar(max) = null,
-	@sFirstName Nnvarchar(max) = null,
-	@sMiddleName Nnvarchar(max) = null,
-	@sLastName Nnvarchar(max) = null,
+	@sLoginID NVARCHAR(max) = null,
+	@sFirstName NVARCHAR(max) = null,
+	@sMiddleName NVARCHAR(max) = null,
+	@sLastName NVARCHAR(max) = null,
 	@iSalesOrgID int
 )
 AS
@@ -36,4 +36,5 @@ BEGIN
 	AND ISNULL(um.S_Middle_Name,'%') LIKE ISNULL(@sMiddleName,'')+'%'
 	AND ISNULL(um.S_Last_Name,'%') LIKE ISNULL(@sLastName,'')+'%'
 END
+
 

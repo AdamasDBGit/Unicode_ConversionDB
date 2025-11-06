@@ -2,11 +2,11 @@ CREATE PROCEDURE [dbo].[uspModifyHierarchyLevelMaster]
 (
 	@iHierarchyLevelID int = null,
 	@iHierarchyMasterID int,
-	@sHierarchyLevelCode Nnvarchar(max) = null,
-	@sHierarchyLevelName Nnvarchar(max) = null,
+	@sHierarchyLevelCode NVARCHAR(max) = null,
+	@sHierarchyLevelName NVARCHAR(max) = null,
 	@iIsLastNode int,
 	@iSequence int,
-    @sHierarchyLevelBy Nnvarchar(max),
+    @sHierarchyLevelBy NVARCHAR(max),
 	@dHierarchyLevelOn datetime,
     @iFlag int
 )
@@ -75,10 +75,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

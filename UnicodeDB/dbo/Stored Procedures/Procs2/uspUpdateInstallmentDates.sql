@@ -6,7 +6,7 @@ CREATE PROCEDURE [dbo].[uspUpdateInstallmentDates] --8755,526
  @iPreviousCourseID INT ,          
  @iNextCourseID INT,          
  @iBridgeID INT,           
- @sUser Nnvarchar(max)            
+ @sUser NVARCHAR(max)            
 )    
 AS    
 BEGIN TRY    
@@ -120,7 +120,7 @@ END TRY
 BEGIN CATCH              
  --Error occurred:                
               
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int              
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int              
  SELECT @ErrMsg = ERROR_MESSAGE(),              
    @ErrSeverity = ERROR_SEVERITY()              
               
@@ -222,4 +222,5 @@ END CATCH
 --  
 -----------------------------------------------------------------------------------------------------------------------------------------------  
 --
+
 

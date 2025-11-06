@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspWriteBatchProcessLog_New]
 (
 	@I_Process_ID_Max Int,
-	@S_Batch_Process_Name Nnvarchar(max),
-	@S_Comments Nnvarchar(max),
-	@S_Status Nnvarchar(max),
+	@S_Batch_Process_Name NVARCHAR(max),
+	@S_Comments NVARCHAR(max),
+	@S_Status NVARCHAR(max),
 	@I_Batch_Process_ID Int
 )
  
@@ -16,4 +16,5 @@ Begin
 	(I_Process_ID, I_Batch_Process_ID,S_Batch_Process_Name,S_Comments,Dt_Run_Date_Time,S_Status) 
 	Select @I_Process_ID_Max, @I_Batch_Process_ID, @S_Batch_Process_Name, @S_Comments, Getdate(), @S_Status
 End
+
 

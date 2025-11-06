@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetUserTerritory]
 (
-	@vLoginID Nnvarchar(max)
+	@vLoginID NVARCHAR(max)
 )
 AS
 BEGIN
@@ -13,4 +13,5 @@ BEGIN
 	WHERE A.I_UTD_User_ID = B.I_TUM_User_ID
 	AND B.S_TUM_Login_ID = @vLoginID
 END
+
 

@@ -6,7 +6,7 @@ CREATE PROCEDURE [dbo].[InsertMethodologyCategory]
 -- =============================================
 -- Add the parameters for the stored procedure here
 @BrandID int,
-@MethodologyCategoryName nnvarchar(max),
+@MethodologyCategoryName NVARCHAR(max),
 @CreatedBy int
 
 AS
@@ -54,3 +54,4 @@ BEGIN
 
 
 END
+

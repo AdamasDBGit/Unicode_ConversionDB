@@ -12,7 +12,7 @@ END TRY
 BEGIN CATCH  
  --Error occurred:    
   
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
   

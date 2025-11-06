@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[uspGetDueListForDiscontinuation]
     (
       @iBrandID INT ,
-      @sHierarchyListID Nnvarchar(max) ,
-      @sStudentID Nnvarchar(max) = NULL ,
-      @sFirstName Nnvarchar(max) = NULL ,
-      @sMiddleName Nnvarchar(max) = NULL ,
-      @sLastName Nnvarchar(max) = NULL
+      @sHierarchyListID NVARCHAR(max) ,
+      @sStudentID NVARCHAR(max) = NULL ,
+      @sFirstName NVARCHAR(max) = NULL ,
+      @sMiddleName NVARCHAR(max) = NULL ,
+      @sLastName NVARCHAR(max) = NULL
     )
 AS
     BEGIN
@@ -167,4 +167,5 @@ AS
             END
 
     END
+
 

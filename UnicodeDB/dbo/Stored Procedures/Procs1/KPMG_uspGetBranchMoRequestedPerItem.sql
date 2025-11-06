@@ -1,9 +1,9 @@
 
 CREATE PROCEDURE [dbo].[KPMG_uspGetBranchMoRequestedPerItem]
-@FromDate Nnvarchar(max),
-@ToDate Nnvarchar(max),
+@FromDate NVARCHAR(max),
+@ToDate NVARCHAR(max),
 @BranchName xml,
-@ItemCode Nnvarchar(max)
+@ItemCode NVARCHAR(max)
 AS
 BEGIN
 	
@@ -71,4 +71,5 @@ BEGIN
 	,ISNULL(QtyRequested,'0') as QtyRequested, @ItemCode as ItemCode,
 	ISNULL(QtyReceived,'0') as  QtyReceived,ISNULL(QtyInTransit,'0') as QtyInTransit FROM @tempTable 
 END
+
 

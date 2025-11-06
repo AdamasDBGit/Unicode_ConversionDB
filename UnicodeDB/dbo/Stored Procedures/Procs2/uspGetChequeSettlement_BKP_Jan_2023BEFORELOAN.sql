@@ -4,7 +4,7 @@ CREATE PROCEDURE [dbo].[uspGetChequeSettlement_BKP_Jan_2023BEFORELOAN]  --[uspGe
       @dtDateTo DATETIME = NULL ,
       @dtDateFrom DATETIME = NULL ,    
    --@iCenterID INT,
-      @sHierarchyDetailID Nnvarchar(max) ,
+      @sHierarchyDetailID NVARCHAR(max) ,
       @iBrandID INT = NULL ,
       @IsSettlement BIT 
     )
@@ -131,4 +131,5 @@ AS
             END    
     END 
   
+
 

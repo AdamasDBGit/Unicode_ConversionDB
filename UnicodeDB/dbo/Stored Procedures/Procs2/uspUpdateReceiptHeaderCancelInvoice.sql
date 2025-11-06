@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[uspUpdateReceiptHeaderCancelInvoice]
 (
-@sReceiptNo Nnvarchar(max) ,
+@sReceiptNo NVARCHAR(max) ,
 @iInvoiceHeaderID INT ,
 @nReceiptAmount NUMERIC(18, 2) ,
 @nReceiptTaxAmount NUMERIC(18, 2) ,
-@sCrtdBy Nnvarchar(max) ,
+@sCrtdBy NVARCHAR(max) ,
 @dCreatedOn DATETIME ,
 @iReceiptHeaderID INT
 )
@@ -25,11 +25,12 @@ END TRY
 BEGIN CATCH
 --Error occurred:
 
-DECLARE @ErrMsg Nnvarchar(max) ,
+DECLARE @ErrMsg NVARCHAR(max) ,
 @ErrSeverity INT
 SELECT @ErrMsg = ERROR_MESSAGE() ,
 @ErrSeverity = ERROR_SEVERITY()
 
 RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

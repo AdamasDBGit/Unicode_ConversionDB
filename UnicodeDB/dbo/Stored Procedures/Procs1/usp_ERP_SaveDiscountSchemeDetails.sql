@@ -1,13 +1,13 @@
 CREATE PROCEDURE [dbo].[usp_ERP_SaveDiscountSchemeDetails]
 (
-	@DiscountSchemeID Nnvarchar(max),
+	@DiscountSchemeID NVARCHAR(max),
 	@DiscountRate DECIMAL(14,2)=NULL,
 	@DiscountAmount DECIMAL(14,2)=NULL,
 	@IsApplicableOn INT,
-	@FromInstalment Nnvarchar(max)=NULL,
-	@FeeComponentID Nnvarchar(max)=NULL,
+	@FromInstalment NVARCHAR(max)=NULL,
+	@FeeComponentID NVARCHAR(max)=NULL,
 	@NoOfInstallment int=null,
-	@CreatedBy Nnvarchar(max)='rice-group-admin'
+	@CreatedBy NVARCHAR(max)='rice-group-admin'
 	
 )
 AS
@@ -38,3 +38,4 @@ BEGIN
 	select @DiscountSchemeDetailID
 
 END
+

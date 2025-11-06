@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[uspInsertAttendanceDataForEntireDay]
     (
       @iBatchID INT ,
       @dtScheduleDate DATE ,
-      @sCrtdBy Nnvarchar(max),
+      @sCrtdBy NVARCHAR(max),
       @dtCrtd DATETIME
       --@iBrandID INT ,
       --@sHierarchyID NVARCHAR(MAX)
@@ -138,4 +138,5 @@ AS
         DEALLOCATE BatchStudentList ;
         END
     END
+
 

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[uspGetBusRouteDetails] ( @SRouteNo Nnvarchar(max) = NULL,@iBrandID INT )
+CREATE PROCEDURE [dbo].[uspGetBusRouteDetails] ( @SRouteNo NVARCHAR(max) = NULL,@iBrandID INT )
 AS 
     BEGIN    
         SET NOCOUNT ON  
@@ -14,4 +14,5 @@ AS
                 AND A.S_Route_No LIKE ISNULL(@SRouteNo, '') + '%'   
                 AND I_Brand_ID = @iBrandID
     END
+
 

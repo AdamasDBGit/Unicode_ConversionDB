@@ -6,7 +6,7 @@ CREATE PROCEDURE [dbo].[uspCreateCenterTransferAdjustmentReceipts]
       @nNegativeAdjustmentAmount DECIMAL(18, 2) ,
       @iStudentID INT ,
       @iReceiptTypeID INT ,
-      @sAdjustmentText Nnvarchar(max),
+      @sAdjustmentText NVARCHAR(max),
       @iBrandID INT
     )
 AS 
@@ -207,4 +207,5 @@ AS
    */
   
     END
+
 

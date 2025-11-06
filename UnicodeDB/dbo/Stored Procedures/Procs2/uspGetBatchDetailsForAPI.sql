@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[uspGetBatchDetailsForAPI](@BatchCode Nnvarchar(max))
+CREATE PROCEDURE [dbo].[uspGetBatchDetailsForAPI](@BatchCode NVARCHAR(max))
 AS
 BEGIN
 
@@ -24,4 +24,5 @@ BEGIN
 	order by TSD.S_Student_ID DESC
 
 END
+
 

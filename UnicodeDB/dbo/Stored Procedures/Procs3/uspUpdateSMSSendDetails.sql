@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[uspUpdateSMSSendDetails](@SMSDetailsID INT, @IsCompleted INT, @ConfigNoofAttempts INT, @ResponseText Nnvarchar(max))
+CREATE PROCEDURE [dbo].[uspUpdateSMSSendDetails](@SMSDetailsID INT, @IsCompleted INT, @ConfigNoofAttempts INT, @ResponseText NVARCHAR(max))
 AS
 BEGIN
 
@@ -34,4 +34,5 @@ BEGIN
 
 
 END
+
 

@@ -3,8 +3,8 @@ CREATE PROCEDURE [dbo].[DCC_uspGenerateInvoiceNumberPerMonth]
 	@invoiceHeaderID INT,
 	@installmentNo INT,
 	@dtInstallmentDate DATETIME,
-	@invoiceType Nnvarchar(max),
-	@InvoiceNumber Nnvarchar(max) OUTPUT
+	@invoiceType NVARCHAR(max),
+	@InvoiceNumber NVARCHAR(max) OUTPUT
 )	
 AS
 BEGIN	
@@ -61,4 +61,5 @@ BEGIN
 	
 	
 END
+
 

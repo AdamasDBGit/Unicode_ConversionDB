@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[uspInsertUnrestrictedEmailList] --'<Root><EmailId sEmailId="abc@abc.com" /><EmailId sEmailId="one@vao.com" /><EmailId sEmailId="test@gmail.com" /><EmailId sEmailId="a123@abc.com" /></Root>','sa','1/12/2011'
 (                          
                       
- @sEmailId Nnvarchar(max),    
- @sCrtdBy Nnvarchar(max),                    
+ @sEmailId NVARCHAR(max),    
+ @sCrtdBy NVARCHAR(max),                    
  @dtCrtdOn DATETIME=NULL           
 )                          
 AS                             
@@ -75,10 +75,11 @@ BEGIN CATCH
               
   ROLLBACK TRANSACTION                  
                         
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int                            
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int                            
  SELECT @ErrMsg = ERROR_MESSAGE(),                            
  @ErrSeverity = ERROR_SEVERITY()                            
  RAISERROR(@ErrMsg, @ErrSeverity, 1)                
                            
 END CATCH
+
 

@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[uspModifyRoleMaster] 
 (
 	@iRoleID int,
-	@sRoleType Nnvarchar(max) = null,	
-    @sRoleCode Nnvarchar(max) = null,    
-    @sRoleDescription Nnvarchar(max) = null,
-	@sRoleBy Nnvarchar(max),
+	@sRoleType NVARCHAR(max) = null,	
+    @sRoleCode NVARCHAR(max) = null,    
+    @sRoleDescription NVARCHAR(max) = null,
+	@sRoleBy NVARCHAR(max),
 	@dRoleOn datetime,
     @iFlag int,
     @iHierarchyDetailID int = null
@@ -56,10 +56,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

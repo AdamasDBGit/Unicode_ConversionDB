@@ -333,7 +333,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
 --    BEGIN        
 --        EXEC dbo.KPMG_uspGetInstallmentDetailsAPI @InvoiceDetailId = @iInvoiceParentId        
 --    END       
-DECLARE @ErrorMessage Nnvarchar(max);      
+DECLARE @ErrorMessage NVARCHAR(max);      
 DECLARE @ErrorSeverity INT;      
 DECLARE @ErrorState INT;      
       
@@ -376,7 +376,7 @@ SELECT
 --Insert into tEst(Test) Values('After Log10')      
     
 ROLLBACK TRANSACTION        
-DECLARE @ErrMsg Nnvarchar(max) ,        
+DECLARE @ErrMsg NVARCHAR(max) ,        
 @ErrSeverity INT        
 SELECT  @ErrMsg = ERROR_MESSAGE() ,        
 @ErrSeverity = ERROR_SEVERITY()        
@@ -384,3 +384,4 @@ Select @ErrMsg as Errormessage
 RAISERROR(@ErrMsg, @ErrSeverity, 1)   
 Insert Into tEst (Test) Values('uspInsertReceiptDetailsFromAPI')  
 END CATCH        
+

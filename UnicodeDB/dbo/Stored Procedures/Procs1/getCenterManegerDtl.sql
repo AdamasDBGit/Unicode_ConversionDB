@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[getCenterManegerDtl]
 (
 	@iCenterID int,
-	@srole Nnvarchar(max) = null
+	@srole NVARCHAR(max) = null
 )
 AS
 BEGIN
@@ -15,4 +15,5 @@ where EMPDTL.I_Status=3 and EMPDTL.I_Centre_Id=@iCenterID and EMPRM.I_Status_ID=
 END
 
 --exec getCenterManegerDtl 720,'CH'
+
 

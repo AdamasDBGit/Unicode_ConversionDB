@@ -1,7 +1,7 @@
 
 CREATE   PROCEDURE dbo.usp_NotificationType_CheckDuplicate
     @NotificationTypeID INT = NULL,
-    @NotificationTypeName Nnvarchar(max),
+    @NotificationTypeName NVARCHAR(max),
     @BrandId INT
 AS
 BEGIN
@@ -13,3 +13,4 @@ BEGIN
       AND inBrandId = @BrandId
       AND (@NotificationTypeID IS NULL OR I_NotificationType_ID <> @NotificationTypeID);
 END;
+

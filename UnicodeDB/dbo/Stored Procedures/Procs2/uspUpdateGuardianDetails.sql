@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspUpdateGuardianDetails]    
 (    
     @guardianID INT,    
-    @Email Nnvarchar(max)    
+    @Email NVARCHAR(max)    
 )    
 AS    
 BEGIN    
@@ -36,3 +36,4 @@ BEGIN
     -- Return success message
     SELECT 1 AS statusFlag, 'Guardian details updated successfully' AS Message;
 END
+

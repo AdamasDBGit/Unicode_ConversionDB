@@ -77,7 +77,7 @@ Begin
     BEGIN CATCH      
 --Error occurred:      
       
-        DECLARE @ErrMsg Nnvarchar(max) ,      
+        DECLARE @ErrMsg NVARCHAR(max) ,      
             @ErrSeverity INT      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,      
                 @ErrSeverity = ERROR_SEVERITY()      
@@ -86,3 +86,4 @@ Begin
     END CATCH 
 
 	End
+

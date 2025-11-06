@@ -8,10 +8,10 @@ AS
 BEGIN TRY 
 
 	DECLARE @BRANCH_ID INT 
-	DECLARE @StudentBarCodeNo nnvarchar(max)
+	DECLARE @StudentBarCodeNo NVARCHAR(max)
 	DECLARE @Student_Detail_ID INT
-	DECLARE @SM_BARCODE Nnvarchar(max)
-	DECLARE @ITEM_CODE Nnvarchar(max)
+	DECLARE @SM_BARCODE NVARCHAR(max)
+	DECLARE @ITEM_CODE NVARCHAR(max)
 	DECLARE @GENID INT
 
 	DECLARE @INSTALLMENTNO INT
@@ -68,7 +68,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
@@ -76,3 +76,4 @@ BEGIN CATCH
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
 --exec Temp_IssueMaterial
+

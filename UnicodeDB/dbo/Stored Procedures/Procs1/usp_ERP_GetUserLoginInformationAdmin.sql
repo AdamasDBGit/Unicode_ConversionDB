@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[usp_ERP_GetUserLoginInformationAdmin]
     (
-      @vLoginID Nnvarchar(max) ,
-      @vPassword Nnvarchar(max)
+      @vLoginID NVARCHAR(max) ,
+      @vPassword NVARCHAR(max)
     )
 AS
     BEGIN
@@ -17,4 +17,5 @@ AS
                 FROM    dbo.T_ERP_User as TEU
 				where S_Username = @vLoginID and S_Password = @vPassword
     END
+
 

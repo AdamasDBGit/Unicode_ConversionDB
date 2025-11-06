@@ -1,8 +1,8 @@
 CREATE  PROCEDURE [dbo].[SPGetFacultyTimeTableDetailsData_INT]
 (	
-	@UpdateON			         Nnvarchar(max) =NULL,
+	@UpdateON			         NVARCHAR(max) =NULL,
 	@MaxID				         INT		 =NULL,
-	@RecordFetchStartDate        nnvarchar(max) =null
+	@RecordFetchStartDate        NVARCHAR(max) =null
 )
 AS
 BEGIN
@@ -120,4 +120,5 @@ BEGIN
 
 
 END
+
 

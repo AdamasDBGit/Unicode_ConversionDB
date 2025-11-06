@@ -8,7 +8,7 @@ CREATE  PROCEDURE [dbo].[usp_ERP_SaveAdhocPaymentSchedule]
     @EndDate DATETIME,          
     @BrandID INT,          
     @SessionID INT,          
-    @Description Nnvarchar(max) = NULL,          
+    @Description NVARCHAR(max) = NULL,          
     @IsCollectWithHighPriority BIT = 0,     
     @NotifyRecipient BIT = 0,   -- ? new parameter  
     @ScheduleDetails UT_AdhocScheduleDetail READONLY,           
@@ -140,9 +140,10 @@ BEGIN
     END TRY          
     BEGIN CATCH          
         ROLLBACK TRANSACTION;          
-        DECLARE @ErrorMessage Nnvarchar(max) = ERROR_MESSAGE();          
+        DECLARE @ErrorMessage NVARCHAR(max) = ERROR_MESSAGE();          
         -- Return Error Message          
         SELECT 0 AS StatusFlag, @ErrorMessage AS Message;          
     END CATCH;          
 END;    
+
 

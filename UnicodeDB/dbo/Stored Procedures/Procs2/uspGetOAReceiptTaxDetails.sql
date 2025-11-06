@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[uspGetOAReceiptTaxDetails]
-	@sReceiptIDs Nnvarchar(max)
+	@sReceiptIDs NVARCHAR(max)
 
 AS
 BEGIN
@@ -18,4 +18,5 @@ BEGIN
 	(SELECT * FROM dbo.fnString2Rows(@sReceiptIDs,','))
 
 END
+
 

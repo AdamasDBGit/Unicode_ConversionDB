@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[ReportUspFacultyUtilizationReportTermWiseAdmin](
-@CourseName Nnvarchar(max)
-,@VTerm Nnvarchar(max)
-,@sTeacher nnvarchar(max)=null
-,@sSubject nnvarchar(max)=null
+@CourseName NVARCHAR(max)
+,@VTerm NVARCHAR(max)
+,@sTeacher NVARCHAR(max)=null
+,@sSubject NVARCHAR(max)=null
 )
 	
 AS
@@ -12,7 +12,7 @@ create table #Result
 
 (I_Student_detail_ID nvarchar(max),Term_Name nvarchar(max),
 Module_Name nvarchar(max), Subjec_Name nvarchar(max),Batch_Name nvarchar(max),
-Marks nnvarchar(max), Teacher nvarchar(max));
+Marks NVARCHAR(max), Teacher nvarchar(max));
 
 ----------Inserting Result Table------
 
@@ -75,7 +75,7 @@ TMM.S_Module_Name
 
 create table #Utility(
 I_Student_Detail_ID nvarchar(max), Term_Name nvarchar(max),Subject_Name nvarchar(max),
-Batch_Name nvarchar(max), Total_Marks nnvarchar(max), Teacher nvarchar(max));
+Batch_Name nvarchar(max), Total_Marks NVARCHAR(max), Teacher nvarchar(max));
 
 
 ---- INSERTING UTILITY TABLE TO SUM ALL THE MARKS FOR UNIQUE STUDENT TERM WISE---
@@ -159,4 +159,5 @@ ORDER BY A.Teacher,B.Teacher, C.Teacher, D.Teacher
 
 
 END
+
 

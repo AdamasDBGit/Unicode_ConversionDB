@@ -7,12 +7,12 @@ CREATE PROCEDURE [dbo].[MenuAddUpdate]
 -- Add the parameters for the stored procedure here
 	
 @MenuID int =null,
-@MenuCode nnvarchar(max)=null,
-@MenuName Nnvarchar(max)=null,
+@MenuCode NVARCHAR(max)=null,
+@MenuName NVARCHAR(max)=null,
 @ParentMenuID int =null,
 @LeafNode int =null,
-@Icon nnvarchar(max)=null,
-@Url  nnvarchar(max)=null,
+@Icon NVARCHAR(max)=null,
+@Url  NVARCHAR(max)=null,
 @CreatedBy int=null,
 @Status int =null
 
@@ -130,4 +130,5 @@ BEGIN CATCH
 END CATCH; 
 
 END
+
 

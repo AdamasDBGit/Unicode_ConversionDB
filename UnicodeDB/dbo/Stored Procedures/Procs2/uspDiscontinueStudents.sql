@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[uspDiscontinueStudents] ( @sLoginID Nnvarchar(max) )
+CREATE PROCEDURE [dbo].[uspDiscontinueStudents] ( @sLoginID NVARCHAR(max) )
 AS
     BEGIN
 
@@ -306,7 +306,7 @@ AS
 
         BEGIN CATCH      
             ROLLBACK TRANSACTION  
-            DECLARE @ErrMsg Nnvarchar(max) ,
+            DECLARE @ErrMsg NVARCHAR(max) ,
                 @ErrSeverity INT      
             SELECT  @ErrMsg = ERROR_MESSAGE() ,
                     @ErrSeverity = ERROR_SEVERITY()      
@@ -315,4 +315,5 @@ AS
         END CATCH
 
     END
+
 

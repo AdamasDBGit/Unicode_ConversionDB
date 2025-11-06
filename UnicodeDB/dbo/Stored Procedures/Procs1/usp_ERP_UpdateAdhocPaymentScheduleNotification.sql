@@ -25,7 +25,7 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
 
-        DECLARE @ErrorMessage Nnvarchar(max) = ERROR_MESSAGE();
+        DECLARE @ErrorMessage NVARCHAR(max) = ERROR_MESSAGE();
 
         -- ? Return Error Response
         SELECT 
@@ -34,3 +34,4 @@ BEGIN
             NULL AS Id;
     END CATCH;
 END;
+

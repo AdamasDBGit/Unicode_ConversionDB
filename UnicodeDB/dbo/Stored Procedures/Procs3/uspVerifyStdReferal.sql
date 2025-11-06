@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspVerifyStdReferal]
 (
-@StudentID Nnvarchar(max),
-@RefStudentID Nnvarchar(max),
+@StudentID NVARCHAR(max),
+@RefStudentID NVARCHAR(max),
 @CentreID INT
 )
 AS
@@ -36,4 +36,5 @@ BEGIN
 
 
 END
+
 

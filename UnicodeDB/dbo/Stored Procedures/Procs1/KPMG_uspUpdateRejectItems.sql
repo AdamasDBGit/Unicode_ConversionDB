@@ -1,6 +1,6 @@
 
 CREATE PROCEDURE [dbo].[KPMG_uspUpdateRejectItems]
-@Action	Nnvarchar(max),
+@Action	NVARCHAR(max),
 @GridData	xml
 
 AS
@@ -19,7 +19,7 @@ BEGIN
 	DECLARE @nodeCount INT
 	DECLARE @loopCount INT
 	DECLARE @Mo_Id INT
-	DECLARE @TBL_STOCK_DTL TABLE(Id INT IDENTITY, ItemCode Nnvarchar(max),BarCode nnvarchar(max)) 
+	DECLARE @TBL_STOCK_DTL TABLE(Id INT IDENTITY, ItemCode NVARCHAR(max),BarCode NVARCHAR(max)) 
 	
 	DECLARE @STK_ID INT
 	DECLARE @BranchId INT
@@ -29,8 +29,8 @@ BEGIN
 	BEGIN
 	
 		INSERT INTO @TBL_STOCK_DTL(ItemCode,BarCode)
-		SELECT  T.c.value('itemCode[1]', 'Nnvarchar(max)'),                  
-			   T.c.value('barCode[1]', 'Nnvarchar(max)')
+		SELECT  T.c.value('itemCode[1]', 'NVARCHAR(max)'),                  
+			   T.c.value('barCode[1]', 'NVARCHAR(max)')
 		FROM   @GridData.nodes('/Root/MaterialItem') T ( c )
 	
 		SET @loopCount = 1
@@ -98,4 +98,5 @@ BEGIN
 	END
 	
 END
+
 

@@ -2,10 +2,10 @@ CREATE PROCEDURE [dbo].[uspSearchStudentListForPostRefund]
 (      
       @iSelectedHierarchyId INT,  
       @iSelectedBrandId INT = NULL,    
-      @sStudentId Nnvarchar(max)=NULL,      
-      @sStudentFirstName Nnvarchar(max)=NULL,      
-      @sStudentSecondName Nnvarchar(max)=NULL,      
-      @sStudentLastName Nnvarchar(max)=NULL      
+      @sStudentId NVARCHAR(max)=NULL,      
+      @sStudentFirstName NVARCHAR(max)=NULL,      
+      @sStudentSecondName NVARCHAR(max)=NULL,      
+      @sStudentLastName NVARCHAR(max)=NULL      
 )      
       
 AS      
@@ -36,4 +36,5 @@ BEGIN
       ORDER BY tsd.S_Student_ID      
             
 END
+
 

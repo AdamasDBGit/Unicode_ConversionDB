@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspGetPaymentDetailsFromPayTM]
 (
-@sBrandName Nnvarchar(max),
-@sStudentID Nnvarchar(max),
+@sBrandName NVARCHAR(max),
+@sStudentID NVARCHAR(max),
 @iInvoiceHeaderID INT,
 @dReceiptDate DATETIME,
 @iCentreId INT,
@@ -53,4 +53,5 @@ EXEC dbo.uspInsertReceiptHeaderFromAPI @sReceiptNo = @sReceiptNo, -- nvarchar(ma
 
 
 END
+
 

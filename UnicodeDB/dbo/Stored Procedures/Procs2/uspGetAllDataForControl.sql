@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetAllDataForControl]
 	-- Add the parameters for the stored procedure here
-			@sHierarchyList	Nnvarchar(max),
+			@sHierarchyList	NVARCHAR(max),
 			@iHierarchyMasterID int
  
 AS
@@ -25,4 +25,5 @@ select DISTINCT I_Hierarchy_Level_Id, S_Hierarchy_Level_Name
 			and I_Status = 1
 	
 END
+
 

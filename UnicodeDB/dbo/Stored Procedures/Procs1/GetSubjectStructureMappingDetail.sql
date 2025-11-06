@@ -9,13 +9,13 @@ CREATE PROCEDURE [dbo].[GetSubjectStructureMappingDetail]
 @SubjectStructureHeaderID int =null,
 @SubjectTemplateHeaderID int =null,
 @SubjectID int =null,
-@Title nnvarchar(max)=null,
-@SubjectName nnvarchar(max)=null,
+@Title NVARCHAR(max)=null,
+@SubjectName NVARCHAR(max)=null,
 @SubjectStatus int =null,
 @ClassID int =null,
 @SchoolGroupID int =null,
 @SubjectTemplateID int =null,
-@SubjectStructureName nnvarchar(max)=null
+@SubjectStructureName NVARCHAR(max)=null
 
 
 AS
@@ -72,3 +72,4 @@ and
 
 
 END
+

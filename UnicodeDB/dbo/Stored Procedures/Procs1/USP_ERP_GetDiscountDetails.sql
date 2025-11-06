@@ -1,7 +1,7 @@
 CREATE procedure [dbo].[USP_ERP_GetDiscountDetails]      
     @BrandID INT = NULL,    
-    @FeeComponent Nnvarchar(max) = NULL,    
-    @FromInstalment Nnvarchar(max) = NULL    
+    @FeeComponent NVARCHAR(max) = NULL,    
+    @FromInstalment NVARCHAR(max) = NULL    
 AS    
 BEGIN    
 SET NOCOUNT ON;    
@@ -79,7 +79,7 @@ SET NOCOUNT ON;
     STUFF((SELECT DISTINCT ',' + T2.S_Component_Name      
            FROM #TempDiscountDetails T2      
            WHERE T2.I_Discount_Scheme_Detail_ID = T.I_Discount_Scheme_Detail_ID      
-           FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 1, '') AS S_Component_Names,    
+           FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(max)'), 1, 1, '') AS S_Component_Names,    
     CASE     
       WHEN T.S_FromInstalment = 0 THEN 'First'    
       WHEN T.S_FromInstalment = -1 THEN 'Last'    
@@ -94,11 +94,11 @@ END AS S_DiscountDescription,
      STUFF((SELECT DISTINCT ',' + T2.I_Fee_Structure_ID     
            FROM #TempDiscountDetails T2      
            WHERE T2.I_Discount_Scheme_Detail_ID = T.I_Discount_Scheme_Detail_ID      
-  FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 1, '') AS I_Fee_Structure_ID,    
+  FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(max)'), 1, 1, '') AS I_Fee_Structure_ID,    
      STUFF((SELECT DISTINCT ',' + T2.S_Fee_Structure_Name      
            FROM #TempDiscountDetails T2      
            WHERE T2.I_Discount_Scheme_Detail_ID = T.I_Discount_Scheme_Detail_ID      
-           FOR XML PATH(''), TYPE).value('.', 'Nnvarchar(max)'), 1, 1, '') AS S_Fee_Structure_Name,    
+           FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(max)'), 1, 1, '') AS S_Fee_Structure_Name,    
     T.N_Discount_Rate,    
     T.N_Discount_Amount,    
     T.I_IsApplicableOn,    
@@ -135,3 +135,4 @@ ORDER BY
     T.S_FromInstalment;    
   DROP TABLE #TempDiscountDetails;    
 END;
+

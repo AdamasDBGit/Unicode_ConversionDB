@@ -1,13 +1,13 @@
 CREATE PROCEDURE [dbo].[uspCreateSubBatch]                   
 (                     
 			@I_Batch_ID int 
-           ,@S_Sub_Batch_Code Nnvarchar(max) 
-           ,@S_Sub_Batch_Name Nnvarchar(max) 
+           ,@S_Sub_Batch_Code NVARCHAR(max) 
+           ,@S_Sub_Batch_Name NVARCHAR(max) 
            ,@I_Status int 
-           ,@S_Crtd_By Nnvarchar(max)=NULL  
+           ,@S_Crtd_By NVARCHAR(max)=NULL  
            ,@Dt_Crtd_On datetime=NULL
            ,@I_Sub_Batch_ID int 
-           ,@UpdtBy Nnvarchar(max) =NULL
+           ,@UpdtBy NVARCHAR(max) =NULL
            ,@UpdtOn  datetime=NULL       
 )                    
 AS                    
@@ -62,10 +62,11 @@ END TRY
 BEGIN CATCH            
  --Error occurred:              
             
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int            
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int            
  SELECT @ErrMsg = ERROR_MESSAGE(),            
    @ErrSeverity = ERROR_SEVERITY()            
             
  RAISERROR(@ErrMsg, @ErrSeverity, 1)            
 END CATCH
+
 

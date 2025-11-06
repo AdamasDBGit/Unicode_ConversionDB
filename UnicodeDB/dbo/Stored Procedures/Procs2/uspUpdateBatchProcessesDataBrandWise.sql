@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspUpdateBatchProcessesDataBrandWise]  
 (  
-	@S_Batch_Process_Name Nnvarchar(max)=null,
-	@S_Last_Run_Status Nnvarchar(max) =null  
+	@S_Batch_Process_Name NVARCHAR(max)=null,
+	@S_Last_Run_Status NVARCHAR(max) =null  
 )  
 AS  
 
@@ -21,4 +21,5 @@ END TRY
 BEGIN CATCH  
 	ROLLBACK TRANSACTION TrnBatch
 END CATCH
+
 

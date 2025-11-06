@@ -1,7 +1,7 @@
 
 CREATE   PROCEDURE dbo.usp_NotificationCategory_Save
     @NotificationCategoryID INT = NULL,
-    @NotificationCategoryName Nnvarchar(max)
+    @NotificationCategoryName NVARCHAR(max)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -22,3 +22,4 @@ BEGIN
         SELECT @NotificationCategoryID AS NotificationCategoryID;
     END
 END;
+

@@ -41,8 +41,8 @@ AS
         WHILE @@FETCH_STATUS = 0 
             BEGIN
         
-                DECLARE @cols Nnvarchar(max)    
-                DECLARE @query Nnvarchar(max)    
+                DECLARE @cols NVARCHAR(max)    
+                DECLARE @query NVARCHAR(max)    
 		    
                 SELECT  @cols = STUFF(( SELECT DISTINCT TOP 100 PERCENT
                                                 '],[' + t.S_Evaluation_Name
@@ -75,7 +75,7 @@ AS pvt'
     END TRY    
     BEGIN CATCH    
      
-        DECLARE @ErrMsg Nnvarchar(max) ,
+        DECLARE @ErrMsg NVARCHAR(max) ,
             @ErrSeverity INT    
     
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
@@ -83,3 +83,4 @@ AS pvt'
     
         RAISERROR(@ErrMsg, @ErrSeverity, 1)    
     END CATCH
+

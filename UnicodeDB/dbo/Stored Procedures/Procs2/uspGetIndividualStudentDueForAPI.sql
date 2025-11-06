@@ -1,7 +1,7 @@
   CREATE PROCEDURE [dbo].[uspGetIndividualStudentDueForAPI]
     (
-      @sBrandName Nnvarchar(max) ,
-      @StudentID Nnvarchar(max)
+      @sBrandName NVARCHAR(max) ,
+      @StudentID NVARCHAR(max)
     )
    AS
     BEGIN
@@ -947,4 +947,5 @@
    
    
     END
+
 

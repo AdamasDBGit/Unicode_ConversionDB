@@ -9,8 +9,8 @@ CREATE PROCEDURE  [dbo].[GetMethodologyActivities]
 @BrandID int =null,
 @MethodologyActivityID int =null,
 @MethodologyCategoryID int =null,
-@MethodologyActivityName nnvarchar(max)=null,
-@MeasureUnit nnvarchar(max) =null,
+@MethodologyActivityName NVARCHAR(max)=null,
+@MeasureUnit NVARCHAR(max) =null,
 @Status int =null
 
 AS
@@ -56,3 +56,4 @@ BEGIN
 
 
 END
+

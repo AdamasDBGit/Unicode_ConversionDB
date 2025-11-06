@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[UpdateExamReportCardUrlAndStatus]
     @inExamScheduleDetailId INT,
     @inStudentId INT,
-    @sReportCardUrl Nnvarchar(max)
+    @sReportCardUrl NVARCHAR(max)
 AS
 BEGIN
     -- Start the transaction
@@ -26,3 +26,4 @@ BEGIN
         THROW;
     END CATCH
 END;
+

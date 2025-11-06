@@ -2,9 +2,9 @@ CREATE PROCEDURE [dbo].[USP_ERP_SaveBusMaster]
 (  
     @iBusID                INT = NULL,       -- if NULL ? Insert, else Update  
     @iBrandID              INT,              -- from client_id (hidden input)  
-    @sBusNumber            Nnvarchar(max),     -- from bus_number input  
+    @sBusNumber            NVARCHAR(max),     -- from bus_number input  
     @iTotalSeat            INT,              -- from total_seat input  
-    @sTrackingDeviceID     Nnvarchar(max),     -- from tracking_device dropdown  
+    @sTrackingDeviceID     NVARCHAR(max),     -- from tracking_device dropdown  
     @iUserID               INT               -- created/updated by  
 )  
 AS  

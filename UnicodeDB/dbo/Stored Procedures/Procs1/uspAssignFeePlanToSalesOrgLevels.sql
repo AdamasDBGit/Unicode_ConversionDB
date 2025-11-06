@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[uspAssignFeePlanToSalesOrgLevels]
 	@iCourseID int,
 	@iDeliveryID int,
 	@iFeePlanID int,
-	@sCreatedBy Nnvarchar(max),
+	@sCreatedBy NVARCHAR(max),
 	@dCreatedOn datetime
 )
 
@@ -200,10 +200,11 @@ END TRY
 BEGIN CATCH
 --Error occurred:
 	ROLLBACK  TRAN T1
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT @ErrMsg = ERROR_MESSAGE(),
 	@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

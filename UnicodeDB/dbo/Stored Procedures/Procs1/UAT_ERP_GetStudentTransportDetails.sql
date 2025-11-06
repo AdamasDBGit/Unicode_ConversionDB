@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[UAT_ERP_GetStudentTransportDetails]
-    @StudentID Nnvarchar(max),
+    @StudentID NVARCHAR(max),
     @BrandID INT
 AS
 BEGIN
@@ -114,5 +114,6 @@ BEGIN
     -- Return status
     SELECT @Status AS status;
 END;
+
 
 

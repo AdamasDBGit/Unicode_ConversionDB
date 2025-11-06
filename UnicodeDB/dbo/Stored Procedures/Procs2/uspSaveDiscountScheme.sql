@@ -1,10 +1,10 @@
 CREATE   PROCEDURE [dbo].[uspSaveDiscountScheme]
 (
-	@DiscountSchemeName Nnvarchar(max),
+	@DiscountSchemeName NVARCHAR(max),
 	@ValidFrom DATETIME,
 	@ValidTo DATETIME,
-	@CreatedBy Nnvarchar(max)='rice-group-admin',
-	@sBrands Nnvarchar(max)
+	@CreatedBy NVARCHAR(max)='rice-group-admin',
+	@sBrands NVARCHAR(max)
 )
 AS
 BEGIN
@@ -28,4 +28,5 @@ BEGIN
 	select @DiscountSchemeID
 
 END
+
 

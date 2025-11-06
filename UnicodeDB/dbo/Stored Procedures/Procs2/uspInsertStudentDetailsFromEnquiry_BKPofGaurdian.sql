@@ -2,12 +2,12 @@
 CREATE PROCEDURE [dbo].[uspInsertStudentDetailsFromEnquiry_BKPofGaurdian]  
     (  
       @iEnquiryRegnID INT ,  
-      @CrtdBy Nnvarchar(max) ,  
+      @CrtdBy NVARCHAR(max) ,  
       @DtCrtdOn DATETIME ,  
-      @sConductCode Nnvarchar(max),  
-      @sStudentCode Nnvarchar(max) = NULL,  
+      @sConductCode NVARCHAR(max),  
+      @sStudentCode NVARCHAR(max) = NULL,  
       @iRollNo INT = NULL,
-      @sStudyMaterialNo Nnvarchar(max) = NULL  
+      @sStudyMaterialNo NVARCHAR(max) = NULL  
     )  
 AS   
     SET NOCOUNT ON    
@@ -181,10 +181,10 @@ IF (@BrandID > 0)
 		I_RelationID INT,
 		I_IsPrimary INT,
 		S_Address nvarchar(max),
-		S_Pin_Code nnvarchar(max)
+		S_Pin_Code NVARCHAR(max)
 		)
 
-		DECLARE @S_ADDRESS nvarchar(max),@S_Pin_Code nnvarchar(max)
+		DECLARE @S_ADDRESS nvarchar(max),@S_Pin_Code NVARCHAR(max)
 
 		select @S_ADDRESS=S_Curr_Address1,@S_Pin_Code=S_Curr_Pincode from T_Student_Detail where I_Enquiry_Regn_ID=@iEnquiryRegnID
 
@@ -369,11 +369,12 @@ END
     BEGIN CATCH    
  --Error occurred:      
         ROLLBACK TRANSACTION    
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()    
     
         RAISERROR(@ErrMsg, @ErrSeverity, 1)    
     END CATCH
+
 

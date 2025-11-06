@@ -2,15 +2,15 @@ CREATE PROCEDURE [dbo].[uspInsertUpdateRoomsDetails]
     (  
       @IRoomID INT = NULL ,  
       @IBrandID INT ,  
-      @SBuildingName Nnvarchar(max) ,  
-      @SBlockName Nnvarchar(max) ,  
-      @SFloorName Nnvarchar(max) ,  
-      @SRoomNo Nnvarchar(max) ,  
+      @SBuildingName NVARCHAR(max) ,  
+      @SBlockName NVARCHAR(max) ,  
+      @SFloorName NVARCHAR(max) ,  
+      @SRoomNo NVARCHAR(max) ,  
       @IRoomType INT ,  
       @NRoomRate INT ,  
       @INoOfBeds INT ,  
       @IStatus INT ,  
-      @SCrtdby Nnvarchar(max) ,  
+      @SCrtdby NVARCHAR(max) ,  
       @DtCrtdOn DATETIME ,  
       @iFlag INT,
       @iCenterID INT  = null
@@ -148,11 +148,12 @@ AS
     END TRY             
     BEGIN CATCH              
  --Error occurred:                
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT              
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()              
               
         RAISERROR(@ErrMsg, @ErrSeverity, 1)              
     END CATCH
+
 

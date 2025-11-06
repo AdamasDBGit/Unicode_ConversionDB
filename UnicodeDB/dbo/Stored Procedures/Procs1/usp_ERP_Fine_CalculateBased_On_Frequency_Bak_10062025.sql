@@ -2,7 +2,7 @@
       
 CREATE PROCEDURE [dbo].[usp_ERP_Fine_CalculateBased_On_Frequency_Bak_10062025]        
     @BrandID INT,        
-    @s_StudentID Nnvarchar(max),        
+    @s_StudentID NVARCHAR(max),        
     @Paymentdate date = Null        
 AS        
 BEGIN        
@@ -194,3 +194,4 @@ BEGIN
                    from @InvDetails        
     End        
 End 
+

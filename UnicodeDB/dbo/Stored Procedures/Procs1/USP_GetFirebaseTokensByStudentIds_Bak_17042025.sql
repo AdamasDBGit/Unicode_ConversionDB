@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[USP_GetFirebaseTokensByStudentIds_Bak_17042025]    
     @inRecipientId INT = NULL,      
     @inCategoryId INT = NULL,    
-    @inSchoolProgramId Nnvarchar(max) = NULL,      
-    @inClassId Nnvarchar(max) = NULL,      
-    @inStreamId Nnvarchar(max) = NULL,      
-    @inSectionId Nnvarchar(max) = NULL,      
-    @StudentIds Nnvarchar(max) = NULL,      
+    @inSchoolProgramId NVARCHAR(max) = NULL,      
+    @inClassId NVARCHAR(max) = NULL,      
+    @inStreamId NVARCHAR(max) = NULL,      
+    @inSectionId NVARCHAR(max) = NULL,      
+    @StudentIds NVARCHAR(max) = NULL,      
     @inBrandID INT,    
     @NotificationId INT = NULL    
 AS      

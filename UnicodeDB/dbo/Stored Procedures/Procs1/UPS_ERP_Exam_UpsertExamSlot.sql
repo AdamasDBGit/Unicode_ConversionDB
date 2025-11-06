@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[UPS_ERP_Exam_UpsertExamSlot]  
     @inSlotID         INT = NULL,    
-    @stSlotCode       Nnvarchar(max) = NULL,  
+    @stSlotCode       NVARCHAR(max) = NULL,  
     @tmSlotStartTime  TIME(0) = NULL,  
     @tmSlotEndTime    TIME(0) = NULL,     
     @inCreatedBy      INT = NULL,  
@@ -59,3 +59,4 @@ BEGIN
   
     SELECT 1 AS StatusFlag, 'Slot saved successfully!' AS Message;  
 END  
+

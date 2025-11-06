@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[ERP_uspGetBrandConfiguredDocuments]
 (
-    @sToken Nnvarchar(max),
-    @sMobileNo Nnvarchar(max),
-    @DocumentType Nnvarchar(max) = NULL
+    @sToken NVARCHAR(max),
+    @sMobileNo NVARCHAR(max),
+    @DocumentType NVARCHAR(max) = NULL
 )
 AS
 BEGIN
@@ -87,4 +87,5 @@ BEGIN
         SELECT 0 AS StatusFlag, 'Invalid Token' AS Message;
     END
 END
+
 

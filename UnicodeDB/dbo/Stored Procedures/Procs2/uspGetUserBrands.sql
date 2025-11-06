@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[uspGetUserBrands](@LoginID Nnvarchar(max))
+CREATE PROCEDURE [dbo].[uspGetUserBrands](@LoginID NVARCHAR(max))
 as
 begin
 
@@ -10,4 +10,5 @@ where B.S_Login_ID=@LoginID and A.I_Status=1 and C.I_Status=1 and D.I_Status=1
 order by B.S_Login_ID,C.I_Brand_ID
 
 end
+
 

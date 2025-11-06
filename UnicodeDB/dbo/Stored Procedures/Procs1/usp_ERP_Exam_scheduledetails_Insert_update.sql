@@ -94,7 +94,7 @@ Print ''
         IF @@TRANCOUNT > 0
             ROLLBACK;
 
-        DECLARE @ErrMsg Nnvarchar(max)
+        DECLARE @ErrMsg NVARCHAR(max)
               , @ErrSeverity int
 
         SELECT ERROR_MESSAGE() as Message
@@ -104,3 +104,4 @@ Print ''
 
     END CATCH;
 End
+

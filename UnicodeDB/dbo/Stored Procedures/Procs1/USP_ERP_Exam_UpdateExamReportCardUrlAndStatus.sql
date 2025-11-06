@@ -3,7 +3,7 @@
 CREATE PROCEDURE [dbo].[USP_ERP_Exam_UpdateExamReportCardUrlAndStatus]  
     @inExamScheduleDetailId INT,  
     @inStudentId INT,  
-    @sReportCardUrl Nnvarchar(max)  
+    @sReportCardUrl NVARCHAR(max)  
 AS  
 BEGIN  
     -- Start the transaction  

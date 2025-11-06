@@ -53,7 +53,7 @@ BEGIN TRY
 BEGIN CATCH          
  --Error occurred:            
  ROLLBACK TRANSACTION           
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int          
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int          
  SELECT @ErrMsg = ERROR_MESSAGE(),          
    @ErrSeverity = ERROR_SEVERITY()          
           
@@ -61,3 +61,4 @@ BEGIN CATCH
 END CATCH   
 
 --exec uspGetStudentCourseComonentForRefund 296761,754
+

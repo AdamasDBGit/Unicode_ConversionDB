@@ -1,9 +1,9 @@
 CREATE  PROCEDURE [dbo].[SPCheckExistingInternalStudentRegistration_SmsDb_INT]
 (
-    @mobileNo  Nnvarchar(max),
-    @RegistrationLoginId    Nnvarchar(max),
+    @mobileNo  NVARCHAR(max),
+    @RegistrationLoginId    NVARCHAR(max),
 	@Status            int out,
-    @Message           nnvarchar(max) out
+    @Message           NVARCHAR(max) out
 	 
 )
 AS
@@ -49,4 +49,5 @@ END
 	 	   
 	
 END
+
 

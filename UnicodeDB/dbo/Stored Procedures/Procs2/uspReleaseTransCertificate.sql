@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[uspReleaseTransCertificate]  
     @iStudentID INT ,  
     @iRequestStatus INT ,/* status 2 = Approved, 1 = Initiated ;For this Sp it will be 2*/  
-    @iTC_Serial_No Nnvarchar(max),  
+    @iTC_Serial_No NVARCHAR(max),  
     @iRelease_Date DATETIME  ,
-    @SRemarks Nnvarchar(max) ,
-    @sUpdatedBy Nnvarchar(max),
+    @SRemarks NVARCHAR(max) ,
+    @sUpdatedBy NVARCHAR(max),
     @DtUpdatedOn DATETIME     
 AS   
     BEGIN TRY    
@@ -52,11 +52,12 @@ AS
     BEGIN CATCH    
  --Error occurred:      
     
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()    
     
         RAISERROR(@ErrMsg, @ErrSeverity, 1)    
     END CATCH
+
 

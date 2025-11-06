@@ -1,6 +1,6 @@
 
 CREATE PROCEDURE [dbo].[KPMG_uspGetMonthlyConsumptionPerBranch]
-@BranchId Nnvarchar(max),
+@BranchId NVARCHAR(max),
 @StartMonth INT,
 @EndMonth INT
 AS
@@ -65,4 +65,5 @@ BEGIN
 	
 	
 END
+
 

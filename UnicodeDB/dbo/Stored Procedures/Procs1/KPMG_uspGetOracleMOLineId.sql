@@ -6,14 +6,14 @@ AS
 
 BEGIN TRY 
 
-	DECLARE @MATERIAL_TEMP TABLE(BarCode Nnvarchar(max),CourseName Nnvarchar(max),ItemCode Nnvarchar(max),MoveOrderNo INT, Slno Nnvarchar(max),Defaulter Nnvarchar(max))
-	DECLARE @TEMP_TABLE TABLE(Id INT Identity,BarCode nvarchar(max),MoLineId Nnvarchar(max), OracleMoveOrderId Nnvarchar(max), ItemCode nvarchar(max), ItemId nvarchar(max))
+	DECLARE @MATERIAL_TEMP TABLE(BarCode NVARCHAR(max),CourseName NVARCHAR(max),ItemCode NVARCHAR(max),MoveOrderNo INT, Slno NVARCHAR(max),Defaulter NVARCHAR(max))
+	DECLARE @TEMP_TABLE TABLE(Id INT Identity,BarCode nvarchar(max),MoLineId NVARCHAR(max), OracleMoveOrderId NVARCHAR(max), ItemCode nvarchar(max), ItemId nvarchar(max))
 	
 	INSERT INTO @TEMP_TABLE (OracleMoveOrderId, BarCode, MoLineId,ItemCode, ItemId)
-	SELECT Mstr.Fld_KPMG_OracleMoNumber,Dtl.Fld_KPMG_Barcode, Dtl.Fld_KPMG_OracleMoLineId,T.c.value('itemCode[1]', 'Nnvarchar(max)') ,MoItm.Fld_KPMG_MoItem_Id
+	SELECT Mstr.Fld_KPMG_OracleMoNumber,Dtl.Fld_KPMG_Barcode, Dtl.Fld_KPMG_OracleMoLineId,T.c.value('itemCode[1]', 'NVARCHAR(max)') ,MoItm.Fld_KPMG_MoItem_Id
 	FROM Tbl_KPMG_StockDetails Dtl 
-	JOIN @ItemXmlData.nodes('/ROOT/Material') T ( c )  on Dtl.Fld_KPMG_Barcode = T.c.value('BarCode[1]', 'Nnvarchar(max)')
-	JOIN Tbl_KPMG_MoItems MoItm ON MoItm.Fld_KPMG_Itemcode = T.c.value('itemCode[1]', 'Nnvarchar(max)') 
+	JOIN @ItemXmlData.nodes('/ROOT/Material') T ( c )  on Dtl.Fld_KPMG_Barcode = T.c.value('BarCode[1]', 'NVARCHAR(max)')
+	JOIN Tbl_KPMG_MoItems MoItm ON MoItm.Fld_KPMG_Itemcode = T.c.value('itemCode[1]', 'NVARCHAR(max)') 
 	JOIN Tbl_KPMG_StockMaster Mstr on Mstr.Fld_KPMG_Stock_Id = Dtl.Fld_KPMG_Stock_Id 
 	WHERE Mstr.Fld_KPMG_Mo_Id = @MoId  and MoItm.Fld_KPMG_Mo_Id = @MoId
 	
@@ -30,10 +30,11 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspGetIndividualStudentDueForRICEAPI]
     (
-      @sBrandName Nnvarchar(max) ,
-      @StudentID Nnvarchar(max)
+      @sBrandName NVARCHAR(max) ,
+      @StudentID NVARCHAR(max)
     )
 AS
     BEGIN
@@ -1062,4 +1062,5 @@ AS
    
    
     END
+
 

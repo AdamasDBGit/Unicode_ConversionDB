@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_ERP_GetTeacherByToken]  
 (  
- @sToken nnvarchar(max)  
+ @sToken NVARCHAR(max)  
 )  
 AS  
 BEGIN  
@@ -51,3 +51,4 @@ where t1.I_User_ID = @userid
   
   
 END
+

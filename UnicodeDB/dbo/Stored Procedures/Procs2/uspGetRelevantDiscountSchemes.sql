@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetRelevantDiscountSchemes]    
 (    
- @sCourseIdList Nnvarchar(max),    
+ @sCourseIdList NVARCHAR(max),    
  @iCenterID int     
 )    
     
@@ -41,4 +41,5 @@ SELECT  Z.S_Discount_Scheme_Name AS SCHEME_NAME,XYZ.Scheme_ID AS SCHEME_ID FROM
     
        
 END
+
 

@@ -3,8 +3,8 @@ CREATE PROCEDURE [dbo].[uspSaveLoginTrail]
  @iUserID INT,    
  @dCurrentDate DATETIME,    
  @iFlag INT,    
- @sUserSessionStateID Nnvarchar(max),  
- @sIPAddress Nnvarchar(max)    
+ @sUserSessionStateID NVARCHAR(max),  
+ @sIPAddress NVARCHAR(max)    
 )    
     
 AS    
@@ -32,10 +32,11 @@ END TRY
 BEGIN CATCH    
  --Error occurred:      
     
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     
  RAISERROR(@ErrMsg, @ErrSeverity, 1)    
 END CATCH
+
 

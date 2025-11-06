@@ -1,7 +1,7 @@
 
 CREATE PROCEDURE [dbo].[KPMG_uspGetMoByBranchToLoad]
-@CenterName Nnvarchar(max),
-@Context Nnvarchar(max)
+@CenterName NVARCHAR(max),
+@Context NVARCHAR(max)
 AS
 BEGIN Try
 	DECLARE @idBranch INT
@@ -23,10 +23,11 @@ BEGIN Try
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            
         RAISERROR(@ErrMsg, @ErrSeverity, 1)            
     END CATCH
+
 

@@ -1,18 +1,18 @@
 CREATE  procedure [dbo].[ERP_uspInsertOnAccPaymentDetailsFromAPI]  
 (  
 @DueID INT=null,  
-@StudentID Nnvarchar(max)=Null,  
+@StudentID NVARCHAR(max)=Null,  
 @BrandID INT,  
 @CenterID INT,  
-@TransactionNo Nnvarchar(max),  
+@TransactionNo NVARCHAR(max),  
 @TransactionDate DATETIME,  
-@TransactionStatus Nnvarchar(max),  
-@TransactionSource Nnvarchar(max),  
-@TransactionMode Nnvarchar(max),  
+@TransactionStatus NVARCHAR(max),  
+@TransactionSource NVARCHAR(max),  
+@TransactionMode NVARCHAR(max),  
 @Amount DECIMAL(14,2),  
 @Tax DECIMAL(14,2),  
 @OnAccReceiptTypeID INT=Null,  
-@RawData Nnvarchar(max)=NULL ,
+@RawData NVARCHAR(max)=NULL ,
 @Is_Online_Payment bit
 )  
 AS  
@@ -184,7 +184,7 @@ select top 1 ID from SelfService.T_OnAccount_Due where
   
  --Error occurred:        
         ROLLBACK TRANSACTION      
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()      
@@ -192,4 +192,5 @@ select top 1 ID from SelfService.T_OnAccount_Due where
         RAISERROR(@ErrMsg, @ErrSeverity, 1)   
   
     END CATCH
+
 

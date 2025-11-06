@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[uspGetStudetForCT]     
 (    
- @sStudentCode Nnvarchar(max) = NULL    
-,@sStudentFName Nnvarchar(max)  = NULL    
-,@sStudentMName Nnvarchar(max)  = NULL    
-,@sStudentLName Nnvarchar(max)  = NULL    
-,@sInvoiceNo Nnvarchar(max) = NULL    
+ @sStudentCode NVARCHAR(max) = NULL    
+,@sStudentFName NVARCHAR(max)  = NULL    
+,@sStudentMName NVARCHAR(max)  = NULL    
+,@sStudentLName NVARCHAR(max)  = NULL    
+,@sInvoiceNo NVARCHAR(max) = NULL    
 ,@iCentreId  INT    
 )    
 as    
@@ -31,4 +31,5 @@ begin
  AND (SD.I_Corporate_ID IS NULL OR SD.I_Corporate_ID = 0)   
      
 end
+
 

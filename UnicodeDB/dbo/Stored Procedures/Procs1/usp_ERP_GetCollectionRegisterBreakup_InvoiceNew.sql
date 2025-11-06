@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_ERP_GetCollectionRegisterBreakup_InvoiceNew]  
     (  
-      @sHierarchyList Nnvarchar(max)=NULL ,  
+      @sHierarchyList NVARCHAR(max)=NULL ,  
       @iBrandID INT ,  
       @startDate DATE ,  
       @endDate DATE  
@@ -139,4 +139,5 @@ GROUP BY        RH.I_Centre_Id ,
   
   
     END  
+
 

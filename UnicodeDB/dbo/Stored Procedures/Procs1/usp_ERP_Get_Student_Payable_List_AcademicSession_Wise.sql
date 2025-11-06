@@ -6,16 +6,16 @@ CREATE PROCEDURE [dbo].[usp_ERP_Get_Student_Payable_List_AcademicSession_Wise]
  @iClassID int=NULL,    
  @iSectionID int=NULL,    
  @iSteamID int=NULL,    
- @sStudentName Nnvarchar(max)=NULL,    
- @sStudentID Nnvarchar(max)=NULL,    
- @sMobileNo Nnvarchar(max)=NULL,    
+ @sStudentName NVARCHAR(max)=NULL,    
+ @sStudentID NVARCHAR(max)=NULL,    
+ @sMobileNo NVARCHAR(max)=NULL,    
  @iswithDue bit=NULL,    
  @Limit INT=NULL,    
     @Offset INT=NULL,    
     @SortCol INT=NULL,    
-    @SortDir Nnvarchar(max)=NULL,    
+    @SortDir NVARCHAR(max)=NULL,    
  @Id INT = NULL,    
- @SearchValue Nnvarchar(max) = NULL    
+ @SearchValue NVARCHAR(max) = NULL    
 AS    
 BEGIN    
  -- SET NOCOUNT ON added to prevent extra result sets from    
@@ -614,3 +614,4 @@ Select Distinct Adhocsch.inStudentDetailID,Adhocsch.TotalDueAmount,asAdhoc_paid.
     
  
 END 
+

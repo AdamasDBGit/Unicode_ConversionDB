@@ -5,9 +5,9 @@ CREATE PROCEDURE [dbo].[uspGetReconciliationData]
 		@dtDateTo datetime = null,
 		@dtDateFrom datetime = null,
 		@dtCurrentDate datetime,
-		@sFName Nnvarchar(max) = null,
-		@sMName Nnvarchar(max) = null,
-		@sLName Nnvarchar(max) = null
+		@sFName NVARCHAR(max) = null,
+		@sMName NVARCHAR(max) = null,
+		@sLName NVARCHAR(max) = null
 	)
 
 AS
@@ -112,4 +112,5 @@ BEGIN
 	SELECT * FROM @InvoiceDetail ORDER BY [I_Centre_Id],I_Invoice_Header_ID DESC
 
 END
+
 

@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[aaaaaa_CreateDataLoadScript] 
-@TblName Nnvarchar(max),
-@schemaName Nnvarchar(max)
+@TblName NVARCHAR(max),
+@schemaName NVARCHAR(max)
 as
 
 	create table #a (id int identity (1,1), ColType int, ColName nvarchar(max))
@@ -55,4 +55,5 @@ as
 
 	exec (@cmd1 + @cmd2)
 	drop table #a
+
 

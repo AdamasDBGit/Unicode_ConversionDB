@@ -3,13 +3,13 @@
 CREATE PROCEDURE [dbo].[usp_ERP_AddFeeComponent_BKP_May_2025]             
  -- Add the parameters for the stored procedure here            
    @FeeHeadID int Null,            
-  @FeeComponentCode Nnvarchar(max),            
-  @FeeComponentName Nnvarchar(max),            
+  @FeeComponentCode NVARCHAR(max),            
+  @FeeComponentName NVARCHAR(max),            
   @Status int,            
-  @UpdatedBy Nnvarchar(max),            
+  @UpdatedBy NVARCHAR(max),            
   @FeeComponentType int,            
   @BrandID int ,            
-  @TypeOfComponent Nnvarchar(max),          
+  @TypeOfComponent NVARCHAR(max),          
   @Is_GST_Applicable bit null,          
   @I_GST_FeeComponent_Catagory_ID int null,          
   @Valid_from datetime null,          
@@ -189,10 +189,11 @@ END TRY
   
 BEGIN CATCH            
  rollback transaction            
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int            
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int            
             
  SELECT @ErrMsg = ERROR_MESSAGE(),            
    @ErrSeverity = ERROR_SEVERITY()            
 select 0 StatusFlag,@ErrMsg Message            
 END CATCH 
+
 

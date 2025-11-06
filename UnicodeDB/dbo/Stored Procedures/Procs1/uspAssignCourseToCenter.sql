@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspAssignCourseToCenter]
 
 	(
-		@sSelectedCenters Nnvarchar(max),
-		@sSelectedCourseID Nnvarchar(max),
-		@sLoginID Nnvarchar(max)
+		@sSelectedCenters NVARCHAR(max),
+		@sSelectedCourseID NVARCHAR(max),
+		@sLoginID NVARCHAR(max)
 	)
 
 AS
@@ -145,10 +145,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetFTReceipts]    
 (    
- @sReceiptID Nnvarchar(max)    
+ @sReceiptID NVARCHAR(max)    
 )    
     
 AS    
@@ -11,4 +11,5 @@ WHERE I_FTD_Receipt_Header_ID IN (Select val from dbo.fnString2Rows(@sReceiptID,
    
     
 END
+
 

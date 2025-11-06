@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[UpdateMethodologyCategory]
 -- Add the parameters for the stored procedure here
 @MethodologyCategoryID int,
 @BrandID int=null,
-@MethodologyCategoryName nnvarchar(max)=null,
+@MethodologyCategoryName NVARCHAR(max)=null,
 @Status int =null
 AS
 BEGIN
@@ -58,3 +58,4 @@ BEGIN
    select 1 StatusFlag,'Methodology Category not Updated Due Incorrect Category' Message    
 
 END
+

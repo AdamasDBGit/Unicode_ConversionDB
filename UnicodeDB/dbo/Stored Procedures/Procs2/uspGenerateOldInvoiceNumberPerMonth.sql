@@ -5,8 +5,8 @@ CREATE PROCEDURE [dbo].[uspGenerateOldInvoiceNumberPerMonth]
 	@dtInstallmentDate DATETIME,
 	@dtFrom DATETIME,
 	@dtTo DATETIME,
-	@invoiceType Nnvarchar(max),
-	@InvoiceNumber Nnvarchar(max) OUTPUT
+	@invoiceType NVARCHAR(max),
+	@InvoiceNumber NVARCHAR(max) OUTPUT
 )	
 AS
 BEGIN	
@@ -113,4 +113,5 @@ BEGIN
 	
 	
 END
+
 

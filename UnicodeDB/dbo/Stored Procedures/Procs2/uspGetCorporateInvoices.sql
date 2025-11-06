@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetCorporateInvoices]
 (
-	@strCorpStudentId Nnvarchar(max)
+	@strCorpStudentId NVARCHAR(max)
 )
 AS
 BEGIN  
@@ -9,4 +9,5 @@ SET @command = 'SELECT * FROM dbo.T_Invoice_Parent WHERE I_Student_Detail_ID IN 
 
 EXEC (@command)
 END
+
 

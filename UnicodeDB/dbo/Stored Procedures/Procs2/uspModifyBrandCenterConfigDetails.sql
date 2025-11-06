@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[uspModifyBrandCenterConfigDetails]
 (  
  @iBrandID int,   
  @sConfigXML xml,  
- @sCreatedBy Nnvarchar(max),  
+ @sCreatedBy NVARCHAR(max),  
  @sCreatedOn datetime,  
  @iFlag int,  
    
@@ -152,4 +152,5 @@ BEGIN
    END  
   END  
 END
+
 

@@ -1,8 +1,8 @@
 
 CREATE PROCEDURE [dbo].[uspAddEditDeleteExaminationList]
-@CONTEXT Nnvarchar(max),
+@CONTEXT NVARCHAR(max),
 @EXAM_ID INT,
-@EXAM_NAME Nnvarchar(max),
+@EXAM_NAME NVARCHAR(max),
 @FROM_DATE DATETIME,
 @TO_DATE DATETIME
 AS
@@ -32,11 +32,12 @@ END
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

@@ -1,6 +1,6 @@
 CREATE   PROCEDURE [dbo].[usp_ERP_Get_Dispute_Transaction_History]
 	-- Add the parameters for the stored procedure here
-	@sStudentID Nnvarchar(max)=NULL,
+	@sStudentID NVARCHAR(max)=NULL,
 	@dtValidFrom datetime =NULL,
 	@dtValidTo datetime= NULL,
 	@BrandID INT=NULL,
@@ -419,4 +419,5 @@ ORDER BY TH.ReceiptDate DESC;
 	drop table #Transaction_History
 
 END
+
 

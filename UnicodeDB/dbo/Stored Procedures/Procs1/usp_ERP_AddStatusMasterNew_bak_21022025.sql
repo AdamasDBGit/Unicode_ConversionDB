@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_ERP_AddStatusMasterNew_bak_21022025]   
-    @StatusDesc Nnvarchar(max) NULL,  
-    @StatusSMSDesc Nnvarchar(max) NULL,  
+    @StatusDesc NVARCHAR(max) NULL,  
+    @StatusSMSDesc NVARCHAR(max) NULL,  
     @StatusID INT NULL,  
     @Amount NUMERIC(18,2) NULL,  
     @Brandid INT NULL,  
@@ -239,7 +239,7 @@ END;
     END TRY  
     BEGIN CATCH  
         ROLLBACK TRANSACTION;  
-        DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT;  
+        DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity INT;  
   
         SELECT @ErrMsg = ERROR_MESSAGE(),  
                @ErrSeverity = ERROR_SEVERITY();  
@@ -248,3 +248,4 @@ END;
   
     COMMIT TRANSACTION;  
 END;
+

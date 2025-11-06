@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetEnquiryFollowupRelevence]
 (
-@iHierarchyDetailID Nnvarchar(max),
+@iHierarchyDetailID NVARCHAR(max),
 @dtFromDate DATETIME,
 @dtToDate DATETIME,
 @iBrandID INT,
@@ -62,4 +62,5 @@ ORDER BY CONVERT(DATE, A.Dt_Crtd_On) ,
    END
      
 END
+
 

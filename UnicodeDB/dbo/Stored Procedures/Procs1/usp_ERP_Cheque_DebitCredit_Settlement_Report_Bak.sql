@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_ERP_Cheque_DebitCredit_Settlement_Report_Bak]
-@BrandID Nnvarchar(max)
+@BrandID NVARCHAR(max)
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -70,3 +70,4 @@ AND ((a.I_Status=0 AND CONVERT(DATE,a.Dt_Upd_On) BETWEEN '07/01/2025' AND '07/31
 and b.I_Brand_ID = @BrandID;
 
 END
+

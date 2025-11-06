@@ -1,14 +1,14 @@
     
 CREATE PROCEDURE [dbo].[usp_ERP_AddSchoolProgram]    
     @iGroupid INT = NULL,    
-    @sGroupCode Nnvarchar(max),    
-    @sGroupName Nnvarchar(max),    
+    @sGroupCode NVARCHAR(max),    
+    @sGroupName NVARCHAR(max),    
     @iGroupStatus INT,    
     @tStartTime TIME(0) = NULL,    
     @tEndTime TIME(0) = NULL,    
     @UTRecipient UT_Recipient READONLY,    
     @iBrandid INT,    
-    @sUpdatedBy Nnvarchar(max),    
+    @sUpdatedBy NVARCHAR(max),    
     @iSessionID INT,    
     @ClassStreamSectionList UT_ClassStreamSection READONLY  -- Add the new parameter    
 AS    
@@ -142,9 +142,10 @@ BEGIN
             ROLLBACK TRANSACTION;    
     
         -- Return error message    
-        DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT;    
+        DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity INT;    
         SELECT @ErrMsg = ERROR_MESSAGE(), @ErrSeverity = ERROR_SEVERITY();    
         SELECT 0 AS StatusFlag, @ErrMsg AS Message;    
     END CATCH    
 END; 
+
 

@@ -6,9 +6,9 @@ CREATE PROCEDURE [dbo].[uspInsertUpdateCenterTimeSlotDetails]
       @DtStartTime DATETIME ,
       @DtEndTime DATETIME ,  
       @IStatus INT ,  
-      @SCrtdBy Nnvarchar(max) ,  
+      @SCrtdBy NVARCHAR(max) ,  
       @DtCrtdOn DATETIME , 
-      @SUpdtBy Nnvarchar(max) ,  
+      @SUpdtBy NVARCHAR(max) ,  
       @DtUpdtOn DATETIME,  
       @IFlag INT
       
@@ -67,11 +67,12 @@ AS
 	END TRY             
     BEGIN CATCH              
  --Error occurred:                
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT              
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()              
               
         RAISERROR(@ErrMsg, @ErrSeverity, 1)              
     END CATCH
+
 

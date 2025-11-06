@@ -6,11 +6,11 @@ CREATE PROCEDURE [dbo].[usp_ERP_GetSearchInvoiceListForCancel] -- 11,'','','sa',
     (      
       @iBrandId INT = NULL ,
 	  @iCenterId INT = NULL ,
-      @sInvoiceId Nnvarchar(max) = NULL ,      
-      @sStudentId Nnvarchar(max) = NULL ,      
-      @sStudentFirstName Nnvarchar(max) = NULL ,      
-      @sStudentSecondName Nnvarchar(max) = NULL ,      
-      @sStudentLastName Nnvarchar(max) = NULL          
+      @sInvoiceId NVARCHAR(max) = NULL ,      
+      @sStudentId NVARCHAR(max) = NULL ,      
+      @sStudentFirstName NVARCHAR(max) = NULL ,      
+      @sStudentSecondName NVARCHAR(max) = NULL ,      
+      @sStudentLastName NVARCHAR(max) = NULL          
     )      
 AS       
     BEGIN          
@@ -83,4 +83,5 @@ AS
           
     END 
 
+
 

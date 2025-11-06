@@ -1,9 +1,9 @@
 
 CREATE PROCEDURE [dbo].[KPMG_GenerateMoveOrderForStudentIssue]
 
-@StudentBarCodeNo nnvarchar(max),
-@Context Nnvarchar(max),
-@MaterialBarCode nnvarchar(max)
+@StudentBarCodeNo NVARCHAR(max),
+@Context NVARCHAR(max),
+@MaterialBarCode NVARCHAR(max)
 
 AS
 DECLARE @CENTER_ID INT
@@ -49,10 +49,11 @@ INSERT INTO Tbl_KPMG_MoMaster(Fld_KPMG_Branch_Id,Fld_KPMG_Context,Fld_KPMG_ISCol
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

@@ -1,7 +1,7 @@
 CREATE   PROCEDURE [dbo].[usp_ERP_CancelAdHocPayment]   
 (  
  @Id int,
- @Reason nnvarchar(max)
+ @Reason NVARCHAR(max)
 )  
 AS  
 begin transaction  
@@ -13,7 +13,7 @@ select 1 StatusFlag,'Payment Cancelled Succesfully.' Message
 END TRY  
 BEGIN CATCH  
  rollback transaction  
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int  
   
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
@@ -21,3 +21,4 @@ BEGIN CATCH
  RAISERROR(@ErrMsg, @ErrSeverity, 1)  
 END CATCH  
 commit transaction  
+

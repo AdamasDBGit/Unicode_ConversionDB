@@ -2,29 +2,29 @@ CREATE   PROCEDURE [dbo].[usp_ERP_InitiateTransaction_Using_for_Adhoc_T]
 	-- Add the parameters for the stored procedure here
 	@iBrandID INT,
 	@iCenterID INT = NULL,
-	@sTransactionNo Nnvarchar(max),
+	@sTransactionNo NVARCHAR(max),
 	@dtTransactionDate datetime,
-	@sTransactionStatus Nnvarchar(max),
-	@sTransactionSource Nnvarchar(max),
-	@sTransactionMode Nnvarchar(max)=NULL,
+	@sTransactionStatus NVARCHAR(max),
+	@sTransactionSource NVARCHAR(max),
+	@sTransactionMode NVARCHAR(max)=NULL,
 	@TotalTransactionAmount decimal(8,2),
 	@iPaymentGatewayBrandID INT,
 	@iSmsPaymentMode INT,
-	@sStudentID Nnvarchar(max),
+	@sStudentID NVARCHAR(max),
 	@XmlData XML='<Root></Root/>',
-	@PaymentJson Nnvarchar(max)=NULL,
-	@SMobileNo Nnvarchar(max)=NULL,
-	@SourceOfRequestType Nnvarchar(max)=NULL,
-	@RequestUserId Nnvarchar(max)=NULL,
-	@CancelledBy Nnvarchar(max)=NULL,
+	@PaymentJson NVARCHAR(max)=NULL,
+	@SMobileNo NVARCHAR(max)=NULL,
+	@SourceOfRequestType NVARCHAR(max)=NULL,
+	@RequestUserId NVARCHAR(max)=NULL,
+	@CancelledBy NVARCHAR(max)=NULL,
 	@CancelledDate datetime=NULL,
-	@ExternalReceiptNo Nnvarchar(max)=NULL,
-	@PaymentStatus Nnvarchar(max)=NULL,
-	@PgResponse Nnvarchar(max)=NULL,
-    @PgMessage Nnvarchar(max)=NULL,
-	@RequestType Nnvarchar(max)=NULL,
+	@ExternalReceiptNo NVARCHAR(max)=NULL,
+	@PaymentStatus NVARCHAR(max)=NULL,
+	@PgResponse NVARCHAR(max)=NULL,
+    @PgMessage NVARCHAR(max)=NULL,
+	@RequestType NVARCHAR(max)=NULL,
 	@ExecutionDate datetime=NULL,
-	@Order_Id Nnvarchar(max)=NULL
+	@Order_Id NVARCHAR(max)=NULL
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -36,7 +36,7 @@ BEGIN
    BEGIN TRANSACTION;	
 
 	DECLARE @StudentDetailID INT
-	DECLARE @sErrorMSG Nnvarchar(max)
+	DECLARE @sErrorMSG NVARCHAR(max)
 
 
 	IF @iPaymentGatewayBrandID IS NULL OR @iPaymentGatewayBrandID = 0
@@ -88,7 +88,7 @@ BEGIN
         FeeScheduleID INT,
 		StatusValue INT,
         Amount DECIMAL(18, 2),
-        InvoiceNo Nnvarchar(max),
+        InvoiceNo NVARCHAR(max),
         InstallmentDate DATETIME,
 		PaymentScheduleID INT
     );
@@ -100,7 +100,7 @@ BEGIN
     );
 
     CREATE TABLE #OnAccountTaxTable (
-        InvoiceNo Nnvarchar(max),
+        InvoiceNo NVARCHAR(max),
         TaxID INT,
         TaxPaid DECIMAL(18, 2)
     );
@@ -174,7 +174,7 @@ BEGIN
         FeeSchedule.value('../../@FeeScheduleID', 'int') AS FeeScheduleID,
 		AdhocDetail.value('@StatusValue', 'int') AS StatusValue,
         AdhocDetail.value('@Amount', 'decimal(18, 2)') AS Amount,
-        AdhocDetail.value('@InvoiceNo', 'nnvarchar(max)') AS InvoiceNo,
+        AdhocDetail.value('@InvoiceNo', 'NVARCHAR(max)') AS InvoiceNo,
         --AdhocDetail.value('@InstallmentDate', 'datetime') AS InstallmentDate
 		CONVERT(datetime, AdhocDetail.value('@InstallmentDate', 'nvarchar(100)'), 126) as InstallmentDate,
 		 AdhocDetail.value('@PaymentScheduleID', 'int') AS PaymentScheduleID
@@ -194,7 +194,7 @@ BEGIN
  -- Insert into on account tax table
 INSERT INTO #OnAccountTaxTable (InvoiceNo, TaxID, TaxPaid)
 SELECT 
-    AdhocDetail.value('@InvoiceNo', 'nnvarchar(max)') AS InvoiceNo,
+    AdhocDetail.value('@InvoiceNo', 'NVARCHAR(max)') AS InvoiceNo,
     TaxDetails.value('@TaxID', 'int') AS TaxID,
     TaxDetails.value('@TaxPaid', 'decimal(18, 2)') AS TaxPaid
 FROM @XmlData.nodes('/Root/RowFeeSheduleDtl/TblDueOnAccountDtl/RowDueOnAccountDtl') AS FeeSchedule(AdhocDetail)
@@ -383,7 +383,7 @@ CROSS APPLY AdhocDetail.nodes('ReceiptTax/TaxDetails') AS TaxDetails(TaxDetails)
 	END TRY
     BEGIN CATCH
         -- Handle errors
-        DECLARE @ErrorMessage Nnvarchar(max);
+        DECLARE @ErrorMessage NVARCHAR(max);
         DECLARE @ErrorSeverity INT;
         DECLARE @ErrorState INT;
 
@@ -402,4 +402,5 @@ CROSS APPLY AdhocDetail.nodes('ReceiptTax/TaxDetails') AS TaxDetails(TaxDetails)
 
 
 END
+
 

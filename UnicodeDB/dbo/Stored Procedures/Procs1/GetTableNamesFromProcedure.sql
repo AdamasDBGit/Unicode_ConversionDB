@@ -1,12 +1,12 @@
 CREATE PROCEDURE [dbo].[GetTableNamesFromProcedure]
-    @ProcedureName Nnvarchar(max)
+    @ProcedureName NVARCHAR(max)
 AS
 BEGIN
     -- Create a temporary table to store the results
-    CREATE TABLE #TempTable (TableName Nnvarchar(max));
+    CREATE TABLE #TempTable (TableName NVARCHAR(max));
 
     -- Declare variables
-    DECLARE @SqlStatement Nnvarchar(max);
+    DECLARE @SqlStatement NVARCHAR(max);
 
     -- Build the dynamic SQL statement
     SET @SqlStatement = '
@@ -26,3 +26,4 @@ BEGIN
     -- Drop the temporary table
     DROP TABLE #TempTable;
 END;
+

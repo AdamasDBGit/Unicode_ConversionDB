@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[uspSearchInvoiceListForCancel] -- 11,'','','sa','',''  
     (      
       @iCenterId INT = NULL ,      
-      @sInvoiceId Nnvarchar(max) = NULL ,      
-      @sStudentId Nnvarchar(max) = NULL ,      
-      @sStudentFirstName Nnvarchar(max) = NULL ,      
-      @sStudentSecondName Nnvarchar(max) = NULL ,      
-      @sStudentLastName Nnvarchar(max) = NULL          
+      @sInvoiceId NVARCHAR(max) = NULL ,      
+      @sStudentId NVARCHAR(max) = NULL ,      
+      @sStudentFirstName NVARCHAR(max) = NULL ,      
+      @sStudentSecondName NVARCHAR(max) = NULL ,      
+      @sStudentLastName NVARCHAR(max) = NULL          
     )      
 AS       
     BEGIN          
@@ -42,4 +42,5 @@ AS
         ORDER BY TSD.S_Student_ID          
           
     END
+
 

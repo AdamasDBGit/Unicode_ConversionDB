@@ -3,9 +3,9 @@ CREATE PROCEDURE [dbo].[uspSearchEnquiryListForStudent]
       @iSelectedHierarchyId INT,    
       @iSelectedBrandId INT = NULL,      
       @iEnquiryId INT = NULL,        
-      @sStudentFirstName Nnvarchar(max)=NULL,        
-      @sStudentSecondName Nnvarchar(max)=NULL,        
-      @sStudentLastName Nnvarchar(max)=NULL ,
+      @sStudentFirstName NVARCHAR(max)=NULL,        
+      @sStudentSecondName NVARCHAR(max)=NULL,        
+      @sStudentLastName NVARCHAR(max)=NULL ,
       @dtDOB DATETIME = NULL       
 )        
         
@@ -29,4 +29,5 @@ BEGIN
       AND terd.I_Enquiry_Regn_ID = ISNULL(@iEnquiryId,terd.I_Enquiry_Regn_ID)   
       AND terd.I_Centre_Id IN (SELECT * FROM dbo.fnString2Rows(@sSearchCenterList,','))    
 END
+
 

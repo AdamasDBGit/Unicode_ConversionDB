@@ -1,7 +1,7 @@
 
 CREATE PROCEDURE [dbo].[uspGetUserAccess]
 (
-	@vLoginID Nnvarchar(max)
+	@vLoginID NVARCHAR(max)
 )
 AS
 BEGIN
@@ -228,4 +228,5 @@ BEGIN
 	AND trm.I_Status = 1
 	AND urd.I_Status = 1
 END
+
 

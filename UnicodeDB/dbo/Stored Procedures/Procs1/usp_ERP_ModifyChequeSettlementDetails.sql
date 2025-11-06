@@ -201,7 +201,7 @@ BEGIN
     END TRY      
     BEGIN CATCH      
         ROLLBACK TRANSACTION  
-        DECLARE @ErrMsg Nnvarchar(max) ,
+        DECLARE @ErrMsg NVARCHAR(max) ,
             @ErrSeverity INT      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()      
@@ -209,3 +209,4 @@ BEGIN
         RAISERROR(@ErrMsg, @ErrSeverity, 1)      
     END CATCH
     END
+

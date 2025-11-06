@@ -3,7 +3,7 @@
 CREATE PROCEDURE [dbo].[ERP_uspInsertStudentBatchDetails_Bulkupload]      
     (      
       @sCoursesXMl XML ,      
-      @sCreatedBy Nnvarchar(max) ,      
+      @sCreatedBy NVARCHAR(max) ,      
       @dtCreatedDate DATETIME ,      
       @bIsFromPromoteBatch BIT = NULL ,      
       @iSourceBatchID INT = NULL                      
@@ -458,11 +458,12 @@ End
     BEGIN CATCH                        
  --Error occurred:                          
         ROLLBACK TRANSACTION                        
-        DECLARE @ErrMsg Nnvarchar(max) ,      
+        DECLARE @ErrMsg NVARCHAR(max) ,      
             @ErrSeverity INT                        
         SELECT  @ErrMsg = ERROR_MESSAGE() ,      
                 @ErrSeverity = ERROR_SEVERITY()                        
                         
         RAISERROR(@ErrMsg, @ErrSeverity, 1)                        
     END CATCH
+
 

@@ -2,9 +2,9 @@
 CREATE PROCEDURE [dbo].[uspCancelInvoice]
     (
       @iInvoiceId INT ,
-      @sUpdatedBy Nnvarchar(max) ,
+      @sUpdatedBy NVARCHAR(max) ,
       @iCancellationReasonId INT = NULL ,
-	  @sCancellationRemarks Nnvarchar(max)=NULL
+	  @sCancellationRemarks NVARCHAR(max)=NULL
     )
 AS
     BEGIN TRY      
@@ -142,11 +142,12 @@ AS
     BEGIN CATCH      
  --Error occurred:        
         ROLLBACK TRANSACTION      
-        DECLARE @ErrMsg Nnvarchar(max) ,
+        DECLARE @ErrMsg NVARCHAR(max) ,
             @ErrSeverity INT      
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()      
       
         RAISERROR(@ErrMsg, @ErrSeverity, 1)      
     END CATCH
+
 

@@ -18,13 +18,13 @@ BEGIN
     ----------------------------------------------------
     DECLARE @MergeOutput TABLE
     (
-        ActionType Nnvarchar(max),
+        ActionType NVARCHAR(max),
         I_Student_Promotion_History_Header_ID INT,
         I_Student_DetailID INT,
         I_Source_Academic_Session INT,
         I_Destination_Academic_Session INT,
         I_Promotion_Status INT,
-        S_Remarks Nnvarchar(max)
+        S_Remarks NVARCHAR(max)
     );
 
     ----------------------------------------------------
@@ -122,7 +122,7 @@ BEGIN
      ----------------------------------------------------
         -- SUCCESS RESPONSE
         ----------------------------------------------------
-        DECLARE @InsertedIDs Nnvarchar(max) = '';
+        DECLARE @InsertedIDs NVARCHAR(max) = '';
 
         SELECT @InsertedIDs = 
             COALESCE(@InsertedIDs + ',', '') + CAST(I_Student_Promotion_History_Header_ID AS NVARCHAR(20))
@@ -145,3 +145,4 @@ BEGIN
             
     END CATCH
 END;
+

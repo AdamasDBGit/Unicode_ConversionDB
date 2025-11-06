@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspGetScheduledFacultyList]
     (
       @iBrandID INT ,
-      @HierarchyDetailID Nnvarchar(max) ,
+      @HierarchyDetailID NVARCHAR(max) ,
       @dFromDate DATE
     )
 AS 
@@ -33,4 +33,5 @@ AS
                 AND CONVERT(DATE, TTTM.Dt_Schedule_Date) = CONVERT(DATE, @dFromDate)
 
     END
+
 

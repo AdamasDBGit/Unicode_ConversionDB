@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[uspModifyHierarchyMaster]
 (
 		@iHierarchyId int,
-		@sHierarchyCode Nnvarchar(max),
-		@sHierarchyType Nnvarchar(max),
-		@sHierarchyDesc Nnvarchar(max),
-		@sCreatedBy Nnvarchar(max),
+		@sHierarchyCode NVARCHAR(max),
+		@sHierarchyType NVARCHAR(max),
+		@sHierarchyDesc NVARCHAR(max),
+		@sCreatedBy NVARCHAR(max),
 		@dCreatedOn datetime,
 		@iFlag int
 )
@@ -63,10 +63,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[uspDemoteStudentsToBatch]
 -- Add the parameters for the stored procedure here  
     @iTobatchId INT ,  
     @iFrombatchId INT ,  
-    @istudentIdsStr Nnvarchar(max)  
+    @istudentIdsStr NVARCHAR(max)  
 AS   
     BEGIN TRY  
  -- SET NOCOUNT ON added to prevent extra result sets from  
@@ -47,11 +47,12 @@ AS
     BEGIN CATCH  
  --Error occurred:    
   
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT  
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()  
   
         RAISERROR(@ErrMsg, @ErrSeverity, 1)  
     END CATCH
+
 

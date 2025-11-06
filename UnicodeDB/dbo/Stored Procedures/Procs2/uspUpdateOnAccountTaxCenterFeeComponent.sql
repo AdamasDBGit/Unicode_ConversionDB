@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[uspUpdateOnAccountTaxCenterFeeComponent]
 	@nTaxRate NUMERIC(18,2),
 	@dtValidFrom Datetime,
 	@dtValidTo DateTime,
-	@sCrtdBy Nnvarchar(max),
+	@sCrtdBy NVARCHAR(max),
 	@dtCrtdOn DATETIME,
 	@iFlag INT
 )
@@ -45,4 +45,5 @@ BEGIN
 	END
 		
 END
+
 

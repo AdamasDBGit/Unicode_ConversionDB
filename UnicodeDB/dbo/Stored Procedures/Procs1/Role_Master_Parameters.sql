@@ -6,8 +6,8 @@ CREATE PROCEDURE [dbo].[Role_Master_Parameters]
 -- =============================================
 -- Add the parameters for the stored procedure here
 @Role_ID int=null,
-@Role_Name nnvarchar(max)=null,
-@Role_Desc nnvarchar(max)=null,
+@Role_Name NVARCHAR(max)=null,
+@Role_Desc NVARCHAR(max)=null,
 @CreatedBy int=null,
 @Createdon date=null,
 @Status int=null
@@ -47,3 +47,4 @@ BEGIN
 	   (I_Status like @Status Or @Status is null )
 
 END
+

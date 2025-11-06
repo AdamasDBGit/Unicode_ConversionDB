@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspTCRemarksHistory]   --[dbo].[uspTCRemarksHistory]8822                 
     (        
-        @sStudentId Nnvarchar(max)        
+        @sStudentId NVARCHAR(max)        
             
     )        
 AS         
@@ -27,4 +27,5 @@ BEGIN
       
           
 END
+
 

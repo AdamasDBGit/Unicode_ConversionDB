@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetStudentAfterLogin_Bak_21032025]        
 (        
- @sToken nnvarchar(max) =null        
+ @sToken NVARCHAR(max) =null        
 )        
 AS        
 BEGIN        

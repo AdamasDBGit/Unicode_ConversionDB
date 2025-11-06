@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetSelectedCoursesDetail]  
 (  
-@sCourseList Nnvarchar(max),  
+@sCourseList NVARCHAR(max),  
 @iCenterID int  
 )  
 AS  
@@ -64,4 +64,5 @@ ON CM.I_Country_ID = COU.I_Country_ID
 WHERE CM.I_Centre_Id = @iCenterID  
   
 END
+
 

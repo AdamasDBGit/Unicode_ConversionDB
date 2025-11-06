@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspGetCenterTransferStatus]           
 (          
- @sStudentCode Nnvarchar(max) = NULL          
-,@sStudentFName Nnvarchar(max)  = NULL          
-,@sStudentMName Nnvarchar(max)  = NULL          
-,@sStudentLName Nnvarchar(max)  = NULL    
+ @sStudentCode NVARCHAR(max) = NULL          
+,@sStudentFName NVARCHAR(max)  = NULL          
+,@sStudentMName NVARCHAR(max)  = NULL          
+,@sStudentLName NVARCHAR(max)  = NULL    
 ,@iHierarchyDetailId INT           
 )          
 AS          
@@ -90,4 +90,5 @@ WHERE ISNULL(SD.I_Status,1) = 1
  ORDER BY  SD.S_First_Name        
         
 END
+
 

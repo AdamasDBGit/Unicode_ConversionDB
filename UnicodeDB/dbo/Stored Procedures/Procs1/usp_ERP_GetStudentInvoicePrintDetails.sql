@@ -4,7 +4,7 @@ CREATE PROCEDURE [dbo].[usp_ERP_GetStudentInvoicePrintDetails] -- [dbo].[uspGetS
     (
       -- Add the parameters for the stored procedure here                        
       @iStudentDetailId INT ,
-      @sStudentNo Nnvarchar(max) = NULL ,
+      @sStudentNo NVARCHAR(max) = NULL ,
       @iCenterId INT = NULL                        
 
     )
@@ -249,4 +249,5 @@ AS
                      
 
     END
+
 

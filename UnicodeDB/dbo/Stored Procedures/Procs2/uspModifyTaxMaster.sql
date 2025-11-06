@@ -2,9 +2,9 @@ CREATE PROCEDURE [dbo].[uspModifyTaxMaster]
 (  
  @iTaxID int = NULL,  
  @iCountryID INT,  
- @sTaxCode Nnvarchar(max),  
- @sTaxDesc Nnvarchar(max),  
- @sCrtdBy Nnvarchar(max),  
+ @sTaxCode NVARCHAR(max),  
+ @sTaxDesc NVARCHAR(max),  
+ @sCrtdBy NVARCHAR(max),  
  @DtCrtdOn datetime,  
     @iFlag int  
 )  
@@ -62,10 +62,11 @@ END TRY
 BEGIN CATCH  
  --Error occurred:    
   
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
   
  RAISERROR(@ErrMsg, @ErrSeverity, 1)  
 END CATCH
+
 

@@ -750,7 +750,7 @@ where I_Student_Detail_ID=@studentID
     BEGIN CATCH                          
 --Error occurred:                            
         ROLLBACK TRANSACTION                          
-        DECLARE @ErrMsg Nnvarchar(max) ,                
+        DECLARE @ErrMsg NVARCHAR(max) ,                
             @ErrSeverity INT                          
         SELECT  @ErrMsg = ERROR_MESSAGE() + ' occurred at Line_Number: ' + CAST(ERROR_LINE() AS VARCHAR(50)),                
                 @ErrSeverity = ERROR_SEVERITY()                          
@@ -760,3 +760,4 @@ where I_Student_Detail_ID=@studentID
 	--
 	--select * from T_Invoice_Parent order by 1 desc
 	--select * from T_Student_Detail where I_Student_Detail_ID=135428
+

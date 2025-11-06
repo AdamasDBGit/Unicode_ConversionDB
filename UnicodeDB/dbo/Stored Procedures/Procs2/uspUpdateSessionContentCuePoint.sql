@@ -2,11 +2,11 @@ CREATE PROCEDURE [dbo].[uspUpdateSessionContentCuePoint]
 (  
 @I_Cue_Point_Details_ID INT,  
 @I_Batch_Content_Details_ID INT,  
-@S_Topic_Name Nnvarchar(max),  
+@S_Topic_Name NVARCHAR(max),  
 @dt_Time DATETIME,  
-@S_Crtd_By Nnvarchar(max)=NULL,  
+@S_Crtd_By NVARCHAR(max)=NULL,  
 @Dt_Crtd_On DATETIME=NULL,  
-@S_Upd_By Nnvarchar(max)=NULL,  
+@S_Upd_By NVARCHAR(max)=NULL,  
 @Dt_Upd_By DATETIME=NULL,  
 @Flag BIT  
 )  
@@ -48,11 +48,12 @@ BEGIN TRY
  SELECT @I_Cue_Point_Details_ID  
 END TRY  
 BEGIN CATCH   
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     
  RAISERROR(@ErrMsg, @ErrSeverity, 1)   
 END CATCH  
 end
+
 

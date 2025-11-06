@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_ERP_Reset_Transaction] 
 	-- Add the parameters for the stored procedure here
-	@sTransactionNo Nnvarchar(max),
+	@sTransactionNo NVARCHAR(max),
 	@iuserID int
 AS
 BEGIN
@@ -79,7 +79,7 @@ SET NOCOUNT ON;
 	END TRY
     BEGIN CATCH
         -- Handle errors
-        DECLARE @ErrorMessage Nnvarchar(max);
+        DECLARE @ErrorMessage NVARCHAR(max);
         DECLARE @ErrorSeverity INT;
         DECLARE @ErrorState INT;
 
@@ -95,4 +95,5 @@ SET NOCOUNT ON;
     END CATCH
 
 END
+
 

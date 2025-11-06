@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[ToGetStudentSTCode]
 -- Description:	To get Student ST Code
 -- =============================================
 -- Add the parameters for the stored procedure here
-@BrandName nnvarchar(max)
+@BrandName NVARCHAR(max)
 
 AS
 BEGIN
@@ -27,3 +27,4 @@ where I_Brand_ID in (select dbo.BrandValurTC(@BrandName)) and TSD.I_Status=1 and
 
 
 END
+

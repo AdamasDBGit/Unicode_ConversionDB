@@ -1,7 +1,7 @@
 
 CREATE   PROCEDURE dbo.usp_NotificationType_Save
     @NotificationTypeID INT = NULL,
-    @NotificationTypeName Nnvarchar(max),
+    @NotificationTypeName NVARCHAR(max),
     @BrandId INT
 AS
 BEGIN
@@ -23,3 +23,4 @@ BEGIN
         SELECT @NotificationTypeID AS NotificationTypeID;
     END
 END;
+

@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[uspModifyCurrencyRate]
 	@iConversionRate NUMERIC(14,2),
 	@dStartDate DATETIME,
 	@dEndDate DATETIME,
-    @sCurrencyBy Nnvarchar(max),
+    @sCurrencyBy NVARCHAR(max),
 	@dCurrencyOn DATETIME,
     @iFlag INT
 )
@@ -119,10 +119,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity INT
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

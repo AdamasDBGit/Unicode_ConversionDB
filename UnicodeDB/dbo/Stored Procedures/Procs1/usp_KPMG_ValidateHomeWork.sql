@@ -1,16 +1,16 @@
 
 CREATE PROCEDURE [dbo].[usp_KPMG_ValidateHomeWork]
 
-@MaterialBarCode nnvarchar(max),
+@MaterialBarCode NVARCHAR(max),
 @StudentId INT
 
 
 AS
 BEGIN TRY 
- DECLARE @Status Nnvarchar(max)=''
- DECLARE @IssuedHomeWork  Nnvarchar(max)
- DECLARE @ParentCode  Nnvarchar(max)
- DECLARE @IssueParentCode  Nnvarchar(max)
+ DECLARE @Status NVARCHAR(max)=''
+ DECLARE @IssuedHomeWork  NVARCHAR(max)
+ DECLARE @ParentCode  NVARCHAR(max)
+ DECLARE @IssueParentCode  NVARCHAR(max)
 
 IF EXISTS(SELECT 1 FROM Tbl_KPMG_SM_Issue A INNER JOIN Tbl_KPMG_SM_List B ON A.Fld_KPMG_ItemCode=B.Fld_KPMG_ItemCode AND B.Fld_KPMG_ItemType=2 AND A.Fld_KPMG_StudentId=@StudentId)
 
@@ -40,10 +40,11 @@ END TRY
 
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspInsertStudentActivityPerformance]
     (
       @sEvaluationXML XML ,
-      @sCrtdBy Nnvarchar(max) ,
+      @sCrtdBy NVARCHAR(max) ,
       @sCrtdOn DATETIME ,
       @iEmployeeId INT = null
     )
@@ -51,7 +51,7 @@ AS
     END TRY
     BEGIN CATCH
 	
-        DECLARE @ErrMsg Nnvarchar(max) ,
+        DECLARE @ErrMsg NVARCHAR(max) ,
             @ErrSeverity INT
 
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
@@ -59,4 +59,5 @@ AS
 
         RAISERROR(@ErrMsg, @ErrSeverity, 1)
     END CATCH
+
 

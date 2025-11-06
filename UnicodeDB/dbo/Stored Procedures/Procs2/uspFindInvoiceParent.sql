@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspFindInvoiceParent]
 (
-	@sStudentId	Nnvarchar(max)
+	@sStudentId	NVARCHAR(max)
 )
 
  
@@ -21,4 +21,5 @@ BEGIN
 			SELECT 1
 		END
 END
+
 

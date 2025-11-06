@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspCopyTimeTableBulk]
     (
       @CenterId INT ,
-      @S_Crtd_By Nnvarchar(max) ,
+      @S_Crtd_By NVARCHAR(max) ,
       @I_TimeSlot_ID INT = NULL ,
       @XMLDateRange XML = NULL 
     )
@@ -450,4 +450,5 @@ AS
         DROP TABLE #tempTimeTablewithid ;
 
     END
+
 

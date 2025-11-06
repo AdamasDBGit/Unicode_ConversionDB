@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspCreateTimeSlotForBatch]         
 (           
-  @sTimeSlotCode Nnvarchar(max) = NULL,  
+  @sTimeSlotCode NVARCHAR(max) = NULL,  
   @DtStartTime datetime,   
   @DtEndTime datetime,         
-  @sCreatedBy Nnvarchar(max),  
+  @sCreatedBy NVARCHAR(max),  
   @dtCreatedOn DATETIME,
   @DtPeriodInterval datetime,
   @DtBreakStartTime datetime,
@@ -36,10 +36,11 @@ END TRY
 BEGIN CATCH  
  --Error occurred:    
   
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
   
  RAISERROR(@ErrMsg, @ErrSeverity, 1)  
 END CATCH
+
 

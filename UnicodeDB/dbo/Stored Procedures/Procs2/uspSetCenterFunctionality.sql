@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspSetCenterFunctionality] 
 	@iCenterID INT,
-	@sStatusCode Nnvarchar(max),
+	@sStatusCode NVARCHAR(max),
 	@iFlag INT
 AS
 BEGIN
@@ -17,4 +17,5 @@ BEGIN
 		(@iCenterID, @sStatusCode)
 	END
 END
+
 

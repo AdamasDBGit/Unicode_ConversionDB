@@ -5,11 +5,11 @@ CREATE PROCEDURE [dbo].[uspGetActiveInvoiceRegister]
       @dtDateTo datetime = null,      
       @dtDateFrom datetime = null,      
       @dtCurrentDate datetime,      
-      @sFName Nnvarchar(max) = null,      
-      @sMName Nnvarchar(max) = null,      
-      @sLName Nnvarchar(max) = NULL,    
-      @sStudentCode Nnvarchar(max) = NULL,    
-      @sInvoiceNo Nnvarchar(max) = NULL        
+      @sFName NVARCHAR(max) = null,      
+      @sMName NVARCHAR(max) = null,      
+      @sLName NVARCHAR(max) = NULL,    
+      @sStudentCode NVARCHAR(max) = NULL,    
+      @sInvoiceNo NVARCHAR(max) = NULL        
     )      
 AS       
     BEGIN      
@@ -158,4 +158,5 @@ AS
         FROM    @InvoiceDetail      
         ORDER BY I_Invoice_Header_ID DESC      
     END
+
 

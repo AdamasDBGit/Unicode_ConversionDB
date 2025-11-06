@@ -650,7 +650,7 @@ from T_ERP_Stud_Fee_Struct_Comp_Mapping_Details cd
         IF @@TRANCOUNT > 0                                                  
             ROLLBACK;                                                  
                                                   
-        DECLARE @ErrMsg Nnvarchar(max),                          
+        DECLARE @ErrMsg NVARCHAR(max),                          
                 @ErrSeverity int                                                  
                                                   
         SELECT @ErrMsg as Message,                     
@@ -660,3 +660,4 @@ from T_ERP_Stud_Fee_Struct_Comp_Mapping_Details cd
                                                   
     END CATCH;                                                  
 END; 
+

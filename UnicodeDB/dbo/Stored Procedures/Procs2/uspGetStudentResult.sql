@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetStudentResult]
 (
- @sStudentID nnvarchar(max)= null
+ @sStudentID NVARCHAR(max)= null
 ,@iIsLatest int = null
 )
 AS
@@ -57,3 +57,4 @@ inner join T_Result_Subject_Rule TRSR ON TRSR.I_Result_Subject_Rule_ID = TSRD.I_
 --inner join T_Exam_Component_Master TECM ON TECM.I_Exam_Component_ID = TSRD.I_Exam_Component_ID
 where TSR.S_Student_ID = @sStudentID and TSR.I_IsHold !=1 and TRES.I_Result_Publish_Status =1
 END
+

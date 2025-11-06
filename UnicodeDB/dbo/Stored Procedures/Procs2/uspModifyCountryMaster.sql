@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspModifyCountryMaster]
 	-- Add the parameters for the stored procedure here
 	@iCountryID int,
-	@sCountryCode Nnvarchar(max),
-	@sCountryName Nnvarchar(max),
-	@sCountryBy Nnvarchar(max),
+	@sCountryCode NVARCHAR(max),
+	@sCountryName NVARCHAR(max),
+	@sCountryBy NVARCHAR(max),
 	@dCountryOn datetime,
 	@iFlag int,
 	@iCurrencyID int			
@@ -59,10 +59,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

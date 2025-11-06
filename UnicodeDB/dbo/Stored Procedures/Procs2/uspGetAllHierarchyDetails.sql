@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[uspGetAllHierarchyDetails]
-			@sHierarchyChain Nnvarchar(max)
+			@sHierarchyChain NVARCHAR(max)
  
 AS
 
@@ -21,4 +21,5 @@ BEGIN
 	exec(@strQuery)
 	
 END
+
 

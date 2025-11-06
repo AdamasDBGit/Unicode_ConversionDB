@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[uspMergeBatch] --[dbo].[uspMergeBatch] '<Root><MergeBatc
     (
       @SMergeBatchXML XML = NULL ,
       @IdesBatchID INT ,
-      @SCrtdby Nnvarchar(max) ,  
+      @SCrtdby NVARCHAR(max) ,  
       @DtCrtdOn DATETIME                 
     )
 AS 
@@ -73,11 +73,12 @@ AS
     END TRY                        
     BEGIN CATCH                        
         ROLLBACK TRANSACTION                       
-        DECLARE @ErrMsg Nnvarchar(max) ,
+        DECLARE @ErrMsg NVARCHAR(max) ,
             @ErrSeverity INT                        
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()                        
                         
         RAISERROR(@ErrMsg, @ErrSeverity, 1)                        
     END CATCH
+
 

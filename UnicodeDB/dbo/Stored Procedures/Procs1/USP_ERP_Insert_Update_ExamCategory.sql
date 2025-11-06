@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[USP_ERP_Insert_Update_ExamCategory]
     @I_EXAM_CATEGORY_ID INT = NULL,  
     @I_Exam_Type_Master_ID INT,  
-    @S_Exam_Category_Name Nnvarchar(max), 
+    @S_Exam_Category_Name NVARCHAR(max), 
     @I_Brand_ID INT, 
     @Is_Active BIT,  
     @I_School_Group_ID INT, 
@@ -74,4 +74,5 @@ BEGIN
         SELECT 1 AS StatusFlag, 'Category updated successfully!' AS Message;
     END
 END
+
 

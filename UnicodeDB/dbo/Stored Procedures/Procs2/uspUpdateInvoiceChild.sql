@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[uspUpdateInvoiceChild]
 (
 	@iInvoiceHeaderId INT,
 	@iCourseId INT,
-	@sIsLumpsum Nnvarchar(max),	
+	@sIsLumpsum NVARCHAR(max),	
 	@iCourseFeePlanId INT,
 	@iCourseStartDate DATETIME,
 	@iCenterId INT,
@@ -144,10 +144,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

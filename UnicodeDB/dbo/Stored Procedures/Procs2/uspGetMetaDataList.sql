@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetMetaDataList] 
 (
-    @Name Nnvarchar(max) = NULL
+    @Name NVARCHAR(max) = NULL
 )	
 
 AS
@@ -22,4 +22,5 @@ RETURN(0)
 
 
 END
+
 

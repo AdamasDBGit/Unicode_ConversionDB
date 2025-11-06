@@ -1,13 +1,13 @@
 CREATE PROCEDURE [dbo].[uspUpdateBatchSchedule] 
 (
 	@iBatchScheduleID INT,
-	@sBatchScheduleIDList Nnvarchar(max) = NULL,
+	@sBatchScheduleIDList NVARCHAR(max) = NULL,
 	@iBatchId INT,
 	@TermID INT,
 	@iModuleID INT,
 	@SessionID INT = NULL,
-	@sSessionName Nnvarchar(max),
-	@sSessionTopic Nnvarchar(max),
+	@sSessionName NVARCHAR(max),
+	@sSessionTopic NVARCHAR(max),
 	@dtScheduledDate DATETIME,
 	@dtActualDate DATETIME,
 	@iEmployeeID INT,
@@ -55,10 +55,11 @@ ELSE
      
 END TRY      
 BEGIN CATCH      
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int      
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int      
  SELECT @ErrMsg = ERROR_MESSAGE(),      
    @ErrSeverity = ERROR_SEVERITY()      
       
  RAISERROR(@ErrMsg, @ErrSeverity, 1)      
 END CATCH
+
 

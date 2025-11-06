@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspValidateFormNo]   
 (  
- @sFormNo Nnvarchar(max),  
+ @sFormNo NVARCHAR(max),  
  @iBrandID INT  
 )    
 AS     
@@ -20,4 +20,5 @@ AS
             END    
          SELECT @Valid    
     END
+
 

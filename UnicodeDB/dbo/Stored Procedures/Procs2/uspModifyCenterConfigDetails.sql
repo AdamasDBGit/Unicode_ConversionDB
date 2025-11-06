@@ -6,7 +6,7 @@ CREATE PROCEDURE [dbo].[uspModifyCenterConfigDetails]
     @iHierarchyLevel int,
 	@iHierarchyDetail int,
 	@nDiscountPercent decimal(4,2),
-	@sCreatedBy Nnvarchar(max),
+	@sCreatedBy NVARCHAR(max),
 	@sCreatedOn datetime,
 	@iFlag int
 )
@@ -158,11 +158,12 @@ END TRY
 
 BEGIN CATCH    
  ROLLBACK TRANSACTION   
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     
  RAISERROR(@ErrMsg, @ErrSeverity, 1)    
     
 END CATCH
+
 

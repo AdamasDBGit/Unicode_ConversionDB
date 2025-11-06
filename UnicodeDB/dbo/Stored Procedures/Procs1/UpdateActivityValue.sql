@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[UpdateActivityValue]
 -- Add the parameters for the stored procedure here
 @MethodologyActivityValueID int,
 @MethodologyActivityID int =null,
-@ActivityValue nnvarchar(max)=null 
+@ActivityValue NVARCHAR(max)=null 
 
 AS
 BEGIN
@@ -53,3 +53,4 @@ BEGIN
 
 
 END
+

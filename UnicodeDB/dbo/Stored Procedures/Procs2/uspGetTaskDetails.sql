@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetTaskDetails] 
 (
-    @S_TUM_Login_ID Nnvarchar(max)
+    @S_TUM_Login_ID NVARCHAR(max)
 	
 )
 
@@ -19,4 +19,5 @@ BEGIN
 		   AND		 TUM.I_TUM_User_ID	= TUT.I_UST_To_User_ID
 		
 END
+
 

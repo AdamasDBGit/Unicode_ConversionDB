@@ -1,10 +1,10 @@
 CREATE PROCEDURE dbo.usp_ERP_ERP_VS_SMS_Recon_DueAdvance
     @iBrandID INT = null,
-    @sHierarchyList Nnvarchar(max) = null,
+    @sHierarchyList NVARCHAR(max) = null,
     @dtSMSInceptionDate DATETIME = null,
     @dtStartDate DATETIME = null,
     @dtEndDate DATETIME = null,
-    @sReconType Nnvarchar(max) = null
+    @sReconType NVARCHAR(max) = null
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -428,3 +428,4 @@ BEGIN
         -- RAISERROR(@Message, 16, 1);
     END CATCH;
 END;
+

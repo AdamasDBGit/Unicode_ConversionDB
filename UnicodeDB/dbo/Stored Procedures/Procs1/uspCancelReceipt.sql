@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[uspCancelReceipt]      -- [dbo].[uspCancelReceipt] 3965,'',null  
     (  
       @iReceiptHeaderId INT ,  
-      @sCancellationReason Nnvarchar(max) ,  
-      @sUpdatedBy Nnvarchar(max) = NULL,  
+      @sCancellationReason NVARCHAR(max) ,  
+      @sUpdatedBy NVARCHAR(max) = NULL,  
       @iFlag INT--akash      
     )  
 AS   
@@ -118,7 +118,7 @@ AS
     END TRY        
     BEGIN CATCH        
         ROLLBACK TRANSACTION       
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT        
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()        
@@ -131,4 +131,5 @@ AS
         EXEC dbo.uspInsertReceiptCancelDataforSMS @iReceiptHeaderID = @iReceiptHeaderId, -- int  
             @iFlag = @iFlag -- int  
         --akash   
+
 

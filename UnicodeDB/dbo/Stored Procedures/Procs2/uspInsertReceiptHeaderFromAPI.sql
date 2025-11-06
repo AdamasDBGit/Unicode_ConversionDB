@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspInsertReceiptHeaderFromAPI]        
     (        
-      @sReceiptNo Nnvarchar(max) ,        
+      @sReceiptNo NVARCHAR(max) ,        
       @iInvoiceHeaderID INT ,        
       @dReceiptDate DATETIME ,        
       @iStudentDetailID INT ,        
@@ -9,18 +9,18 @@ CREATE PROCEDURE [dbo].[uspInsertReceiptHeaderFromAPI]
       @nReceiptAmount NUMERIC(18, 2) ,        
       @nReceiptTaxAmount NUMERIC(18, 2) ,        
       @sFundTransferStatus CHAR(1) ,        
-      @sCrtdBy Nnvarchar(max) ,        
+      @sCrtdBy NVARCHAR(max) ,        
       @dCreatedOn DATETIME ,        
       @nCreditCardNo NUMERIC(18, 0) ,        
-      @dCreditCardExpiry Nnvarchar(max) ,        
-      @sCreditCardIssuer Nnvarchar(max) ,        
-      @sChequeDDNo Nnvarchar(max) ,        
-      @dChequeDDDate Nnvarchar(max) ,        
-      @sBankName Nnvarchar(max) ,        
-      @sBranchName Nnvarchar(max) ,        
+      @dCreditCardExpiry NVARCHAR(max) ,        
+      @sCreditCardIssuer NVARCHAR(max) ,        
+      @sChequeDDNo NVARCHAR(max) ,        
+      @dChequeDDDate NVARCHAR(max) ,        
+      @sBankName NVARCHAR(max) ,        
+      @sBranchName NVARCHAR(max) ,        
       @iReceiptType INT,        
       @iBrandID INT = NULL  ,      
-      @sNarration Nnvarchar(max),      
+      @sNarration NVARCHAR(max),      
       @sReceiptDetailXML XML,      
       @iReceiptHeaderID INT OUTPUT         
     )        
@@ -150,7 +150,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
                   
         SET @iReceiptHeaderID=@iReceiptID         
               
-          DECLARE @ErrorMessage Nnvarchar(max);    
+          DECLARE @ErrorMessage NVARCHAR(max);    
         DECLARE @ErrorSeverity INT;    
         DECLARE @ErrorState INT;    
     
@@ -178,7 +178,7 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
         --INSERT INTO ERP_ErrorLogTable (ErrorMessage, ErrorSeverity, ErrorState, ErrorProcedure)    
         --VALUES (@ErrorMessage, @ErrorSeverity, @ErrorState, 'uspInsertReceiptHeaderFromAPI');    
        ROLLBACK TRANSACTION          
-        DECLARE @ErrMsg Nnvarchar(max) ,        
+        DECLARE @ErrMsg NVARCHAR(max) ,        
             @ErrSeverity INT          
         SELECT  @ErrMsg = ERROR_MESSAGE() ,        
                 @ErrSeverity = ERROR_SEVERITY()          
@@ -186,4 +186,5 @@ VALUES  ( GETDATE(), -- CreatedOn - datetime
         RAISERROR(@ErrMsg, @ErrSeverity, 1) 
 		Insert Into tEst (Test) Values('uspInsertReceiptHeaderFromAPI')
     END CATCH
+
 

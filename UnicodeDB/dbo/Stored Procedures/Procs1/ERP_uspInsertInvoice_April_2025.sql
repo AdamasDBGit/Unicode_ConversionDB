@@ -749,7 +749,7 @@ where I_Student_Detail_ID=@studentID
     BEGIN CATCH                          
 --Error occurred:                            
         ROLLBACK TRANSACTION                          
-        DECLARE @ErrMsg Nnvarchar(max) ,                
+        DECLARE @ErrMsg NVARCHAR(max) ,                
             @ErrSeverity INT                          
         SELECT  @ErrMsg = ERROR_MESSAGE() + ' occurred at Line_Number: ' + CAST(ERROR_LINE() AS VARCHAR(50)),                
                 @ErrSeverity = ERROR_SEVERITY()                          

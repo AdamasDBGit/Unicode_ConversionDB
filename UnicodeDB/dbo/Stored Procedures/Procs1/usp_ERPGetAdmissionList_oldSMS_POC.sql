@@ -1,17 +1,17 @@
 CREATE PROCEDURE [dbo].[usp_ERPGetAdmissionList_oldSMS_POC]          
  -- Add the parameters for the stored procedure here          
  (          
-  @Enquiry_No Nnvarchar(max) = null,          
-  @Full_Name Nnvarchar(max) = null,          
-  @S_FatherName Nnvarchar(max) = NULL,        
-  @S_MotherName Nnvarchar(max) = NULL,          
-  @Mobile Nnvarchar(max) = null,          
+  @Enquiry_No NVARCHAR(max) = null,          
+  @Full_Name NVARCHAR(max) = null,          
+  @S_FatherName NVARCHAR(max) = NULL,        
+  @S_MotherName NVARCHAR(max) = NULL,          
+  @Mobile NVARCHAR(max) = null,          
   @AdmissionStageID int = null,      
   @Limit INT,      
   @Offset INT,      
   @SortCol INT,      
-  @SortDir Nnvarchar(max),      
-  @Search Nnvarchar(max) = NULL,
+  @SortDir NVARCHAR(max),      
+  @Search NVARCHAR(max) = NULL,
   @sessionID int =null,
   @PaymentDate datetime=null
  )          
@@ -317,4 +317,5 @@ BEGIN
    FETCH NEXT @Limit ROWS ONLY;      
         
 END 
+
 

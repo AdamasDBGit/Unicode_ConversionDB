@@ -1,37 +1,37 @@
 
 CREATE PROCEDURE [dbo].[uspInsertPreEnquiryFromAPI]
 (
-@ExtApplicationID Nnvarchar(max)=NULL,
-@Centre Nnvarchar(max),
-@FirstName Nnvarchar(max),
-@MiddleName Nnvarchar(max)='',
-@LastName Nnvarchar(max),
-@DateofBirth Nnvarchar(max),
+@ExtApplicationID NVARCHAR(max)=NULL,
+@Centre NVARCHAR(max),
+@FirstName NVARCHAR(max),
+@MiddleName NVARCHAR(max)='',
+@LastName NVARCHAR(max),
+@DateofBirth NVARCHAR(max),
 @Age INT,
-@MobileNo Nnvarchar(max),
-@PhoneNo Nnvarchar(max)='',
-@EmailID Nnvarchar(max),
-@SalesDisposition Nnvarchar(max),
+@MobileNo NVARCHAR(max),
+@PhoneNo NVARCHAR(max)='',
+@EmailID NVARCHAR(max),
+@SalesDisposition NVARCHAR(max),
 @DateofMaturityCC DATETIME=NULL,
 @DateofMaturitySales DATETIME=NULL,
 @DateofMaturity DATETIME,
-@Counsellor Nnvarchar(max),
-@LeadCreatedBy Nnvarchar(max),
-@LeadOrigin Nnvarchar(max),
-@PrimaryTrafficChannel Nnvarchar(max),
-@Publisher Nnvarchar(max),
-@InfoSource Nnvarchar(max),
-@Source Nnvarchar(max),
-@Medium Nnvarchar(max),
-@Campaign Nnvarchar(max),
-@HighestEduQualification Nnvarchar(max),
-@Country Nnvarchar(max),
-@State Nnvarchar(max),
-@District Nnvarchar(max)=NULL,
-@City Nnvarchar(max),
-@Address Nnvarchar(max),
-@Pincode Nnvarchar(max),
-@Course Nnvarchar(max),
+@Counsellor NVARCHAR(max),
+@LeadCreatedBy NVARCHAR(max),
+@LeadOrigin NVARCHAR(max),
+@PrimaryTrafficChannel NVARCHAR(max),
+@Publisher NVARCHAR(max),
+@InfoSource NVARCHAR(max),
+@Source NVARCHAR(max),
+@Medium NVARCHAR(max),
+@Campaign NVARCHAR(max),
+@HighestEduQualification NVARCHAR(max),
+@Country NVARCHAR(max),
+@State NVARCHAR(max),
+@District NVARCHAR(max)=NULL,
+@City NVARCHAR(max),
+@Address NVARCHAR(max),
+@Pincode NVARCHAR(max),
+@Course NVARCHAR(max),
 @UserRegnDate DATETIME
 )
 AS
@@ -290,7 +290,7 @@ BEGIN
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()                    
@@ -302,4 +302,5 @@ BEGIN
 	
 
 END
+
 

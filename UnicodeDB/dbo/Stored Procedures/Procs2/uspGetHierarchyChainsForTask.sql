@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetHierarchyChainsForTask] 
 (	
-	@sLoginID Nnvarchar(max),
+	@sLoginID NVARCHAR(max),
 	@iHierarchyMasterID int,	
 	@iSrcHierarchyDetailID int,
 	@iSelectedHierarchyDetailID int = null
@@ -185,4 +185,5 @@ BEGIN
 		END
 	END
 END
+
 

@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[uspGetHierarchyChainforCenterTransfer] 
 
 (
-	@sSalesOrgChain Nnvarchar(max),
-	@sHierarchyChain Nnvarchar(max)
+	@sSalesOrgChain NVARCHAR(max),
+	@sHierarchyChain NVARCHAR(max)
 )
 
 AS
@@ -65,4 +65,5 @@ BEGIN
 		SELECT iHLid AS ChildLevelID FROM @tblTemp WHERE [ID]=@iIDPos  
 	
 END
+
 

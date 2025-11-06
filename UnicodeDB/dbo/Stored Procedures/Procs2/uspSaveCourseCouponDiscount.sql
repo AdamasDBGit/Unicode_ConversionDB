@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspSaveCourseCouponDiscount] --'<Root><CouponNumber sCouponNumber="TESTCUAUG25_1" /><CouponNumber sCouponNumber="TESTCUAUG25_2" /><CouponNumber sCouponNumber="TESTCUAUG25_3" /></Root>'  
 (                      
                   
- @sCouponNumbers Nnvarchar(max),  
+ @sCouponNumbers NVARCHAR(max),  
  @iStatus INT,          
- @sCouponCourseIds Nnvarchar(max),                
+ @sCouponCourseIds NVARCHAR(max),                
  @dtExpiryDate DATETIME=NULL,        
  @dDiscountAmount DECIMAL        
 )                      
@@ -105,10 +105,11 @@ BEGIN CATCH
           
   ROLLBACK TRANSACTION              
                     
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int                        
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int                        
  SELECT @ErrMsg = ERROR_MESSAGE(),                        
  @ErrSeverity = ERROR_SEVERITY()                        
  RAISERROR(@ErrMsg, @ErrSeverity, 1)            
                        
 END CATCH
+
 

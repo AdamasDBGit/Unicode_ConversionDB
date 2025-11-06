@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspGetIDTConversionDetails]
 (
 @iBrandID INT,
-@sHierarchyListID Nnvarchar(max),
+@sHierarchyListID NVARCHAR(max),
 @dtStartDate DATETIME,
 @dtEndDate DATETIME
 )
@@ -77,4 +77,5 @@ WHERE   TCBD.I_Centre_Id IN ( 18, 19 )
 
 
 END
+
 

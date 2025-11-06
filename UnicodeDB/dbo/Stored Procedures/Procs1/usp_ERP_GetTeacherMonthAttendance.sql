@@ -10,7 +10,7 @@ BEGIN
 	BEGIN TRY
 	DECLARE @MinDate DATE = '',
 		@MaxDate DATE = '',
-		@SessionName nnvarchar(max),
+		@SessionName NVARCHAR(max),
 		@BrandID int;
 
 		set @BrandID = (select I_Brand_ID from T_Faculty_Master where I_Faculty_Master_ID = @FacultyMasterID)
@@ -79,7 +79,7 @@ SELECT
 	;
 	END TRY
 	BEGIN CATCH
-		DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+		DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 		SELECT	@ErrMsg = ERROR_MESSAGE(),
 				@ErrSeverity = ERROR_SEVERITY()
@@ -87,3 +87,4 @@ SELECT
 	END CATCH
 END
 
+

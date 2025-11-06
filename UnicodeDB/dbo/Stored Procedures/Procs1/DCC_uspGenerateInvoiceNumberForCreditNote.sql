@@ -3,7 +3,7 @@ CREATE PROCEDURE [dbo].[DCC_uspGenerateInvoiceNumberForCreditNote] --exec uspGen
 	@invoiceHeaderID INT,
 	@installmentNo INT,
 	@dtInstallmentDate DATETIME,
-	@InvoiceNumber Nnvarchar(max) OUTPUT
+	@InvoiceNumber NVARCHAR(max) OUTPUT
 )	
 AS
 BEGIN	
@@ -82,4 +82,5 @@ BEGIN
 			--END
 		--END
 END
+
 

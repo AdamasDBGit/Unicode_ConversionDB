@@ -1,5 +1,5 @@
 
-CREATE PROCEDURE [dbo].[uspCheckExtEnquiryValidity](@BrandID INT, @EmailID Nnvarchar(max), @MobileNo Nnvarchar(max), @ExtSource Nnvarchar(max))
+CREATE PROCEDURE [dbo].[uspCheckExtEnquiryValidity](@BrandID INT, @EmailID NVARCHAR(max), @MobileNo NVARCHAR(max), @ExtSource NVARCHAR(max))
 AS
 BEGIN
 
@@ -24,4 +24,5 @@ BEGIN
 
 
 END
+
 

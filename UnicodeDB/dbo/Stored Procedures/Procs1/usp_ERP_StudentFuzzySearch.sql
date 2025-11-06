@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[usp_ERP_StudentFuzzySearch]    
 (    
     @brandid INT,    
-    @StudentID Nnvarchar(max) = NULL,    
-    @StudentName Nnvarchar(max) = NULL,    
-    @Search Nnvarchar(max) = NULL    
+    @StudentID NVARCHAR(max) = NULL,    
+    @StudentName NVARCHAR(max) = NULL,    
+    @Search NVARCHAR(max) = NULL    
 )    
 AS    
 BEGIN    
@@ -210,3 +210,4 @@ BEGIN
         )  
     ORDER BY FullName;  
 END
+

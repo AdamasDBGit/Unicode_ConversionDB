@@ -1,7 +1,7 @@
 
 CREATE PROCEDURE [dbo].[KPMG_uspGetStudyMaterial]
 
-@MaterialBarCodeNo nnvarchar(max)
+@MaterialBarCodeNo NVARCHAR(max)
 --,@ItemCode nvarchar(255) 
 
 AS
@@ -9,7 +9,7 @@ BEGIN TRY
 
 
 
-DECLARE @TEMP_TABLE TABLE (ItemCode Nnvarchar(max) ,BarCode Nnvarchar(max),Name Nnvarchar(max),CourseName Nnvarchar(max))
+DECLARE @TEMP_TABLE TABLE (ItemCode NVARCHAR(max) ,BarCode NVARCHAR(max),Name NVARCHAR(max),CourseName NVARCHAR(max))
 
  
 
@@ -38,10 +38,11 @@ select * from @TEMP_TABLE
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

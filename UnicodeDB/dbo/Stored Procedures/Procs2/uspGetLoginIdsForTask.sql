@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[uspGetLoginIdsForTask] 
 (
-	@sLoginID Nnvarchar(max),
+	@sLoginID NVARCHAR(max),
 	@iHierarchyMasterID int,	
-	@sHierarchyInstanceName Nnvarchar(max)
+	@sHierarchyInstanceName NVARCHAR(max)
 	
 )
 
@@ -181,4 +181,5 @@ BEGIN
 	END
 
 END
+
 

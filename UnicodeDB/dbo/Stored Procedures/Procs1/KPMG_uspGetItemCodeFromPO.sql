@@ -1,6 +1,6 @@
 
 CREATE PROCEDURE [dbo].[KPMG_uspGetItemCodeFromPO]
-@POID	Nnvarchar(max)
+@POID	NVARCHAR(max)
 --@STR_PASSWORD	NVARCHAR(MAX)
 --@STR_USERSESSION	NVARCHAR(MAX)
 AS
@@ -15,4 +15,5 @@ BEGIN
     
 	
 END
+
 

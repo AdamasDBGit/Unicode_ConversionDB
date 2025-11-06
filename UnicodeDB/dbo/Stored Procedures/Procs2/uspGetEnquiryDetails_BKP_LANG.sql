@@ -5,15 +5,15 @@ CREATE PROCEDURE [dbo].[uspGetEnquiryDetails_BKP_LANG]
       @dStartDate DATETIME = NULL ,    
       @dEndDate DATETIME = NULL ,    
       @iEnquiryStatus INT = NULL ,    
-      @sFirstName Nnvarchar(max) = NULL ,    
-      @sMiddleName Nnvarchar(max) = NULL ,    
-      @sLastName Nnvarchar(max) = NULL ,    
-      @sEnquiryNo Nnvarchar(max) = NULL ,    
-      @sCourseList Nnvarchar(max) = NULL ,    
+      @sFirstName NVARCHAR(max) = NULL ,    
+      @sMiddleName NVARCHAR(max) = NULL ,    
+      @sLastName NVARCHAR(max) = NULL ,    
+      @sEnquiryNo NVARCHAR(max) = NULL ,    
+      @sCourseList NVARCHAR(max) = NULL ,    
       @iCenterID INT = NULL ,    
       @dtFollowUpFromDate DATETIME = NULL ,    
       @dtFollowUpToDate DATETIME = NULL ,    
-      @sFormNo Nnvarchar(max) = NULL                             
+      @sFormNo NVARCHAR(max) = NULL                             
     )    
 AS     
     BEGIN                              
@@ -385,4 +385,5 @@ AS
                         AND TEQD.I_Status = 1                                                        
             END                               
     END   
+
 

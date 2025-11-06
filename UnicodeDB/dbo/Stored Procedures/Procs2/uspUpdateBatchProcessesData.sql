@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[uspUpdateBatchProcessesData]
 (
 @I_Batch_Process_ID int,
-@S_Batch_Process_Name Nnvarchar(max)=null,
-@S_Batch_Process_Desc Nnvarchar(max)=null,
+@S_Batch_Process_Name NVARCHAR(max)=null,
+@S_Batch_Process_Desc NVARCHAR(max)=null,
 @I_Interval_Days int=null,
 @Dt_Last_Run_Date datetime =null,
-@S_Last_Run_Status Nnvarchar(max) =null
+@S_Last_Run_Status NVARCHAR(max) =null
 )
 
 AS
@@ -32,4 +32,5 @@ ROLLBACK TRANSACTION
 END CATCH
 
 END
+
 

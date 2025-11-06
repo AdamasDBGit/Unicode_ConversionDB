@@ -3,7 +3,7 @@ CREATE PROCEDURE [dbo].[uspGetChequeSettlement]  --[uspGetChequeSettlement] null
       @dtDateTo DATETIME = NULL ,
       @dtDateFrom DATETIME = NULL ,    
    --@iCenterID INT,
-      @sHierarchyDetailID Nnvarchar(max) ,
+      @sHierarchyDetailID NVARCHAR(max) ,
       @iBrandID INT = NULL ,
       @IsSettlement BIT 
     )
@@ -133,4 +133,5 @@ AS
                         AND RH.I_Status=1                 
             END    
     END
+
 

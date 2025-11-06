@@ -1,13 +1,13 @@
 
 CREATE PROCEDURE [dbo].[uspUpdateBranchLevelStock]
 @MoveOrderNo INT,
-@Context Nnvarchar(max),
+@Context NVARCHAR(max),
 @MoveOrderXML XML,
 @OracleMoveOrderXML XML=''
 AS
 
 BEGIN TRY 
-DECLARE @MATERIAL_TEMP TABLE(BarCode Nnvarchar(max),CourseName Nnvarchar(max),ItemCode Nnvarchar(max),MoveOrderNo INT, Slno Nnvarchar(max),Defaulter Nnvarchar(max))
+DECLARE @MATERIAL_TEMP TABLE(BarCode NVARCHAR(max),CourseName NVARCHAR(max),ItemCode NVARCHAR(max),MoveOrderNo INT, Slno NVARCHAR(max),Defaulter NVARCHAR(max))
 DECLARE @COUNT INT
 DECLARE @BranchId INTEGER 
 DECLARE @ITEM_CODE INTEGER 
@@ -16,25 +16,25 @@ DECLARE @loopCount INT
 DECLARE @GENID INT
 DECLARE @GEN_MOV_ID INT
 DECLARE @TEMP_ORACLE_MO TABLE(OracleMoLineId INT ,OracleMoNumber INT,SMSMoId INT,SMSMoLineNo INT)
-DECLARE @TBL_STOCK_REJECTION TABLE(UUID INT IDENTITY(1,1),ItemCode Nnvarchar(max),Quantity INT)
+DECLARE @TBL_STOCK_REJECTION TABLE(UUID INT IDENTITY(1,1),ItemCode NVARCHAR(max),Quantity INT)
 INSERT INTO @TEMP_ORACLE_MO(OracleMoLineId,OracleMoNumber,SMSMoId,SMSMoLineNo)
 SELECT 
                         T.c.value('OracleMoLineId[1]', 'INT') ,
-                        T.c.value('OracleMoNumber[1]', 'Nnvarchar(max)') ,
+                        T.c.value('OracleMoNumber[1]', 'NVARCHAR(max)') ,
                         T.c.value('SMSMoId[1]', 'INT') ,                        
                         T.c.value('SMSMoLineNo[1]', 'INT')                                                                      
                 FROM    @OracleMoveOrderXML.nodes('/ROOT/OracleMoveOrder') T ( c )   
                 
                 
-DECLARE @TBL_STOCK TABLE(UUID INT IDENTITY(1,1),ItemCode Nnvarchar(max),Quantity INT,OracleMoNumber Nnvarchar(max),OracleMoLineId Nnvarchar(max)) 
+DECLARE @TBL_STOCK TABLE(UUID INT IDENTITY(1,1),ItemCode NVARCHAR(max),Quantity INT,OracleMoNumber NVARCHAR(max),OracleMoLineId NVARCHAR(max)) 
 INSERT INTO @MATERIAL_TEMP(BarCode,CourseName,ItemCode,MoveOrderNo,Slno,Defaulter)
 SELECT 
-                        T.c.value('BarCode[1]', 'Nnvarchar(max)') ,
-                        T.c.value('courseName[1]', 'Nnvarchar(max)') ,
-                        T.c.value('itemCode[1]', 'Nnvarchar(max)') ,
+                        T.c.value('BarCode[1]', 'NVARCHAR(max)') ,
+                        T.c.value('courseName[1]', 'NVARCHAR(max)') ,
+                        T.c.value('itemCode[1]', 'NVARCHAR(max)') ,
                         @MoveOrderNo ,
-                        T.c.value('slno[1]', 'Nnvarchar(max)'),
-                        T.c.value('defaulter[1]', 'Nnvarchar(max)')                                                                      
+                        T.c.value('slno[1]', 'NVARCHAR(max)'),
+                        T.c.value('defaulter[1]', 'NVARCHAR(max)')                                                                      
                 FROM    @MoveOrderXML.nodes('/ROOT/Material') T ( c )   
 
 
@@ -157,8 +157,8 @@ BEGIN
     select @nodeCount,@loopCount
 	WHILE @loopCount <= @nodeCount
 	BEGIN
-		DECLARE @OracleMo Nnvarchar(max)
-		DECLARE @OracleMoLineNo Nnvarchar(max)							
+		DECLARE @OracleMo NVARCHAR(max)
+		DECLARE @OracleMoLineNo NVARCHAR(max)							
 		PRINT 1
 		select @ITEM_CODE=ItemCode,@OracleMo= ISNULL(OracleMoNumber,''),@OracleMoLineNo=ISNULL(OracleMoLineId,'') 
 		from @TBL_STOCK where UUID=@loopCount
@@ -301,10 +301,11 @@ END
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

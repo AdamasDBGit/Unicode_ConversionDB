@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[uspGetStudentForUpgrade] --NULL,'Sudipta',NULL,'das',NULL,null,13                  
 (                  
- @sStudentCode Nnvarchar(max) = NULL                  
-,@sStudentFName Nnvarchar(max)  = NULL                  
-,@sStudentMName Nnvarchar(max)  = NULL                  
-,@sStudentLName Nnvarchar(max)  = NULL                  
-,@sInvoiceNo Nnvarchar(max) = NULL     
-,@sCourseCode Nnvarchar(max)=NULL                 
+ @sStudentCode NVARCHAR(max) = NULL                  
+,@sStudentFName NVARCHAR(max)  = NULL                  
+,@sStudentMName NVARCHAR(max)  = NULL                  
+,@sStudentLName NVARCHAR(max)  = NULL                  
+,@sInvoiceNo NVARCHAR(max) = NULL     
+,@sCourseCode NVARCHAR(max)=NULL                 
 ,@iCentreId  INT                  
 )                  
 AS                  
@@ -68,4 +68,5 @@ END
       
 -------------------------------------------------------------------------------------------------------------------------------------------      
 --------------------------------------------
+
 

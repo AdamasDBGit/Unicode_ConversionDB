@@ -2,11 +2,11 @@ CREATE PROCEDURE [dbo].[uspGetUserCenterHierarchyDetails] --1262,2,'VOC301' ,'SA
 (                
   @iHierarchyDetailID INT = NULL,                
   @iBrandID INT = NULL,                 
-  @sLoginID Nnvarchar(max) = NULL ,                   
-  @sFirstName Nnvarchar(max) = NULL,                
-  @sMiddleName Nnvarchar(max) = NULL,                
-  @sLastName Nnvarchar(max) = NULL,      
-  @sUserType Nnvarchar(max) = NULL                  
+  @sLoginID NVARCHAR(max) = NULL ,                   
+  @sFirstName NVARCHAR(max) = NULL,                
+  @sMiddleName NVARCHAR(max) = NULL,                
+  @sLastName NVARCHAR(max) = NULL,      
+  @sUserType NVARCHAR(max) = NULL                  
                    
 )                    
 AS                
@@ -91,4 +91,5 @@ FROM @tblUsers AS tu WHERE S_User_Type = ISNULL(@sUserType,S_User_Type)
                 
                 
 END
+
 

@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[uspInsertUserVideoAccessTrail]
 (  
 @iUserID INT,  
 @iBatchContentDetailsID INT,  
-@sIPAddress Nnvarchar(max),
+@sIPAddress NVARCHAR(max),
 @dtLoginTime DATETIME  
 )  
 AS  
@@ -24,11 +24,12 @@ BEGIN
  SELECT @@IDENTITY
  END TRY  
  BEGIN CATCH   
-  DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+  DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
   SELECT @ErrMsg = ERROR_MESSAGE(),    
   @ErrSeverity = ERROR_SEVERITY()    
   
   RAISERROR(@ErrMsg, @ErrSeverity, 1)     
  END CATCH   
 END
+
 

@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspCourseExistATDC]  
 (           
   @iDestinationCenterId INT          
- ,@sCourseList Nnvarchar(max)        
+ ,@sCourseList NVARCHAR(max)        
           
 )          
 AS          
@@ -53,4 +53,5 @@ BEGIN
 END        
         
 END
+
 

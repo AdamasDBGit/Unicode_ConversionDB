@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[usp_ERP_GetStudentBatchListNew]  
     (  
       @iBrandId INT ,  
-      @sHierarchyListID Nnvarchar(max)=NULL ,  
-      @sBatchList Nnvarchar(max) = NULL  
+      @sHierarchyListID NVARCHAR(max)=NULL ,  
+      @sBatchList NVARCHAR(max) = NULL  
     )  
 AS   
     BEGIN  
@@ -323,4 +323,5 @@ AS
           
           
           
+
 

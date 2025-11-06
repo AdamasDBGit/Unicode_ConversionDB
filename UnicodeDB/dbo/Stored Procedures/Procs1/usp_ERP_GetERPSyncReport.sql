@@ -3,7 +3,7 @@ CREATE PROCEDURE [dbo].[usp_ERP_GetERPSyncReport]
     (  
       -- Add the parameters for the stored procedure here  
       -- EXEC REPORT.uspGetERPSyncReport 53,107,'11/01/2013','11/30/2013'  
-      @sHierarchyList Nnvarchar(max)=NULL ,  
+      @sHierarchyList NVARCHAR(max)=NULL ,  
       @iBrandID INT ,  
       @dtStartDate DATETIME ,  
       @dtEndDate DATETIME  
@@ -408,4 +408,5 @@ AS
             
     END
     
+
 

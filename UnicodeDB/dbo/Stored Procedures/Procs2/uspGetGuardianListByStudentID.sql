@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetGuardianListByStudentID]  
  (  
- @StudentID nnvarchar(max) = null,  
+ @StudentID NVARCHAR(max) = null,  
  @ParentID int = null,  
  @BrandID int=null  
  )  

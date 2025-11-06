@@ -1,15 +1,15 @@
 CREATE PROCEDURE [dbo].[ERP_uspSearchAdhocPaymentScheduleStudentDetails]  
 (  
     @EnquiryNo INT = NULL,  
-    @StudentID Nnvarchar(max) = NULL,  
-    @StudentName Nnvarchar(max) = NULL,  
+    @StudentID NVARCHAR(max) = NULL,  
+    @StudentName NVARCHAR(max) = NULL,  
     @Limit INT,  
     @Offset INT,  
     @SortCol INT,  
-    @SortDir Nnvarchar(max),  
+    @SortDir NVARCHAR(max),  
     @Id INT = NULL,  
     @PaymentID INT = NULL,  
-    @SearchValue Nnvarchar(max) = NULL  -- ?? New Parameter for Universal Search  
+    @SearchValue NVARCHAR(max) = NULL  -- ?? New Parameter for Universal Search  
 )  
 AS  
 BEGIN  
@@ -93,3 +93,4 @@ BEGIN
     FROM PaginatedData  
     WHERE RowNum BETWEEN @Offset + 1 AND @Offset + @Limit;  
 END;  
+

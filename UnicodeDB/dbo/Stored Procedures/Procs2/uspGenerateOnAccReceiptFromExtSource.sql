@@ -4,14 +4,14 @@ CREATE PROCEDURE [dbo].[uspGenerateOnAccReceiptFromExtSource]
       @iAmount NUMERIC(18, 2) = NULL ,
       @iReceiptDate DATETIME = NULL ,
       @iEnquiryID INT = NULL ,
-      @sFormNo Nnvarchar(max) = NULL ,
+      @sFormNo NVARCHAR(max) = NULL ,
       @iBrandID INT = NULL ,
-      @TransactionNo Nnvarchar(max) = NULL ,
-      @ExtReceiptNo Nnvarchar(max) = NULL ,
-      @ExtReceiptDate Nnvarchar(max) = NULL ,
-      @Source Nnvarchar(max) = NULL ,
-      @DepositAccNo Nnvarchar(max) = NULL ,
-      @CrtdBy Nnvarchar(max) ,
+      @TransactionNo NVARCHAR(max) = NULL ,
+      @ExtReceiptNo NVARCHAR(max) = NULL ,
+      @ExtReceiptDate NVARCHAR(max) = NULL ,
+      @Source NVARCHAR(max) = NULL ,
+      @DepositAccNo NVARCHAR(max) = NULL ,
+      @CrtdBy NVARCHAR(max) ,
       @CrtdOn DATETIME
     )
 AS
@@ -189,4 +189,5 @@ AS
             END
 
     END
+
 

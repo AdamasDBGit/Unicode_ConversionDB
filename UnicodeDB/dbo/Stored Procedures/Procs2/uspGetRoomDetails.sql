@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspGetRoomDetails]   
 (  
- @SBuildingName Nnvarchar(max) ,
+ @SBuildingName NVARCHAR(max) ,
  @iBrandId INT = NULL,  
- @SBlockName Nnvarchar(max) ,  
- @SFloorName Nnvarchar(max),  
+ @SBlockName NVARCHAR(max) ,  
+ @SFloorName NVARCHAR(max),  
  @iCenterID INT  = null  
 )   
 AS    
@@ -62,4 +62,5 @@ BEGIN
   A.I_Centre_ID = @iCenterID  
  END  
 END
+
 

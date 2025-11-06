@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspModifyBrandMaster] 
 (
 	@iBrandID int,
-	@vBrandCode Nnvarchar(max),
-    @vBrandName Nnvarchar(max),
-	@vBrandBy Nnvarchar(max),
+	@vBrandCode NVARCHAR(max),
+    @vBrandName NVARCHAR(max),
+	@vBrandBy NVARCHAR(max),
 	@dBrandOn datetime,
     @iFlag int
 )
@@ -47,10 +47,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

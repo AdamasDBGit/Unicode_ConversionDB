@@ -183,7 +183,7 @@ MERGE INTO T_ERP_Users_Role_Permission_Map AS target
     BEGIN CATCH                
         IF @@TRANCOUNT > 0                
             ROLLBACK;                
-DECLARE @ErrorMessage Nnvarchar(max);              
+DECLARE @ErrorMessage NVARCHAR(max);              
         SET @ErrorMessage = ERROR_MESSAGE();        
         -- Log the error message or handle it as needed              
               
@@ -191,3 +191,4 @@ DECLARE @ErrorMessage Nnvarchar(max);
         Select @ErrorMessage as Message              
     END CATCH                
 End
+

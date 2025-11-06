@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetStudentBatchFromHierarchy] 
 (
-@sHierarchyList Nnvarchar(max),
+@sHierarchyList NVARCHAR(max),
 @iBrandID int
 )         
 AS             
@@ -58,4 +58,5 @@ AS
                 A.Dt_BatchStartDate DESC,--akash        
                 A.S_Batch_Name           
     END
+
 

@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[usp_ERP_GetAdvanceFromStudentWithInvoiceNo]    
 (    
-  @sHierarchyList Nnvarchar(max) =Null,    
+  @sHierarchyList NVARCHAR(max) =Null,    
   @iBrandID INT =Null,    
   @dtfromDate DATETIME=Null  ,
   @dtUptoDate DATETIME =Null,    
-  @sStatus Nnvarchar(max) = 'ALL'     
+  @sStatus NVARCHAR(max) = 'ALL'     
   
 )    
 AS    
@@ -677,4 +677,5 @@ drop table #temphistory
     
     
 END
+
 

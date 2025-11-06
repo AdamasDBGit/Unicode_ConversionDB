@@ -45,7 +45,7 @@ BEGIN
                 I_Promotion_Status INT,
                 Is_Due_Cleared BIT,
                 Stud_Due_Amount NUMERIC(10,2),
-                Remarks Nnvarchar(max),
+                Remarks NVARCHAR(max),
                 CreatedBy INT,
                 CreatedDate DATETIME,
                 UpdatedBy INT,
@@ -152,10 +152,11 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        DECLARE @ErrMsg Nnvarchar(max),                  
+        DECLARE @ErrMsg NVARCHAR(max),                  
                 @ErrSeverity int                  
                   
         SELECT ERROR_MESSAGE() as Message,                  
                0 StatusFlag      
     END CATCH;
 END;
+

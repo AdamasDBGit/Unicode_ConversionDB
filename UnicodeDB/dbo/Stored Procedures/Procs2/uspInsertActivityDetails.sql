@@ -2,11 +2,11 @@ CREATE PROCEDURE [dbo].[uspInsertActivityDetails]
 (      
  @I_Brand_ID      INT   ,   
  @iActivityID  INT = NULL,
- @S_Activity_Name    Nnvarchar(max) ,     
- @S_Evaluation_IDs    Nnvarchar(max)   ,    
- @vEsdCrtdBy      Nnvarchar(max) ,    
+ @S_Activity_Name    NVARCHAR(max) ,     
+ @S_Evaluation_IDs    NVARCHAR(max)   ,    
+ @vEsdCrtdBy      NVARCHAR(max) ,    
  @I_Status         INT  ,    
- @vEsdUpdBy      Nnvarchar(max) ,    
+ @vEsdUpdBy      NVARCHAR(max) ,    
  @dEsdCrtdOn         DATETIME  ,    
  @dEsdUpdOn      DATETIME ,
  @iflag   INT
@@ -53,11 +53,12 @@ BEGIN TRY
 END TRY    
 BEGIN CATCH    
  ROLLBACK TRANSACTION T1    
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
     
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     
  RAISERROR(@ErrMsg, @ErrSeverity, 1)    
 END CATCH
+
 

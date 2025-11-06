@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[usp_ERP_upsert_Bulk_Transport]        
 (        
-    @str_route Nnvarchar(max),        
+    @str_route NVARCHAR(max),        
     @brandid int,        
     @Erp_Createdby int,        
     @response int  -- 0 for delete, 1 for new insert/update          
@@ -253,4 +253,5 @@ BEGIN
     -- Select from temporary table      
     SELECT *, @brandid AS BrandID FROM #Temp_T_Transport;      
 END;   
+
 

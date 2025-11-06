@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[uspCreateTransferOutInvoice] --exec uspCreateTransferOut
     @iCancelledInvoiceId INT ,   
     @iStudentId INT ,   
     @iCenterId INT ,   
-    @iUserId Nnvarchar(max),   
+    @iUserId NVARCHAR(max),   
     @iBrandID INT   
 AS   
     BEGIN                     
@@ -439,7 +439,7 @@ AS
         BEGIN CATCH                     
 --Error occurred:                       
                     
-            DECLARE @ErrMsg Nnvarchar(max) ,   
+            DECLARE @ErrMsg NVARCHAR(max) ,   
                 @ErrSeverity INT                     
             SELECT  @ErrMsg = ERROR_MESSAGE() ,   
                     @ErrSeverity = ERROR_SEVERITY()                     
@@ -447,4 +447,5 @@ AS
             RAISERROR(@ErrMsg, @ErrSeverity, 1)                     
         END CATCH                     
     END
+
 

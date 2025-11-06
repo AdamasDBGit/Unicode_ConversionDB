@@ -10,7 +10,7 @@ CREATE PROCEDURE [dbo].[Student_Subject_Allocation]
 @Session int,
 @Group int,
 @class int,
-@subject nnvarchar(max)
+@subject NVARCHAR(max)
 
 
 
@@ -47,3 +47,4 @@ BEGIN
 
 
 END
+

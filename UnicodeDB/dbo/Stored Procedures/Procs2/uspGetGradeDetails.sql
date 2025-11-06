@@ -31,7 +31,7 @@ from T_Exam_Grade_Master where  I_Exam_Grade_Master_Header_ID = @iExamGradeMaste
 END TRY
 BEGIN CATCH
 	rollback transaction
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
@@ -40,3 +40,4 @@ BEGIN CATCH
 END CATCH
 commit transaction
 
+

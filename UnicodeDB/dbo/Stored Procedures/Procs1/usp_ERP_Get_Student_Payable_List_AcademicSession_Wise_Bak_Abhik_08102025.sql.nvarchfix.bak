@@ -1,0 +1,625 @@
+CREATE PROCEDURE [dbo].[usp_ERP_Get_Student_Payable_List_AcademicSession_Wise_Bak_Abhik_08102025]     
+ -- Add the parameters for the stored procedure here    
+ @iAcademicSessionID int=NULL,    
+ @iSchoolGroupID int=NULL,    
+ @iClassID int=NULL,    
+ @iSectionID int=NULL,    
+ @iSteamID int=NULL,    
+ @sStudentName Nnvarchar(max)=NULL,    
+ @sStudentID Nnvarchar(max)=NULL,    
+ @sMobileNo Nnvarchar(max)=NULL,    
+ @iswithDue bit=NULL,    
+ @Limit INT=NULL,    
+    @Offset INT=NULL,    
+    @SortCol INT=NULL,    
+    @SortDir Nnvarchar(max)=NULL,    
+ @Id INT = NULL,    
+ @SearchValue Nnvarchar(max) = NULL    
+AS    
+BEGIN    
+ -- SET NOCOUNT ON added to prevent extra result sets from    
+ -- interfering with SELECT statements.    
+ SET NOCOUNT ON;    
+    
+        
+ Create table #StudentPayableList    
+ (    
+ StudentDetailID int,    
+ StudentID nvarchar(max),    
+ StudentName nvarchar(max),    
+ sMobileNo nvarchar(max),    
+ AcademicSessionID int,    
+ AcademicLabel nvarchar(max),    
+ SchoolGroupID int,    
+ SchoolGroupName nvarchar(max),    
+ ClassID int,    
+ ClassName nvarchar(max),    
+ SectionID int,    
+ SectionName nvarchar(max),    
+ StreamID int,    
+ StreamName nvarchar(max),    
+ InvoiceHeaderID int,    
+ MappedFeeStructureID int,    
+ MappedFeeStructureName nvarchar(max),    
+ MappedDiscountSchemeID int,    
+ MappedDiscountSchemeName nvarchar(max),    
+ TotalAmountPayable decimal(10,2),    
+ TotalAmountPaid decimal(10,2),    
+ LastPaymentDate datetime,    
+ LastPaymentAmount decimal(10,2),    
+ PreviousSessionAmount decimal(10,2),    
+ IsActive bit,    
+ IsParentInvoice bit,    
+ TotalBasePayable decimal(10,2),    
+ TotalTaxPayable decimal(10,2),    
+ IsWritedOff bit,    
+ IsCancelled bit,    
+ IsRevised bit,    
+ CurrentStatus nvarchar(max),    
+ CurrentDue decimal(10,2),    
+ LastPaymentMode nvarchar(max),    
+ CurrentStatusDesc nvarchar(max)    
+ )    
+    
+    
+    
+    
+    
+    
+--Select DISTINCT scs.I_Brand_ID as BrandID,scs.I_School_Session_ID SchoolSessionID,    
+--YEAR(Dt_Session_Start_Date) as SessionStartYear    
+--,YEAR(Dt_Session_End_Date ) SessionEndYear ,    
+--SD.S_Student_ID as StudentID,    
+--SD.I_Student_Detail_ID StudentDetailID,    
+--ASM.S_Label as SLabel,    
+--SG.I_School_Group_ID as SchoolGroupID,    
+--SG.S_School_Group_Name as SchoolGroupName,    
+--C.I_Class_ID as ClassID,    
+--C.S_Class_Name as ClassName,    
+--S.I_Section_ID as SectionID,    
+--S.S_Section_Name as SectionName,    
+--s1.I_Stream_ID as StreamID,    
+--s1.S_Stream as StreamName,    
+--TIP.I_Invoice_Header_ID as InvoiceHeaderID,    
+--TIP.S_Invoice_No as InvoiceNo,    
+--EFS.I_Fee_Structure_ID as ERPFeeStructureID,    
+--EFS.S_Fee_Structure_Name as ERPFeeStructureName,    
+--DSM.I_Discount_Scheme_ID as DiscountSchemeID,    
+--DSM.S_Discount_Scheme_Name as DiscountSchemeName    
+--Into #StudentwiseSession    
+--from T_Student_Class_Section SCS          
+--Inner Join T_School_Academic_Session_Master ASM ON ASm.I_School_Session_ID=scs.I_School_Session_ID    
+--inner join T_Student_Detail as SD on SCS.I_Student_Detail_ID=SD.I_Student_Detail_ID    
+--inner join T_School_Group_Class as SGC on SGC.I_School_Group_Class_ID=SCS.I_School_Group_Class_ID    
+--inner join T_School_Group as SG on SGC.I_School_Group_ID=SG.I_School_Group_ID    
+--inner join T_Class as C on C.I_Class_ID=SGC.I_Class_ID    
+--inner join T_Section as S on S.I_Section_ID=SCS.I_Section_ID    
+--inner join    
+--T_Invoice_Parent as TIP on TIP.I_Student_Detail_ID=SD.I_Student_Detail_ID    
+--inner join     
+--T_Invoice_Child_Header as ICH on ICH.I_Invoice_Header_ID=TIP.I_Invoice_Header_ID    
+--inner join     
+--T_Course_Fee_Plan as CFP on ICH.I_Course_FeePlan_ID=CFP.I_Course_Fee_Plan_ID    
+--inner join    
+--T_ERP_Fee_Structure as EFS on CFP.I_New_I_Fee_Structure_ID=EFS.I_Fee_Structure_ID    
+--left join    
+--T_Discount_Scheme_Master as DSM on TIP.I_Discount_Scheme_ID=DSM.I_Discount_Scheme_ID    
+--left join T_Stream as s1 on s1.I_Stream_ID=SCS.I_Stream_ID    
+--where     
+--   (@sStudentID IS NULL OR SD.S_Student_ID LIKE '%' + @sStudentID + '%')    
+--            AND (@sStudentName IS NULL OR (SD.S_First_Name + ' ' + ISNULL(SD.S_Middle_Name, '') + ' ' + SD.S_Last_Name) LIKE '%' + @sStudentName + '%')    
+--            AND ISNULL(@iClassID,C.I_Class_ID)=c.I_Class_ID    
+--   AND ISNULL(@iAcademicSessionID,ASM.I_School_Session_ID)=ASM.I_School_Session_ID    
+--   AND ISNULL(@iSchoolGroupID,SG.I_School_Group_ID)=SG.I_School_Group_ID    
+--   AND ISNULL(@iSectionID,S.I_Section_ID)=S.I_Section_ID    
+--   AND ISNULL(@iSteamID,s1.I_Stream_ID)=s1.I_Stream_ID    
+--   AND (    
+--                @SearchValue IS NULL OR    
+--                SD.S_Student_ID LIKE '%' + @SearchValue + '%' OR    
+--                SD.S_First_Name + ' ' + ISNULL(SD.S_Middle_Name, '') + ' ' + SD.S_Last_Name LIKE '%' + @SearchValue + '%' OR    
+--                SD.S_Mobile_No LIKE '%' + @SearchValue + '%' OR    
+--                SG.S_School_Group_Name LIKE '%' + @SearchValue + '%' OR    
+--                C.S_Class_Name LIKE '%' + @SearchValue + '%' OR    
+--    S.S_Section_Name LIKE '%' + @SearchValue + '%' OR    
+--    s1.S_Stream LIKE '%' + @SearchValue + '%' OR    
+--    EFS.S_Fee_Structure_Name LIKE '%' + @SearchValue + '%' OR    
+--    DSM.S_Discount_Scheme_Name LIKE '%' + @SearchValue + '%'    
+--            )    
+--   AND SCS.I_Status=1    
+    
+    
+DECLARE @TotalCount INT;    
+    
+IF OBJECT_ID('tempdb..#AllData') IS NOT NULL    
+    DROP TABLE #AllData;    
+    
+-- Create the temp table structure only once    
+CREATE TABLE #AllData (    
+    StudentDetailID INT,    
+    InvoiceHeaderID INT    
+);    
+    
+-- Step 1: Materialize AllData into a temp table    
+    
+IF @iswithDue = 'true'    
+BEGIN    
+  INSERT INTO #AllData    
+  SELECT    
+     distinct scs.I_Student_Detail_ID AS StudentDetailID,TIP.I_Invoice_Header_ID as InvoiceHeaderID    
+     --,C.*    
+  --INTO #AllData    
+    
+  FROM     
+  T_Invoice_Parent as TIP     
+  INNER JOIN T_School_Academic_Session_Master ASM ON ASM.I_School_Session_ID = TIP.I_School_Session_ID    
+  INNER JOIN T_Student_Detail SD ON TIP.I_Student_Detail_ID = SD.I_Student_Detail_ID    
+  inner join T_Student_Class_Section SCS on SCS.I_Student_Detail_ID=TIP.I_Student_Detail_ID     
+  and SCS.I_School_Session_ID=TIP.I_School_Session_ID and SCS.I_Status = 1    
+  inner JOIN T_School_Group_Class SGC ON SGC.I_School_Group_Class_ID = SCS.I_School_Group_Class_ID    
+  inner JOIN T_School_Group SG ON SGC.I_School_Group_ID = SG.I_School_Group_ID    
+  inner JOIN T_Class C ON C.I_Class_ID = SGC.I_Class_ID    
+  inner JOIN T_Section S ON S.I_Section_ID = SCS.I_Section_ID    
+  LEFT JOIN T_Stream s1 ON s1.I_Stream_ID = SCS.I_Stream_ID    
+  left join    
+  T_Student_Parent_Maps as SPM on SD.S_Student_ID=SPM.S_Student_ID    
+  left join    
+  T_Parent_Master as PM on SPM.I_Parent_Master_ID=PM.I_Parent_Master_ID    
+  left join     
+  (    
+  select I_Invoice_Header_ID as InvoiceHeaderID,sum(ISNULL(N_Receipt_Amount,0)+ISNULL(N_Tax_Amount,0)) as totalpaidamount    
+  from T_Receipt_Header where I_Status=1 group by I_Invoice_Header_ID    
+  ) as paidamount2 on paidamount2.InvoiceHeaderID=TIP.I_Invoice_Header_ID    
+  WHERE    
+   (@sStudentID IS NULL OR SD.S_Student_ID = @sStudentID)    
+        AND (@sStudentName IS NULL     
+      
+  --OR (SD.S_First_Name + ' ' + ISNULL(SD.S_Middle_Name, '') + ' ' + SD.S_Last_Name) LIKE '%' +    
+  --@sStudentName + '%')    
+  OR    
+            LTRIM(RTRIM(REPLACE(REPLACE(    
+                ISNULL(SD.S_First_Name, '') +    
+                CASE WHEN SD.S_Middle_Name IS NULL OR LTRIM(RTRIM(SD.S_Middle_Name)) = '' THEN '' ELSE ' ' + SD.S_Middle_Name END +    
+                CASE WHEN SD.S_Last_Name IS NULL OR LTRIM(RTRIM(SD.S_Last_Name)) = '' THEN '' ELSE ' ' + SD.S_Last_Name END,    
+                '  ', ' '    
+            ), '  ', ' '))) LIKE '%' + LTRIM(RTRIM(REPLACE(REPLACE(@sStudentName, '  ', ' '), '  ', ' '))) + '%'    
+        )    
+        AND    
+   ISNULL(@iAcademicSessionID, TIP.I_School_Session_ID) = TIP.I_School_Session_ID    
+   AND ISNULL(@iClassID, C.I_Class_ID) = C.I_Class_ID    
+   AND ISNULL(@iSchoolGroupID, SG.I_School_Group_ID) = SG.I_School_Group_ID    
+   AND ISNULL(@iSectionID, S.I_Section_ID) = S.I_Section_ID    
+   AND (    
+   @iSteamID IS NULL     
+   OR ISNULL(@iSteamID, s1.I_Stream_ID) = s1.I_Stream_ID)    
+   and (ISNULL(TIP.N_Invoice_Amount,0)+ISNULL(TIP.N_Tax_Amount,0)) > totalpaidamount    
+    AND ISNULL(@sMobileNo,PM.S_Mobile_No)=PM.S_Mobile_No    
+      
+    
+    
+END    
+ELSE    
+BEGIN    
+    
+     
+   INSERT INTO #AllData    
+  SELECT    
+   distinct scs.I_Student_Detail_ID AS StudentDetailID,TIP.I_Invoice_Header_ID as InvoiceHeaderID    
+     --,C.*    
+  --INTO #AllData    
+    
+  FROM     
+  T_Invoice_Parent as TIP     
+  INNER JOIN T_School_Academic_Session_Master ASM ON ASM.I_School_Session_ID = TIP.I_School_Session_ID    
+  INNER JOIN T_Student_Detail SD ON TIP.I_Student_Detail_ID = SD.I_Student_Detail_ID    
+  inner join T_Student_Class_Section SCS on SCS.I_Student_Detail_ID=TIP.I_Student_Detail_ID     
+  and SCS.I_School_Session_ID=TIP.I_School_Session_ID and SCS.I_Status = 1    
+  inner JOIN T_School_Group_Class SGC ON SGC.I_School_Group_Class_ID = SCS.I_School_Group_Class_ID    
+  inner JOIN T_School_Group SG ON SGC.I_School_Group_ID = SG.I_School_Group_ID    
+  inner JOIN T_Class C ON C.I_Class_ID = SGC.I_Class_ID    
+  inner JOIN T_Section S ON S.I_Section_ID = SCS.I_Section_ID    
+  LEFT JOIN T_Stream s1 ON s1.I_Stream_ID = SCS.I_Stream_ID    
+  left join    
+  T_Student_Parent_Maps as SPM on SD.S_Student_ID=SPM.S_Student_ID    
+  left join    
+  T_Parent_Master as PM on SPM.I_Parent_Master_ID=PM.I_Parent_Master_ID    
+  WHERE    
+  ((@sStudentID IS NULL OR SD.S_Student_ID = @sStudentID)    
+  --      AND (@sStudentName IS NULL OR (SD.S_First_Name + ' ' + ISNULL(SD.S_Middle_Name, '') + ' ' +    
+  --SD.S_Last_Name) LIKE '%' + @sStudentName + '%')     
+  OR    
+  LTRIM(RTRIM(REPLACE(REPLACE(    
+                ISNULL(SD.S_First_Name, '') +    
+                CASE WHEN SD.S_Middle_Name IS NULL OR LTRIM(RTRIM(SD.S_Middle_Name)) = '' THEN '' ELSE ' ' + SD.S_Middle_Name END +    
+                CASE WHEN SD.S_Last_Name IS NULL OR LTRIM(RTRIM(SD.S_Last_Name)) = '' THEN '' ELSE ' ' + SD.S_Last_Name END,    
+                '  ', ' '    
+            ), '  ', ' '))) LIKE '%' + LTRIM(RTRIM(REPLACE(REPLACE(@sStudentName, '  ', ' '), '  ', ' '))) + '%'    
+            
+        )AND    
+   ISNULL(@iAcademicSessionID, TIP.I_School_Session_ID) = TIP.I_School_Session_ID    
+   AND ISNULL(@iClassID, C.I_Class_ID) = C.I_Class_ID    
+   AND ISNULL(@iSchoolGroupID, SG.I_School_Group_ID) = SG.I_School_Group_ID    
+   AND ISNULL(@iSectionID, S.I_Section_ID) = S.I_Section_ID    
+   AND (    
+   @iSteamID IS NULL     
+   OR ISNULL(@iSteamID, s1.I_Stream_ID) = s1.I_Stream_ID    
+  )    
+  AND ISNULL(@sMobileNo,PM.S_Mobile_No)=PM.S_Mobile_No    
+    
+END    
+        
+ print @iClassID    
+    
+ --select * from #AllData    
+    
+-- Step 2: Set TotalCount from the temp table    
+SELECT @TotalCount = COUNT(*) FROM #AllData;    
+    
+-- Step 3: Now use #AllData in FilteredData CTE    
+;WITH FilteredData AS (    
+    SELECT DISTINCT    
+        scs.I_Brand_ID AS BrandID,    
+        scs.I_School_Session_ID AS SchoolSessionID,    
+        YEAR(ASM.Dt_Session_Start_Date) AS SessionStartYear,    
+        YEAR(ASM.Dt_Session_End_Date) AS SessionEndYear,    
+        SD.S_Student_ID AS StudentID,    
+        SD.I_Student_Detail_ID AS StudentDetailID,    
+        ASM.S_Label AS SLabel,    
+        SG.I_School_Group_ID AS SchoolGroupID,    
+        SG.S_School_Group_Name AS SchoolGroupName,    
+        C.I_Class_ID AS ClassID,    
+        C.S_Class_Name AS ClassName,    
+        S.I_Section_ID AS SectionID,    
+        S.S_Section_Name AS SectionName,    
+        s1.I_Stream_ID AS StreamID,    
+        s1.S_Stream AS StreamName,    
+        TIP.I_Invoice_Header_ID AS InvoiceHeaderID,    
+        TIP.S_Invoice_No AS InvoiceNo,    
+        EFS.I_Fee_Structure_ID AS ERPFeeStructureID,    
+        EFS.S_Fee_Structure_Name AS ERPFeeStructureName,    
+        DSM.I_Discount_Scheme_ID AS DiscountSchemeID,    
+        DSM.S_Discount_Scheme_Name AS DiscountSchemeName,    
+        @TotalCount AS TotalRecordsUnfiltered,    
+        COUNT(*) OVER() AS TotalRecordsFiltered,    
+        ROW_NUMBER() OVER (    
+            ORDER BY    
+                CASE WHEN @SortCol = 1 AND @SortDir = 'asc' THEN SD.S_Student_ID END ASC,    
+                CASE WHEN @SortCol = 1 AND @SortDir = 'desc' THEN SD.S_Student_ID END DESC,    
+                CASE WHEN @SortCol = 2 AND @SortDir = 'asc' THEN SD.S_First_Name END ASC,    
+                CASE WHEN @SortCol = 2 AND @SortDir = 'desc' THEN SD.S_First_Name END DESC,    
+                CASE WHEN @SortCol = 3 AND @SortDir = 'asc' THEN C.S_Class_Name END ASC,    
+                CASE WHEN @SortCol = 3 AND @SortDir = 'desc' THEN C.S_Class_Name END DESC,    
+                SD.I_Student_Detail_ID DESC    
+        ) AS RowNum    
+    FROM #AllData AD    
+ INNER JOIN T_Invoice_Parent TIP ON TIP.I_Invoice_Header_ID = AD.InvoiceHeaderID    
+    INNER JOIN T_Invoice_Child_Header ICH ON ICH.I_Invoice_Header_ID = TIP.I_Invoice_Header_ID    
+    INNER JOIN T_Course_Fee_Plan CFP ON ICH.I_Course_FeePlan_ID = CFP.I_Course_Fee_Plan_ID    
+    left JOIN T_ERP_Fee_Structure EFS ON CFP.I_New_I_Fee_Structure_ID = EFS.I_Fee_Structure_ID    
+    LEFT JOIN T_Discount_Scheme_Master DSM ON TIP.I_Discount_Scheme_ID = DSM.I_Discount_Scheme_ID    
+    INNER JOIN T_School_Academic_Session_Master ASM ON ASM.I_School_Session_ID = TIP.I_School_Session_ID    
+    INNER JOIN T_Student_Detail SD ON TIP.I_Student_Detail_ID = SD.I_Student_Detail_ID    
+   left JOIN T_Student_Class_Section SCS ON SCS.I_Student_Detail_ID = AD.StudentDetailID and SCS.I_Status=1    
+    left JOIN T_School_Group_Class SGC ON SGC.I_School_Group_Class_ID = SCS.I_School_Group_Class_ID    
+    left JOIN T_School_Group SG ON SGC.I_School_Group_ID = SG.I_School_Group_ID    
+    left JOIN T_Class C ON C.I_Class_ID = SGC.I_Class_ID    
+    left JOIN T_Section S ON S.I_Section_ID = SCS.I_Section_ID    
+    LEFT JOIN T_Stream s1 ON s1.I_Stream_ID = SCS.I_Stream_ID    
+    WHERE    
+        (@sStudentID IS NULL OR SD.S_Student_ID = @sStudentID)    
+        AND (    
+  --@sStudentName IS NULL OR (SD.S_First_Name + ' ' + ISNULL(SD.S_Middle_Name, '') + ' ' + SD.S_Last_Name)    
+  --LIKE '%' + @sStudentName + '%')    
+  @sStudentName IS NULL OR     
+            LTRIM(RTRIM(REPLACE(REPLACE(    
+                ISNULL(SD.S_First_Name, '') +    
+                CASE WHEN SD.S_Middle_Name IS NULL OR LTRIM(RTRIM(SD.S_Middle_Name)) = '' THEN '' ELSE ' ' + SD.S_Middle_Name END +    
+                CASE WHEN SD.S_Last_Name IS NULL OR LTRIM(RTRIM(SD.S_Last_Name)) = '' THEN '' ELSE ' ' + SD.S_Last_Name END,    
+                '  ', ' '    
+            ), '  ', ' '))) LIKE '%' + LTRIM(RTRIM(REPLACE(REPLACE(@sStudentName, '  ', ' '), '  ', ' '))) + '%'    
+        )    
+        AND (    
+            @SearchValue IS NULL OR    
+            SD.S_Student_ID LIKE '%' + @SearchValue + '%' OR    
+            --SD.S_First_Name + ' ' + ISNULL(SD.S_Middle_Name, '') + ' ' + SD.S_Last_Name LIKE '%' + @SearchValue + '%' OR    
+                
+   LTRIM(RTRIM(REPLACE(REPLACE(    
+                ISNULL(SD.S_First_Name, '') +    
+                CASE WHEN SD.S_Middle_Name IS NULL OR LTRIM(RTRIM(SD.S_Middle_Name)) = '' THEN '' ELSE ' ' + SD.S_Middle_Name END +    
+                CASE WHEN SD.S_Last_Name IS NULL OR LTRIM(RTRIM(SD.S_Last_Name)) = '' THEN '' ELSE ' ' + SD.S_Last_Name END,    
+                '  ', ' '    
+            ), '  ', ' '))) LIKE '%' + LTRIM(RTRIM(REPLACE(REPLACE(@sStudentName, '  ', ' '), '  ', ' '))) + '%'    
+         OR    
+   SD.S_Mobile_No LIKE '%' + @SearchValue + '%' OR    
+            SG.S_School_Group_Name LIKE '%' + @SearchValue + '%' OR    
+            C.S_Class_Name LIKE '%' + @SearchValue + '%' OR    
+            S.S_Section_Name LIKE '%' + @SearchValue + '%' OR    
+            s1.S_Stream LIKE '%' + @SearchValue + '%' OR    
+            EFS.S_Fee_Structure_Name LIKE '%' + @SearchValue + '%' OR    
+            DSM.S_Discount_Scheme_Name LIKE '%' + @SearchValue + '%'    
+  )    
+        --AND SCS.I_Status = 1    
+)    
+    
+-- Final output    
+SELECT *    
+INTO #StudentwiseSession    
+FROM FilteredData    
+WHERE RowNum BETWEEN @Offset + 1 AND @Offset + @Limit;    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   --select * from #StudentwiseSession    
+       
+    
+;WITH LatestPayment AS (    
+    SELECT     
+        RH.I_Invoice_Header_ID AS InvoiceHeaderID,    
+        CONVERT(DATE, RH.Dt_Receipt_Date) AS PaymentDate,    
+        ISNULL(RH.N_Receipt_Amount, 0) + ISNULL(RH.N_Tax_Amount, 0) AS PaymentAmount,    
+  PM.S_PaymentMode_Name as Paymentmode,    
+        ROW_NUMBER() OVER (PARTITION BY RH.I_Invoice_Header_ID ORDER BY RH.Dt_Crtd_On DESC) AS rn    
+    FROM T_Receipt_Header RH    
+    INNER JOIN T_PaymentMode_Master PM ON RH.I_PaymentMode_ID = PM.I_PaymentMode_ID    
+    WHERE RH.I_Status = 1    
+)    
+    
+    
+    
+    
+ insert into #StudentPayableList    
+ (    
+ StudentDetailID,    
+ StudentID,    
+ StudentName,    
+ sMobileNo,    
+ AcademicSessionID,    
+ AcademicLabel,    
+ SchoolGroupID,    
+ SchoolGroupName,    
+ ClassID,    
+ ClassName,    
+ SectionID,    
+ SectionName,    
+ StreamID,    
+ StreamName,    
+ InvoiceHeaderID,    
+ MappedFeeStructureID,    
+ MappedFeeStructureName,    
+ MappedDiscountSchemeID,    
+ MappedDiscountSchemeName,    
+ TotalAmountPayable,    
+ TotalBasePayable,    
+ TotalTaxPayable,    
+ TotalAmountPaid,    
+ LastPaymentDate,    
+ LastPaymentAmount,    
+ PreviousSessionAmount,    
+ IsActive,    
+ IsParentInvoice,    
+ IsWritedOff,    
+ IsCancelled,    
+ IsRevised,    
+ CurrentStatus,    
+ CurrentDue,    
+ LastPaymentMode,    
+ CurrentStatusDesc    
+ )    
+ select     
+ SWS.StudentDetailID,    
+ SWS.StudentID,    
+ SD.S_First_Name + ' ' + ISNULL(SD.S_Middle_Name, '') + ' ' + SD.S_Last_Name,    
+ ISNULL(SD.S_Mobile_No,SD.S_Guardian_Mobile_No),    
+ SWS.SchoolSessionID,    
+ SWS.SLabel,    
+ SWS.SchoolGroupID,    
+ ISNULL(SWS.SchoolGroupName,'-'),    
+ SWS.ClassID,    
+ ISNULL(SWS.ClassName,'-'),    
+ SWS.SectionID,    
+ ISNULL(SWS.SectionName,'-'),    
+ SWS.StreamID,    
+ SWS.StreamName,    
+ SWS.InvoiceHeaderID,    
+ SWS.ERPFeeStructureID,    
+ ISNULL(SWS.ERPFeeStructureName,'-'),    
+ SWS.DiscountSchemeID,    
+ ISNULL(SWS.DiscountSchemeName,'-'),    
+ (ISNULL(TIP.N_Invoice_Amount,0)+ISNULL(TIP.N_Tax_Amount,0)) + ISNULL(fineamount.Totalfineamount,0)+ISNULL(scheduleadhoc.Total_FinalAdhocDue,0),    
+ ISNULL(TIP.N_Invoice_Amount,0)+ ISNULL(fineamount.Totalfineamount,0)+ISNULL(scheduleadhoc.Total_FinalAdhocDue,0),    
+ ISNULL(TIP.N_Tax_Amount,0),    
+ ISNULL(InvoiceableReceipt.BasePaidAmount,0)+ISNULL(InvoiceableReceipt.TaxPaidAmount,0) +ISNULL(fineamount.Totalfineamount,0)+ISNULL(scheduleadhoc.TotalAdhocPaid,0),    
+ LastPayment.PaymentDate,    
+ LastPayment.PaymentAmount,    
+ ISNULL(PreviousAmount.TotalOutstanding,0),    
+ TIP.I_Status,    
+ CASE WHEN childInvoice.I_Parent_Invoice_ID IS NOT NULL THEN 'true' ELSE 'false'  END as IsParentInvoice,    
+ CASE  WHEN  childInvoice.I_Parent_Invoice_ID IS NOT NULL and childInvoice.invoiceAmount <= 0 THEN 'true' ELSE 'false'  END as IsWritedOff,    
+ CASE WHEN TIP.I_Status = 0 AND childInvoice.I_Parent_Invoice_ID IS NULL THEN 'true' ELSE 'false' END as IsCancelled,    
+ CASE  WHEN  childInvoice.I_Parent_Invoice_ID IS NOT NULL and childInvoice.invoiceAmount > 0 THEN 'true' ELSE 'false'  END as IsRevised,    
+ CASE     
+ WHEN TIP.I_Status=1 THEN 'View Dues'    
+ WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NOT NULL and childInvoice.invoiceAmount <= 0 THEN 'Written Off'    
+ WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NOT NULL and childInvoice.invoiceAmount > 0 THEN 'Invoice Cancelled(R)'    
+ WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NULL THEN 'Invoice Cancelled'    
+ ELSE    
+ '-' END,    
+ (ISNULL(TIP.N_Invoice_Amount,0)+ISNULL(TIP.N_Tax_Amount,0)+ ISNULL(fineamount.Totalfineamount,0)+ISNULL(scheduleadhoc.Total_FinalAdhocDue,0))    
+ -    
+ (ISNULL(InvoiceableReceipt.BasePaidAmount,0)+ISNULL(InvoiceableReceipt.TaxPaidAmount,0)+ISNULL(fineamount.Totalfineamount,0)+ISNULL(scheduleadhoc.TotalAdhocPaid,0))    
+,LastPayment.Paymentmode,    
+CASE     
+ WHEN TIP.I_Status=1 THEN 'View Dues'    
+ WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NOT NULL and childInvoice.invoiceAmount <= 0 THEN 'All dues have been written off. Total Paid and Remaining Due are adjusted to INR 0.00 as part of the Revise Invoice process."'    
+ WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NOT NULL and childInvoice.invoiceAmount > 0 THEN 'This student’s invoices have been cancelled via the Revise Invoice process. No payable record exists currently'    
+ WHEN TIP.I_Status=0 AND childInvoice.I_Parent_Invoice_ID IS NULL THEN 'This student’s invoices have been cancelled via the Cancelled Invoice process. No payable record exists currently.'    
+ ELSE    
+ '-' END    
+ from     
+ #StudentwiseSession as SWS    
+ inner join    
+ T_Student_Detail as SD on SWS.StudentDetailID=SD.I_Student_Detail_ID    
+ inner join    
+ T_Invoice_Parent as TIP on TIP.I_Invoice_Header_ID=SWS.InvoiceHeaderID    
+ --left join     
+ --(    
+ --select TIP.I_Invoice_Header_ID,sum(ISNULL(IDT.N_Tax_Value,0)) as TotalInvoicableTaxAmount from T_Invoice_Parent as TIP     
+ --inner join     
+ --T_Invoice_Child_Header as ICH on TIP.I_Invoice_Header_ID=ICH.I_Invoice_Header_ID    
+ --inner join    
+ --T_Invoice_Child_Detail as ICD on ICH.I_Invoice_Child_Header_ID=ICD.I_Invoice_Detail_ID    
+ --inner join    
+ --T_Invoice_Detail_Tax as IDT on IDT.I_Invoice_Detail_ID=ICD.I_Invoice_Detail_ID    
+ --group by TIP.I_Invoice_Header_ID    
+ --) as TaxInvoice on TaxInvoice.I_Invoice_Header_ID=SWS.InvoiceHeaderID    
+ left join    
+ (    
+ select RH.I_Invoice_Header_ID,sum(ISNULL(RH.N_Receipt_Amount,0)) as BasePaidAmount,sum(ISNULL(RH.N_Tax_Amount,0)) TaxPaidAmount from T_Receipt_Header as RH    
+ where RH.I_Status=1    
+ group by RH.I_Invoice_Header_ID    
+ ) InvoiceableReceipt on InvoiceableReceipt.I_Invoice_Header_ID=SWS.InvoiceHeaderID    
+ left join    
+ (    
+ select TIP.I_Parent_Invoice_ID,ISNULL(TIP.N_Invoice_Amount,0) as invoiceAmount from T_Invoice_Parent as TIP where TIP.I_Parent_Invoice_ID IS NOT NULL    
+ ) as childInvoice on childInvoice.I_Parent_Invoice_ID=TIP.I_Invoice_Header_ID    
+ left join    
+ (    
+ SELECT    
+    I_Student_Detail_ID,    
+    SUM(InvoiceAmount + InvoiceTaxAmount - ReceiptAmount) AS TotalOutstanding    
+FROM (    
+SELECT distinct    
+    TIP.I_Student_Detail_ID,    
+    TIP.I_Invoice_Header_ID,    
+ TIP.Dt_Crtd_On,    
+    CAST(ISNULL(TIP.N_Invoice_Amount, 0) AS NUMERIC(38, 2)) AS InvoiceAmount,    
+  CAST(ISNULL(TIP.N_Tax_Amount, 0) AS NUMERIC(38, 2)) AS InvoiceTaxAmount ,    
+    CAST(ISNULL(RH2.TotalReceiptAmount, 0) AS NUMERIC(38, 2)) AS ReceiptAmount    
+FROM T_Invoice_Parent AS TIP    
+INNER JOIN #StudentwiseSession AS SWS ON TIP.I_Student_Detail_ID = SWS.StudentDetailID    
+INNER JOIN T_School_Academic_Session_Master SA1 ON SA1.I_School_Session_ID = SWS.SchoolSessionID    
+INNER JOIN T_School_Academic_Session_Master AS SA    
+    ON (CONVERT(DATE, SA.Dt_Session_End_Date) < CONVERT(DATE, SA1.Dt_Session_Start_Date)    
+        AND TIP.I_School_Session_ID = SA.I_School_Session_ID)    
+    OR TIP.I_School_Session_ID IS NULL    
+LEFT JOIN (    
+    SELECT I_Invoice_Header_ID,    
+           SUM(ISNULL(N_Receipt_Amount, 0) + ISNULL(N_Tax_Amount, 0)) AS TotalReceiptAmount    
+    FROM T_Receipt_Header    
+    WHERE I_Status = 1    
+    GROUP BY I_Invoice_Header_ID    
+) AS RH2 ON RH2.I_Invoice_Header_ID = TIP.I_Invoice_Header_ID    
+WHERE TIP.I_Status = 1) AS PreviosInvoiceBase    
+GROUP BY I_Student_Detail_ID    
+    
+    
+ ) as PreviousAmount on PreviousAmount.I_Student_Detail_ID=SWS.StudentDetailID    
+LEFT JOIN (    
+    SELECT InvoiceHeaderID, PaymentDate, PaymentAmount,Paymentmode    
+    FROM LatestPayment    
+    WHERE rn = 1    
+) AS LastPayment ON LastPayment.InvoiceHeaderID = SWS.InvoiceHeaderID    
+left join    
+(    
+select     
+sum(RH.N_Receipt_Amount)+    
+sum(RH.N_Tax_Amount) as Totalfineamount,invoiceadhoc.I_Invoice_Header_ID    
+from     
+T_Receipt_Header as RH     
+inner join    
+(select  distinct invoicefine.I_Receipt_Header_ID,ICH.I_Invoice_Header_ID from     
+(SELECT     
+    s.Value AS RefInvoiceNumber,    
+    RH.I_Receipt_Header_ID    
+FROM     
+    T_Receipt_Header RH    
+CROSS APPLY     
+    dbo.SplitString(RH.S_Ref_Invoice_Number, ',') s    
+WHERE     
+    RH.S_Ref_Invoice_Number IS NOT NULL) as invoicefine    
+inner join    
+T_Invoice_Child_Detail as ICD  on invoicefine.RefInvoiceNumber=ICD.S_Invoice_Number    
+inner join    
+T_Invoice_Child_Header as ICH on ICD.I_Invoice_Child_Header_ID=ICH.I_Invoice_Child_Header_ID    
+) as invoiceadhoc on invoiceadhoc.I_Receipt_Header_ID=RH.I_Receipt_Header_ID    
+group by invoiceadhoc.I_Invoice_Header_ID    
+) as fineamount on fineamount.I_Invoice_Header_ID=SWS.InvoiceHeaderID    
+left join    
+(    
+Select Distinct Adhocsch.inStudentDetailID,Adhocsch.TotalDueAmount,asAdhoc_paid.TotalAdhocPaid    
+  ,Adhocsch.inSessionID,    
+  Adhocsch.TotalDueAmount+asAdhoc_paid.TotalAdhocPaid as Total_FinalAdhocDue    
+  from (    
+    SELECT  inStudentDetailID,        
+        SUM(CASE           
+                WHEN SD.inPaymentStatus = 1 THEN 0          
+  ELSE H.nAmount          
+            END) AS TotalDueAmount     
+   ,h.inSessionID    
+    FROM T_ERP_AdhocPaymentScheduleStudentDetail SD          
+    INNER JOIN T_ERP_AdhocPaymentScheduleHeaderDetail HD           
+        ON SD.inAdhocPaymentScheduleHeaderDetailID = HD.inAdhocPaymentScheduleHeaderDetailID          
+    INNER JOIN T_ERP_AdhocPaymentScheduleHeader H           
+        ON HD.inAdhocPaymentScheduleHeaderID = H.inAdhocPaymentScheduleHeaderID          
+    GROUP BY SD.inStudentDetailID,h.inSessionID    
+ ) Adhocsch    
+ Left Join T_Student_Detail sd on sd.I_Student_Detail_ID=Adhocsch.inStudentDetailID    
+ Left JOin (    
+  Select I_Enquiry_Regn_ID as EnquiryID, SUM(ISNULL(N_Receipt_Amount,0)+ISNULL(N_Tax_Amount,0)) as TotalAdhocPaid    
+  from T_Receipt_Header     
+  group by I_Enquiry_Regn_ID    
+ )  asAdhoc_paid on asAdhoc_paid.EnquiryID=sd.I_Enquiry_Regn_ID    
+ --left join    
+ --T_Student_Detail as SD2 on SD2.I_Student_Detail_ID=Adhocsch.inStudentDetailID    
+ --where SD2.S_Student_ID='22-0078'    
+) as scheduleadhoc on scheduleadhoc.inStudentDetailID=SWS.StudentDetailID and scheduleadhoc.inSessionID=sws.SchoolSessionID    
+    
+    
+ select SP.*,ISNULL(@TotalCount,0) as TotalUnfilteredCount     
+ from #StudentPayableList SP    
+    
+    
+    
+    
+      
+--SELECT    
+--    TIP.I_Student_Detail_ID,    
+--    TIP.I_Invoice_Header_ID,    
+-- TIP.Dt_Crtd_On,    
+--    CAST(ISNULL(TIP.N_Invoice_Amount, 0) AS NUMERIC(38, 2)) AS InvoiceAmount,    
+--  CAST(ISNULL(TIP.N_Tax_Amount, 0) AS NUMERIC(38, 2)) AS InvoiceTaxAmount ,    
+--    CAST(ISNULL(RH2.TotalReceiptAmount, 0) AS NUMERIC(38, 2)) AS ReceiptAmount    
+--FROM T_Invoice_Parent AS TIP    
+--INNER JOIN #StudentwiseSession AS SWS ON TIP.I_Student_Detail_ID = SWS.StudentDetailID    
+--INNER JOIN T_School_Academic_Session_Master SA1 ON SA1.I_School_Session_ID = SWS.SchoolSessionID    
+--INNER JOIN T_School_Academic_Session_Master AS SA    
+--    ON (CONVERT(DATE, SA.Dt_Session_End_Date) < CONVERT(DATE, SA1.Dt_Session_Start_Date)    
+--        AND TIP.I_School_Session_ID = SA.I_School_Session_ID)    
+--    OR TIP.I_School_Session_ID IS NULL    
+--LEFT JOIN (    
+--    SELECT I_Invoice_Header_ID,    
+--           SUM(ISNULL(N_Receipt_Amount, 0) + ISNULL(N_Tax_Amount, 0)) AS TotalReceiptAmount    
+--    FROM T_Receipt_Header    
+--    WHERE I_Status = 1    
+--    GROUP BY I_Invoice_Header_ID    
+--) AS RH2 ON RH2.I_Invoice_Header_ID = TIP.I_Invoice_Header_ID    
+--WHERE TIP.I_Status = 1    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+END 

@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[uspCreateAdjustmentReceipts]
       @nAmount DECIMAL(18, 2) ,
       @iEnquiryRegnID INT ,
       @iReceiptTypeID INT ,
-      @sAdjustmentText Nnvarchar(max),
+      @sAdjustmentText NVARCHAR(max),
       @iBrandID INT
     )
 AS 
@@ -199,4 +199,5 @@ AS
    
   
     END
+
 

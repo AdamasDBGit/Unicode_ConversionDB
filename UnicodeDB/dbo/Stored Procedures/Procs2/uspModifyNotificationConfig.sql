@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspModifyNotificationConfig] 
 (
-@TaskName Nnvarchar(max),
-@HierarchyName Nnvarchar(max)
+@TaskName NVARCHAR(max),
+@HierarchyName NVARCHAR(max)
 )
 AS
 BEGIN
@@ -19,4 +19,5 @@ INSERT INTO T_Task_Hierarchy_Mapping(I_Task_Master_Id,I_Hierarchy_Detail_ID)
 	SELECT @TaskId,* from dbo.fnString2Rows(@HierarchyName,',')
 
 END
+
 

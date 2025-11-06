@@ -5,14 +5,14 @@ CREATE PROCEDURE [dbo].[uspGenerateReceiptForRegistrationTokenAmount]
 	@iEnquiryId INT,
 	@iReceiptDate DATETIME,
 	@iPaymentModeId INT,
-	@sChequeDDno Nnvarchar(max),
+	@sChequeDDno NVARCHAR(max),
 	@dChequeDate DATETIME,
-	@sBankName Nnvarchar(max), 
-	@sBranchName Nnvarchar(max),
+	@sBankName NVARCHAR(max), 
+	@sBranchName NVARCHAR(max),
 	@iCreditCardNo NUMERIC(18,0),
-	@sCreditCardIssuer Nnvarchar(max),
+	@sCreditCardIssuer NVARCHAR(max),
 	@dCardExpiryDate DATETIME,
-	@sCrtdBy Nnvarchar(max),
+	@sCrtdBy NVARCHAR(max),
 	@iReceiptType int,
 	@dTaxAmount numeric(12,6),
 	@TaxXML xml
@@ -105,10 +105,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

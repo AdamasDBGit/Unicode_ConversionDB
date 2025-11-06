@@ -36,7 +36,7 @@ BEGIN TRY
 
 END TRY
 BEGIN CATCH
-    DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT
+    DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity INT
 
     SELECT @ErrMsg = ERROR_MESSAGE(),
            @ErrSeverity = ERROR_SEVERITY()

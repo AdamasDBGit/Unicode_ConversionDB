@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspGetTaskForUser]
     (
       @iUserID INT ,
-      @sLoginID Nnvarchar(max)
+      @sLoginID NVARCHAR(max)
     )
 AS
     BEGIN 
@@ -73,4 +73,5 @@ AS
                 --AND (SELECT TUM.I_User_ID FROM dbo.T_User_Master AS TUM WHERE TUM.S_Login_ID=TA.S_From_User)!=TA.I_To_User_ID
         ORDER BY TD.I_Task_Details_Id DESC 
     END
+
 

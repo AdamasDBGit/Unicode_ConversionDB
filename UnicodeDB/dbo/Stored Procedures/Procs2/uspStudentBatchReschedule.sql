@@ -3,8 +3,8 @@ CREATE PROCEDURE [dbo].[uspStudentBatchReschedule] -- 258,'2011-09-09 00:00:00.0
  @iBatchID INT ,          
  @dtStartDate DATETIME,
  @dtEndDate DATETIME,
- @sComment Nnvarchar(max),
- @sCreatedBy Nnvarchar(max)
+ @sComment NVARCHAR(max),
+ @sCreatedBy NVARCHAR(max)
 )          
           
 AS          
@@ -38,4 +38,5 @@ BEGIN
     
     
 END
+
 

@@ -2,8 +2,8 @@ CREATE PROCEDURE [dbo].[usp_ERP_UpdateResendNotificationStatus]
 (
     @inNotificationLogsID int,
 	@inSendStatus int,
-	@stNotificationStatus nnvarchar(max),
-	@stErrorMessage nnvarchar(max)=null
+	@stNotificationStatus NVARCHAR(max),
+	@stErrorMessage NVARCHAR(max)=null
 
 )
 AS 
@@ -18,7 +18,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
     ROLLBACK TRANSACTION;
-    DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT;
+    DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity INT;
     SELECT @ErrMsg = ERROR_MESSAGE(), @ErrSeverity = ERROR_SEVERITY();
     RAISERROR (@ErrMsg, @ErrSeverity, 1);
 END CATCH;

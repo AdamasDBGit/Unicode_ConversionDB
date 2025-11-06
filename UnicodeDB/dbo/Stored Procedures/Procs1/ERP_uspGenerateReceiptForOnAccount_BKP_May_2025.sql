@@ -6,21 +6,21 @@ CREATE   PROCEDURE [dbo].[ERP_uspGenerateReceiptForOnAccount_BKP_May_2025]
       @iStudentDetailId INT = NULL ,    
       @iReceiptDate DATETIME ,    
       @iPaymentModeId INT=null ,    
-      @sChequeDDno Nnvarchar(max)=null ,    
+      @sChequeDDno NVARCHAR(max)=null ,    
       @dChequeDate DATETIME =null,    
-      @sBankName Nnvarchar(max)=null ,    
-      @sBranchName Nnvarchar(max)=null ,    
+      @sBankName NVARCHAR(max)=null ,    
+      @sBranchName NVARCHAR(max)=null ,    
       @iCreditCardNo NUMERIC(18, 0)=null ,    
-      @sCreditCardIssuer Nnvarchar(max)=null ,    
+      @sCreditCardIssuer NVARCHAR(max)=null ,    
       @dCardExpiryDate DATETIME=null ,    
-      @sCrtdBy Nnvarchar(max)=null ,    
+      @sCrtdBy NVARCHAR(max)=null ,    
       @iReceiptType INT ,    
       @dTaxAmount NUMERIC(12, 6) ,    
       @TaxXML XML=Null ,    
       @iEnquiryID INT = NULL ,    
-      @sFormNo Nnvarchar(max) = NULL ,    
+      @sFormNo NVARCHAR(max) = NULL ,    
       @iBrandID INT = NULL ,    
-      @sNarration Nnvarchar(max) = NULL            
+      @sNarration NVARCHAR(max) = NULL            
     )    
 AS     
     BEGIN TRY              
@@ -231,11 +231,12 @@ AS
     BEGIN CATCH              
  --Error occurred:                
         ROLLBACK TRANSACTION              
-        DECLARE @ErrMsg Nnvarchar(max) ,    
+        DECLARE @ErrMsg NVARCHAR(max) ,    
             @ErrSeverity INT              
         SELECT  @ErrMsg = ERROR_MESSAGE() ,    
                 @ErrSeverity = ERROR_SEVERITY()              
               
         RAISERROR(@ErrMsg, @ErrSeverity, 1)              
     END CATCH 
+
 

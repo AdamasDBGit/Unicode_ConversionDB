@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspSaveStudentPicture]  
     (  
       @iEnquiryID INT ,  
-      @sPicture Nnvarchar(max)  
+      @sPicture NVARCHAR(max)  
       --@sPicture NVARCHAR(MAX)  
     )  
 AS   
@@ -13,11 +13,12 @@ AS
     BEGIN CATCH    
  --Error occurred:      
     
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()    
     
         RAISERROR(@ErrMsg, @ErrSeverity, 1)    
     END CATCH
+
 

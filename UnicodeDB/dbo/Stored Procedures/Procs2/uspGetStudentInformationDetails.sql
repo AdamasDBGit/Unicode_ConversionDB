@@ -2,9 +2,9 @@ CREATE PROCEDURE [dbo].[uspGetStudentInformationDetails] -- [dbo].[uspGetStudent
     (
       -- Add the parameters for the stored procedure here                  
       @iEnquiryRegnID INT = NULL ,
-      @sEmailId Nnvarchar(max) = NULL ,
+      @sEmailId NVARCHAR(max) = NULL ,
       @iApplicationId INT = NULL ,
-      @sStudentCode Nnvarchar(max) = NULL          
+      @sStudentCode NVARCHAR(max) = NULL          
     )
 AS 
     BEGIN            
@@ -327,4 +327,5 @@ AS
                   
             END        
     END
+
 

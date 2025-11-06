@@ -1,12 +1,12 @@
 CREATE PROCEDURE [dbo].[ERP_uspInsertStudentDetailsFromEnquiry_bak_27092024]                  
     (                  
       @iEnquiryRegnID INT ,                  
-      @CrtdBy Nnvarchar(max) ,                  
+      @CrtdBy NVARCHAR(max) ,                  
       @DtCrtdOn DATETIME ,                  
-      @sConductCode Nnvarchar(max) =Null,                  
-      @sStudentCode Nnvarchar(max) = NULL,                  
+      @sConductCode NVARCHAR(max) =Null,                  
+      @sStudentCode NVARCHAR(max) = NULL,                  
       @iRollNo INT = NULL,                
-      @sStudyMaterialNo Nnvarchar(max) = NULL      
+      @sStudyMaterialNo NVARCHAR(max) = NULL      
       ,@s_brandid Int=null    
       --@iStudentDetailId_OUTPUT INT OUTPUT            
     )                  
@@ -180,15 +180,15 @@ IF (@BrandID > 0)
  BEGIN                
   DECLARE @GaudianDetails table (                
   I_Brand_ID INT,                
-  S_Mobile_No nnvarchar(max),                
+  S_Mobile_No NVARCHAR(max),                
   S_FullName nvarchar(max),                
  I_RelationID INT,                
   I_IsPrimary INT,                
-  S_Address nnvarchar(max),                
-  S_Pin_Code nnvarchar(max)                
+  S_Address NVARCHAR(max),                
+  S_Pin_Code NVARCHAR(max)                
   )                
                 
-  DECLARE @S_ADDRESS nnvarchar(max),@S_Pin_Code nnvarchar(max)                
+  DECLARE @S_ADDRESS NVARCHAR(max),@S_Pin_Code NVARCHAR(max)                
                 
   select @S_ADDRESS=S_Curr_Address1,@S_Pin_Code=S_Curr_Pincode from T_Student_Detail             
   where I_Enquiry_Regn_ID=@iEnquiryRegnID                
@@ -212,12 +212,12 @@ IF (@BrandID > 0)
                 
                 
   DECLARE @ipI_Brand_ID INT                
-  DECLARE @ipS_Mobile_No nnvarchar(max)                
+  DECLARE @ipS_Mobile_No NVARCHAR(max)                
   DECLARE @ipFullName nvarchar(max)                
   DECLARE @ipRelationID INT                
   DECLARE @ipIsPrimary INT                
-  DECLARE @ipAddress nnvarchar(max)                
-  DECLARE @ipPin_Code nnvarchar(max)                
+  DECLARE @ipAddress NVARCHAR(max)                
+  DECLARE @ipPin_Code NVARCHAR(max)                
                 
   -- declare cursor for Parent details                          
         DECLARE UPLOADPARENTDETAILS_CURSOR CURSOR FOR                           
@@ -245,7 +245,7 @@ IF (@BrandID > 0)
    WHILE @@FETCH_STATUS = 0                 
             BEGIN                 
                 
-    DECLARE @FirstName nnvarchar(max),@MiddleName nnvarchar(max),@LastName nnvarchar(max),@iparentID INT                
+    DECLARE @FirstName NVARCHAR(max),@MiddleName NVARCHAR(max),@LastName NVARCHAR(max),@iparentID INT                
     SELECT                 
     @FirstName=Ltrim(SubString(@ipFullName, 1, Isnull(Nullif(CHARINDEX(' ', @ipFullName), 0), 1000)))                 
     ,@MiddleName=Ltrim(SUBSTRING(@ipFullName, CharIndex(' ', @ipFullName),                 
@@ -433,11 +433,12 @@ END
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                    
-        DECLARE @ErrMsg Nnvarchar(max) ,                  
+        DECLARE @ErrMsg NVARCHAR(max) ,                  
                 @ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,                  
                 @ErrSeverity = ERROR_SEVERITY()                    
                     
         RAISERROR(@ErrMsg, @ErrSeverity, 1)                    
     END CATCH
+
 

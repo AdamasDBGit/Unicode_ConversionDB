@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetEmailIDsForTask] 
 (	
-	@sLoginID Nnvarchar(max),
+	@sLoginID NVARCHAR(max),
 	@iHierarchyMasterID int,	
 	@iSrcHierarchyDetailID int,
 	@iSelectedHierarchyDetailID int = null
@@ -195,4 +195,5 @@ BEGIN
   END  
  END 
 END
+
 

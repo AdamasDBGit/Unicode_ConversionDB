@@ -3,7 +3,7 @@ CREATE PROCEDURE [dbo].[uspModifyModuleWeightageMapping]
 (
 	@iTermID INT,
 	@sModuleTermMap TEXT,
-	@sModifiedBy Nnvarchar(max),
+	@sModifiedBy NVARCHAR(max),
 	@dModifiedOn DATETIME
 )
 
@@ -102,10 +102,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity INT
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity INT
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

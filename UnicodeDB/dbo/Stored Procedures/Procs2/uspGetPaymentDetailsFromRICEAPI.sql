@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspGetPaymentDetailsFromRICEAPI]
     (
-      @sBrandName Nnvarchar(max) ,
-      @sStudentID Nnvarchar(max) ,
+      @sBrandName NVARCHAR(max) ,
+      @sStudentID NVARCHAR(max) ,
       --@iInvoiceHeaderID INT ,
       @dReceiptDate DATETIME ,
       @iCentreId INT ,
@@ -9,9 +9,9 @@ CREATE PROCEDURE [dbo].[uspGetPaymentDetailsFromRICEAPI]
       @ReceiptTaxAmount NUMERIC(18, 2) ,
       @iReceiptType INT = 2 ,
       @sPaymentDetailsXML XML ,
-      @sTransactionCode Nnvarchar(max) ,
-      @sExtReceiptNo Nnvarchar(max) ,
-      @sSource Nnvarchar(max)
+      @sTransactionCode NVARCHAR(max) ,
+      @sExtReceiptNo NVARCHAR(max) ,
+      @sSource NVARCHAR(max)
     )
 AS
     SET NOCOUNT ON 
@@ -614,7 +614,7 @@ AS
 
  --Error occurred:      
         ROLLBACK TRANSACTION    
-        DECLARE @ErrMsg Nnvarchar(max) ,
+        DECLARE @ErrMsg NVARCHAR(max) ,
             @ErrSeverity INT    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
                 @ErrSeverity = ERROR_SEVERITY()    
@@ -622,4 +622,5 @@ AS
         RAISERROR(@ErrMsg, @ErrSeverity, 1) 
 
     END CATCH
+
 

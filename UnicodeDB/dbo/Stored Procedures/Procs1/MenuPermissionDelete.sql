@@ -6,7 +6,7 @@ CREATE PROCEDURE [dbo].[MenuPermissionDelete]
 -- =============================================
 -- Add the parameters for the stored procedure here
 @MenuID int,
-@PermissionName Nnvarchar(max)
+@PermissionName NVARCHAR(max)
 
 
 
@@ -29,4 +29,5 @@ SET NOCOUNT ON;
 
 
 END
+
 

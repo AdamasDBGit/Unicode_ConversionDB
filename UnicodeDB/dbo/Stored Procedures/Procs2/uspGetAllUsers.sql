@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspGetAllUsers] 
 	@iFlagCompany int,
-	@sLoginID Nnvarchar(max),
-	@sFirstName Nnvarchar(max),
-	@sMiddleName Nnvarchar(max),
-	@sLastName Nnvarchar(max)
+	@sLoginID NVARCHAR(max),
+	@sFirstName NVARCHAR(max),
+	@sMiddleName NVARCHAR(max),
+	@sLastName NVARCHAR(max)
 AS
 BEGIN
 
@@ -131,4 +131,5 @@ BEGIN
 	END
  
 END
+
 

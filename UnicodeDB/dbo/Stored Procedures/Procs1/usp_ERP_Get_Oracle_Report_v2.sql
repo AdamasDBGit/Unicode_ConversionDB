@@ -1,5 +1,5 @@
 CREATE PROCEDURE dbo.usp_ERP_Get_Oracle_Report_v2  
-    @Mode Nnvarchar(max)  
+    @Mode NVARCHAR(max)  
 AS  
 BEGIN  
     SET NOCOUNT ON;  
@@ -202,8 +202,9 @@ BEGIN
         END;  
     END TRY  
     BEGIN CATCH  
-        DECLARE @ErrMsg Nnvarchar(max) = ERROR_MESSAGE();  
+        DECLARE @ErrMsg NVARCHAR(max) = ERROR_MESSAGE();  
         RAISERROR('Error in usp_ERP_Get_Oracle_Report_v2: %s', 16, 1, @ErrMsg);  
         THROW;  
     END CATCH;  
 END;
+

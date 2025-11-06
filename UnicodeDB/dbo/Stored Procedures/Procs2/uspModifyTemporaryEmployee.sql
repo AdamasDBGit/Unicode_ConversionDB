@@ -1,21 +1,21 @@
 CREATE PROCEDURE [dbo].[uspModifyTemporaryEmployee]
 	@iUserID int,
-	@sLoginID Nnvarchar(max) = NULL,
-	@sPassword Nnvarchar(max)=NULL,
-	@sTitle Nnvarchar(max)=NULL,
-	@sFirstName Nnvarchar(max) = NULL,
-	@sMiddleName Nnvarchar(max)=NULL,
-	@sLastName Nnvarchar(max)=NULL,
-	@sEmailID Nnvarchar(max)=NULL,
-	@sUserType Nnvarchar(max),
-	@sForgotPasswordQuestion Nnvarchar(max)=NULL,
-	@sForgotPasswordAnswer Nnvarchar(max)=NULL,	
+	@sLoginID NVARCHAR(max) = NULL,
+	@sPassword NVARCHAR(max)=NULL,
+	@sTitle NVARCHAR(max)=NULL,
+	@sFirstName NVARCHAR(max) = NULL,
+	@sMiddleName NVARCHAR(max)=NULL,
+	@sLastName NVARCHAR(max)=NULL,
+	@sEmailID NVARCHAR(max)=NULL,
+	@sUserType NVARCHAR(max),
+	@sForgotPasswordQuestion NVARCHAR(max)=NULL,
+	@sForgotPasswordAnswer NVARCHAR(max)=NULL,	
 	@iReferenceID int = NULL,
 	@iHierarchyMasterID int=NULL,
 	@iHierarchyDetailSOID int=NULL,
 	@iHierarchyDetailTDID int=NULL,
 	@iOldHierarchyDetailID int=NULL,
-	@sCreatedBy Nnvarchar(max),
+	@sCreatedBy NVARCHAR(max),
 	@iflag int
 AS
 BEGIN TRY
@@ -159,10 +159,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

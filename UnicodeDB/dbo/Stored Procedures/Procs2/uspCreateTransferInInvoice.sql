@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[uspCreateTransferInInvoice]  --exec uspCreateTransferInI
     @iCancelledInvoiceId INT ,   
     @iStudentId INT ,   
     @iCenterId INT ,   
-    @iUserId Nnvarchar(max),   
+    @iUserId NVARCHAR(max),   
     @iBrandID INT , 
     @iInvoiceHeaderId INT 
 AS   
@@ -432,7 +432,7 @@ AS
 		BEGIN CATCH                     
 	--Error occurred:                       
 	                
-			DECLARE @ErrMsg Nnvarchar(max) ,   
+			DECLARE @ErrMsg NVARCHAR(max) ,   
 				@ErrSeverity INT                     
 			SELECT  @ErrMsg = ERROR_MESSAGE() ,   
 					@ErrSeverity = ERROR_SEVERITY()                     
@@ -440,4 +440,5 @@ AS
 			RAISERROR(@ErrMsg, @ErrSeverity, 1)                     
 		END CATCH                      
     END
+
 

@@ -7,13 +7,13 @@ CREATE PROCEDURE [dbo].[uspUpdateStudentBatch]
   @dtBatchStartDate DATETIME,
   @dtCourseExpectedEndDate DATETIME,
   @iStatus INT,
-  @sUpdatedBy Nnvarchar(max),
+  @sUpdatedBy NVARCHAR(max),
   @sUpdatedOn DATETIME,
   @iFacultyId int,
-  @sBatchName Nnvarchar(max),	
+  @sBatchName NVARCHAR(max),	
   /*Added by susmita : 2023March10 : Added for get the value of new selected fee plan and reason of modify and passing to procedure for log and modify */
   @iNewFeePlanID INT = NULL,
-  @ReasonOfModify Nnvarchar(max)=NULL
+  @ReasonOfModify NVARCHAR(max)=NULL
   /*-------------------------------------------------------------------------------------*/
 
 )        
@@ -212,10 +212,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

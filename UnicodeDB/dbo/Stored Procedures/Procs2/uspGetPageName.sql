@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetPageName]
 (
-	@SPAGENAME Nnvarchar(max)
+	@SPAGENAME NVARCHAR(max)
 )
 AS 
 
@@ -15,4 +15,5 @@ BEGIN
 			SELECT 'N' AS 'ENABLEMULTILINGUALFEATURES'
 		END
 END
+
 

@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetStudentForMultipleBatch ] -- [dbo].[uspGetStudentForMultipleBatch] '178,'
 ( 
-	@iBatchID Nnvarchar(max) 
+	@iBatchID NVARCHAR(max) 
 )
 AS 
     BEGIN          
@@ -22,4 +22,5 @@ AS
                 AND STBD.I_Status = 1 
         ORDER BY STD.S_Student_ID
     END
+
 

@@ -3,7 +3,7 @@ CREATE PROCEDURE [dbo].[uspGetStudentDetails] -- [dbo].[uspGetStudentDetails] NU
     (
       -- Add the parameters for the stored procedure here                        
       @iStudentDetailId INT ,
-      @sStudentNo Nnvarchar(max) = NULL ,
+      @sStudentNo NVARCHAR(max) = NULL ,
       @iCenterId INT = NULL                        
 
     )
@@ -389,4 +389,5 @@ AS
                                         
 
     END
+
 

@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspModuleWiseBookList]     
 (    
- @sCourseList Nnvarchar(max)   
+ @sCourseList NVARCHAR(max)   
 )  
 AS  
 BEGIN  
@@ -29,4 +29,5 @@ WHERE TCM.I_Course_Id  IN
   AND GETDATE() <= ISNULL(MTM.Dt_Valid_To   , GETDATE())   
   
 END
+
 

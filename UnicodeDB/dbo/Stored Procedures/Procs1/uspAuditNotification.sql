@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspAuditNotification]
 (
-	@sLoginID Nnvarchar(max)
+	@sLoginID NVARCHAR(max)
 	,@iTaskID INT
 	,@iID INT
-	,@sMessage Nnvarchar(max)
+	,@sMessage NVARCHAR(max)
 )
 
 AS
@@ -100,4 +100,5 @@ DECLARE @iCenterId int
 	END
 
 END
+
 

@@ -9,8 +9,8 @@ CREATE PROCEDURE [dbo].[uspInsertUpdateDeleteNotificationMaster]
 	 @iNotificationPriorityID int=null,  
 	 @dNotificationDate datetime=null,  
 	 @tNotificationTime time = null,  
-	 @sNotificationTitle nnvarchar(max)=null,
-	 @sNotificationDesc nnvarchar(max)=null,
+	 @sNotificationTitle NVARCHAR(max)=null,
+	 @sNotificationDesc NVARCHAR(max)=null,
 	 @iCreatedBy int=null,
 	 @dCreatedDate datetime=null,
 	 @iUpdatedBy int=null,
@@ -105,10 +105,11 @@ BEGIN TRY
 END TRY  
 BEGIN CATCH  
  rollback transaction  
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int  
   
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
 select 0 StatusFlag,@ErrMsg Message  
 END CATCH  
 commit transaction 
+

@@ -1,14 +1,14 @@
 CREATE PROCEDURE [dbo].[uspValidateDuplicateRecordExists]
 (
-	@sTableName Nnvarchar(max),
-	@sFieldName Nnvarchar(max),
-	@sValue Nnvarchar(max)
+	@sTableName NVARCHAR(max),
+	@sFieldName NVARCHAR(max),
+	@sValue NVARCHAR(max)
 )
 As
 
 Begin
 
-	Declare @sQuery nnvarchar(max)
+	Declare @sQuery NVARCHAR(max)
 	SET @sQuery ='SELECT ''TRUE'' FROM '+@sTableName +' Where '+ @sFieldName +'='+''''+@sValue+''''
 
 	Create Table #Result
@@ -22,4 +22,5 @@ Begin
 	SELECT Count(*) FROm #Result
 
 End
+
 

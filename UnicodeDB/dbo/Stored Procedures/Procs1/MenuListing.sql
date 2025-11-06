@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[MenuListing]
 -- Description:	To Search and get the menu list
 -- =============================================
 -- Add the parameters for the stored procedure here
-@Menuname Nnvarchar(max)=null,
+@Menuname NVARCHAR(max)=null,
 @MenuID int = null
 
 
@@ -19,4 +19,5 @@ BEGIN
 
 
 END
+
 

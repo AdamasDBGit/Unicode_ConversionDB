@@ -3,9 +3,9 @@ CREATE PROCEDURE [dbo].[uspModifyCompanyTaxMaster]
 	@iIndex INT,	
 	@iBrandID INT,
 	@iCountryID INT,
-	@sTaxName Nnvarchar(max),
-	@sTaxDesc Nnvarchar(max),
-	@sCrtdBy Nnvarchar(max),
+	@sTaxName NVARCHAR(max),
+	@sTaxDesc NVARCHAR(max),
+	@sCrtdBy NVARCHAR(max),
 	@dtCrtdOn DATETIME,
 	@iFlag INT
 AS
@@ -42,4 +42,5 @@ BEGIN
 		END
 
 END
+
 

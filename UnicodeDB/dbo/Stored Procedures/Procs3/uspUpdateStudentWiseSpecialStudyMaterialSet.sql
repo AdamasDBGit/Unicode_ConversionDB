@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[uspUpdateStudentWiseSpecialStudyMaterialSet]      
-@StudentDetailId Nnvarchar(max),      
+@StudentDetailId NVARCHAR(max),      
 @ExamDetails XML      
 AS      
 BEGIN TRY       
@@ -10,8 +10,8 @@ select @iStudentID=I_student_detail_id from T_student_detail where S_student_id 
  CREATE TABLE #tempStudentExaminationDetails  
             (  
               Fld_KPMG_ExaminationId int,  
-              Fld_KPMG_StudentDetailId Nnvarchar(max),  
-              Fld_KPMG_MaterialBarCode Nnvarchar(max),  
+              Fld_KPMG_StudentDetailId NVARCHAR(max),  
+              Fld_KPMG_MaterialBarCode NVARCHAR(max),  
               I_Student_detail_id INT,  
               Fld_KPMG_Admit_Path nvarchar(max)  
             )            
@@ -26,7 +26,7 @@ INSERT INTO #tempStudentExaminationDetails
        SELECT      
  a.b.value('EXAMID[1]','INT') ,      
  @StudentDetailId,      
- CASE WHEN ISNULL(a.b.value('BARCODE[1]','nnvarchar(max)'),'')<>'' THEN a.b.value('BARCODE[1]','nnvarchar(max)')  ELSE  null END,    
+ CASE WHEN ISNULL(a.b.value('BARCODE[1]','NVARCHAR(max)'),'')<>'' THEN a.b.value('BARCODE[1]','NVARCHAR(max)')  ELSE  null END,    
  @iStudentID,    
  a.b.value('FileName[1]','nvarchar(max)')    
  FROM @ExamDetails.nodes('ROOT/EXAM') a(b)  
@@ -38,7 +38,7 @@ INSERT INTO Tbl_KPMG_StudentExaminationDetails (Fld_KPMG_ExaminationId,Fld_KPMG_
  SELECT      
  a.b.value('EXAMID[1]','INT') ,      
  @StudentDetailId,      
- CASE WHEN ISNULL(a.b.value('BARCODE[1]','nnvarchar(max)'),'')<>'' THEN a.b.value('BARCODE[1]','nnvarchar(max)')  ELSE  null END,    
+ CASE WHEN ISNULL(a.b.value('BARCODE[1]','NVARCHAR(max)'),'')<>'' THEN a.b.value('BARCODE[1]','NVARCHAR(max)')  ELSE  null END,    
  @iStudentID,    
  a.b.value('FileName[1]','nvarchar(max)')    
  FROM @ExamDetails.nodes('ROOT/EXAM') a(b)     
@@ -57,10 +57,11 @@ INSERT INTO Tbl_KPMG_StudentExaminationDetails (Fld_KPMG_ExaminationId,Fld_KPMG_
 END TRY      
 BEGIN CATCH      
       
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int      
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int      
       
  SELECT @ErrMsg = ERROR_MESSAGE(),      
    @ErrSeverity = ERROR_SEVERITY()      
       
  RAISERROR(@ErrMsg, @ErrSeverity, 1)      
 END CATCH
+

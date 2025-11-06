@@ -54,7 +54,7 @@ SET Is_Sync_Complete = 1
 WHERE ID = @ID;
 END TRY
 BEGIN CATCH
-DECLARE @ErrMsg Nnvarchar(max) = ERROR_MESSAGE();
+DECLARE @ErrMsg NVARCHAR(max) = ERROR_MESSAGE();
 DECLARE @ErrNumber INT = ERROR_NUMBER();
 
 
@@ -68,3 +68,4 @@ WHERE ID = @ID;
 RAISERROR('Error %d: %s', 16, 1, @ErrNumber, @ErrMsg);
 END CATCH
 END
+

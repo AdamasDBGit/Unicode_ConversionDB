@@ -6,7 +6,7 @@ CREATE PROCEDURE [dbo].[uspModifyTransferredStudentInvoice] --21341,0,0.0,8819,1
       @iStudentDetailId INT ,
       @iSourceCenterId INT ,
       @iDestinationCenterId INT ,
-      @sUser Nnvarchar(max)
+      @sUser NVARCHAR(max)
     )
 AS
     BEGIN                            
@@ -335,4 +335,5 @@ AS
             END                  
                             
     END
+
 

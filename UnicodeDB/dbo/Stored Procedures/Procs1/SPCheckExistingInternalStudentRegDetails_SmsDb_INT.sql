@@ -1,6 +1,6 @@
 CREATE  PROCEDURE [dbo].[SPCheckExistingInternalStudentRegDetails_SmsDb_INT]
 (
-    @RegistrationLoginId    Nnvarchar(max)
+    @RegistrationLoginId    NVARCHAR(max)
 	--@Status            int out
   
 	 
@@ -42,4 +42,5 @@ END
 	 	   
 	
 END
+
 

@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[UspGetStudentList]
-@Session_ID nnvarchar(max),
-@Brand_ID nnvarchar(max)=null,
+@Session_ID NVARCHAR(max),
+@Brand_ID NVARCHAR(max)=null,
 ----@Student__Detail_ID nvarchar(30)=Null,
-@School_Group_ID nnvarchar(max)=null,
-@Class_ID nnvarchar(max)=null,
-@Stream_ID nnvarchar(max)=null,
-@Section_ID nnvarchar(max)=Null
+@School_Group_ID NVARCHAR(max)=null,
+@Class_ID NVARCHAR(max)=null,
+@Stream_ID NVARCHAR(max)=null,
+@Section_ID NVARCHAR(max)=Null
 as
 SET NOCOUNT ON;  
 select 
@@ -85,3 +85,4 @@ isnull(TSS.S_Section_Name,'NA'),
 TSCS.S_Class_Roll_No) As A;
 
 
+

@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[spsMetaData]
 (
-    @Name Nnvarchar(max) = NULL
+    @Name NVARCHAR(max) = NULL
 )
 /*
 AUTHOR: Ryan Sockalosky
@@ -31,4 +31,5 @@ WHERE IsActive = 1
     AND Name = ISNULL(@Name, Name)
 
 RETURN(0)
+
 

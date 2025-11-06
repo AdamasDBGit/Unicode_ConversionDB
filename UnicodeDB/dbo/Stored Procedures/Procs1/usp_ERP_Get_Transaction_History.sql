@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[usp_ERP_Get_Transaction_History]      
-    @sStudentID Nnvarchar(max) = NULL,      
+    @sStudentID NVARCHAR(max) = NULL,      
     @dtValidFrom DATETIME = NULL,      
     @dtValidTo DATETIME = NULL,      
     @BrandID INT = NULL,      
@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[usp_ERP_Get_Transaction_History]
     @iPaymentStatusID INT = NULL,    
     @iReceiptType INT = NULL,    
     @bIsAdhoc BIT = NULL ,  
- @sStudentName Nnvarchar(max) = NULL  
+ @sStudentName NVARCHAR(max) = NULL  
 AS      
 BEGIN      
     SET NOCOUNT ON;      
@@ -308,4 +308,5 @@ WHERE rn = 1;
     
     DROP TABLE #Transaction_History;      
 END 
+
 

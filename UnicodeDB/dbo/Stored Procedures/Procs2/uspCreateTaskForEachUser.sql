@@ -1,13 +1,13 @@
 CREATE PROCEDURE [dbo].[uspCreateTaskForEachUser]  
 (  
  @iTaskID INT,  
- @sCreatedBy Nnvarchar(max),  
- @sTrustDomain Nnvarchar(max) = null,  
- @sStudentIDs Nnvarchar(max) = null,  
- @sCenterID Nnvarchar(max) = null,  
+ @sCreatedBy NVARCHAR(max),  
+ @sTrustDomain NVARCHAR(max) = null,  
+ @sStudentIDs NVARCHAR(max) = null,  
+ @sCenterID NVARCHAR(max) = null,  
  @iEmployeeID INT = null,  
  @iRoleID INT = null,  
- @sHierarchyChain Nnvarchar(max),
+ @sHierarchyChain NVARCHAR(max),
  @iUserID INT = NULL
 )  
    
@@ -257,9 +257,10 @@ END TRY
 BEGIN CATCH  
  --Error occurred:    
   
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int  
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
  RAISERROR(@ErrMsg, @ErrSeverity, 1)  
 END CATCH
+
 

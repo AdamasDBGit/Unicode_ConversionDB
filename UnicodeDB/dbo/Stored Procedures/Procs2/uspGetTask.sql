@@ -4,7 +4,7 @@ CREATE PROCEDURE [dbo].[uspGetTask]
       @sKeyValue XML = NULL ,  
       @iCondition INT = NULL ,  
       @iHierarchyMasterId INT = NULL ,  
-      @sHierarchyChain Nnvarchar(max) = NULL ,  
+      @sHierarchyChain NVARCHAR(max) = NULL ,  
       @iStatus INT    
     )  
 AS   
@@ -117,4 +117,5 @@ AS
                     END     
             END     
     END
+
 

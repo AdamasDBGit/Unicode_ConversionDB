@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspPopulateCourseDetailsForCenter]     
  @iHierarchyID int,    
- @sCourseIDs Nnvarchar(max),    
- @sCourseFamilyIDs Nnvarchar(max),    
- @sDurationIDs Nnvarchar(max),    
- @sCertificateIDs Nnvarchar(max)    
+ @sCourseIDs NVARCHAR(max),    
+ @sCourseFamilyIDs NVARCHAR(max),    
+ @sDurationIDs NVARCHAR(max),    
+ @sCertificateIDs NVARCHAR(max)    
 AS    
 BEGIN   
  SET NOCOUNT OFF    
@@ -53,4 +53,5 @@ BEGIN
  AND GETDATE() <= ISNULL(B.Dt_Valid_To,GETDATE())
  ORDER BY A.S_Course_Code  
 END
+
 

@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetStudentSpecificEmailID] 
 (	
-	@sStudentIDs Nnvarchar(max),
+	@sStudentIDs NVARCHAR(max),
 	@iHierarchyDetailID int	
 )
 AS
@@ -36,4 +36,5 @@ BEGIN
 	)
 
 END
+
 

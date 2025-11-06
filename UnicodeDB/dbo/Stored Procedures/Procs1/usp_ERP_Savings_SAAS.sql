@@ -30,7 +30,7 @@ select 1 StatusFlag , 'SAAS Configured' Message
         IF @@TRANCOUNT > 0          
             ROLLBACK;          
           
-        DECLARE @ErrMsg Nnvarchar(max)       
+        DECLARE @ErrMsg NVARCHAR(max)       
               , @ErrSeverity int          
           
         SELECT ERROR_MESSAGE() as Message          
@@ -40,3 +40,4 @@ select 1 StatusFlag , 'SAAS Configured' Message
           
     END CATCH;          
 END;
+

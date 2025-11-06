@@ -1,9 +1,9 @@
 CREATE PROCEDURE [dbo].[uspConfigureDeliveryPattern] 
 (
 	 @iCourseID int,
-	 @sUpdatedBy Nnvarchar(max),
+	 @sUpdatedBy NVARCHAR(max),
 	 @dUpdatedOn datetime,
-	 @sDeliveryPatternIdList Nnvarchar(max)
+	 @sDeliveryPatternIdList NVARCHAR(max)
 )
 
 AS
@@ -91,10 +91,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

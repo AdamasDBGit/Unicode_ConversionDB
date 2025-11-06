@@ -5,42 +5,42 @@ CREATE PROCEDURE [dbo].[uspInsertStudentDetails]
 	@PrefCareerID int,
 	@InfoSourceID int,
 	@EnquiryTypeID int,
-	@EnquiryNo Nnvarchar(max),
-	@IsCorporate Nnvarchar(max),
-	@EnquiryDesc Nnvarchar(max),
-	@Title Nnvarchar(max),
-	@FirstName Nnvarchar(max),
-	@MiddleName Nnvarchar(max),
-	@LastName Nnvarchar(max),
+	@EnquiryNo NVARCHAR(max),
+	@IsCorporate NVARCHAR(max),
+	@EnquiryDesc NVARCHAR(max),
+	@Title NVARCHAR(max),
+	@FirstName NVARCHAR(max),
+	@MiddleName NVARCHAR(max),
+	@LastName NVARCHAR(max),
 	@DtBirthDate datetime,
-	@Age Nnvarchar(max),
+	@Age NVARCHAR(max),
 	@QualificationNameID int,
 	@SkipTest char(1),
 	@StreamID int,
-	@EmailID Nnvarchar(max),
-	@PhoneNo Nnvarchar(max),
-	@MobileNo Nnvarchar(max),
+	@EmailID NVARCHAR(max),
+	@PhoneNo NVARCHAR(max),
+	@MobileNo NVARCHAR(max),
 	@CurrCityID int,
 	@CurrStateID int,
 	@CurrCountryID int,
-	@GuardianName Nnvarchar(max),
+	@GuardianName NVARCHAR(max),
 	@GuardianOccupationID int,
-	@GuardianEmailID Nnvarchar(max),
-	@GuardianPhoneNo Nnvarchar(max),
-	@GuardianMobileNo Nnvarchar(max),
+	@GuardianEmailID NVARCHAR(max),
+	@GuardianPhoneNo NVARCHAR(max),
+	@GuardianMobileNo NVARCHAR(max),
 	@IncomeGroupID int,
-	@CurrAddress1 Nnvarchar(max),
-	@CurrAddress2 Nnvarchar(max),
-	@CurrPincode Nnvarchar(max),
-	@CurrArea Nnvarchar(max),
-	@PermAddress1 Nnvarchar(max),
-	@PermAddress2 Nnvarchar(max),
-	@PermPincode Nnvarchar(max),
+	@CurrAddress1 NVARCHAR(max),
+	@CurrAddress2 NVARCHAR(max),
+	@CurrPincode NVARCHAR(max),
+	@CurrArea NVARCHAR(max),
+	@PermAddress1 NVARCHAR(max),
+	@PermAddress2 NVARCHAR(max),
+	@PermPincode NVARCHAR(max),
 	@PermCityID int,
 	@PermStateID int,
 	@PermCountryID int,
-	@PermArea Nnvarchar(max),
-	@CrtdBy Nnvarchar(max),
+	@PermArea NVARCHAR(max),
+	@CrtdBy NVARCHAR(max),
 	@DtCrtdOn datetime
 )
 
@@ -168,10 +168,11 @@ END TRY
 BEGIN CATCH
 	--Error occurred:  
 	ROLLBACK TRANSACTION 
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+
 

@@ -1,12 +1,12 @@
 CREATE PROCEDURE [dbo].[uspGetMaterialsByItemsToLoad]   
 (  
- @ItemCode Nnvarchar(max),  
+ @ItemCode NVARCHAR(max),  
  @MoveOrderNo INT,  
- @Context Nnvarchar(max)  
+ @Context NVARCHAR(max)  
 )  
   
 AS  
- DECLARE @TEMPTABLE TABLE(SLNo INT IDENTITY(1,1),StockId INT ,BarCode Nnvarchar(max),StockDetailId INT,IsIssued INT,ItemCode Nnvarchar(max),IsRequired CHAR(1) default 'N')  
+ DECLARE @TEMPTABLE TABLE(SLNo INT IDENTITY(1,1),StockId INT ,BarCode NVARCHAR(max),StockDetailId INT,IsIssued INT,ItemCode NVARCHAR(max),IsRequired CHAR(1) default 'N')  
  DECLARE @ItemAmountTable Table (Id int identity, ItemCode nvarchar(max))  
  DECLARE @INT_STOCK_ID INT  
  --DECLARE @CHAR_ISCHILD_REVMO INT  
@@ -156,11 +156,12 @@ SELECT SLNo  ,BarCode ,StockDetailId ,IsIssued,ItemCode, C.S_Course_Name AS Cour
 END TRY  
 BEGIN CATCH  
    
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int  
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int  
   
  SELECT @ErrMsg = ERROR_MESSAGE(),  
    @ErrSeverity = ERROR_SEVERITY()  
   
  RAISERROR(@ErrMsg, @ErrSeverity, 1)  
 END CATCH
+
 

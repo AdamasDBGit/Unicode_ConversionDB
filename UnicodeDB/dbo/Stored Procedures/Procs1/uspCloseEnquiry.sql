@@ -4,9 +4,9 @@ CREATE PROCEDURE [dbo].[uspCloseEnquiry]
   @iCenterID INT,    
   @iEnquiryID INT,      
   @iEnquiryStatus INT,         
-  @sUpdatedBy Nnvarchar(max),    
+  @sUpdatedBy NVARCHAR(max),    
   @dtUpdatedOn DATETIME ,
-  @iNewEnquiryID Nnvarchar(max)     
+  @iNewEnquiryID NVARCHAR(max)     
 )            
 AS            
 BEGIN TRY    
@@ -41,10 +41,11 @@ END TRY
 BEGIN CATCH    
  --Error occurred:      
     
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    
     
  RAISERROR(@ErrMsg, @ErrSeverity, 1)    
 END CATCH
+
 

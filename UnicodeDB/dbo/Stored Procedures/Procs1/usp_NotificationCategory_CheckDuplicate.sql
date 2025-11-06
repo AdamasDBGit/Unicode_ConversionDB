@@ -1,7 +1,7 @@
 
 CREATE   PROCEDURE dbo.usp_NotificationCategory_CheckDuplicate
     @NotificationCategoryID INT = NULL,
-    @NotificationCategoryName Nnvarchar(max)
+    @NotificationCategoryName NVARCHAR(max)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -11,3 +11,4 @@ BEGIN
     WHERE S_Event_Category = @NotificationCategoryName
       AND (@NotificationCategoryID IS NULL OR I_Event_Category_ID <> @NotificationCategoryID);
 END;
+

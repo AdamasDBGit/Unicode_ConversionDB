@@ -2,11 +2,11 @@
 CREATE PROCEDURE [dbo].[usp_ERP_GetCollectionRegisterReportNew] --195,61,'12/1/2007','1/1/2008','ALL'  
     (
       -- Add the parameters for the stored procedure here  
-      @sHierarchyList Nnvarchar(max) ,
+      @sHierarchyList NVARCHAR(max) ,
       @iBrandID INT ,
       @dtStartDate DATETIME ,
       @dtEndDate DATETIME ,
-      @sCounselorCond Nnvarchar(max)
+      @sCounselorCond NVARCHAR(max)
     )
 AS 
     BEGIN TRY  
@@ -625,7 +625,7 @@ AS
   
     BEGIN CATCH  
   
-        DECLARE @ErrMsg Nnvarchar(max) ,
+        DECLARE @ErrMsg NVARCHAR(max) ,
             @ErrSeverity INT  
   
         SELECT  @ErrMsg = ERROR_MESSAGE() ,
@@ -634,4 +634,5 @@ AS
         RAISERROR(@ErrMsg, @ErrSeverity, 1)  
   
     END CATCH  
+
 

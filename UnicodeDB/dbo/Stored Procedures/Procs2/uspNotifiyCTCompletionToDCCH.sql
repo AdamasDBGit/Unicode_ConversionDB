@@ -4,7 +4,7 @@ CREATE PROCEDURE [dbo].[uspNotifiyCTCompletionToDCCH]
  ,@iStudentDetailId INT    
  ,@iSourceCenterId INT 
  ,@iDestinationCenterId INT
- ,@sUserID Nnvarchar(max)   
+ ,@sUserID NVARCHAR(max)   
 )    
 AS    
 BEGIN  
@@ -61,4 +61,5 @@ INSERT INTO dbo.T_Task_Assignment(I_Task_ID,I_To_User_ID,S_From_User)
 SELECT @ID,I_User_Id,@sUserID FROM @USERID 
 
 END
+
 

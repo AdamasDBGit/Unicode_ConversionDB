@@ -6,10 +6,10 @@ CREATE PROCEDURE [dbo].[AddMethodologyActivity]
 -- =============================================
 -- Add the parameters for the stored procedure here
 @MethodologyCategoryID int,
-@MethodologyActivityName nnvarchar(max),
-@MethodologyActivityDescription nnvarchar(max),
-@MeasureUnit nnvarchar(max),
-@CreatedBy nnvarchar(max)
+@MethodologyActivityName NVARCHAR(max),
+@MethodologyActivityDescription NVARCHAR(max),
+@MeasureUnit NVARCHAR(max),
+@CreatedBy NVARCHAR(max)
 
 AS
 BEGIN
@@ -63,3 +63,4 @@ BEGIN
 
 
 END
+

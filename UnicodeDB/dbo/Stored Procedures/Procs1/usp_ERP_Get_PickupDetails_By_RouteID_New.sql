@@ -35,7 +35,7 @@ BEGIN
     END TRY        
     BEGIN CATCH        
         -- Error handling here    
-        DECLARE @ErrorMessage Nnvarchar(max) = ERROR_MESSAGE();    
+        DECLARE @ErrorMessage NVARCHAR(max) = ERROR_MESSAGE();    
         DECLARE @ErrorSeverity INT = ERROR_SEVERITY();    
         DECLARE @ErrorState INT = ERROR_STATE();    
             

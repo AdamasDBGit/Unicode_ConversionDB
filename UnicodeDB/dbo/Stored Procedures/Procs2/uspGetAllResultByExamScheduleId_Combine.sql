@@ -242,7 +242,7 @@ group by TSR.I_Student_Result_ID,C.I_Activity_ID
 END TRY    
 BEGIN CATCH    
      
- DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int    
+ DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int    
     
  SELECT @ErrMsg = ERROR_MESSAGE(),    
    @ErrSeverity = ERROR_SEVERITY()    

@@ -1,7 +1,7 @@
 
 
 
-CREATE PROCEDURE [dbo].[usp_ERP_Fee_Invoice_PartPayment_Bak_10062025](@iBrandID INT,@sStudentID Nnvarchar(max))                      
+CREATE PROCEDURE [dbo].[usp_ERP_Fee_Invoice_PartPayment_Bak_10062025](@iBrandID INT,@sStudentID NVARCHAR(max))                      
 AS                      
 BEGIN                      
                       
@@ -58,7 +58,7 @@ BEGIN
      I_Course_ID INT,                      
               S_Course_Name nvarchar(max) ,                      
      S_Course_Name_Current nvarchar(max),                      
-     S_Student_Photo Nnvarchar(max),                      
+     S_Student_Photo NVARCHAR(max),                      
               S_Batch_Name nvarchar(max) ,                      
      S_Batch_Name_Current nvarchar(max) ,                      
               S_Student_ID nvarchar(max) ,                      
@@ -837,4 +837,5 @@ order by InstallmentNo,I_Invoice_Detail_ID
 --exec [SelfService].uspGetStudentOnAccDue @iBrandID,@MobileNo                      
                       
 END 
+
 

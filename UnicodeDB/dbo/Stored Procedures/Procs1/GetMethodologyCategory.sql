@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[GetMethodologyCategory]
 -- Add the parameters for the stored procedure here
 @MethodologyID int =null,
 @BrandID int =null,
-@MethodologyName nnvarchar(max) =null,
+@MethodologyName NVARCHAR(max) =null,
 @Status int= null
 
 
@@ -41,3 +41,4 @@ BEGIN
 
 
 END
+

@@ -1,11 +1,11 @@
 CREATE PROCEDURE [dbo].[uspSearchStudentListForOnAccountRefund]
     (
       @iCenterID INT ,
-      @sStudentId Nnvarchar(max) = NULL ,
-      @sStudentFirstName Nnvarchar(max) = NULL ,
-      @sStudentSecondName Nnvarchar(max) = NULL ,
-      @sStudentLastName Nnvarchar(max) = NULL ,
-      @sEnquiryNo Nnvarchar(max) = NULL        
+      @sStudentId NVARCHAR(max) = NULL ,
+      @sStudentFirstName NVARCHAR(max) = NULL ,
+      @sStudentSecondName NVARCHAR(max) = NULL ,
+      @sStudentLastName NVARCHAR(max) = NULL ,
+      @sEnquiryNo NVARCHAR(max) = NULL        
     )
 AS 
     BEGIN        
@@ -36,4 +36,5 @@ AS
         ORDER BY S_Student_ID ,
                 S_Enquiry_No   
     END
+
 

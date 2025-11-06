@@ -2,41 +2,41 @@ CREATE PROCEDURE [dbo].[ERP_uspInsertPreEnquiryDetails]
     (  
       --@Centre INT , 
 
-	  @sFirstName Nnvarchar(max) = NULL, --
-	  @sMiddleName Nnvarchar(max) = NULL, --
-	  @sLastName Nnvarchar(max) = NULL, --
+	  @sFirstName NVARCHAR(max) = NULL, --
+	  @sMiddleName NVARCHAR(max) = NULL, --
+	  @sLastName NVARCHAR(max) = NULL, --
 	  @DtBirthDate DATETIME = NULL, --
-	  @sMobileNo Nnvarchar(max) = NULL, --
+	  @sMobileNo NVARCHAR(max) = NULL, --
 	  @iEnquiryStatusCode int = NULL, --
 	  @CreatedBy INT = NULL,      --
 
 	  @iRelationId INT  = NULL, --
-	  @FatherFirstName nnvarchar(max) = NULL,  --
-	  @FatherMiddleName nnvarchar(max) = NULL, --
-	  @FatherLastName nnvarchar(max) = NULL,   --
-	  @FatherEmailId nnvarchar(max) = NULL,    --
-	  @FatherMobileNo nnvarchar(max) = NULL,    --
+	  @FatherFirstName NVARCHAR(max) = NULL,  --
+	  @FatherMiddleName NVARCHAR(max) = NULL, --
+	  @FatherLastName NVARCHAR(max) = NULL,   --
+	  @FatherEmailId NVARCHAR(max) = NULL,    --
+	  @FatherMobileNo NVARCHAR(max) = NULL,    --
 
-	  @MotherFirstName nnvarchar(max) = NULL,  --
-	  @MotherMiddleName nnvarchar(max) = NULL, --
-	  @MotherLastName nnvarchar(max) = NULL,   --
-	  @MotherEmailId nnvarchar(max) = NULL,    --
-	  @MotherMobileNo nnvarchar(max) = NULL,    --
+	  @MotherFirstName NVARCHAR(max) = NULL,  --
+	  @MotherMiddleName NVARCHAR(max) = NULL, --
+	  @MotherLastName NVARCHAR(max) = NULL,   --
+	  @MotherEmailId NVARCHAR(max) = NULL,    --
+	  @MotherMobileNo NVARCHAR(max) = NULL,    --
 	  -- current address
-	  @sAddressLine1 Nnvarchar(max) = NULL, --
-	  @sAddressLine2 Nnvarchar(max) = NULL, --
+	  @sAddressLine1 NVARCHAR(max) = NULL, --
+	  @sAddressLine2 NVARCHAR(max) = NULL, --
 	  @iCountryId int = NULL,  --
 	  @iStateId int = NULL,   --
 	  @iCityId int = NULL,  --
-	  @sPinCode Nnvarchar(max) = NULL,  --
+	  @sPinCode NVARCHAR(max) = NULL,  --
 
 	  -- permanent address
-	  @sPAddressLine1 Nnvarchar(max) = NULL, --
-	  @sPAddressLine2 Nnvarchar(max) = NULL, --
+	  @sPAddressLine1 NVARCHAR(max) = NULL, --
+	  @sPAddressLine2 NVARCHAR(max) = NULL, --
 	  @iPCountryId int = NULL,  --
 	  @iPStateId int = NULL,   --
 	  @iPCityId int = NULL,  --
-	  @sPPinCode Nnvarchar(max) = NULL,  --
+	  @sPPinCode NVARCHAR(max) = NULL,  --
 
 	  @iEnquiryType int = NULL,
 	  @SchoolGroupID int = NULL,
@@ -81,10 +81,10 @@ CREATE PROCEDURE [dbo].[ERP_uspInsertPreEnquiryDetails]
         @EducationCurrentStatus INT=NULL,
 	--  @EmailID NVARCHAR(MAX)=NULL,
 	--  @GenderID INT=NULL
-	  @sRefererName Nnvarchar(max) = null,
-	  @sRefererMobileNo Nnvarchar(max) = null,
+	  @sRefererName NVARCHAR(max) = null,
+	  @sRefererMobileNo NVARCHAR(max) = null,
 	  @EnqTypeSourceMappingID int=null,
-	  @SReferal nnvarchar(max)=null
+	  @SReferal NVARCHAR(max)=null
     )  
 AS   
     BEGIN TRY                    
@@ -338,10 +338,11 @@ END
     BEGIN CATCH                    
  --Error occurred:                      
         ROLLBACK TRANSACTION                     
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
 				@ErrSeverity INT                    
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()                    
                     
         RAISERROR(@ErrMsg, @ErrSeverity, 1)                    
     END CATCH
+

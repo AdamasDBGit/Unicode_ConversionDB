@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[uspSearchStudentListByTCstatus]   --794,NULL,NULL,NULL,NULL,0           
     (  
       @iCenterId INT ,  
-      @sStudentId Nnvarchar(max) = NULL ,  
-      @sStudentFirstName Nnvarchar(max) = NULL ,  
-      @sStudentSecondName Nnvarchar(max) = NULL ,  
-      @sStudentLastName Nnvarchar(max) = NULL ,  
+      @sStudentId NVARCHAR(max) = NULL ,  
+      @sStudentFirstName NVARCHAR(max) = NULL ,  
+      @sStudentSecondName NVARCHAR(max) = NULL ,  
+      @sStudentLastName NVARCHAR(max) = NULL ,  
       @sTCStatus INT = NULL             
     )  
 AS   
@@ -31,4 +31,5 @@ AS
                 AND ISNULL(TTC.Is_Released,0) = 0  
                 AND ISNULL(TTC.I_Transfer_Req_Status, 0) = @sTCStatus  
     END
+
 

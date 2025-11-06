@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[USP_ERP_Check_Student_And_Phone]      
     @brandID INT ,      
-    @StudentID Nnvarchar(max)       
+    @StudentID NVARCHAR(max)       
 AS      
 BEGIN      
     DECLARE @Studentexists INT, @phoneExists nvarchar(max)      
@@ -36,3 +36,4 @@ BEGIN
             'StudentID Available' AS Message      
     END      
 END 
+

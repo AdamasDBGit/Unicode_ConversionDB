@@ -1,7 +1,7 @@
       
 CREATE PROCEDURE [dbo].[uspGetOAInvoice] --exec uspGetOAInvoice 'RC19-17BS-00001'     
 (      
-  @OAInvoiceNo Nnvarchar(max)          
+  @OAInvoiceNo NVARCHAR(max)          
 )      
 AS       
       
@@ -155,4 +155,5 @@ AS
    ORDER BY TIOADT.I_Tax_ID    
               
 END
+
 

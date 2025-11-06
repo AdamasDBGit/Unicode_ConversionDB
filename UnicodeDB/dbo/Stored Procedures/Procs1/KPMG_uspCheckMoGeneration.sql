@@ -1,7 +1,7 @@
 
 CREATE PROCEDURE [dbo].[KPMG_uspCheckMoGeneration]  
-@Context Nnvarchar(max),
-@CurrentDate Nnvarchar(max)
+@Context NVARCHAR(max),
+@CurrentDate NVARCHAR(max)
 
 AS   
     BEGIN TRY 
@@ -28,10 +28,11 @@ AS
     BEGIN CATCH            
  --Error occurred:              
             
-        DECLARE @ErrMsg Nnvarchar(max) ,  
+        DECLARE @ErrMsg NVARCHAR(max) ,  
             @ErrSeverity INT            
         SELECT  @ErrMsg = ERROR_MESSAGE() ,  
                 @ErrSeverity = ERROR_SEVERITY()            
         RAISERROR(@ErrMsg, @ErrSeverity, 1)            
     END CATCH
+
 

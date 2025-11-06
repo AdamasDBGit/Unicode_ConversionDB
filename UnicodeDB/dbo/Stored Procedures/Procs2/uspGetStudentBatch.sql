@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[uspGetStudentBatch](@StudentID Nnvarchar(max), @BrandID INT=NULL)
+CREATE PROCEDURE [dbo].[uspGetStudentBatch](@StudentID NVARCHAR(max), @BrandID INT=NULL)
 AS
 BEGIN
 
@@ -18,4 +18,5 @@ BEGIN
 	ORDER BY TSBD.Dt_Valid_From DESC
 
 END
+
 

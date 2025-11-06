@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[uspGetCourseDetail] -- [dbo].[uspGetCourseDetail] '05-0782',62    
     (  
-      @sSelectedStudentCode Nnvarchar(max) ,  
+      @sSelectedStudentCode NVARCHAR(max) ,  
       @iInvoiceID INT = NULL,
       @iCenterID INT =NULL      
     )  
@@ -319,4 +319,5 @@ AS
        
         END      
     END
+
 

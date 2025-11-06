@@ -38,7 +38,7 @@ BEGIN
         IF @@TRANCOUNT > 0
             ROLLBACK;
 
-        DECLARE @ErrMsg Nnvarchar(max)
+        DECLARE @ErrMsg NVARCHAR(max)
               , @ErrSeverity INT;
 
         SELECT @ErrMsg = ERROR_MESSAGE(), @ErrSeverity = ERROR_SEVERITY();

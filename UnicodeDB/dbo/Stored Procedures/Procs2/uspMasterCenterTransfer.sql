@@ -1,10 +1,10 @@
 CREATE PROCEDURE [dbo].[uspMasterCenterTransfer]                         
 (                         
-  @sLoginId Nnvarchar(max)                        
+  @sLoginId NVARCHAR(max)                        
  ,@iSourceCenterID INT = NULL                        
  ,@iDestinationCenterID INT = NULL                        
  ,@iStudentDetailId INT = NULL                        
- ,@sRemarks Nnvarchar(max)                        
+ ,@sRemarks NVARCHAR(max)                        
  ,@iCTStatus INT                        
  ,@iTransferRequestId INT = NULL                  
  ,@iCourseDuration INT = NULL                  
@@ -89,4 +89,5 @@ UPDATE T_Student_Attendance_Details SET I_Centre_Id = @iDestinationCenterID WHER
 SELECT 1      
       
 END
+
 

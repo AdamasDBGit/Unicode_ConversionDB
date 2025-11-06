@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspSendSMSForOnlinePayments]
     (
       @iBrandID INT ,
-      @sTransactionNo Nnvarchar(max)
+      @sTransactionNo NVARCHAR(max)
     )
 AS
     BEGIN
@@ -119,4 +119,5 @@ AS
 
 
     END
+
 

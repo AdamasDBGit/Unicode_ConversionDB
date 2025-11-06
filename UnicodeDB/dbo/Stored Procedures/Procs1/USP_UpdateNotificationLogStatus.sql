@@ -1,8 +1,8 @@
 CREATE PROCEDURE [dbo].[USP_UpdateNotificationLogStatus]  
     @inNotificationLogsID INT,  
-    @stNotificationStatus Nnvarchar(max),  
-    @stErrorMessage Nnvarchar(max) = NULL,  
-    @stRenderMessageBody Nnvarchar(max) = NULL,  
+    @stNotificationStatus NVARCHAR(max),  
+    @stErrorMessage NVARCHAR(max) = NULL,  
+    @stRenderMessageBody NVARCHAR(max) = NULL,  
     @inSendStatus INT = NULL  
 AS  
 BEGIN  
@@ -24,3 +24,4 @@ BEGIN
         SELECT 0 AS StatusFlag, ERROR_MESSAGE() AS Message;  
     END CATCH  
 END;  
+

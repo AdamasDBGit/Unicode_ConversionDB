@@ -2,11 +2,11 @@ CREATE PROCEDURE [dbo].[USP_ERP_SaveGuardMaster]
 (
     @I_Guard_ID INT = NULL,      -- If NULL or 0 ? Insert, else Update
     @I_Brand_ID INT,
-    @S_Name     Nnvarchar(max),
-    @S_Phone    Nnvarchar(max) = NULL,
-    @S_Type     Nnvarchar(max) = NULL,
-    @S_Token    Nnvarchar(max) = NULL,
-    @S_Emp_No   Nnvarchar(max) = NULL
+    @S_Name     NVARCHAR(max),
+    @S_Phone    NVARCHAR(max) = NULL,
+    @S_Type     NVARCHAR(max) = NULL,
+    @S_Token    NVARCHAR(max) = NULL,
+    @S_Emp_No   NVARCHAR(max) = NULL
 )
 AS
 BEGIN
@@ -78,3 +78,4 @@ BEGIN
             @I_Guard_ID AS I_Guard_ID;
     END CATCH
 END;
+

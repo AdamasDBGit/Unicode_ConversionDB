@@ -1,22 +1,22 @@
 
 CREATE PROCEDURE [dbo].[KPMG_GetOnHandQuantityUpLoadData]
-@MaterialBarCode Nnvarchar(max),
-@StudentBarCodeNo nnvarchar(max)
+@MaterialBarCode NVARCHAR(max),
+@StudentBarCodeNo NVARCHAR(max)
 
 AS
 
 BEGIN TRY 
 
-DECLARE @ITEM_CODE Nnvarchar(max)
+DECLARE @ITEM_CODE NVARCHAR(max)
 DECLARE @BRANCH_ID INT
-DECLARE @BRANCH_NAME Nnvarchar(max)
+DECLARE @BRANCH_NAME NVARCHAR(max)
 DECLARE @STUDENTID INT
 DECLARE @ITEM_TYPE INT
 DECLARE @ITEM_ISSUE_ID INT
-DECLARE @ERROR Nnvarchar(max)
+DECLARE @ERROR NVARCHAR(max)
 
 
-DECLARE @TEMP_TABLE TABLE (ItemCode Nnvarchar(max), ItemDescription Nnvarchar(max),CourseName Nnvarchar(max)  ,BarCode Nnvarchar(max),Name Nnvarchar(max),StudentId INT,DamageStatus INT,OkStatus INT,DuplicateStatus INT,IssueDate DateTime)
+DECLARE @TEMP_TABLE TABLE (ItemCode NVARCHAR(max), ItemDescription NVARCHAR(max),CourseName NVARCHAR(max)  ,BarCode NVARCHAR(max),Name NVARCHAR(max),StudentId INT,DamageStatus INT,OkStatus INT,DuplicateStatus INT,IssueDate DateTime)
 DECLARE @damageStatus INT,@OkStatus INT,@DuplicateStatus INT	
 IF EXISTS(SELECT 1 FROM Tbl_KPMG_SM_Issue WHERE Fld_KPMG_Barcode=@MaterialBarCode)
 BEGIN
@@ -86,10 +86,11 @@ SELECT @ITEM_ISSUE_ID AS ITEM_ISSUE_ID,@ITEM_CODE AS ITEM_CODE,@BRANCH_NAME AS B
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

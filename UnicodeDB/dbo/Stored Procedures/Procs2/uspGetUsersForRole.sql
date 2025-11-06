@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[uspGetUsersForRole]
 (
 	@iCenterID int,
-	@srole Nnvarchar(max) = null
+	@srole NVARCHAR(max) = null
 )
 AS
 BEGIN
@@ -28,4 +28,5 @@ END
 
 ---exec [dbo].[uspgetCenterManegerDtl] 720,'CH'
 ---exec [dbo].[uspgetCenterManegerDtl] 0,'HOCC'
+
 

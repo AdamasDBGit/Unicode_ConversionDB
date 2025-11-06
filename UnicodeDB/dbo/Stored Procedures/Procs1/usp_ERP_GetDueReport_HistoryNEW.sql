@@ -2,10 +2,10 @@ CREATE PROCEDURE [dbo].[usp_ERP_GetDueReport_HistoryNEW]
 --EXEC [REPORT].[uspGetDueReport_History] '54', 109, '2018-04-30', 'ALL'  
     (  
       -- Add the parameters for the stored procedure here  
-      @sHierarchyList Nnvarchar(max)=NULL ,  
+      @sHierarchyList NVARCHAR(max)=NULL ,  
       @iBrandID INT ,  
       @dtUptoDate DATETIME ,  
-      @sStatus Nnvarchar(max) = 'ALL'   
+      @sStatus NVARCHAR(max) = 'ALL'   
     )  
 AS   
     BEGIN  
@@ -758,4 +758,5 @@ AS
   DROP TABLE #tempTaxAmountGST  
    
 END  
+
 

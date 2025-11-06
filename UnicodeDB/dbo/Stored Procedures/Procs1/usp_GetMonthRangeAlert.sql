@@ -8,9 +8,9 @@ BEGIN
 
     DECLARE @SessionStartDate DATE, @SessionEndDate DATE;
     DECLARE @SelectedMonthCount INT, @ValidMonthCount INT;
-    DECLARE @StartMonthName Nnvarchar(max), @EndMonthName Nnvarchar(max);
-    DECLARE @FirstValidMonthName Nnvarchar(max), @LastValidMonthName Nnvarchar(max);
-    DECLARE @Message Nnvarchar(max);
+    DECLARE @StartMonthName NVARCHAR(max), @EndMonthName NVARCHAR(max);
+    DECLARE @FirstValidMonthName NVARCHAR(max), @LastValidMonthName NVARCHAR(max);
+    DECLARE @Message NVARCHAR(max);
 
     -- 1. Get current academic session
     SELECT 

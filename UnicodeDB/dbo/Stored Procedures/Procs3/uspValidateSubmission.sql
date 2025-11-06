@@ -1,19 +1,19 @@
 
 CREATE PROCEDURE [dbo].[uspValidateSubmission]
 
-@StudentBarCodeNo nnvarchar(max),
-@MaterialBarCode nnvarchar(max),
-@ReplacedBarCode nnvarchar(max),
-@ReissueReceiptNo nnvarchar(max),
-@StudyMaterialName nnvarchar(max),
-@Context nnvarchar(max)
+@StudentBarCodeNo NVARCHAR(max),
+@MaterialBarCode NVARCHAR(max),
+@ReplacedBarCode NVARCHAR(max),
+@ReissueReceiptNo NVARCHAR(max),
+@StudyMaterialName NVARCHAR(max),
+@Context NVARCHAR(max)
 
 AS
 BEGIN TRY 
 DECLARE @STUDENTID INT
-DECLARE @MATERIAL_STATUS Nnvarchar(max)=''
-DECLARE @STATUS Nnvarchar(max)	
-DECLARE @TEMP_TABLE TABLE (ItemCode Nnvarchar(max), ItemDescription Nnvarchar(max),CourseName Nnvarchar(max)  ,BarCode Nnvarchar(max),Name Nnvarchar(max),StudentId INT,DamageStatus INT,OkStatus INT,DuplicateStatus INT,IssueDate DateTime)
+DECLARE @MATERIAL_STATUS NVARCHAR(max)=''
+DECLARE @STATUS NVARCHAR(max)	
+DECLARE @TEMP_TABLE TABLE (ItemCode NVARCHAR(max), ItemDescription NVARCHAR(max),CourseName NVARCHAR(max)  ,BarCode NVARCHAR(max),Name NVARCHAR(max),StudentId INT,DamageStatus INT,OkStatus INT,DuplicateStatus INT,IssueDate DateTime)
 DECLARE @damageStatus INT,@OkStatus INT,@DuplicateStatus INT	
 	
 			
@@ -131,10 +131,11 @@ DECLARE @damageStatus INT,@OkStatus INT,@DuplicateStatus INT
 END TRY
 BEGIN CATCH
 	
-	DECLARE @ErrMsg Nnvarchar(max), @ErrSeverity int
+	DECLARE @ErrMsg NVARCHAR(max), @ErrSeverity int
 
 	SELECT	@ErrMsg = ERROR_MESSAGE(),
 			@ErrSeverity = ERROR_SEVERITY()
 
 	RAISERROR(@ErrMsg, @ErrSeverity, 1)
 END CATCH
+

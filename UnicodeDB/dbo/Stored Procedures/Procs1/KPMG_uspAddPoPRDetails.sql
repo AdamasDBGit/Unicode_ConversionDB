@@ -1,7 +1,7 @@
 
 CREATE PROCEDURE [dbo].[KPMG_uspAddPoPRDetails]
 @POPR_XML XML,
-@Context Nnvarchar(max)
+@Context NVARCHAR(max)
 AS   
 	BEGIN Try	
 		DECLARE @POLIST_COUNT INT
@@ -92,10 +92,11 @@ AS
 	BEGIN CATCH            
 	--Error occurred:              
 
-		DECLARE @ErrMsg Nnvarchar(max) ,  
+		DECLARE @ErrMsg NVARCHAR(max) ,  
 		@ErrSeverity INT            
 		SELECT  @ErrMsg = ERROR_MESSAGE() ,  
 			@ErrSeverity = ERROR_SEVERITY()            
 		RAISERROR(@ErrMsg, @ErrSeverity, 1)            
 	END CATCH
+
 
