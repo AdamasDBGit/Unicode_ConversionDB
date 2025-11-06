@@ -1,0 +1,81 @@
+﻿-- =============================================
+-- Author:		<Susmita Paul>
+-- Create date: <2024-July-04>
+-- Description:	<Adjust Cron>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ERP_Adjust_Cron] 
+	-- Add the parameters for the stored procedure here
+	@iTransactionMasterID int,
+	--@ERP_Remarks NVARCHAR(MAX)=NULL,
+	--@ERP_Error NVARCHAR(MAX)=NULL,
+	@isCompleted bit,
+	@CronCanBeProcess bit,
+	@isfromCron bit,
+	@isfailed bit,
+	@ERP_Response NVARCHAR(MAX)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	DECLARE @S_Transaction_No varchar(max),@currentStatus varchar(max)=NULL,@StatusID bit = 'true',@Requery_PG_LogID int=NULL
+	DECLARE @Requery_Request_LogID int=NULL,@ERP_Remarks varchar(max)=NULL,@ERP_Error varchar(max)=NULL
+
+
+	select
+	@S_Transaction_No=I_ERP_TransactionNo,@currentStatus=S_TransactionStatus,@Requery_PG_LogID=PG_History_ID,
+	@Requery_Request_LogID=RequestLogID
+	from T_ERP_Transaction_Master as TM where TM.I_ERP_Transaction_Master_ID=@iTransactionMasterID
+
+
+
+
+	IF ISNULL(@isCompleted,'false')='true'
+	BEGIN
+		select @ERP_Remarks=ErrorMessage from T_ERP_Request_Log where I_ERP_RequestID=@Requery_Request_LogID
+	END
+	ELSE
+	BEGIN
+		select @ERP_Error=ErrorMessage from T_ERP_Request_Log where I_ERP_RequestID=@Requery_Request_LogID
+	END
+
+
+
+
+	IF ISNULL(@isfailed,'false')='true'
+		BEGIN
+			set @StatusID='false'
+		END
+
+		--print @isfailed
+
+	-- Execute the stored procedure and capture the number of rows updated
+DECLARE @UpdatedRowCount INT=0;
+
+EXEC @UpdatedRowCount = [dbo].[usp_ERP_SaveTransactionCronJob] 
+	@S_Transaction_No,--@S_Transaction_No varchar(max),
+	@iTransactionMasterID,--@I_Transaction_Master_ID INT,
+	@currentStatus,--@currentStatus varchar(max)=NULL,
+	@isCompleted,--@CompleteStatus bit=NULL,
+	@CronCanBeProcess,--@CronCanBeProcess bit=NULL,
+	NULL,--@NoOfAttempt int=NULL,
+	@StatusID,--@StatusID bit = NULL,
+	NULL,--@Is_PG_Success bit=NULL,
+	NULL,--@Is_PG_Failure bit=NULL,
+	NULL,--@Is_Failed_User bit =NULL,
+	@Requery_PG_LogID,--@Requery_PG_LogID int=NULL,
+	@Requery_Request_LogID,--@Requery_Request_LogID int=NULL,
+	NULL,--@PG_Response varchar(max)=NULL,
+	@ERP_Response,--@ERP_Response--@ERP_Response varchar(max)=NULL,
+	NULL,--@PG_Remarks varchar(max)=NULL,
+	@ERP_Remarks,--@ERP_Remarks varchar(max)=NULL,
+	NULL,--@PG_Error varchar(max)=NULL,
+	@ERP_Error,--@ERP_Error varchar(max)=NULL,
+	@CronCanBeProcess,--@CanbeProcessForERPSattlement BIT=NULL,
+	@isfromCron--@IsFromCron bit
+
+	select @UpdatedRowCount
+    
+END
+

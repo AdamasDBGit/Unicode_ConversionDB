@@ -1,0 +1,27 @@
+﻿CREATE TABLE [ACADEMICS].[T_E_Project_Group_Audit] (
+    [I_E_Project_Group_Audit_ID]     INT            IDENTITY (1, 1) NOT FOR REPLICATION NOT NULL,
+    [I_E_Project_Group_ID]           INT            NOT NULL,
+    [S_Group_Desc]                   VARCHAR (200)  NULL,
+    [I_E_Project_Spec_ID]            INT            NULL,
+    [I_Center_ID]                    INT            NULL,
+    [I_Course_ID]                    INT            NULL,
+    [I_Term_ID]                      INT            NULL,
+    [I_Module_ID]                    INT            NULL,
+    [Dt_Project_Start_Date]          DATETIME       NULL,
+    [Dt_Project_End_Date]            DATETIME       NULL,
+    [Dt_Cancellation_Date]           DATETIME       NULL,
+    [S_Cancellation_Reason]          VARCHAR (2000) NULL,
+    [I_E_Project_File_ID]            INT            NULL,
+    [I_Report_File_ID]               INT            NULL,
+    [S_Crtd_By]                      VARCHAR (20)   NULL,
+    [S_Upd_By]                       VARCHAR (20)   NULL,
+    [Dt_Crtd_On]                     DATETIME       NULL,
+    [Dt_Upd_On]                      DATETIME       NULL,
+    [I_Status]                       INT            NULL,
+    [S_Ext_E_Project_File_Name]      VARCHAR (200)  NULL,
+    [S_Ext_Report_File_Name]         VARCHAR (200)  NULL,
+    [I_Is_File_Submitted_Externally] BIT            NULL,
+    [S_Remarks]                      VARCHAR (1000) NULL,
+    CONSTRAINT [PK_T_E_Project_Group_Audit] PRIMARY KEY CLUSTERED ([I_E_Project_Group_Audit_ID] ASC)
+);
+

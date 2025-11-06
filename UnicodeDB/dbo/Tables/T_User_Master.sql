@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[T_User_Master] (
+    [I_User_ID]               INT            IDENTITY (1, 1) NOT NULL,
+    [S_Login_ID]              NVARCHAR (MAX) NULL,
+    [S_Password]              NVARCHAR (200) NULL,
+    [S_Title]                 NVARCHAR (MAX) NULL,
+    [S_First_Name]            NVARCHAR (MAX) NULL,
+    [S_Middle_Name]           NVARCHAR (MAX) NULL,
+    [S_Last_Name]             NVARCHAR (MAX) NULL,
+    [S_Email_ID]              NVARCHAR (MAX) NULL,
+    [I_Reference_ID]          INT            NULL,
+    [S_User_Type]             NVARCHAR (MAX) NULL,
+    [I_Status]                INT            NULL,
+    [S_Forget_Pwd_Qtn]        NVARCHAR (MAX) NULL,
+    [S_Forget_Pwd_Answer]     NVARCHAR (MAX) NULL,
+    [S_Crtd_By]               NVARCHAR (MAX) NULL,
+    [S_Upd_By]                NVARCHAR (MAX) NULL,
+    [Dt_Crtd_On]              DATETIME       NULL,
+    [Dt_Upd_On]               DATETIME       NULL,
+    [B_LDAP_User]             BIT            NULL,
+    [B_Force_Password_Change] BIT            NULL,
+    [Dt_Date_Of_Birth]        DATE           NULL,
+    [S_Token]                 NVARCHAR (MAX) NULL,
+    [IsAllAllowedEligible]    BIT            NULL,
+    [Is_Teaching_Staff]       BIT            NULL,
+    [Is_Non_Teaching_Staff]   BIT            NULL,
+    CONSTRAINT [PK__T_User_Master__1B0907CE] PRIMARY KEY CLUSTERED ([I_User_ID] ASC)
+);
+

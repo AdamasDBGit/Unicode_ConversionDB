@@ -1,0 +1,183 @@
+﻿
+--EXEC   [usp_ERP_Fine_CalculateBased_On_Frequency_TEST]  107,'25-0435' ,'2025-08-21'             
+CREATE PROCEDURE [dbo].[usp_ERP_Fine_CalculateBased_On_Frequency_Test]                    
+    @BrandID INT,                    
+    @s_StudentID NVARCHAR(MAX),                    
+    @Paymentdate date = Null                    
+AS                    
+BEGIN                    
+    SET NOCount ON                    
+    --Declare   @BrandID INT=1,                    
+    --    @s_StudentID VARCHAR(10)='24-0042'                    
+                    
+    --Declare @Paymentdate date=(Select convert(date,getdate()))                    
+    --Declare @Paymentdate date='2024-07-28'                    
+    --Select @Paymentdate                    
+    --       Declare   @BrandID INT=107,@s_StudentID VARCHAR(10)='25-0118'           
+    --Declare @Paymentdate date='2025-05-29'         
+ Declare @finecomponentID int,@AdhocCompName Varchar(100)            
+   SEt @finecomponentID= (select top 1 I_Status_Value from T_Status_Master             
+   where I_Brand_ID=@BrandID and Status_Type=2)  -----If Status_Type=2 Then Fine ,If Status_Type=1 Then  Prospectus          
+   Set @AdhocCompName=(select Top 1 S_Status_Desc from T_Status_Master           
+   where I_Status_Value=@finecomponentID and Status_Type=2)     
+    
+    IF OBJECT_ID('tempdb..#InstallmentDatewiseFine') IS NOT NULL          
+       DROP TABLE #InstallmentDatewiseFine;          
+    CREATE TABLE #InstallmentDatewiseFine (          
+       ID INT Identity(1,1),          
+       FineTagID INT,          
+       Is_waiveOff BIT,          
+       waiveoff_Installmentdate DATE,          
+       InvoiceheaderID INT,          
+       FreqType INT,          
+       S_Installment_Frequency VARCHAR(50),          
+       N_FineAmount Numeric(18, 2),          
+       Installment_No int ,    
+    Temp_Inv_No Varchar(100),    
+    Status_value Int    
+);          
+    INSERT INTO #InstallmentDatewiseFine ( FineTagID, Is_waiveOff, waiveoff_Installmentdate, InvoiceheaderID, FreqType    
+ , S_Installment_Frequency,Installment_No,Temp_Inv_No,Status_value)          
+    Select Distinct           
+    ISNULL(IVP.I_FineTagID,0) as FineTagID,                    
+    ISNULL(ICD.Is_Fine_waiveroff,0) as Is_waiveOff,          
+    Convert(Date,ICD.Dt_Installment_Date) as waiveoff_Installmentdate,          
+    IVP.I_Invoice_Header_ID as InvoiceheaderID,          
+ FreqType,          
+ S_Installment_Frequency,          
+ ICD.I_Installment_No   ,    
+ ICD.S_Invoice_Number,    
+ @finecomponentID    
+           
+              
+    from T_Invoice_Parent IVP With (Nolock)                    
+        Inner Join T_Student_Detail SD With (Nolock)                    
+            on SD.I_Student_Detail_ID = IVP.I_Student_Detail_ID             
+   Inner Join T_Invoice_Child_Header ICH With (Nolock) ON ICH.I_Invoice_Header_ID=IVP.I_Invoice_Header_ID          
+   Inner Join T_Invoice_Child_Detail ICD With (Nolock) ON ICD.I_Invoice_Child_Header_ID=ICH.I_Invoice_Child_Header_ID          
+                 
+    Inner Join T_Enquiry_Regn_Detail RD With (Nolock)                    
+            on RD.I_Enquiry_Regn_ID = SD.I_Enquiry_Regn_ID                    
+        Inner Join T_Brand_Center_Details BCD With (Nolock)                    
+            on BCD.I_Centre_Id = RD.I_Centre_Id              
+  Inner Join T_ERP_Fee_Fine_Header FH ON FH.I_Fee_Fine_H_ID=ISNULL(IVP.I_FineTagID,0)          
+  Inner Join T_ERP_Fee_PaymentInstallment_Type PT With (Nolock)                    
+            On FH.FreqType = PT.I_Fee_Pay_Installment_ID       
+    
+    where SD.S_Student_ID = @s_StudentID and IVP.I_Status=1                 
+          and BCD.I_Brand_ID = @BrandID   --and ISNULL(ICD.Is_Fine_waiveroff,0)=1          
+    --and Convert(Date,ICD.Dt_Installment_Date)<Convert(Date,@Paymentdate)          
+          
+   -- Select * from #InstallmentDatewiseFine order by waiveoff_Installmentdate          
+          
+           
+          
+          
+    Declare @ID int=1,@lst Int ,@InvoiceHeaderID Bigint,@FineTagID INT,@FrequencyID INT,@FrequencyCode VarChar(50)          
+    ,@InstallmentDt date,@FineAmount Numeric(18, 2),@Is_waiveOff BIT ,@tempInvNo Varchar(100),@Statusvalue INT         
+    SET @lst=(select MAX(ID) from #InstallmentDatewiseFine)          
+          
+    While @id<=@lst          
+    BEGIN          
+    Select @FineTagID=FineTagID,@InvoiceHeaderID=InvoiceheaderID,@FrequencyID=FreqType          
+    ,@FrequencyCode=S_Installment_Frequency,@InstallmentDt=waiveoff_Installmentdate          
+    ,@Is_waiveOff=Is_waiveOff ,@tempInvNo=Temp_Inv_No ,@Statusvalue=Status_value        
+     FROM           
+     #InstallmentDatewiseFine where ID=@id          
+             
+    Begin          
+    --drop table #InstallmentDatewiseFine          
+    If (ISNULL(@FineTagID,0) <> 0)                    
+          Begin          
+             
+      IF @FrequencyCode = 'Daily'          
+        Begin          
+     If @Paymentdate > @InstallmentDt          
+     Begin          
+   Declare @LateDays int                    
+         SET @LateDays = DATEDIFF(DAY, @InstallmentDt, @PaymentDate)+1;          
+   SET @FineAmount =                    
+                        (                    
+                            Select Top 1                    
+                                N_Fine_Amount                    
+                            from T_ERP_Fee_Fine_Details With (Nolock)                    
+                            where I_Fee_Fine_H_ID = @FineTagID                 
+                                  and @LateDays                    
+                                  Between I_Frm_Range and I_To_Range       
+          AND Is_Active=1      
+                        )            
+       If (@Is_waiveOff <> 1)          
+       Begin          
+      Update #InstallmentDatewiseFine                    
+                        set N_FineAmount = Isnull(@FineAmount, 0)                    
+                        where ID = @ID          
+      End          
+     End          
+ End          
+          
+ End          
+ SET @ID=@id+1          
+ End          
+ END          
+   select @s_StudentID as StudentID,InvoiceheaderID,waiveoff_Installmentdate          
+   ,Installment_No,    
+  CASE 
+    WHEN T_Tran.I_Student_Detail_ID IS NOT NULL AND T_Tran.StatusValue IS NULL 
+        THEN CAST(0.00 AS DECIMAL(10,2))    
+    WHEN T_Tran.I_Student_Detail_ID IS NOT NULL AND T_Tran.StatusValue = T.Status_value     
+        THEN CAST(ISNULL(T_Tran.TotalAmoutPaid, 0) AS DECIMAL(10,2))    
+    ELSE CAST(ISNULL(T.N_FineAmount, 0) AS DECIMAL(10,2)) 
+    END AS ActualFineAmount
+  
+       
+   ,Is_waiveOff ,Temp_Inv_No  
+   Into #Final_InstallmentDatewiseFine 
+         
+   from #InstallmentDatewiseFine  T    
+    
+    Left Join (    
+ select tm.I_ERP_Transaction_Master_ID, sd.I_Student_Detail_ID,sd.S_Student_ID,tm.S_TransactionStatus    
+,TM.Order_ID,TM.I_ERP_TransactionNo,TID.S_Installment_invoice_NO,Convert(Date,TID.Dt_Installment_Date) AS InstallmentDate    
+,TID.StatusValue,TID.TotalAmoutPaid    
+from T_ERP_Transaction_Master TM    
+Inner Join T_Student_Detail sd on sd.I_Student_Detail_ID=TM.I_StudentDetailID    
+Inner Join T_ERP_Transaction_Invoice_Details TID     
+ON TID.I_ERP_Transaction_Master_ID=TM.I_ERP_Transaction_Master_ID    
+and TID.StudentID=SD.S_Student_ID    
+where TM.S_TransactionStatus='Initiated'    
+and ISNULL(TID.IsCompleted,0) =0    
+and ISNULL(TID.CanBeProcessed,0)=1    
+and SD.S_Student_ID=@s_StudentID    
+--order by sd.S_Student_ID    
+ ) T_Tran ON T_Tran.S_Student_ID=@s_StudentID     
+ --and T_Tran.InstallmentDate=Convert(date,T.waiveoff_Installmentdate)    
+   AND T_Tran.S_Installment_invoice_NO=T.Temp_Inv_No    
+   --and T_Tran.StatusValue=T.Status_value   
+  
+   SELECT 
+    FT.StudentID,
+    FT.InvoiceheaderID,
+    FT.waiveoff_Installmentdate,
+    FT.Installment_No,
+	ft.ActualFineAmount
+
+    ,CASE 
+        WHEN FT.ActualFineAmount <= ISNULL(fwh.Fine_waiveroff_Amt, 0) 
+            THEN 0
+        ELSE FT.ActualFineAmount - ISNULL(fwh.Fine_waiveroff_Amt, 0) 
+    END AS CurrFineAmount,
+    FT.Is_waiveOff,
+    FT.Temp_Inv_No
+FROM #Final_InstallmentDatewiseFine FT
+LEFT JOIN (
+    SELECT 
+        I_Invoice_Header_ID,
+        Dt_Installment_Date,
+        CAST(SUM(ISNULL(Fine_waiveroff_Amt, 0)) AS DECIMAL(12,2)) AS Fine_waiveroff_Amt
+    FROM T_ERP_FineWaiver_History_Captured WITH (NOLOCK)
+    GROUP BY I_Invoice_Header_ID, Dt_Installment_Date
+) AS Fwh 
+    ON fwh.I_Invoice_Header_ID = FT.InvoiceheaderID
+   AND fwh.Dt_Installment_Date = FT.waiveoff_Installmentdate;
+
+End 

@@ -1,0 +1,76 @@
+﻿CREATE PROCEDURE [dbo].[USP_ERP_Insert_Update_ExamCategory]
+    @I_EXAM_CATEGORY_ID INT = NULL,  
+    @I_Exam_Type_Master_ID INT,  
+    @S_Exam_Category_Name VARCHAR(100), 
+    @I_Brand_ID INT, 
+    @Is_Active BIT,  
+    @I_School_Group_ID INT, 
+    @I_School_Session_ID INT,  
+    @I_Created_By INT  
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Check for duplicates
+    IF EXISTS (
+        SELECT 1
+        FROM T_ERP_EXAM_CATEGORY
+        WHERE inExamTypeID = @I_Exam_Type_Master_ID
+        AND stExamCategoryName = @S_Exam_Category_Name
+        AND (@I_EXAM_CATEGORY_ID IS NULL OR inExamCategoryId != @I_EXAM_CATEGORY_ID)
+        AND inBrandID = @I_Brand_ID
+        AND inSchoolGroupID = @I_School_Group_ID
+        AND inSchoolSessionID = @I_School_Session_ID
+    )
+    BEGIN
+        -- Return an error if a duplicate is found
+        SELECT 0 AS StatusFlag, 'Duplicate category' AS Message;
+        RETURN;
+    END
+
+    IF @I_EXAM_CATEGORY_ID IS NULL
+    BEGIN
+        -- Insert new record
+        INSERT INTO T_ERP_EXAM_CATEGORY (
+            inExamTypeID,
+            stExamCategoryName,
+            inBrandID,
+            IsActive,
+            dtCreatedDate,
+            inCreatedBy,
+            unCategoryId,
+            inSchoolGroupID,
+            inSchoolSessionID
+        ) VALUES (
+            @I_Exam_Type_Master_ID,
+            @S_Exam_Category_Name,
+            @I_Brand_ID,
+            @Is_Active,
+            GETDATE(),  -- Automatically set the current date and time
+            @I_Created_By,
+            NEWID(),  -- Generate a new unique identifier for unCategoryId
+            @I_School_Group_ID,
+            @I_School_Session_ID
+        );
+        
+        SET @I_EXAM_CATEGORY_ID = SCOPE_IDENTITY();  -- Get the newly inserted ID
+
+        SELECT 1 AS StatusFlag, 'Category saved successfully!' AS Message;
+    END
+    ELSE
+    BEGIN
+        -- Update existing record
+        UPDATE T_ERP_EXAM_CATEGORY
+        SET
+            inExamTypeID = @I_Exam_Type_Master_ID,
+            stExamCategoryName = @S_Exam_Category_Name,
+            inBrandID = @I_Brand_ID,
+            IsActive = @Is_Active,
+            inSchoolGroupID = @I_School_Group_ID,
+            inSchoolSessionID = @I_School_Session_ID
+        WHERE
+            inExamCategoryId = @I_EXAM_CATEGORY_ID;
+        
+        SELECT 1 AS StatusFlag, 'Category updated successfully!' AS Message;
+    END
+END

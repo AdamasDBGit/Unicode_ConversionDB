@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[T_ERP_Fee_Structure_Session_Installment_Breakup] (
+    [I_Fee_Structure_Session_Installment_Breakup_ID] INT             IDENTITY (1, 1) NOT NULL,
+    [I_Fee_Structure_Installment_Component_ID]       INT             NULL,
+    [R_I_Fee_Component_ID]                           INT             NULL,
+    [I_Seq_No]                                       INT             NULL,
+    [N_Component_Actual_Total_Annual_Amount]         DECIMAL (8, 2)  NULL,
+    [Is_OneTime]                                     BIT             NULL,
+    [R_I_Fee_Pay_Installment_ID]                     INT             NULL,
+    [Is_During_Admission]                            BIT             NULL,
+    [Expected_Installment_Date]                      DATETIME        NULL,
+    [Dtt_Created_At]                                 DATETIME        NULL,
+    [Dtt_Modified_At]                                DATETIME        NULL,
+    [I_Created_By]                                   INT             NULL,
+    [I_Modified_By]                                  INT             NULL,
+    [I_Fee_Structure_AcademicSession_Map_ID]         INT             NULL,
+    [CGST_Perc]                                      NUMERIC (10, 2) NULL,
+    [SGST_Perc]                                      NUMERIC (10, 2) NULL,
+    [IGST_Perc]                                      NUMERIC (10, 2) NULL,
+    [IGST_value]                                     NUMERIC (10, 2) NULL,
+    [SGST_value]                                     NUMERIC (10, 2) NULL,
+    [CGST_value]                                     NUMERIC (10, 2) NULL,
+    [I_Fee_Structure_ID]                             INT             NULL,
+    [I_Brand_ID]                                     INT             NULL
+);
+

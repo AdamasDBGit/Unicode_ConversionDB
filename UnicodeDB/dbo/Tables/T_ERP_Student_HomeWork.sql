@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[T_ERP_Student_HomeWork] (
+    [I_Student_HomeWork_ID]     BIGINT          IDENTITY (1, 1) NOT NULL,
+    [R_I_School_Session_ID]     INT             NULL,
+    [R_I_Faculty_Master_ID]     INT             NULL,
+    [R_I_School_Group_Class_ID] INT             NULL,
+    [R_I_Class_ID]              INT             NULL,
+    [R_I_Stream_ID]             INT             NULL,
+    [R_I_Student_Detail_ID]     BIGINT          NULL,
+    [Dt_Assigned_Dt]            DATE            NULL,
+    [Dt_Due_Dt]                 DATE            NULL,
+    [R_I_HomeworkType_ID]       TINYINT         NOT NULL,
+    [S_HomeWork_Title]          NVARCHAR (MAX)  NULL,
+    [S_Homework_Desc]           NVARCHAR (4000) NULL,
+    [S_Submission_Method]       NVARCHAR (MAX)  NULL,
+    [Dt_Submission_Dt]          DATE            NULL,
+    [I_Homework_Status]         TINYINT         NULL,
+    [I_Submission_Status]       BIT             CONSTRAINT [DF__T_ERP_Stu__I_Sub__0644BD8A] DEFAULT ((0)) NULL,
+    [S_Submission_Remarks]      NVARCHAR (MAX)  NULL,
+    [Is_Active]                 BIT             CONSTRAINT [DF__T_ERP_Stu__Is_Ac__77F69E33] DEFAULT ((1)) NULL,
+    [Dtt_Created_At]            DATETIME        CONSTRAINT [DF__T_ERP_Stu__Dtt_C__78EAC26C] DEFAULT (getdate()) NULL,
+    [Dtt_Modified_At]           DATETIME        NULL,
+    [I_Created_By]              INT             NULL,
+    [I_Modified_By]             INT             NULL,
+    CONSTRAINT [PK__T_ERP_St__82494443105858F7] PRIMARY KEY CLUSTERED ([I_Student_HomeWork_ID] ASC)
+);
+

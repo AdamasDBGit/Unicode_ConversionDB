@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [MBP]
+    AUTHORIZATION [dbo];
+

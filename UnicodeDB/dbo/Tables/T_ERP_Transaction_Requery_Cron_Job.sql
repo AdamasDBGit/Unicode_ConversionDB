@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[T_ERP_Transaction_Requery_Cron_Job] (
+    [I_Requery_Cron_Job_ID]          INT            IDENTITY (1, 1) NOT NULL,
+    [S_Transaction_No]               NVARCHAR (MAX) NULL,
+    [I_Transaction_Master_ID]        INT            NULL,
+    [S_Current_Status]               NVARCHAR (MAX) NULL,
+    [CompleteStatus]                 BIT            NULL,
+    [CronCanBeProcess]               BIT            NULL,
+    [PG_NoOfAttempt]                 INT            NULL,
+    [ERP_NoOfAttempt]                INT            NULL,
+    [StatusID]                       BIT            NULL,
+    [CreatedOn]                      DATETIME       NULL,
+    [CompletedOn]                    DATETIME       NULL,
+    [Is_PG_Sucess]                   BIT            NULL,
+    [Is_PG_Failure]                  BIT            NULL,
+    [Is_Failed_User]                 BIT            NULL,
+    [Requery_PG_LogID]               INT            NULL,
+    [Requery_Request_LogID]          INT            NULL,
+    [PG_Response]                    NVARCHAR (MAX) NULL,
+    [CanbeProcessForERPSattlement]   BIT            NULL,
+    [Dt_PG_Current_Response_Date]    DATETIME       NULL,
+    [Dt_ERP_Current_Response_Date]   DATETIME       NULL,
+    [Dt_Closed_Date_By_Other_Source] DATETIME       NULL,
+    [S_PG_Remarks]                   NVARCHAR (MAX) NULL,
+    [S_ERP_Remarks]                  NVARCHAR (MAX) NULL,
+    [S_PG_Error]                     NVARCHAR (MAX) NULL,
+    [S_ERP_Error]                    NVARCHAR (MAX) NULL
+);
+

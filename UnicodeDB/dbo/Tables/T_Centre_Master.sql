@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[T_Centre_Master] (
+    [I_Centre_Id]                    INT            IDENTITY (1, 1) NOT NULL,
+    [S_Center_Code]                  NVARCHAR (MAX) NULL,
+    [S_Center_Name]                  NVARCHAR (MAX) NULL,
+    [I_Status]                       INT            NULL,
+    [Dt_Valid_From]                  DATETIME       NULL,
+    [Dt_Valid_To]                    DATETIME       NULL,
+    [S_Center_Short_Name]            NVARCHAR (MAX) NULL,
+    [I_Center_Category]              INT            NULL,
+    [I_RFF_Type]                     INT            NULL,
+    [I_Is_Startup_Material_In_Place] BIT            NULL,
+    [I_Is_Library_In_Place]          BIT            NULL,
+    [I_Country_ID]                   INT            NULL,
+    [I_Expiry_Status]                INT            NULL,
+    [S_Crtd_By]                      NVARCHAR (MAX) NULL,
+    [S_Upd_By]                       NVARCHAR (MAX) NULL,
+    [Dt_Crtd_On]                     DATETIME       NULL,
+    [Dt_Upd_On]                      DATETIME       NULL,
+    [I_Is_OwnCenter]                 INT            NULL,
+    [S_ServiceTax_Regd_Code]         NVARCHAR (MAX) NULL,
+    [S_SAP_Customer_Id]              NVARCHAR (MAX) NULL,
+    [I_Is_Center_Serv_Tax_Reqd]      BIT            NULL,
+    [S_Cost_Center]                  NVARCHAR (MAX) NULL,
+    [I_Brand_ID]                     INT            NULL,
+    CONSTRAINT [PK__T_Centre_Master__0F975522] PRIMARY KEY CLUSTERED ([I_Centre_Id] ASC)
+);
+

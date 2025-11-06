@@ -1,0 +1,16 @@
+﻿CREATE PROCEDURE [dbo].[uspGetTimeSlotListForSelectedCenter]
+(
+	@iCenterId INT
+)
+
+
+AS
+
+BEGIN
+	SET NOCOUNT ON;	
+	
+		SELECT I_TIMESLOT_ID,S_TIMESLOT_DESC, S_TimeSlot_Code
+		FROM T_CENTER_TIMESLOT 
+		WHERE I_CENTRE_ID = @iCenterId AND I_STATUS = 1
+	
+END

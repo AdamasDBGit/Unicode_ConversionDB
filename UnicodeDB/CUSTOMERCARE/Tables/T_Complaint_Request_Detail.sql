@@ -1,0 +1,28 @@
+﻿CREATE TABLE [CUSTOMERCARE].[T_Complaint_Request_Detail] (
+    [I_Complaint_Req_ID]         INT            IDENTITY (1, 1) NOT NULL,
+    [I_Root_Cause_ID]            INT            NULL,
+    [I_Center_ID]                INT            NULL,
+    [I_Course_ID]                INT            NULL,
+    [I_Status_ID]                INT            NULL,
+    [I_Complaint_Category_ID]    INT            NULL,
+    [I_Student_Detail_ID]        INT            NULL,
+    [Dt_Complaint_Date]          DATETIME       NULL,
+    [S_Complaint_Details]        VARCHAR (2000) NULL,
+    [I_Document_ID]              INT            NULL,
+    [I_User_ID]                  INT            CONSTRAINT [DF_T_Complaint_Request_Detail_I_User_ID] DEFAULT ((0)) NULL,
+    [S_Complaint_Code]           VARCHAR (20)   NULL,
+    [I_User_Hierarchy_detail_ID] INT            NULL,
+    [I_Complaint_Mode_ID]        INT            NULL,
+    [S_Crtd_By]                  VARCHAR (20)   NULL,
+    [S_Contact_Number]           VARCHAR (20)   NULL,
+    [S_Upd_By]                   VARCHAR (20)   NULL,
+    [S_Email_ID]                 VARCHAR (50)   NULL,
+    [I_Current_Escalation_level] SMALLINT       NULL,
+    [Dt_Crtd_On]                 DATETIME       NULL,
+    [Dt_Upd_On]                  DATETIME       NULL,
+    [S_Remarks]                  VARCHAR (2000) NULL,
+    [S_Name]                     VARCHAR (50)   NULL,
+    [S_Address]                  VARCHAR (100)  NULL,
+    CONSTRAINT [PK__T_Complaint_Requ__2117B236] PRIMARY KEY CLUSTERED ([I_Complaint_Req_ID] ASC)
+);
+

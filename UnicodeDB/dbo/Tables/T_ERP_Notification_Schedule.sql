@@ -1,0 +1,51 @@
+﻿CREATE TABLE [dbo].[T_ERP_Notification_Schedule] (
+    [inNotificationScheduleID] INT              IDENTITY (1, 1) NOT NULL,
+    [unNotificationScheduleID] UNIQUEIDENTIFIER DEFAULT (newid()) NULL,
+    [inTypeId]                 INT              NULL,
+    [stTypeName]               NVARCHAR (200)   NULL,
+    [inCategoryId]             INT              NULL,
+    [stCategoryName]           NVARCHAR (200)   NULL,
+    [inPriorityId]             INT              NULL,
+    [stPriorityName]           NVARCHAR (200)   NULL,
+    [stDeliveryChannelId]      NVARCHAR (20)    NULL,
+    [stDeliveryChannelName]    NVARCHAR (200)   NULL,
+    [inRecipientId]            INT              NULL,
+    [stRecipientName]          NVARCHAR (200)   NULL,
+    [stForAllOrIndividual]     NVARCHAR (200)   NULL,
+    [stSchoolProgramId]        NVARCHAR (200)   NULL,
+    [stSchoolProgramName]      NVARCHAR (200)   NULL,
+    [stClassId]                NVARCHAR (500)   NULL,
+    [stClassName]              NVARCHAR (500)   NULL,
+    [stClassStreamSectionId]   NVARCHAR (MAX)   NULL,
+    [stClassStreamSectionName] NVARCHAR (MAX)   NULL,
+    [inTemplateId]             INT              NULL,
+    [stTemplateTitle]          NVARCHAR (200)   NULL,
+    [stSMSTemplateMessage]     NVARCHAR (MAX)   NULL,
+    [stPushTemplateMessage]    NVARCHAR (MAX)   NULL,
+    [stEmailSubject]           NVARCHAR (200)   NULL,
+    [stEmailTemplateMessage]   NVARCHAR (MAX)   NULL,
+    [dtNotificationDate]       DATETIME         NULL,
+    [tmNotificationTime]       TIME (7)         NULL,
+    [stEmailAttachment]        NVARCHAR (MAX)   NULL,
+    [dtCreatedDate]            DATETIME         NULL,
+    [dtModifiedDate]           DATETIME         NULL,
+    [inCreatedBy]              INT              NULL,
+    [inModifiedBy]             INT              NULL,
+    [inStatus]                 BIT              NULL,
+    [inBrandId]                INT              NULL,
+    [stNotificationType]       NVARCHAR (200)   NULL,
+    [dtStartDate]              DATETIME         NULL,
+    [dtEndDate]                DATETIME         NULL,
+    [stFrequency]              NVARCHAR (200)   NULL,
+    [stFrequencyWord]          NVARCHAR (200)   NULL,
+    [stPushTitle]              NVARCHAR (100)   NULL,
+    [inJobId]                  INT              DEFAULT ((0)) NULL,
+    [stPushAttachment]         NVARCHAR (MAX)   NULL,
+    PRIMARY KEY CLUSTERED ([inNotificationScheduleID] ASC)
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_TERP_Notif_Sched_Brand_Type_ID]
+    ON [dbo].[T_ERP_Notification_Schedule]([inBrandId] ASC, [stNotificationType] ASC, [inNotificationScheduleID] ASC);
+

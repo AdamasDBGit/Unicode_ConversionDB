@@ -1,0 +1,179 @@
+﻿--exec [usp_ERP_FacultyUtilizationReport_ExamWiseAdmin] 107,3,'6',8,81,null
+CREATE PROCEDURE [dbo].[usp_ERP_FacultyUtilizationReport_ExamWiseAdmin]
+(
+@brandID int,@SessionID INT,@str_class_ID Varchar(100),@scheduleID int
+,@FacultyID int=null,@subjectID int =NULL
+)
+As 
+Begin
+--Declare @brandID int=107,@SessionID INT=3,@str_class_ID Varchar(100)
+select Distinct TC.S_Class_Name AS Class_name,SM.I_Class_ID AS Class_ID,
+SM.S_Subject_Name AS Subject_Name, FS.I_Subject_ID
+,FS.I_Faculty_Master_ID as Faculty_ID,FM.S_Faculty_Name as Faculty_Name
+,T1.inExamScheduleDetailId,ESD.stExamName
+Into #Teacher_Subject_temp
+from T_ERP_Faculty_Subject FS
+Inner Join T_Faculty_Master FM ON FM.I_Faculty_Master_ID=FS.I_Faculty_Master_ID
+and FM.I_Brand_ID=@brandID
+Inner Join T_Subject_Master SM ON SM.I_Subject_ID=FS.I_Subject_ID
+Inner Join T_Class TC ON TC.I_Class_ID=SM.I_Class_ID and Tc.I_Brand_ID=@brandID
+Inner Join T_School_Academic_Session_Master SS ON SS.I_Brand_ID=TC.I_Brand_ID
+and SS.I_School_Session_ID=@SessionID
+Inner Join
+(
+select Distinct ESS.inExamScheduleDetailId,ESS.inClassId,ESS.inSubjectID
+,EFS.I_Faculty_Master_ID
+from T_ERP_Exam_ScheduleSubjects ESS
+Inner Join T_ERP_Faculty_Subject EFS ON EFS.I_Subject_ID=ESS.inSubjectID
+Inner Join T_Subject_Master SM ON SM.I_Subject_ID=ESS.inSubjectID
+and SM.I_Class_ID=ESS.inClassId and SM.I_Brand_ID=@brandID
+Inner Join T_School_Academic_Session_Master SS ON SS.I_Brand_ID=SM.I_Brand_ID
+and SS.I_School_Session_ID=@SessionID
+) T1 ON T1.inClassId=TC.I_Class_ID and T1.inSubjectID=SM.I_Subject_ID
+and T1.I_Faculty_Master_ID=FM.I_Faculty_Master_ID
+Inner Join T_ERP_Exam_SchedulesDetails ESD 
+ON ESD.inExamScheduleDetailId=T1.inExamScheduleDetailId
+order by  FM.S_Faculty_Name, SM.I_Class_ID
+--Select * from #Teacher_Subject_temp where Faculty_Name ='Madhurima Rudra'
+Create Table #Courses(Id int Identity(1,1),CourseID int)              
+INSERT INTO #Courses (CourseID) -- Adjust ColumnName to match your table's column              
+SELECT Value              
+FROM dbo.ERP_SplitString(@str_class_ID, ',');
+
+Select distinct
+ mm.inExamScheduleDetailId
+,mm.inStudentId
+,mm.inSubjectId
+,ESSD.inSectionId
+--,mm.dcObtainedMarks
+,CAST(ROUND(mm.dcObtainedMarks, 0) AS INT) as dcObtainedMarks
+,CAST(ROUND(ESSD.dcFullMarks, 0) AS INT) as dcFullMarks
+,tt.Faculty_ID
+,tt.Faculty_Name
+,tt.Class_ID
+Into #TotalMarksResult_Stud
+from T_ERP_Exam_ScheduleSubjectAttendanceMarks mm
+Inner Join #Teacher_Subject_temp tt on tt.inExamScheduleDetailId=mm.inExamScheduleDetailId
+Inner Join T_ERP_Exam_ScheduleSubjectDetails ESSD 
+ON ESSD.inExamScheduleSubjectDetailId=mm.inExamScheduleSubjectDetailId
+and ESSD.inClassId=tt.Class_ID
+Inner Join #Courses ttc on ttc.CourseID=tt.Class_ID
+where Faculty_ID=@FacultyID and tt.inExamScheduleDetailId=@scheduleID
+--Select * from #TotalMarksResult_Stud
+
+Select SUM(dcObtainedMarks) as TotalMarks
+,inStudentId
+,Class_ID
+,inSubjectId
+,inSectionId
+,inExamScheduleDetailId
+,Faculty_ID
+,Faculty_Name
+INTO #FinalStudresult
+from #TotalMarksResult_Stud
+Group by inStudentId
+,Class_ID
+,inSubjectId
+,inSectionId
+,inExamScheduleDetailId
+,Faculty_ID
+,Faculty_Name
+
+
+
+
+Select Distinct 
+A.inSectionId
+,TS.S_Section_Name as Sectionname
+,A.inExamScheduleDetailId
+,RES.stExamName as ExamName
+,A.Class_ID
+,tc.S_Class_Name as ClassName
+,A.Faculty_ID
+,FM.S_Faculty_Name as FacultyName
+,A.inSubjectId
+,SM.S_Subject_Name AS SubjectName
+,isnull(E.Student,'0') AS R_0_To_40 ,                
+isnull(B.Student,'0') as R_41_To_60,                
+isnull(C.Student,'0') as R_61_To_80,                
+isnull(D.Student,'0') as R_81_To_100  
+
+from 
+(
+select inSectionId,inExamScheduleDetailId,Faculty_ID,inSubjectId
+, count (inStudentId) 
+as Student,                 
+concat(inSectionId,Faculty_ID,inSubjectId) as ID   ,            
+Class_ID            
+from #FinalStudresult             
+            
+where TotalMarks between 0 and 100   
+Group By 
+inSectionId,inExamScheduleDetailId,Faculty_ID,inSubjectId,Class_ID
+)A
+Left Join (
+select inSectionId,inExamScheduleDetailId,Faculty_ID,inSubjectId, count (inStudentId) 
+as Student,                 
+concat(inSectionId,Faculty_ID,inSubjectId) as ID   ,            
+Class_ID            
+from #FinalStudresult             
+            
+where TotalMarks between 0 and 40   
+Group By 
+inSectionId,inExamScheduleDetailId,Faculty_ID,inSubjectId,Class_ID
+) as E ON E.ID=A.ID
+Left Join (
+select inSectionId,inExamScheduleDetailId,Faculty_ID,inSubjectId, count (inStudentId) 
+as Student,                 
+concat(inSectionId,Faculty_ID,inSubjectId) as ID   ,            
+Class_ID            
+from #FinalStudresult             
+            
+where TotalMarks between 41 and 60   
+Group By 
+inSectionId,inExamScheduleDetailId,Faculty_ID,inSubjectId,Class_ID
+) as B on B.ID=A.ID
+Left Join
+(
+select inSectionId,inExamScheduleDetailId,Faculty_ID,inSubjectId, count (inStudentId) 
+as Student,                 
+concat(inSectionId,Faculty_ID,inSubjectId) as ID   ,            
+Class_ID            
+from #FinalStudresult             
+            
+where TotalMarks between 61 and 80   
+Group By 
+inSectionId,inExamScheduleDetailId,Faculty_ID,inSubjectId,Class_ID
+) AS C ON C.ID=A.ID
+Left Join
+(
+select inSectionId,inExamScheduleDetailId,Faculty_ID,inSubjectId, count (inStudentId) 
+as Student,                 
+concat(inSectionId,Faculty_ID,inSubjectId) as ID   ,            
+Class_ID            
+from #FinalStudresult             
+            
+where TotalMarks between 81 and 100   
+Group By 
+inSectionId,inExamScheduleDetailId,Faculty_ID,inSubjectId,Class_ID
+) as D On D.ID=A.ID
+Inner Join T_Class tc on tc.I_Class_ID=A.Class_ID and tc.I_Brand_ID=@brandID
+Inner Join T_Section TS ON TS.I_Section_ID=A.inSectionId
+Inner Join T_Faculty_Master FM ON FM.I_Faculty_Master_ID=A.Faculty_ID 
+and FM.I_Brand_ID=@brandID
+Inner Join T_ERP_Exam_SchedulesDetails RES ON RES.inExamScheduleDetailId=A.inExamScheduleDetailId
+and RES.inAcademicSessionId=@SessionID
+Inner Join T_Subject_Master SM ON SM.I_Subject_ID=A.inSubjectId
+ORDER BY 
+A.Faculty_ID,A.Class_ID,A.inSectionId,A.inSubjectId,
+isnull(E.Student,'0')  ,  
+isnull(B.Student,'0')  ,  
+isnull(C.Student,'0')  ,  
+isnull(D.Student,'0')  
+Drop table #TotalMarksResult_Stud;
+drop table #Courses;
+drop table #FinalStudresult;
+drop table #Teacher_Subject_temp;
+End
+
+

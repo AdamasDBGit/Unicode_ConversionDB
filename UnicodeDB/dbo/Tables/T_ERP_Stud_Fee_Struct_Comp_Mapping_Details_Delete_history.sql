@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[T_ERP_Stud_Fee_Struct_Comp_Mapping_Details_Delete_history] (
+    [I_Stud_Fee_Struct_CompMap_Details_ID] BIGINT          NULL,
+    [R_I_Stud_Fee_Struct_CompMap_ID]       BIGINT          NULL,
+    [R_I_Fee_Structure_ID]                 INT             NULL,
+    [R_I_Fee_Component_ID]                 INT             NULL,
+    [Seq]                                  INT             NULL,
+    [N_Component_Actual_Amount]            NUMERIC (12, 2) NULL,
+    [Dtt_Created_At]                       DATETIME        NULL,
+    [Dtt_Modified_At]                      DATETIME        NULL,
+    [I_Created_By]                         INT             NULL,
+    [I_Modified_By]                        INT             NULL,
+    [Is_Active]                            BIT             NULL,
+    [R_I_Fee_Pay_Installment_ID]           INT             NULL,
+    [Dt_Moved_DT]                          DATETIME        NULL,
+    [Is_Moved]                             BIT             NULL,
+    [I_ExtracomponentRef_ID]               INT             NULL,
+    [I_ExtracomponentRef_Type]             INT             NULL,
+    [CGST_per]                             NUMERIC (10, 2) NULL,
+    [SGST_per]                             NUMERIC (10, 2) NULL,
+    [IGST_per]                             NUMERIC (10, 2) NULL,
+    [IGST_value]                           NUMERIC (10, 2) NULL,
+    [CGST_value]                           NUMERIC (10, 2) NULL,
+    [SGST_value]                           NUMERIC (10, 2) NULL,
+    [I_ExtracomponentRef2_ID]              INT             NULL,
+    [Is_OneTime]                           BIT             NULL,
+    [Dt_Deleted_date]                      DATETIME        NULL
+);
+

@@ -1,0 +1,174 @@
+﻿-- ===============================================================    
+-- Author : Surya Narayan Chakraborty.    
+-- Created On : 01/11/2025    
+-- ===============================================================    
+    
+CREATE PROCEDURE [dbo].[usp_ERP_Route_Pickup_InsertUpdate]      
+    @RouteID INT = NULL,      
+    @RouteNo VARCHAR(500) = NULL,      
+    @PickupPointID INT = NULL,      
+    @Status INT = NULL,      
+    @UpdtBy VARCHAR(500) = NULL,      
+    @CrtdBy VARCHAR(500) = NULL,      
+    @Latitude VARCHAR(4000) = NULL,      
+    @Longitude VARCHAR(4000) = NULL,      
+    @Location VARCHAR(4000) = NULL,      
+    @iBrandID INT = NULL,      
+    @UT_Route dbo.UT_Route READONLY      
+AS      
+BEGIN      
+    SET NOCOUNT ON;      
+          
+    BEGIN TRY      
+        BEGIN TRANSACTION;      
+        DECLARE @RouteInsertStatus INT = 0, @RouteUpdateStatus INT = 0;      
+        DECLARE @MappingInsertStatus INT = 0, @MappingUpdateStatus INT = 0;      
+        DECLARE @MappingDeleteStatus INT = 0; -- New variable to track deletion status
+        DECLARE @MergeOutput TABLE (      
+            ActionType VARCHAR(500),       
+            I_PickupPoint_ID INT,       
+            S_Pickup_Name VARCHAR(500),      
+            Source_I_PickupPoint_ID INT      
+        );      
+      
+        -- Insert / Update T_BusRoute_Master      
+        IF @RouteID IS NULL      
+        BEGIN      
+            INSERT INTO T_BusRoute_Master      
+              (      
+                S_Route_No, I_Status, S_Crtd_By, Dt_Crtd_On, S_Updt_By, Dt_Updt_On, I_Brand_ID,      
+                start_latitude, start_longitude, S_Location      
+              )      
+            VALUES       
+              (      
+              @RouteNo, @Status, @CrtdBy, GETDATE(), @UpdtBy, GETDATE(), @iBrandID, @Latitude,       
+              @Longitude, @Location      
+              );      
+            SET @RouteID = SCOPE_IDENTITY();      
+            SET @RouteInsertStatus = 1;      
+        END      
+        ELSE      
+        BEGIN      
+            UPDATE T_BusRoute_Master       
+            SET S_Route_No = @RouteNo, I_Status = @Status, S_Updt_By = @UpdtBy, Dt_Updt_On = GETDATE(),       
+                I_Brand_ID = @iBrandID, start_latitude = @Latitude, start_longitude = @Longitude,      
+                S_Location = @Location      
+            WHERE I_Route_ID = @RouteID;      
+            SET @RouteUpdateStatus = 1;      
+        END      
+      
+        -- Merge Statement with OUTPUT to capture generated IDs and action types      
+        MERGE INTO T_Transport_Master AS target       
+        USING @UT_Route AS source      
+        ON target.I_PickupPoint_ID = source.I_PickupPoint_ID        
+        WHEN MATCHED THEN      
+            UPDATE SET       
+                S_PickupPoint_Name = source.S_Pickup_Name,       
+                pickup_latitude = source.S_Latitude,      
+                pickup_longitude = source.S_Longitude,       
+                PickPoint_Landmark = source.S_Landmark,      
+                S_PickupPoint_Location = source.S_Location,       
+                pickup_index = source.S_Pickup_Order,      
+                drop_index = source.S_Drop_Order,       
+                I_Status = 1,       
+                S_Updt_By = @UpdtBy,       
+                Dt_Updt_On = GETDATE()      
+        WHEN NOT MATCHED THEN      
+            INSERT (      
+                I_Brand_ID, S_PickupPoint_Name, pickup_latitude, pickup_longitude,       
+                pickup_index, drop_index, I_Status, PickPoint_Landmark,       
+                S_PickupPoint_Location, S_Updt_BY, Dt_Updt_On, S_Crtd_By, Dt_Crtd_On      
+            )      
+            VALUES (      
+                @iBrandID, source.S_Pickup_Name, source.S_Latitude, source.S_Longitude,       
+                source.S_Pickup_Order, source.S_Drop_Order, 1, source.S_Landmark,       
+                source.S_Location, @UpdtBy, GETDATE(), @CrtdBy, GETDATE()      
+            )      
+        OUTPUT $action, inserted.I_PickupPoint_ID, source.S_Pickup_Name, source.I_PickupPoint_ID       
+        INTO @MergeOutput;      
+      
+        -- Map ALL PickupPointIDs from the MERGE output to the route      
+        INSERT INTO T_Route_Transport_Map       
+        (      
+            I_PickupPoint_ID, I_Route_ID, I_Status, S_Crtd_By, Dt_Crtd_On,       
+            S_Updt_By, Dt_Updt_On, start_latitude, start_longitude      
+        )      
+        SELECT       
+            mo.I_PickupPoint_ID, @RouteID, @Status, @CrtdBy, GETDATE(),       
+            @UpdtBy, GETDATE(), @Latitude, @Longitude      
+        FROM @MergeOutput mo      
+        WHERE NOT EXISTS (      
+            SELECT 1 FROM T_Route_Transport_Map       
+            WHERE I_PickupPoint_ID = mo.I_PickupPoint_ID       
+           AND I_Route_ID = @RouteID      
+        );      
+      
+        -- Check if any mapping inserts happened      
+        IF @@ROWCOUNT > 0      
+            SET @MappingInsertStatus = 1;      
+      
+        -- Also update existing mappings if any      
+        UPDATE T_Route_Transport_Map      
+        SET       
+            I_Status = @Status,       
+            S_Updt_By = @UpdtBy,       
+            Dt_Updt_On = GETDATE(),       
+            start_latitude = @Latitude,       
+            start_longitude = @Longitude      
+        FROM T_Route_Transport_Map rtm      
+        INNER JOIN @MergeOutput mo ON rtm.I_PickupPoint_ID = mo.I_PickupPoint_ID       
+        WHERE rtm.I_Route_ID = @RouteID;      
+      
+        -- Check if any mapping updates happened      
+        IF @@ROWCOUNT > 0      
+            SET @MappingUpdateStatus = 1;      
+
+        -- NEW LOGIC: Delete pickup points that are not in the current update but exist for this route
+        -- First, get all pickup point IDs that are being updated/inserted in this operation
+        DECLARE @CurrentPickupPointIDs TABLE (I_PickupPoint_ID INT);
+        
+        INSERT INTO @CurrentPickupPointIDs (I_PickupPoint_ID)
+        SELECT I_PickupPoint_ID FROM @MergeOutput;
+        
+        -- Delete from mapping table for this route where pickup points are not in current update
+        DELETE FROM T_Route_Transport_Map 
+        WHERE I_Route_ID = @RouteID 
+          AND I_PickupPoint_ID NOT IN (SELECT I_PickupPoint_ID FROM @CurrentPickupPointIDs);
+        
+        -- Check if any mappings were deleted
+        IF @@ROWCOUNT > 0
+            SET @MappingDeleteStatus = 1;
+        
+        -- Delete from Transport Master where pickup points are not used in any route and not in current update
+        DELETE FROM T_Transport_Master 
+        WHERE I_PickupPoint_ID NOT IN (SELECT I_PickupPoint_ID FROM T_Route_Transport_Map)
+          AND I_PickupPoint_ID NOT IN (SELECT I_PickupPoint_ID FROM @CurrentPickupPointIDs);
+      
+        -- Final Status Output      
+        IF @RouteInsertStatus = 1      
+        BEGIN      
+            SELECT 1 AS StatusFlag, 'Route Pickup Configuration Added' AS Message, @RouteID AS RouteID;      
+        END      
+        ELSE IF @RouteUpdateStatus = 1 OR @MappingDeleteStatus = 1      
+        BEGIN      
+            SELECT 1 AS StatusFlag, 'Route Pickup Configuration Updated' AS Message, @RouteID AS RouteID;      
+        END      
+        ELSE      
+        BEGIN      
+            SELECT 0 AS StatusFlag, 'Action Not Taken' AS Message, @RouteID AS RouteID;      
+        END      
+      
+        -- Return the generated/updated pickup point IDs      
+        --SELECT I_PickupPoint_ID, S_Pickup_Name, ActionType       
+        --FROM @MergeOutput;      
+      
+        COMMIT;      
+    END TRY      
+    BEGIN CATCH      
+        IF @@TRANCOUNT > 0 ROLLBACK;      
+              
+        DECLARE @ErrMsg NVARCHAR(4000) = ERROR_MESSAGE();      
+        SELECT 0 AS StatusFlag, @ErrMsg AS Message, @RouteID AS RouteID;            
+        RAISERROR(@ErrMsg, 16, 1);      
+    END CATCH;      
+END;

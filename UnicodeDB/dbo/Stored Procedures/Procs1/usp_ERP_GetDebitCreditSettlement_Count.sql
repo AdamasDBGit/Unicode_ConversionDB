@@ -1,0 +1,335 @@
+﻿
+
+CREATE PROCEDURE [dbo].[usp_ERP_GetDebitCreditSettlement_Count]  
+--exec [dbo].[usp_ERP_GetDebitCreditSettlement_Count] 35,11,107,NULL    
+    (
+      --@dtDateTo DATETIME = NULL ,
+      --@dtDateFrom DATETIME = NULL ,    
+   --@iCenterID INT,
+      --@sHierarchyDetailID NVARCHAR(MAX) ,
+	  @iAcademicSession int,
+	  @iMonthNo int,
+      @iBrandID INT = NULL ,
+     @IsSettlement BIT = NULL
+    )
+AS
+    BEGIN          
+        SET NOCOUNT ON; 
+
+
+		DECLARE @StartDate DATE = '2024-03-01';
+		DECLARE @EndDate DATE = '2025-04-01';
+		DECLARE @TargetMonth INT = @iMonthNo; -- November
+
+		DECLARE @dtDateTo datetime=NULL,@dtDateFrom datetime=NULL
+
+		DECLARE @DtOracleCutoffDateofPreviosMonth DATETIME = NULL;
+		DECLARE @n INT = 0; -- Replace with your desired number of months
+
+
+
+
+		select @StartDate=Dt_Session_Start_Date,@EndDate=Dt_Session_End_Date from T_School_Academic_Session_Master 
+		where I_School_Session_ID=@iAcademicSession and I_Brand_ID=@iBrandID 
+
+		-- Calculate the year for the target month (November) within the range
+		DECLARE @Year INT = YEAR(@StartDate);
+		DECLARE @FirstDayOfTargetMonth DATE = DATEFROMPARTS(@Year, @TargetMonth, 1);
+
+		-- If the first day of the target month is before the start date, move to the next year
+		IF @FirstDayOfTargetMonth < @StartDate
+			SET @FirstDayOfTargetMonth = DATEADD(YEAR, 1, @FirstDayOfTargetMonth);
+
+		-- Calculate the last day of the target month
+		DECLARE @LastDayOfTargetMonth DATE = EOMONTH(@FirstDayOfTargetMonth);
+
+		-- Check if the calculated dates fall within the range
+		IF @FirstDayOfTargetMonth BETWEEN @StartDate AND @EndDate AND @LastDayOfTargetMonth BETWEEN @StartDate AND @EndDate
+		BEGIN
+			set @dtDateFrom=@FirstDayOfTargetMonth
+			set @dtDateTo=@LastDayOfTargetMonth
+		END
+
+
+		
+		--select @dtDateTo,@dtDateFrom
+		
+
+	-- Get the last day of the nth month from the current month
+	SET @DtOracleCutoffDateofPreviosMonth = EOMONTH(DATEADD(MONTH, (@n-1), @dtDateFrom));
+
+
+
+	print  @dtDateFrom 
+	print @dtDateTo
+
+		IF @IsSettlement IS NULL
+			BEGIN
+
+			WITH SettledReceipts AS (
+				SELECT 
+					SUM(RH.N_Receipt_Amount + RH.N_Tax_Amount) AS Total_Receipt_Amount,
+					COUNT(*) AS No_Receipts
+				FROM 
+					dbo.T_Receipt_Header RH WITH (NOLOCK)
+					left JOIN dbo.T_Student_Detail SD WITH (NOLOCK) ON SD.I_Student_Detail_ID = RH.I_Student_Detail_ID
+					left join dbo.T_Enquiry_Regn_Detail as ERD  WITH (NOLOCK) ON RH.I_Enquiry_Regn_ID=ERD.I_Enquiry_Regn_ID
+					INNER JOIN dbo.T_PaymentMode_Master AS TPMM WITH (NOLOCK) ON TPMM.I_PaymentMode_ID = RH.I_PaymentMode_ID
+					INNER JOIN dbo.T_Brand_Center_Details AS BCD WITH (NOLOCK) ON BCD.I_Centre_Id = RH.I_Centre_Id
+				WHERE 
+					TPMM.ISAllowedForSattlement = 'true'
+						AND TPMM.IsAllowedForDebitCredit = 'true'
+						AND DATEDIFF(dd, Dt_Deposit_Date, @dtDateFrom) <= 0
+                        AND DATEDIFF(dd, Dt_Deposit_Date, @dtDateTo) >= 0 
+						AND RH.Dt_Receipt_Date BETWEEN @dtDateFrom AND @dtDateTo
+                        AND RH.I_Status = 1
+						AND BCD.I_Brand_ID=@iBrandID
+			), 
+			UnSettledRemainingReceipts AS (
+				SELECT 
+					SUM(RH.N_Receipt_Amount + RH.N_Tax_Amount) AS Total_Receipt_Amount,
+					COUNT(*) AS No_Receipts
+				FROM 
+					dbo.T_Receipt_Header RH WITH (NOLOCK)
+					left JOIN dbo.T_Student_Detail SD WITH (NOLOCK) ON SD.I_Student_Detail_ID = RH.I_Student_Detail_ID
+					left join dbo.T_Enquiry_Regn_Detail as ERD  WITH (NOLOCK) ON RH.I_Enquiry_Regn_ID=ERD.I_Enquiry_Regn_ID
+					INNER JOIN dbo.T_PaymentMode_Master AS TPMM WITH (NOLOCK) ON TPMM.I_PaymentMode_ID = RH.I_PaymentMode_ID
+					INNER JOIN dbo.T_Brand_Center_Details AS BCD WITH (NOLOCK) ON BCD.I_Centre_Id = RH.I_Centre_Id
+				WHERE 
+					TPMM.ISAllowedForSattlement = 'true'
+					AND TPMM.IsAllowedForDebitCredit = 'true'
+					AND (RH.Bank_Account_Name IS NULL OR RH.Dt_Deposit_Date IS NULL)
+					AND RH.Dt_Receipt_Date BETWEEN @dtDateFrom AND @dtDateTo
+					AND RH.I_Status = 1
+					AND BCD.I_Brand_ID = @iBrandID
+			),
+			UnSettledRemainingPreviousMonthReceipts AS (
+				SELECT 
+					SUM(RH.N_Receipt_Amount + RH.N_Tax_Amount) AS Total_Receipt_Amount,
+					COUNT(*) AS No_Receipts
+				FROM 
+					dbo.T_Receipt_Header RH WITH (NOLOCK)
+					left JOIN dbo.T_Student_Detail SD WITH (NOLOCK) ON SD.I_Student_Detail_ID = RH.I_Student_Detail_ID
+					left join dbo.T_Enquiry_Regn_Detail as ERD  WITH (NOLOCK) ON RH.I_Enquiry_Regn_ID=ERD.I_Enquiry_Regn_ID
+					INNER JOIN dbo.T_PaymentMode_Master AS TPMM WITH (NOLOCK) ON TPMM.I_PaymentMode_ID = RH.I_PaymentMode_ID
+					INNER JOIN dbo.T_Brand_Center_Details AS BCD WITH (NOLOCK) ON BCD.I_Centre_Id = RH.I_Centre_Id
+				WHERE 
+					TPMM.ISAllowedForSattlement = 'true'
+					AND TPMM.IsAllowedForDebitCredit = 'true'
+					AND (RH.Bank_Account_Name IS NULL OR RH.Dt_Deposit_Date IS NULL)
+					AND CONVERT(DATE,RH.Dt_Receipt_Date) <= CONVERT(DATE,@DtOracleCutoffDateofPreviosMonth)
+					AND RH.I_Status = 1
+					AND BCD.I_Brand_ID = @iBrandID
+			),
+			SettledPreviousMonthReceipts AS (
+				SELECT 
+					SUM(RH.N_Receipt_Amount + RH.N_Tax_Amount) AS Total_Receipt_Amount,
+					COUNT(*) AS No_Receipts
+				FROM 
+					dbo.T_Receipt_Header RH WITH (NOLOCK)
+					left JOIN dbo.T_Student_Detail SD WITH (NOLOCK) ON SD.I_Student_Detail_ID = RH.I_Student_Detail_ID
+					left join dbo.T_Enquiry_Regn_Detail as ERD  WITH (NOLOCK) ON RH.I_Enquiry_Regn_ID=ERD.I_Enquiry_Regn_ID
+					INNER JOIN dbo.T_PaymentMode_Master AS TPMM WITH (NOLOCK) ON TPMM.I_PaymentMode_ID = RH.I_PaymentMode_ID
+					INNER JOIN dbo.T_Brand_Center_Details AS BCD WITH (NOLOCK) ON BCD.I_Centre_Id = RH.I_Centre_Id
+				WHERE 
+					TPMM.ISAllowedForSattlement = 'true'
+					AND TPMM.IsAllowedForDebitCredit = 'true'
+					AND DATEDIFF(dd, Dt_Deposit_Date, @dtDateFrom) <= 0
+                        AND DATEDIFF(dd, Dt_Deposit_Date, @dtDateTo) >= 0 
+					AND CONVERT(DATE,RH.Dt_Receipt_Date) <= CONVERT(DATE,@DtOracleCutoffDateofPreviosMonth)
+					AND RH.I_Status = 1
+					AND BCD.I_Brand_ID = @iBrandID
+			)
+
+
+
+
+				-- Select from both CTEs in a single row
+				SELECT 
+					SettledReceipts.Total_Receipt_Amount AS SettledReceipts_Amount,
+					SettledReceipts.No_Receipts AS SettledReceipts_Count,
+					UnSettledRemainingReceipts.Total_Receipt_Amount AS UnSettledRemainingReceipts_Amount,
+					UnSettledRemainingReceipts.No_Receipts AS UnSettledRemainingReceipts_Count,
+					UnSettledRemainingPreviousMonthReceipts.Total_Receipt_Amount AS UnSettledRemainingPreviousReceipts_Amount,
+					UnSettledRemainingPreviousMonthReceipts.No_Receipts AS UnSettledRemainingPreviousReceipts_Count,
+					SettledPreviousMonthReceipts.Total_Receipt_Amount AS SettledPreviousReceipts_Amount,
+					SettledPreviousMonthReceipts.No_Receipts AS SettledPreviousReceipts_Count,
+					(SELECT DATENAME(MONTH, @FirstDayOfTargetMonth)) as CurrentMonthName,
+					 CAST(@LastDayOfTargetMonth AS DATETIME) + CAST('23:59:00' AS DATETIME) as Settelment_Cutoff_Date,
+					 CASE WHEN CONVERT(DATE,@LastDayOfTargetMonth) >= CONVERT(DATE,GETDATE()) THEN 'true'
+					 ELSE 'false' END IsEditable,
+					 @Year as CurrentYear
+				 , (ISNULL(SettledReceipts.Total_Receipt_Amount,0)+ISNULL(UnSettledRemainingReceipts.Total_Receipt_Amount,0)) as TotalReceipt_Amount
+				,(ISNULL(SettledReceipts.No_Receipts,0) + ISNULL(UnSettledRemainingReceipts.No_Receipts,0)) TotalReceipt_count
+				FROM 
+					SettledReceipts
+				CROSS JOIN 
+					UnSettledRemainingReceipts
+				CROSS JOIN
+					UnSettledRemainingPreviousMonthReceipts
+				CROSS JOIN
+					SettledPreviousMonthReceipts
+					
+
+			END
+
+ELSE
+BEGIN
+
+        IF @IsSettlement = 0
+            BEGIN    
+                SELECT  RH.N_Receipt_Amount + RH.N_Tax_Amount AS N_Receipt_Amount ,
+                        RH.I_Receipt_Header_ID ,
+                        SD.S_First_Name ,
+                        SD.S_Middle_Name ,
+                        SD.S_Last_Name ,
+                        RH.I_Enquiry_Regn_ID ,
+                        RH.I_Student_Detail_ID ,
+						SD.S_Student_ID as StudentID,
+                        RH.S_Receipt_No ,
+                        RH.I_Receipt_Type ,
+                        RH.I_Centre_Id ,
+                        RH.I_PaymentMode_ID ,
+                        ISNULL(RH.S_ChequeDD_No, CASE WHEN TPMM.S_PaymentMode_Name LIKE '%ICICI%' AND @iBrandID=107 THEN 'ICICI'
+                        WHEN @iBrandID=109 AND TPMM.S_PaymentMode_Name LIKE '%HDFC%' THEN 'HDFC'
+                        WHEN TPMM.S_PaymentMode_Name LIKE 'ONLINE%' THEN TPMM.S_PaymentMode_Name
+                        ELSE '------' END) AS S_ChequeDD_No ,
+                        RH.Bank_Account_Name ,
+                        RH.Dt_Deposit_Date
+                FROM    dbo.T_Receipt_Header RH WITH ( NOLOCK )
+                        INNER JOIN dbo.T_Student_Detail SD WITH ( NOLOCK ) ON SD.I_Student_Detail_ID = RH.I_Student_Detail_ID
+                        INNER JOIN dbo.T_PaymentMode_Master AS TPMM WITH (NOLOCK) ON TPMM.I_PaymentMode_ID = RH.I_PaymentMode_ID
+						INNER JOIN dbo.T_Brand_Center_Details as BCD WITH (NOLOCK) ON BCD.I_Centre_Id=RH.I_Centre_Id -- added for eliminate for remove arivoo's centre depenedency  
+                WHERE  -- RH.I_PaymentMode_ID IN ( 13, 14, 15, 16, 17, 19, 20,21,22,23,24,25,28 )
+                       -- AND RH.I_Centre_Id IN (
+                        --SELECT  fnCenter.centerID
+                        --FROM    fnGetCentersForReports(@sHierarchyDetailID,
+                        --                               @iBrandID) fnCenter )--(select chnd.I_Center_ID from T_Center_Hierarchy_Name_Details chnd where chnd.I_Hierarchy_Detail_ID=@iHierarchyDetailID)
+                        TPMM.ISAllowedForSattlement = 'true'
+						AND TPMM.IsAllowedForDebitCredit = 'true'
+						AND ( RH.Bank_Account_Name IS NULL
+                              OR RH.Dt_Deposit_Date IS NULL
+                            )
+                        AND RH.Dt_Receipt_Date BETWEEN @dtDateFrom
+                                               AND     @dtDateTo
+                        AND RH.I_Status = 1
+						AND BCD.I_Brand_ID=@iBrandID
+                UNION ALL
+                SELECT  RH.N_Receipt_Amount + RH.N_Tax_Amount AS N_Receipt_Amount ,
+                        RH.I_Receipt_Header_ID ,
+                        TERD.S_First_Name ,
+                        TERD.S_Middle_Name ,
+                        TERD.S_Last_Name ,
+                        RH.I_Enquiry_Regn_ID ,
+                        RH.I_Student_Detail_ID ,
+						NULL as StudentID,
+                        RH.S_Receipt_No ,
+                        RH.I_Receipt_Type ,
+                        RH.I_Centre_Id ,
+                        RH.I_PaymentMode_ID ,
+                        ISNULL(RH.S_ChequeDD_No, CASE WHEN TPMM.S_PaymentMode_Name LIKE '%ICICI%' AND @iBrandID=107 THEN 'ICICI'
+                        WHEN @iBrandID=109 AND TPMM.S_PaymentMode_Name LIKE '%HDFC%' THEN 'HDFC'
+                        WHEN TPMM.S_PaymentMode_Name LIKE 'ONLINE%' THEN TPMM.S_PaymentMode_Name
+                        ELSE '------' END) AS S_ChequeDD_No ,
+                        RH.Bank_Account_Name ,
+                        RH.Dt_Deposit_Date
+                FROM    dbo.T_Receipt_Header RH WITH ( NOLOCK )
+                        INNER JOIN dbo.T_Enquiry_Regn_Detail TERD WITH ( NOLOCK ) ON TERD.I_Enquiry_Regn_ID = RH.I_Enquiry_Regn_ID
+                        INNER JOIN dbo.T_PaymentMode_Master AS TPMM WITH (NOLOCK) ON TPMM.I_PaymentMode_ID = RH.I_PaymentMode_ID
+						INNER JOIN dbo.T_Brand_Center_Details as BCD WITH (NOLOCK) ON BCD.I_Centre_Id=RH.I_Centre_Id -- added for eliminate for remove arivoo's centre depenedency
+				WHERE  -- RH.I_PaymentMode_ID IN ( 13, 14, 15, 16, 17, 19, 20,21,22 ,23,24,25,28)
+                --        AND RH.I_Centre_Id IN (
+                --        SELECT  fnCenter.centerID
+                --        FROM    fnGetCentersForReports(@sHierarchyDetailID,
+                --                                       @iBrandID) fnCenter ) --(select chnd.I_Center_ID from T_Center_Hierarchy_Name_Details chnd where chnd.I_Hierarchy_Detail_ID=@iHierarchyDetailID)
+                        TPMM.ISAllowedForSattlement = 'true'
+						AND TPMM.IsAllowedForDebitCredit = 'true'
+						AND ( RH.Bank_Account_Name IS NULL
+                              OR RH.Dt_Deposit_Date IS NULL
+                            )
+                        AND RH.Dt_Receipt_Date BETWEEN @dtDateFrom
+                                               AND     @dtDateTo
+                        AND RH.I_Status = 1 
+						AND BCD.I_Brand_ID=@iBrandID
+  
+  
+            END    
+        ELSE
+            BEGIN    
+                SELECT  RH.N_Receipt_Amount + RH.N_Tax_Amount AS N_Receipt_Amount ,
+                        RH.I_Receipt_Header_ID ,
+                        SD.S_First_Name ,
+                        SD.S_Middle_Name ,
+                        SD.S_Last_Name ,
+                        RH.I_Enquiry_Regn_ID ,
+                        RH.I_Student_Detail_ID ,
+						SD.S_Student_ID as StudentID,
+                        RH.S_Receipt_No ,
+                        RH.I_Receipt_Type ,
+                        RH.I_Centre_Id ,
+                        RH.I_PaymentMode_ID ,
+                        ISNULL(RH.S_ChequeDD_No, CASE WHEN TPMM.S_PaymentMode_Name LIKE '%ICICI%' AND @iBrandID=107 THEN 'ICICI'
+                        WHEN @iBrandID=109 AND TPMM.S_PaymentMode_Name LIKE '%HDFC%' THEN 'HDFC'
+                        WHEN TPMM.S_PaymentMode_Name LIKE 'ONLINE%' THEN TPMM.S_PaymentMode_Name
+                        ELSE '------' END) AS S_ChequeDD_No ,
+                        RH.Bank_Account_Name ,
+                        RH.Dt_Deposit_Date
+                FROM    dbo.T_Receipt_Header RH WITH ( NOLOCK )
+                        INNER JOIN dbo.T_Student_Detail SD WITH ( NOLOCK ) ON SD.I_Student_Detail_ID = RH.I_Student_Detail_ID
+                        INNER JOIN dbo.T_PaymentMode_Master AS TPMM WITH (NOLOCK) ON TPMM.I_PaymentMode_ID = RH.I_PaymentMode_ID
+						INNER JOIN dbo.T_Brand_Center_Details as BCD WITH (NOLOCK) ON BCD.I_Centre_Id=RH.I_Centre_Id -- added for eliminate for remove arivoo's centre depenedency
+				WHERE   --RH.I_PaymentMode_ID IN ( 13, 14, 15, 16, 17,19,20,21,22,23,24,25,28 )
+                --        AND RH.I_Centre_Id IN (
+                --        SELECT  fnCenter.centerID
+                --        FROM    fnGetCentersForReports(@sHierarchyDetailID,
+                --                                       @iBrandID) fnCenter )--(select chnd.I_Center_ID from T_Center_Hierarchy_Name_Details chnd where chnd.I_Hierarchy_Detail_ID=@iHierarchyDetailID)    
+						TPMM.ISAllowedForSattlement = 'true'
+						AND TPMM.IsAllowedForDebitCredit = 'true'
+						AND DATEDIFF(dd, Dt_Deposit_Date, @dtDateFrom) <= 0
+                        AND DATEDIFF(dd, Dt_Deposit_Date, @dtDateTo) >= 0 
+                        AND RH.I_Status = 1
+						AND BCD.I_Brand_ID=@iBrandID
+                        
+                        UNION ALL
+                        
+                        SELECT  RH.N_Receipt_Amount + RH.N_Tax_Amount AS N_Receipt_Amount ,
+                        RH.I_Receipt_Header_ID ,
+                        TERD.S_First_Name ,
+                        TERD.S_Middle_Name ,
+                        TERD.S_Last_Name ,
+                        RH.I_Enquiry_Regn_ID ,
+                        RH.I_Student_Detail_ID ,
+						NULL as StudentID,
+                        RH.S_Receipt_No ,
+                        RH.I_Receipt_Type ,
+                        RH.I_Centre_Id ,
+                        RH.I_PaymentMode_ID ,
+                        ISNULL(RH.S_ChequeDD_No, CASE WHEN TPMM.S_PaymentMode_Name LIKE '%ICICI%' AND @iBrandID=107 THEN 'ICICI'
+                        WHEN @iBrandID=109 AND TPMM.S_PaymentMode_Name LIKE '%HDFC%' THEN 'HDFC'
+                        WHEN TPMM.S_PaymentMode_Name LIKE 'ONLINE%' THEN TPMM.S_PaymentMode_Name
+                        ELSE '------' END) AS S_ChequeDD_No ,
+                        RH.Bank_Account_Name ,
+                        RH.Dt_Deposit_Date
+                FROM    dbo.T_Receipt_Header RH WITH ( NOLOCK )
+                        --INNER JOIN dbo.T_Student_Detail SD WITH ( NOLOCK ) ON SD.I_Student_Detail_ID = RH.I_Student_Detail_ID
+                        INNER JOIN dbo.T_Enquiry_Regn_Detail AS TERD WITH (NOLOCK) ON TERD.I_Enquiry_Regn_ID = RH.I_Enquiry_Regn_ID
+                        INNER JOIN dbo.T_PaymentMode_Master AS TPMM WITH (NOLOCK) ON TPMM.I_PaymentMode_ID = RH.I_PaymentMode_ID
+						INNER JOIN dbo.T_Brand_Center_Details as BCD WITH (NOLOCK) ON BCD.I_Centre_Id=RH.I_Centre_Id -- added for eliminate for remove arivoo's centre depenedency
+			   WHERE   --RH.I_PaymentMode_ID IN ( 13, 14, 15, 16, 17,19,20,21,22 ,23,24,25,28)
+                        --AND RH.I_Centre_Id IN (
+                        --SELECT  fnCenter.centerID
+                        --FROM    fnGetCentersForReports(@sHierarchyDetailID,
+                        --                               @iBrandID) fnCenter )--(select chnd.I_Center_ID from T_Center_Hierarchy_Name_Details chnd where chnd.I_Hierarchy_Detail_ID=@iHierarchyDetailID)    
+                        TPMM.ISAllowedForSattlement = 'true'
+						AND TPMM.IsAllowedForDebitCredit = 'true'
+						AND DATEDIFF(dd, Dt_Deposit_Date, @dtDateFrom) <= 0
+                        AND DATEDIFF(dd, Dt_Deposit_Date, @dtDateTo) >= 0 
+                        AND RH.I_Status = 1  
+						AND BCD.I_Brand_ID=@iBrandID
+            END   
+			
+END
+
+    END 
+  
+

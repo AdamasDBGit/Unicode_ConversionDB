@@ -1,0 +1,23 @@
+﻿CREATE Proc Usp_ERP_Get_ExamNamefrom_ClassID
+(@str_ClassID NVARCHAR(MAX),@brandID int)
+As
+Begin
+--Declare @str_ClassID varchar(50)
+Create Table #Courses(Id int Identity(1,1),CourseID int)                
+INSERT INTO #Courses (CourseID) -- Adjust ColumnName to match your table's column                
+SELECT Value                
+FROM dbo.ERP_SplitString(@str_ClassID, ',');
+
+Select Distinct ESD.inExamScheduleDetailId
+,Concat(ESD.stExamName,'(',Tc.S_Class_Name,' ',SG.S_School_Group_Code,')') 
+as ExamName
+
+from T_ERP_Exam_ScheduleSubjects ESS
+Inner Join #Courses c on c.CourseID=ESS.inClassId
+Inner join T_ERP_Exam_SchedulesDetails ESD 
+ON ESD.inExamScheduleDetailId=ESS.inExamScheduleDetailId
+Inner Join T_Class Tc ON Tc.I_Class_ID=c.CourseID and Tc.I_Brand_ID=@brandID
+Inner Join T_School_Group SG ON SG.I_School_Group_ID=ESD.inSchoolProgramId
+and SG.I_Brand_Id=@brandID
+Drop Table #Courses
+End

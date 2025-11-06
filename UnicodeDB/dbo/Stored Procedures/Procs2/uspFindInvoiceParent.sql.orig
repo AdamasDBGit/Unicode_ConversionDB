@@ -1,0 +1,23 @@
+﻿CREATE PROCEDURE [dbo].[uspFindInvoiceParent]
+(
+	@sStudentId	VARCHAR(500)
+)
+
+ 
+AS
+
+BEGIN
+	SET NOCOUNT ON;
+	DECLARE @iStudentDetailId INT
+	
+	SELECT @iStudentDetailId = I_STUDENT_DETAIL_ID FROM T_STUDENT_DETAIL WHERE S_STUDENT_ID = @sStudentId
+	
+	IF NOT EXISTS (SELECT I_Invoice_Header_ID FROM T_INVOICE_PARENT WHERE I_Student_Detail_ID = @iStudentDetailId AND I_STATUS = 1)
+		BEGIN
+			SELECT 0					
+		END
+	ELSE
+		BEGIN
+			SELECT 1
+		END
+END

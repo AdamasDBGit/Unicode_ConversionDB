@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[T_POC_StudentChartData] (
+    [Id]                  INT            IDENTITY (1, 1) NOT NULL,
+    [StudentName]         NVARCHAR (255) NOT NULL,
+    [Reading]             DECIMAL (5, 2) NOT NULL,
+    [LanguageProficiency] DECIMAL (5, 2) NOT NULL,
+    [LiteraryAnalysis]    DECIMAL (5, 2) NOT NULL,
+    [AchieversSection]    DECIMAL (5, 2) NOT NULL,
+    CONSTRAINT [PK__T_POC_St__3214EC0747C0C209] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+

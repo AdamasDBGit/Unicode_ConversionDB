@@ -1,0 +1,27 @@
+﻿CREATE TABLE [EXAMINATION].[T_Examination_Audit] (
+    [I_Exam_Audit_ID]           INT           IDENTITY (1, 1) NOT FOR REPLICATION NOT NULL,
+    [I_Exam_ID]                 INT           NULL,
+    [I_Exam_Component_ID]       INT           NOT NULL,
+    [I_Centre_Id]               INT           NULL,
+    [I_Course_ID]               INT           NULL,
+    [I_Term_ID]                 INT           NULL,
+    [I_Module_ID]               INT           NULL,
+    [I_Status_ID]               INT           NULL,
+    [I_Agency_ID]               INT           NULL,
+    [S_Invigilator_Name]        VARCHAR (500) NULL,
+    [S_Identification_Doc_Type] VARCHAR (200) NULL,
+    [C_Invigilator_Notified]    CHAR (1)      NULL,
+    [S_Reason]                  VARCHAR (MAX) NULL,
+    [Dt_Exam_Date]              DATETIME      NULL,
+    [S_Registration_No]         VARCHAR (20)  NULL,
+    [Dt_Registration_Date]      DATETIME      NULL,
+    [S_Exam_Venue]              VARCHAR (200) NULL,
+    [Dt_Exam_Start_Time]        DATETIME      NULL,
+    [Dt_Exam_End_Time]          DATETIME      NULL,
+    [Dt_Crtd_On]                DATETIME      NULL,
+    [Dt_Upd_On]                 DATETIME      NULL,
+    [S_Crtd_By]                 VARCHAR (20)  NULL,
+    [S_Upd_By]                  VARCHAR (20)  NULL,
+    CONSTRAINT [PK__T_Examination_Au__0F6E0347] PRIMARY KEY CLUSTERED ([I_Exam_Audit_ID] ASC)
+);
+

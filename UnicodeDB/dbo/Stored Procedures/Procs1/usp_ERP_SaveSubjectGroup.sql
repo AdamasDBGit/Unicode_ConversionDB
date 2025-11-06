@@ -1,0 +1,143 @@
+﻿-- =============================================
+-- Author:		<Susmita Paul>
+-- Create date: <2024-Sept-10>
+-- Description:	<Save Subject Group>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ERP_SaveSubjectGroup]
+	-- Add the parameters for the stored procedure here
+	@iSchoolGroupID INT,
+	@iClassID INT,
+	@iStreamID INT=NULL,
+	@iSubjectGroupID INT = NULL,
+	@sSubjectGroupName NVARCHAR(MAX),
+	@subjectList NVARCHAR(MAX),
+	@iCreatedBy INT
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	DECLARE @SubjectGroupID INT=NULL
+
+	CREATE TABLE #SubjectIDs
+	(
+	SubjectID int,
+	IndexNo int IDENTITY(1,1)
+	)
+
+	insert into #SubjectIDs
+	select CAST(FSR.Val as INT) as SubjectID from fnString2Rows(@subjectList,',') AS FSR
+
+	--select * from #SubjectIDs
+
+	IF @iSubjectGroupID IS NULL
+	BEGIN
+		IF exists(select * from T_ERP_Subject_Group_Master
+		where SubjectGroupName=@sSubjectGroupName and SchoolGroupID=@iSchoolGroupID and ClassID=@iClassID and ISNULL(StreamID,0) =ISNULL(@iStreamID,ISNULL(StreamID,0)))
+		BEGIN
+
+			select 0 as StatusFlag, 'Subject Group Exists' as Message
+
+		END
+		ELSE
+			BEGIN
+
+				if exists(select * from T_ERP_Student_Class_Routine as SCR 
+				inner join
+				#SubjectIDs as s on SCR.I_Subject_ID=s.SubjectID)
+				BEGIN
+					select 0 as StatusFlag, 'Subject Already been Used in routine' as Message
+				END
+				ELSE
+				BEGIN
+
+					insert into T_ERP_Subject_Group_Master
+					 (
+						SubjectGroupName, 
+						ClassID,       
+						SchoolGroupID,
+						StreamID,
+						CreatedBy,
+						CreatedOn 
+					)
+					select @sSubjectGroupName,@iClassID,@iSchoolGroupID,@iStreamID,@iCreatedBy,GETDATE()
+
+
+					SET @SubjectGroupID=SCOPE_IDENTITY() 
+
+					update SM set SM.SubjectGroupID=@SubjectGroupID
+					from T_Subject_Master as SM
+					inner join
+					#SubjectIDs s on SM.I_Subject_ID=s.SubjectID
+
+
+					select 1 as StatusFlag, 'Subject Group has been Mapped successfully' as Message
+
+
+
+				END
+			END
+
+	END
+
+	ELSE
+	BEGIN
+
+		IF exists(select * from T_ERP_Subject_Group_Master
+		where SubjectGroupID=@iSubjectGroupID and SubjectGroupName=@sSubjectGroupName and SchoolGroupID=@iSchoolGroupID and ClassID=@iClassID and ISNULL(StreamID,0) =ISNULL(@iStreamID,ISNULL(StreamID,0)))
+		BEGIN
+
+			if exists(select * from T_ERP_Student_Class_Routine where SubjectGroupID=@iSubjectGroupID)
+			BEGIN
+				select 0 as StatusFlag, 'Subject Group Already Mapped with Routine' as Message
+			END
+			ELSE
+			BEGIN
+
+			if exists(select * from T_ERP_Student_Class_Routine as SCR 
+				inner join
+				#SubjectIDs as s on SCR.I_Subject_ID=s.SubjectID)
+				BEGIN
+					select 0 as StatusFlag, 'Subject Already been Used in routine' as Message
+				END
+				ELSE
+				BEGIN
+
+					update T_ERP_Subject_Group_Master set SubjectGroupName=@sSubjectGroupName where 
+					SubjectGroupID=@iSubjectGroupID and SubjectGroupName=@sSubjectGroupName and SchoolGroupID=@iSchoolGroupID and ClassID=@iClassID and ISNULL(StreamID,0) =ISNULL(@iStreamID,ISNULL(StreamID,0))
+
+					update SM set SM.SubjectGroupID=NULL from
+					T_Subject_Master as SM
+					left join 
+					T_ERP_Student_Class_Routine as  SCR on SM.I_Subject_ID=SCR.I_Subject_ID 
+					where SM.SubjectGroupID=@iSubjectGroupID and SCR.I_Student_Class_Routine_ID IS NULL
+
+					--select SM.* from  T_Subject_Master as SM
+					--	inner join
+					--	#SubjectIDs s on SM.I_Subject_ID=s.SubjectID
+
+					--	select @SubjectGroupID
+
+					update SM set SM.SubjectGroupID=@iSubjectGroupID
+						from T_Subject_Master as SM
+						inner join
+						#SubjectIDs s on SM.I_Subject_ID=s.SubjectID
+
+						select 1 as StatusFlag, 'Subject Group has been Mapped successfully' as Message
+
+				END
+
+			END
+			
+
+		END
+		ELSE
+		BEGIN
+			select 0 as StatusFlag, 'Subject Group Not Exists' as Message
+		END
+
+	END
+END
+

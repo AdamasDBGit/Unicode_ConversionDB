@@ -1,0 +1,35 @@
+﻿-- =============================================
+-- Author:		<Susmita Paul>
+-- Create date: <2024-Aug-24>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ERP_SavePermision_Role] 
+	-- Add the parameters for the stored procedure here
+	@Permission_Type NVARCHAR(MAX),
+	@RequestType NVARCHAR(MAX),
+	@S_Name NVARCHAR(MAX),
+	@pageURL NVARCHAR(MAX),
+	@description NVARCHAR(MAX),
+	@componentdisplay NVARCHAR(MAX)=NULL,
+	@componentenable NVARCHAR(MAX)=NULL,
+	@rolecode NVARCHAR(MAX),
+	@brandID int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+
+	Declare @newrow int
+	
+	insert into T_ERP_Permission 
+	(Permission_Type,RequestType,S_Name,I_CreatedBy,Dt_CreatedAt,I_Status,S_PageUrl,Description,Is_Active,S_Display_Component_Permissions,S_Enable_Component_Permissions)
+	values(@Permission_Type,@RequestType,@S_Name,1,GETDATE(),1,@pageURL,@description,1,@componentdisplay,@componentenable)
+
+	set @newrow=SCOPE_IDENTITY() 
+
+	exec usp_ERP_MapRolePermission @newrow,@rolecode,NULL,@brandID,1
+
+
+
+END
+

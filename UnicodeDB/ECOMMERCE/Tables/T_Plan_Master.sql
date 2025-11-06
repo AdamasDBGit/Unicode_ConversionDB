@@ -1,0 +1,26 @@
+﻿CREATE TABLE [ECOMMERCE].[T_Plan_Master] (
+    [PlanID]                  INT           IDENTITY (1, 1) NOT NULL,
+    [PlanCode]                VARCHAR (MAX) NOT NULL,
+    [PlanName]                VARCHAR (MAX) NOT NULL,
+    [BrandID]                 INT           NOT NULL,
+    [StatusID]                INT           NULL,
+    [IsPublished]             BIT           NULL,
+    [ValidFrom]               DATETIME      NULL,
+    [ValidTo]                 DATETIME      NULL,
+    [CreatedBy]               VARCHAR (MAX) NULL,
+    [CreatedOn]               DATETIME      NULL,
+    [UpdatedBy]               VARCHAR (MAX) NULL,
+    [UpdatedOn]               DATETIME      NULL,
+    [I_Language_ID]           INT           NULL,
+    [I_Language_Name]         VARCHAR (200) NULL,
+    [SequenceNo]              INT           DEFAULT ((999999)) NULL,
+    [PlanProjectedAmount]     INT           NULL,
+    [PlanProjectedPercentage] INT           NULL,
+    [PlanActualTotalPrice]    INT           DEFAULT ((0)) NOT NULL,
+    [IsExtendedPlan]          BIT           DEFAULT ('FALSE') NULL,
+    [ExtendedMonthRangeFrom]  INT           DEFAULT ((0)) NULL,
+    [ExtendedMonthRangeTo]    INT           DEFAULT ((0)) NULL,
+    [ExtendedParentCourse]    INT           NULL,
+    [PlanType]                INT           NULL
+);
+

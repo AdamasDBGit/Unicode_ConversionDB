@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[zz_Routine_Class_1] (
+    [Routine Name]          NVARCHAR (255) NULL,
+    [School Group Name]     NVARCHAR (255) NULL,
+    [Class Name]            NVARCHAR (255) NULL,
+    [Stream Name]           NVARCHAR (255) NULL,
+    [Section Name]          NVARCHAR (255) NULL,
+    [Total Periods]         FLOAT (53)     NULL,
+    [Start Time]            DATETIME       NULL,
+    [Period Duration]       FLOAT (53)     NULL,
+    [Period Gap]            FLOAT (53)     NULL,
+    [Break Period Number]   DATETIME       NULL,
+    [Break Period Duration] FLOAT (53)     NULL,
+    [Number of Weekdays]    FLOAT (53)     NULL,
+    [Faculty Class Teacher] NVARCHAR (255) NULL,
+    [Period Number]         FLOAT (53)     NULL,
+    [Period Start Time]     DATETIME       NULL,
+    [Period End Time]       DATETIME       NULL,
+    [Day Name]              NVARCHAR (255) NULL,
+    [Subject Name]          NVARCHAR (255) NULL,
+    [Faculty Subject Name]  NVARCHAR (255) NULL,
+    [F20]                   NVARCHAR (255) NULL,
+    [F21]                   NVARCHAR (255) NULL,
+    [F22]                   NVARCHAR (255) NULL,
+    [F23]                   NVARCHAR (255) NULL
+);
+

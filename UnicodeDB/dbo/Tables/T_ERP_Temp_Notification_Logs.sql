@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[T_ERP_Temp_Notification_Logs] (
+    [inTempNotificationLogsID] INT            IDENTITY (1, 1) NOT NULL,
+    [inNotificationScheduleID] INT            NULL,
+    [stStudentId]              NVARCHAR (200) NULL,
+    [stStudentName]            NVARCHAR (200) NULL,
+    [stTeacherId]              NVARCHAR (200) NULL,
+    [stTeacherName]            NVARCHAR (200) NULL,
+    [inUserId]                 INT            NULL,
+    [stUserName]               NVARCHAR (200) NULL,
+    [inTemplateId]             INT            NULL,
+    [stTemplateTitle]          NVARCHAR (200) NULL,
+    [stSMSTemplateMessage]     NVARCHAR (MAX) NULL,
+    [stPushTemplateMessage]    NVARCHAR (MAX) NULL,
+    [stEmailSubject]           NVARCHAR (200) NULL,
+    [stEmailTemplateMessage]   NVARCHAR (MAX) NULL,
+    [stNotificationStatus]     NVARCHAR (MAX) NULL,
+    [stErrorMessage]           NVARCHAR (MAX) NULL,
+    [stRenderMessageBody]      NVARCHAR (MAX) NULL,
+    [dtCreatedDate]            DATETIME       NULL,
+    [inCreatedBy]              INT            NULL,
+    [inDeliveryChannelId]      INT            NULL,
+    [stPushTitle]              NVARCHAR (100) NULL,
+    [inSendStatus]             INT            NULL,
+    PRIMARY KEY CLUSTERED ([inTempNotificationLogsID] ASC)
+);
+

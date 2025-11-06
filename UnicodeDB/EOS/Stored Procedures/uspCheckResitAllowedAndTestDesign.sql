@@ -1,0 +1,82 @@
+﻿CREATE PROCEDURE [EOS].[uspCheckResitAllowedAndTestDesign]
+(
+	@iEmployeeID INT,
+	@iExamComponentID INT
+)
+AS
+BEGIN
+
+	DECLARE @N_FULL_MARKS INT
+	DECLARE @N_MARKS_CUTOFF INT
+	DECLARE @N_PASS_MARKS INT
+	DECLARE @N_MAXIMUM_RESIT_ALLOWED INT
+	DECLARE @N_ALREADY_APPEARED INT
+	DECLARE @SkillCleared CHAR(1)
+
+	CREATE TABLE #TAB
+	(
+		cTEstDegnPresent CHAR(1),
+		cResitAllowed CHAR(1),
+		iFullMarks INT,
+		cSkillCleared CHAR(1)
+	)
+		
+	INSERT INTO #TAB VALUES(NULL,NULL,NULL,NULL)
+
+	SET NOCOUNT ON;
+
+	SELECT @N_FULL_MARKS=SUM(ISNULL(N_MARKS,0)*ISNULL(I_NO_OF_QUESTIONS,0)) FROM EXAMINATION.T_TEST_DESIGN_PATTERN WHERE I_TEST_DESIGN_ID IN
+	(
+		SELECT I_TEST_DESIGN_ID FROM EXAMINATION.T_TEST_DESIGN WHERE I_EXAM_COMPONENT_ID=@iExamComponentID
+	)
+
+	IF (@N_FULL_MARKS IS NOT NULL)
+		BEGIN
+			UPDATE #TAB SET cTEstDegnPresent='Y',iFullMarks=@N_FULL_MARKS
+		END
+	ELSE
+		BEGIN
+			UPDATE #TAB SET cTEstDegnPresent='N'
+		END
+
+	--CENTER
+	SELECT @N_MAXIMUM_RESIT_ALLOWED=I_Number_Of_Resits FROM EOS.T_Skill_Exam_Map WHERE [I_Exam_Component_ID]=@iExamComponentID
+	AND [I_Centre_ID] IN
+	(
+		SELECT [I_CENTRE_ID] FROM [T_EMPLOYEE_DTLS] WHERE [I_EMPLOYEE_ID]=@iEmployeeID
+	)
+
+	--GLOBAL
+	IF( @N_MAXIMUM_RESIT_ALLOWED IS NULL)
+	BEGIN
+		SELECT @N_MAXIMUM_RESIT_ALLOWED=I_Number_Of_Resits FROM EOS.T_Skill_Exam_Map WHERE [I_Exam_Component_ID]=@iExamComponentID
+		AND [I_Centre_ID] IS NULL
+	END
+
+	SELECT @N_ALREADY_APPEARED=COUNT(*) FROM [EOS].[T_Employee_Exam_Result] WHERE [I_Employee_ID]=@iEmployeeID AND [I_Exam_Component_ID]=@iExamComponentID
+	
+	IF(@N_MAXIMUM_RESIT_ALLOWED<=@N_ALREADY_APPEARED)
+		BEGIN
+			UPDATE #TAB SET cResitAllowed='N'
+		END
+	ELSE
+		BEGIN
+			UPDATE #TAB SET cResitAllowed='Y'
+		END
+
+	SELECT @SkillCleared=[I_Status] FROM EOS.T_Employee_Skill_Map WHERE [I_Employee_ID]=@iEmployeeID AND [I_Skill_ID] IN(SELECT [I_Skill_ID]
+	FROM  EOS.[T_Skill_Exam_Map] WHERE [I_Exam_Component_ID]=@iExamComponentID AND [I_Status]=1 )
+
+	IF (@SkillCleared=1)
+		BEGIN
+			UPDATE #TAB SET cSkillCleared='Y'
+		END
+	ELSE
+		BEGIN
+			UPDATE #TAB SET cSkillCleared='N'
+		END
+
+	SELECT * FROM #TAB
+	DROP TABLE #TAB
+
+END

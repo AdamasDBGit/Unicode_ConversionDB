@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[T_POC_SHOLASTIC] (
+    [Id]          INT            IDENTITY (1, 1) NOT NULL,
+    [StudentName] NVARCHAR (100) NOT NULL,
+    [EngLish40]   INT            NOT NULL,
+    [English10]   INT            NOT NULL,
+    [Englisg50]   INT            NOT NULL,
+    [English100]  INT            NOT NULL,
+    [Hindi40]     INT            NOT NULL,
+    [Hindi10]     INT            NOT NULL,
+    [Hindi50]     INT            NOT NULL,
+    [Hindi100]    INT            NOT NULL,
+    [Marathi40]   INT            NOT NULL,
+    [Marathi10]   INT            NOT NULL,
+    [Marathi50]   INT            NOT NULL,
+    [Marathi100]  INT            NOT NULL,
+    [Maths40]     INT            NOT NULL,
+    [Maths10]     INT            NOT NULL,
+    [Maths50]     INT            NOT NULL,
+    [Maths100]    INT            NOT NULL,
+    [EVS40]       INT            NOT NULL,
+    [EVS10]       INT            NOT NULL,
+    [EVS50]       INT            NOT NULL,
+    [EVS100]      INT            NOT NULL,
+    [Percentage]  DECIMAL (18)   NULL,
+    [Grade]       NVARCHAR (5)   NULL,
+    CONSTRAINT [PK__T_POC_SH__3214EC072982B79D] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+

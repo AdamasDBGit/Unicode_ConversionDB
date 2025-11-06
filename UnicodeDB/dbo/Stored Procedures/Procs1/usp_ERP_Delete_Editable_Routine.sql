@@ -1,0 +1,38 @@
+﻿-- =============================================
+-- Author:		<Susmita Paul>
+-- Create date: <2024-Sept-27>
+-- Description:	<Delete Routine>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ERP_Delete_Editable_Routine]
+	-- Add the parameters for the stored procedure here
+	@selectedClassStructureDetailID INT,
+	@sSubjects NVARCHAR(MAX)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    
+	create table #Subject
+	(
+	SubjectID int
+	)
+
+	insert into #Subject
+	select CAST(Val as INT) from fnString2Rows(@sSubjects,',') AS FSR
+
+
+	DELETE SCR 
+	FROM T_ERP_Student_Class_Routine AS SCR
+	LEFT JOIN #Subject AS S ON SCR.I_Subject_ID = S.SubjectID
+	LEFT JOIN T_ERP_Teacher_Time_Plan AS TTP ON TTP.I_Student_Class_Routine_ID = SCR.I_Student_Class_Routine_ID
+	WHERE SCR.I_Routine_Structure_Detail_ID = @selectedClassStructureDetailID 
+	AND S.SubjectID IS NULL 
+	AND TTP.I_Teacher_Time_Plan_ID IS NULL;
+
+	SELECT 1 AS statusFlag, 'Deleted' AS Message
+
+
+END
+

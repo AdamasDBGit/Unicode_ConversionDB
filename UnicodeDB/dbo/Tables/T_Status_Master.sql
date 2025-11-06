@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[T_Status_Master] (
+    [I_Status_Id]          INT             IDENTITY (1, 1) NOT NULL,
+    [S_Status_Type]        NVARCHAR (MAX)  NULL,
+    [S_Status_Desc]        NVARCHAR (MAX)  NULL,
+    [I_Status_Value]       INT             NULL,
+    [I_Brand_ID]           INT             NULL,
+    [S_Status_Desc_SMS]    NVARCHAR (MAX)  NULL,
+    [S_Invoice_Required]   CHAR (1)        NULL,
+    [N_Amount]             NUMERIC (18, 2) NULL,
+    [FormShell_Status]     INT             NULL,
+    [I_ConFig_ID]          INT             NULL,
+    [Status_Type]          INT             NULL,
+    [S_Lebel]              NVARCHAR (MAX)  NULL,
+    [Is_active]            BIT             NULL,
+    [Is_GSTApplicable]     BIT             NULL,
+    [Is_AllowAmountChange] BIT             NULL,
+    [Is_AdmissionToken]    BIT             NULL,
+    [BankID]               INT             NULL,
+    [BankEffectiveFrom]    DATETIME        NULL,
+    [BankEffectiveTo]      DATETIME        NULL,
+    [Valid_from]           DATETIME        NULL,
+    [Valid_to]             DATETIME        NULL,
+    CONSTRAINT [PK_T_Status_Master] PRIMARY KEY CLUSTERED ([I_Status_Id] ASC)
+);
+

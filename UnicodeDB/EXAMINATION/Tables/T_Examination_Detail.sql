@@ -1,0 +1,26 @@
+﻿CREATE TABLE [EXAMINATION].[T_Examination_Detail] (
+    [I_Exam_ID]                 INT           IDENTITY (1, 1) NOT NULL,
+    [I_Exam_Component_ID]       INT           NULL,
+    [I_Centre_Id]               INT           NULL,
+    [I_Course_ID]               INT           NULL,
+    [I_Term_ID]                 INT           NULL,
+    [I_Module_ID]               INT           NULL,
+    [I_Status_ID]               INT           NULL,
+    [I_Agency_ID]               INT           NULL,
+    [S_Invigilator_Name]        VARCHAR (500) NULL,
+    [S_Identification_Doc_Type] VARCHAR (200) NULL,
+    [C_Invigilator_Notified]    CHAR (1)      NULL,
+    [S_Reason]                  VARCHAR (MAX) NULL,
+    [Dt_Exam_Date]              DATETIME      NULL,
+    [S_Registration_No]         VARCHAR (20)  NULL,
+    [Dt_Registration_Date]      DATETIME      NULL,
+    [S_Exam_Venue]              VARCHAR (200) NULL,
+    [Dt_Exam_Start_Time]        DATETIME      NULL,
+    [Dt_Exam_End_Time]          DATETIME      NULL,
+    [S_Crtd_By]                 VARCHAR (20)  NULL,
+    [S_Upd_By]                  VARCHAR (20)  NULL,
+    [Dt_Crtd_On]                DATETIME      NULL,
+    [Dt_Upd_On]                 DATETIME      NULL,
+    CONSTRAINT [PK__T_Examination_De__11564BB9] PRIMARY KEY CLUSTERED ([I_Exam_ID] ASC)
+);
+

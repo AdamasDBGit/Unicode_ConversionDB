@@ -1,0 +1,166 @@
+﻿    
+    
+    
+CREATE PROCEDURE [dbo].[usp_ERP_AddStatusMasterNew]               
+    @StatusDesc NVARCHAR(MAX) NULL,              
+    @StatusSMSDesc NVARCHAR(MAX) NULL,              
+    @StatusID INT NULL,              
+    @Amount NUMERIC(18,2) NULL,              
+    @Brandid INT NULL,              
+    @Is_GST_Applicable BIT NULL,              
+    @Is_AllowAmountChange BIT NULL,              
+    @I_GST_FeeComponent_Catagory_ID INT NULL,              
+    @Valid_from DATETIME NULL,                      
+    @Valid_to DATETIME NULL,    
+    @BankID INT = NULL,    
+    @BankEffectiveFrom DATETIME = NULL,    
+    @BankEffectiveTo DATETIME = NULL    
+AS              
+BEGIN              
+    BEGIN TRANSACTION;              
+    BEGIN TRY              
+        SET NOCOUNT ON;              
+    
+        DECLARE @DefaultGSTCATID INT          
+        SET @DefaultGSTCATID = (          
+            SELECT DISTINCT TOP 1 GIC.I_GST_FeeComponent_Catagory_ID            
+            FROM T_ERP_GST_Configuration_Details GCD          
+            INNER JOIN T_ERP_GST_Item_Category GIC           
+                ON GCD.I_GST_FeeComponent_Catagory_ID = GIC.I_GST_FeeComponent_Catagory_ID          
+            WHERE N_SGST = 0.00 AND N_CGST = 0.00 AND N_IGST = 0.00 AND GIC.Is_Active = 1          
+            ORDER BY GIC.I_GST_FeeComponent_Catagory_ID          
+        );          
+    
+        DECLARE @createdStatusID INT;              
+        DECLARE @StatusValue INT;              
+        DECLARE @existinggstid INT;              
+    
+        -- Update block    
+        IF (@StatusID > 0)              
+        BEGIN              
+            SET @StatusValue = (              
+                SELECT TOP 1 I_Status_Value               
+                FROM T_Status_Master               
+                WHERE I_Status_Id = @StatusID              
+            );           
+    
+            UPDATE [dbo].[T_Status_Master]              
+            SET               
+                [S_Status_Desc] = @StatusDesc,              
+                [S_Status_Type] = 'ReceiptType',              
+                [S_Status_Desc_SMS] = @StatusSMSDesc,              
+                [N_Amount] = @Amount,              
+                [I_Brand_ID] = @Brandid,    
+                [Is_AllowAmountChange] = @Is_AllowAmountChange,    
+                [Is_GSTApplicable] = @Is_GST_Applicable,    
+                [BankID] = @BankID,    
+                [BankEffectiveFrom] = @BankEffectiveFrom,    
+                [BankEffectiveTo] = @BankEffectiveTo,    
+                [Valid_from] = @Valid_from,    
+                [Valid_to] = @Valid_to    
+            WHERE I_Status_Id = @StatusID;              
+    
+            IF @Is_GST_Applicable = 1 AND @I_GST_FeeComponent_Catagory_ID IS NOT NULL                      
+            BEGIN              
+                UPDATE T_ERP_GST_Component_Mapping     
+                SET     
+                    Is_Active = 1,    
+                    dt_modify = GETDATE(),    
+                    I_GST_FeeComponent_Catagory_ID = @I_GST_FeeComponent_Catagory_ID    
+                WHERE     
+                    I_Fee_Component_ID = @StatusValue     
+                    AND I_GST_Component_Type = 2            
+            END              
+            ELSE IF @Is_GST_Applicable = 0               
+            BEGIN              
+                UPDATE T_ERP_GST_Component_Mapping           
+                SET     
+                    I_GST_FeeComponent_Catagory_ID = @DefaultGSTCATID,          
+                    dt_modify = GETDATE()          
+                WHERE     
+                    I_Fee_Component_ID = @StatusValue            
+                    AND I_GST_Component_Type = 2            
+            END;              
+    
+            SELECT 1 AS StatusFlag, 'Status Updated' AS Message;              
+        END              
+        ELSE              
+        BEGIN              
+            IF EXISTS (              
+                SELECT *               
+                FROM T_Status_Master               
+  WHERE S_Status_Desc = @StatusDesc               
+                  AND S_Status_Desc_SMS = @StatusDesc             
+            )              
+            BEGIN              
+SELECT 0 AS StatusFlag, 'Duplicate Status Master' AS Message;              
+            END              
+            ELSE              
+            BEGIN            
+                SET @StatusValue = (SELECT ISNULL(MAX(I_Status_Value), 0) + 1 FROM T_Status_Master);              
+    
+                INSERT INTO [dbo].[T_Status_Master] (              
+                    [S_Status_Desc], [S_Status_Type], [S_Status_Desc_SMS],               
+                    [I_Status_Value], [N_Amount], [I_Brand_ID], [Is_AllowAmountChange],     
+                    [Is_GSTApplicable], [BankID], [BankEffectiveFrom], [BankEffectiveTo],     
+                    [Valid_from], [Valid_to]    
+                )              
+                VALUES (              
+                    @StatusDesc, 'ReceiptType', @StatusSMSDesc,               
+                    @StatusValue, @Amount, @Brandid, @Is_AllowAmountChange,    
+                    @Is_GST_Applicable, @BankID, @BankEffectiveFrom, @BankEffectiveTo,    
+                    @Valid_from, @Valid_to    
+                );              
+    
+                SET @createdStatusID = SCOPE_IDENTITY();              
+    
+                IF @Is_GST_Applicable = 1 AND @I_GST_FeeComponent_Catagory_ID IS NOT NULL                      
+                BEGIN                
+                    INSERT INTO T_ERP_GST_Component_Mapping (    
+                        I_GST_FeeComponent_Catagory_ID,            
+                        I_Fee_Component_ID,            
+                        Is_Active,            
+                        dt_create,            
+                        I_GST_Component_Type            
+                    )            
+                    SELECT @I_GST_FeeComponent_Catagory_ID, @StatusValue, 1, GETDATE(), 2    
+                    WHERE NOT EXISTS (    
+                        SELECT 1 FROM T_ERP_GST_Component_Mapping cm     
+                        WHERE cm.I_GST_FeeComponent_Catagory_ID = @I_GST_FeeComponent_Catagory_ID            
+                          AND cm.I_Fee_Component_ID = @StatusValue     
+                          AND cm.Is_Active = 1     
+                          AND cm.I_GST_Component_Type = 2            
+                    );            
+                END              
+                ELSE              
+                BEGIN              
+                    INSERT INTO T_ERP_GST_Component_Mapping (    
+                        I_GST_FeeComponent_Catagory_ID,            
+                        I_Fee_Component_ID,            
+                        Is_Active,            
+                        dt_create,            
+                        I_GST_Component_Type            
+                    )            
+                    SELECT @DefaultGSTCATID, @StatusValue, 1, GETDATE(), 2    
+                    WHERE NOT EXISTS (    
+                        SELECT 1 FROM T_ERP_GST_Component_Mapping cm     
+                        WHERE cm.I_GST_FeeComponent_Catagory_ID = @DefaultGSTCATID            
+                          AND cm.I_Fee_Component_ID = @StatusValue     
+                          AND cm.Is_Active = 1     
+                          AND cm.I_GST_Component_Type = 2            
+                    );            
+                END;              
+    
+                SELECT 1 AS StatusFlag, 'Status added' AS Message;              
+            END;              
+        END;              
+    END TRY              
+    BEGIN CATCH              
+        ROLLBACK TRANSACTION;              
+        DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity INT;              
+        SELECT @ErrMsg = ERROR_MESSAGE(),              
+               @ErrSeverity = ERROR_SEVERITY();              
+        SELECT 0 AS StatusFlag, @ErrMsg AS Message;              
+    END CATCH;              
+    COMMIT TRANSACTION;              
+END; 

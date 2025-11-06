@@ -1,0 +1,147 @@
+﻿-- =============================================
+-- Author:		<Susmita Paul>
+-- Create date: <2024-July-02>
+-- Description:	<Save Cron Job>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ERP_SaveTransactionCronJob] 
+	-- Add the parameters for the stored procedure here
+	@S_Transaction_No varchar(max),
+	@I_Transaction_Master_ID INT,
+	@currentStatus varchar(max)=NULL,
+	@CompleteStatus bit=NULL,
+	@CronCanBeProcess bit=NULL,
+	@NoOfAttempt int=NULL,
+	@StatusID bit = NULL,
+	@Is_PG_Success bit=NULL,
+	@Is_PG_Failure bit=NULL,
+	@Is_Failed_User bit =NULL,
+	@Requery_PG_LogID int=NULL,
+	@Requery_Request_LogID int=NULL,
+	@PG_Response varchar(max)=NULL,
+	@ERP_Response varchar(max)=NULL,
+	@PG_Remarks varchar(max)=NULL,
+	@ERP_Remarks varchar(max)=NULL,
+	@PG_Error varchar(max)=NULL,
+	@ERP_Error varchar(max)=NULL,
+	@CanbeProcessForERPSattlement BIT=NULL,
+	@IsFromCron bit
+
+AS
+BEGIN
+	
+
+	if not exists(select * from T_ERP_Transaction_Requery_Cron_Job where I_Transaction_Master_ID=@I_Transaction_Master_ID)
+	BEGIN
+
+		insert into T_ERP_Transaction_Requery_Cron_Job
+		(
+		S_Transaction_No,
+		I_Transaction_Master_ID,
+		S_Current_Status,
+		StatusID,
+		CreatedOn
+		--,
+		--Requery_PG_LogID,
+		--Requery_Request_LogID
+		)
+		select 
+		@S_Transaction_No,
+		@I_Transaction_Master_ID,
+		@CompleteStatus,
+		1,
+		GETDATE()
+		--@Requery_PG_LogID,
+		--@Requery_Request_LogID
+
+	END
+	ELSE
+	BEGIN
+	
+		if ISNULL(@IsFromCron,'false') = 'false'
+		BEGIN
+			if exists(select * from T_ERP_Transaction_Requery_Cron_Job where I_Transaction_Master_ID=@I_Transaction_Master_ID and (CompleteStatus='false' OR CompleteStatus IS NULL) and (CronCanBeProcess='true' OR CronCanBeProcess IS NULL))
+			BEGIN
+			
+				update T_ERP_Transaction_Requery_Cron_Job 
+				set 
+				S_Current_Status=@currentStatus,
+				CronCanBeProcess='false',
+				CanbeProcessForERPSattlement='false',
+				Requery_PG_LogID=@Requery_PG_LogID,
+				Requery_Request_LogID=@Requery_Request_LogID,
+				Dt_Closed_Date_By_Other_Source=GETDATE()
+				where 
+				I_Transaction_Master_ID=@I_Transaction_Master_ID and (CompleteStatus='false' OR CompleteStatus IS NULL) and (CronCanBeProcess='true' OR CronCanBeProcess IS NULL)
+
+			END
+		END
+		ELSE
+
+		BEGIN
+
+		if exists(select * from T_ERP_Transaction_Requery_Cron_Job where I_Transaction_Master_ID=@I_Transaction_Master_ID and (CompleteStatus='false' OR CompleteStatus IS NULL) and CronCanBeProcess='true')
+			BEGIN
+
+			IF @PG_Response IS NOT NULL
+				BEGIN
+
+					update T_ERP_Transaction_Requery_Cron_Job 
+					set
+					PG_NoOfAttempt=ISNULL(PG_NoOfAttempt,0)+1,
+					Is_PG_Sucess=@Is_PG_Success,
+					Is_PG_Failure=@Is_PG_Failure,
+					Is_Failed_User=@Is_Failed_User,
+					PG_Response=@PG_Response,
+					CanbeProcessForERPSattlement=@CanbeProcessForERPSattlement,
+					Dt_PG_Current_Response_Date=GETDATE(),
+					S_PG_Remarks =@PG_Remarks,
+					S_PG_Error=@PG_Error
+					where I_Transaction_Master_ID=@I_Transaction_Master_ID and ISNULL(CompleteStatus,'false')='false' and  ISNULL(CronCanBeProcess,'false')='true'
+
+				END
+		
+			IF @ERP_Response IS NOT NULL
+			BEGIN 
+
+				IF exists(select * from  T_ERP_Transaction_Requery_Cron_Job where I_Transaction_Master_ID=@I_Transaction_Master_ID and ISNULL(CompleteStatus,'false')='false' and  ISNULL(CronCanBeProcess,'false')='true'
+					and ISNULL(CanbeProcessForERPSattlement,'false')='true' and PG_Response IS NOT NULL and ISNULL(CompleteStatus,'false') ='false')
+				BEGIN
+
+					DECLARE @completeDate datetime=NULL
+
+
+					IF @CompleteStatus = 'true'
+					BEGIN
+						SET @completeDate=GETDATE()
+					
+					END
+
+					--print @CompleteStatus
+
+					update T_ERP_Transaction_Requery_Cron_Job 
+					set 
+					S_Current_Status=@currentStatus,
+					CompleteStatus=@CompleteStatus,
+					ERP_NoOfAttempt=ISNULL(ERP_NoOfAttempt,0)+1,
+					CronCanBeProcess=@CronCanBeProcess,
+					CompletedOn=@completeDate,
+					Requery_PG_LogID=@Requery_PG_LogID,
+					Requery_Request_LogID=@Requery_Request_LogID,
+					S_ERP_Remarks=@ERP_Remarks,
+					S_ERP_Error=@ERP_Error,
+					Dt_ERP_Current_Response_Date=GETDATE(),
+					StatusID=@StatusID
+					where I_Transaction_Master_ID=@I_Transaction_Master_ID and ISNULL(CompleteStatus,'false')='false' and  ISNULL(CronCanBeProcess,'false')='true'
+					and ISNULL(CanbeProcessForERPSattlement,'false')='true' and PG_Response IS NOT NULL
+				
+					select @@ROWCOUNT as UpdatedRowCount
+			
+				END
+
+			END
+			END
+		END
+
+	END
+	
+END

@@ -1,0 +1,20 @@
+﻿
+CREATE PROCEDURE [dbo].[KPMG_uspGetPOnPRList]
+--@STR_LOGINID	VARCHAR(255),
+--@STR_PASSWORD	VARCHAR(255)
+--@STR_USERSESSION	VARCHAR(255)
+AS
+BEGIN
+
+ 
+	
+	SET NOCOUNT ON;
+	--DECLARE @UserId	INT
+	SELECT distinct(A.Fld_KPMG_PO_Id) AS POId,A.Fld_KPMG_PR_Id AS PRId, A.Fld_KPMG_PO_Id AS ID FROM Tbl_KPMG_PoDetails A
+	left outer JOIN Tbl_KPMG_PoDetailItems B ON A.Fld_KPMG_PoPr_Id=B.Fld_KPMG_PoPr_Id AND B.Fld_KPMG_Status=0
+	
+	
+	
+    
+	
+END

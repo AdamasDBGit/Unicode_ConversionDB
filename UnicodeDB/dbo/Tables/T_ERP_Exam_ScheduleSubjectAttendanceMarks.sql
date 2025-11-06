@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[T_ERP_Exam_ScheduleSubjectAttendanceMarks] (
+    [inExamScheduleSubjectAttendanceMarksId] INT              IDENTITY (1, 1) NOT NULL,
+    [unExamScheduleSubjectAttendanceMarksId] UNIQUEIDENTIFIER CONSTRAINT [DF__T_ERP_Exa__unExa__1FDA725B] DEFAULT (newid()) NULL,
+    [inExamScheduleSubjectDetailId]          INT              NOT NULL,
+    [inExamScheduleDetailId]                 INT              NOT NULL,
+    [inStudentId]                            INT              NULL,
+    [inSubjectId]                            INT              NULL,
+    [inPresent]                              INT              NULL,
+    [stAttendanceRemarks]                    NVARCHAR (MAX)   NULL,
+    [dcObtainedMarks]                        DECIMAL (18, 2)  NULL,
+    [inConduct]                              INT              NULL,
+    [inRanks]                                INT              NULL,
+    [inPaperStatus]                          INT              NULL,
+    [stRemarks]                              NVARCHAR (400)   NULL,
+    [inCreatedBy]                            INT              NULL,
+    [inModifiedBy]                           INT              NULL,
+    [dtCreatedDate]                          DATETIME         NULL,
+    [dtModifiedDate]                         DATETIME         NULL,
+    [sReportCardUrl]                         NVARCHAR (MAX)   NULL,
+    [I_Student_Result_Detail_ID]             INT              NULL,
+    [I_Student_Result_ID]                    INT              NULL,
+    [inReportCardStatus]                     INT              NULL,
+    CONSTRAINT [PK__T_ERP_Ex__6BCE2C3D805C2023] PRIMARY KEY CLUSTERED ([inExamScheduleSubjectAttendanceMarksId] ASC)
+);
+

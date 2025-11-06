@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[T_Center_Receipt] (
+    [I_Center_Receipt_ID]  INT             IDENTITY (1, 1) NOT FOR REPLICATION NOT NULL,
+    [S_Invoice_No]         NVARCHAR (MAX)  NULL,
+    [Dt_Receipt_Date]      DATETIME        NOT NULL,
+    [S_Student_ID]         NVARCHAR (MAX)  NOT NULL,
+    [S_First_Name]         NVARCHAR (MAX)  NOT NULL,
+    [S_Last_Name]          NVARCHAR (MAX)  NOT NULL,
+    [I_PaymentMode_ID]     INT             NOT NULL,
+    [I_Center_ID]          INT             NOT NULL,
+    [N_Receipt_Amount]     NUMERIC (18, 2) NOT NULL,
+    [I_Status]             INT             NOT NULL,
+    [I_Flag_IsAdjusted]    SMALLINT        NOT NULL,
+    [Dt_CreditCard_Expiry] DATETIME        NULL,
+    [S_CreditCard_Issuer]  NVARCHAR (MAX)  NULL,
+    [N_CreditCard_No]      NUMERIC (18)    NULL,
+    [S_ChequeDD_No]        NVARCHAR (MAX)  NULL,
+    [Dt_ChequeDD_Date]     DATETIME        NULL,
+    [S_Bank_Name]          NVARCHAR (MAX)  NULL,
+    [S_Branch_Name]        NVARCHAR (MAX)  NULL,
+    [I_Receipt_Type]       SMALLINT        NOT NULL,
+    [S_Crtd_By]            NVARCHAR (MAX)  NULL,
+    [S_Upd_By]             NVARCHAR (MAX)  NULL,
+    [Dt_Crtd_On]           DATETIME        NULL,
+    [Dt_Upd_On]            DATETIME        NULL,
+    CONSTRAINT [PK_T_Center_Receipt] PRIMARY KEY CLUSTERED ([I_Center_Receipt_ID] ASC)
+);
+

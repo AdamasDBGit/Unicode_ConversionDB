@@ -1,0 +1,189 @@
+﻿CREATE   PROCEDURE usp_ERP_Insert_New_Brand_Create
+(
+    -- Input Parameters
+    @BrandCode VARCHAR(20),             -- Mandatory
+    @brandname VARCHAR(100),            -- Mandatory
+    @BrandShortCode VARCHAR(10),        -- Mandatory (Usually same as BrandCode)
+    @CINNo VARCHAR(20) = NULL,
+    @PanNo VARCHAR(20) = NULL,
+    @Locationname VARCHAR(20),          -- Mandatory
+    @clientname VARCHAR(255),           -- Mandatory
+    @CentreAddress NVARCHAR(MAX),       -- Mandatory
+    @CityID INT,                        -- Mandatory
+    @stateid INT,                       -- Mandatory
+    @PinCode VARCHAR(6)=null,
+    @telephone VARCHAR(12) = '0',
+    @emailID VARCHAR(200) = NULL,
+    @stateCode VARCHAR(5),              -- Mandatory (Numeric as string)
+    @GSTCODE VARCHAR(25) = NULL,
+    @SACCODE VARCHAR(15) = NULL,
+    @websites VARCHAR(100),
+    @FinancialYearStartDate DATE,       -- Mandatory
+    @FinancialYearEndDate DATE,         -- Mandatory
+    @tenant_ID VARCHAR(20),             -- Mandatory
+
+    -- Output Parameters
+    @OutBrandID INT OUTPUT,
+    @OutBrandName VARCHAR(100) OUTPUT
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        BEGIN TRAN;
+
+        DECLARE @MaxI_Brand_ID INT,
+                @centerID INT,
+                @SessionID INT,
+                @f_Level VARCHAR(10);
+
+        -- Generate Next Brand ID
+        SET @MaxI_Brand_ID = (SELECT ISNULL(MAX(I_Brand_ID), 0) + 1 FROM T_Brand_Master);
+
+        -- Derive Financial Year if NULL
+        DECLARE @CurrentDate DATE = GETDATE();
+        IF (@FinancialYearStartDate IS NULL AND @FinancialYearEndDate IS NULL)
+        BEGIN
+            IF MONTH(@CurrentDate) >= 4
+            BEGIN
+                SET @FinancialYearStartDate = CAST(YEAR(@CurrentDate) AS VARCHAR(4)) + '-04-01';
+                SET @FinancialYearEndDate = DATEADD(DAY, -1, DATEADD(YEAR, 1, @FinancialYearStartDate));
+            END
+            ELSE
+            BEGIN
+                SET @FinancialYearStartDate = CAST(YEAR(@CurrentDate) - 1 AS VARCHAR(4)) + '-04-01';
+                SET @FinancialYearEndDate = DATEADD(DAY, -1, DATEADD(YEAR, 1, @FinancialYearStartDate));
+            END
+        END
+
+        -- Build Financial Level
+        SET @f_Level = CONCAT(YEAR(@FinancialYearStartDate), '-', YEAR(@FinancialYearEndDate));
+
+        ------------------ Insert Brand Master ------------------
+        INSERT INTO T_Brand_Master
+        (
+            I_Brand_ID, S_Brand_Code, S_Brand_Name, S_Crtd_By, S_Upd_By,
+            Dt_Crtd_On, Dt_Upd_On, I_Status, S_Short_Code, S_CIN, S_PAN,
+            s_location, S_Client_Name, tenant_ID
+        )
+        VALUES
+        (
+            @MaxI_Brand_ID, @BrandCode, @brandname, 'Admin', NULL,
+            GETDATE(), NULL, 1, @BrandShortCode, @CINNo, @PanNo,
+            @Locationname, @clientname, @tenant_ID
+        );
+
+        SET @OutBrandID = @MaxI_Brand_ID;
+        SET @OutBrandName = @brandname;
+
+        ------------------ Insert Academic Session ------------------
+        INSERT INTO T_School_Academic_Session_Master
+        (
+            I_Brand_ID, Dt_Session_Start_Date, Dt_Session_End_Date, S_Label,
+            I_Status, S_CreatedBy, Dt_CreatedOn, S_UpdatedBy, Dt_UpdatedOn, I_Current_Session
+        )
+        VALUES
+        (
+            @OutBrandID, @FinancialYearStartDate, @FinancialYearEndDate, @f_Level,
+            1, 'atc-Admin', GETDATE(), NULL, NULL, 1
+        );
+
+        SET @SessionID = SCOPE_IDENTITY();
+
+        ------------------ Insert Center Master ------------------
+        INSERT INTO T_Centre_Master
+        (
+            S_Center_Code, S_Center_Name, I_Status, Dt_Valid_From, Dt_Valid_To,
+            S_Center_Short_Name, I_Center_Category, I_RFF_Type, I_Is_Startup_Material_In_Place,
+            I_Is_Library_In_Place, I_Country_ID, I_Expiry_Status, S_Crtd_By, S_Upd_By,
+            Dt_Crtd_On, Dt_Upd_On, I_Is_OwnCenter, S_ServiceTax_Regd_Code,
+            S_SAP_Customer_Id, I_Is_Center_Serv_Tax_Reqd, S_Cost_Center
+        )
+        VALUES
+        (
+            @BrandCode, @brandname, 1, '2000-01-01', '2050-01-01',
+            @BrandShortCode, 1, 1, 0, 0, 1, NULL, 'atc-admin', 'atc-admin',
+            GETDATE(), NULL, 1, NULL, NULL, 0, 0
+        );
+
+        SET @centerID = SCOPE_IDENTITY();
+
+        ------------------ Brand Center Mapping ------------------
+        IF NOT EXISTS (SELECT 1 FROM T_Brand_Center_Details WHERE I_Brand_ID = @OutBrandID AND I_Centre_Id = @centerID AND I_Status = 1)
+        BEGIN
+            INSERT INTO T_Brand_Center_Details
+            (I_Centre_Id, I_Brand_ID, S_Crtd_By, Dt_Valid_From, Dt_Crtd_On, I_Status)
+            VALUES
+            (@centerID, @OutBrandID, 'Atc-Admin', '2000-01-01', GETDATE(), 1);
+        END
+
+        ------------------ Center Address ------------------
+        INSERT INTO NETWORK.T_Center_Address
+        (
+            I_Centre_Id, S_Center_Address1, S_Center_Address2, I_City_ID, I_State_ID,
+            S_Pin_Code, I_Country_ID, S_Telephone_No, S_Email_ID,
+            S_Delivery_Address1, S_Delivery_Address2, I_Delivery_City_ID,
+            I_Delivery_State_ID, S_Delivery_Pin_No, I_Delivery_Country_ID,
+            S_Delivery_Phone_No, S_Delivery_Email_ID
+        )
+        VALUES
+        (
+            @centerID, @CentreAddress, NULL, @CityID, @stateid,
+            @PinCode, 1, @telephone, @emailID,
+            @CentreAddress, NULL, @CityID, @stateid, @PinCode,
+            1, @telephone, @emailID
+        );
+
+        ------------------ GST Code Master ------------------
+        INSERT INTO T_GST_Code_Master
+        (
+            I_State_ID, S_GST_Code, S_SAC_Code, I_Status, S_Crtd_By,
+            S_Upd_By, Dt_Crtd_On, Dt_Upd_On, I_Brand_ID, S_State_Code
+        )
+        VALUES
+        (
+            @stateid, @GSTCODE, @SACCODE, 1, 'atc-Admin',
+            NULL, GETDATE(), NULL, @OutBrandID, @stateCode
+        );
+
+        ------------------ School Contact ------------------
+        INSERT INTO T_School_Contact
+        (I_Brand_ID, S_Email, S_Mobile, S_Description, S_Logo, I_Status, s_Websites)
+        VALUES
+        (@OutBrandID, @emailID, @telephone, @Locationname, NULL, 1, @websites);
+
+        ------------------ Center Hierarchy ------------------
+        IF NOT EXISTS (SELECT 1 FROM T_Center_Hierarchy_Name_Details WHERE I_Center_ID = @centerID AND I_Brand_ID = @OutBrandID)
+        BEGIN
+            INSERT INTO T_Center_Hierarchy_Name_Details
+            (I_Center_ID, S_Center_Name, I_Brand_ID, S_Brand_Name, I_Region_ID, S_Region_Name, I_Territory_ID, S_Territiry_Name, I_City_ID, S_City_Name, I_Hierarchy_Detail_ID)
+            VALUES
+            (@centerID, @brandname, @OutBrandID, @brandname, 51, 'West Bengal', 52, 'North', @CityID, 'Kolkata', 53);
+        END
+
+        ------------------ Invoice Repository ------------------
+        IF NOT EXISTS (SELECT 1 FROM T_ERP_InvGenerateRepository WHERE S_Curr_Year = @f_Level AND I_Brand_ID = @OutBrandID AND I_School_Session_ID = @SessionID)
+        BEGIN
+            INSERT INTO T_ERP_InvGenerateRepository
+            (S_Curr_Year, I_IncrementID, Dtt_Lst_Update, I_Brand_ID, I_School_Session_ID, Type)
+            VALUES
+            (@f_Level, 0, NULL, @OutBrandID, @SessionID, 'INV');
+        END
+
+        ------------------ Invoice Sequence ------------------
+        DECLARE @Seq TABLE(Rowdata VARCHAR(5));
+        INSERT INTO @Seq(Rowdata)
+        VALUES('I'),('A'),('C'),('RI'),('RC'),('BS');
+
+        INSERT INTO T_Invoice_Sequence_Number
+        (I_Brand_ID, I_State_ID, I_Sequence_Number, S_Invoice_type)
+        SELECT @OutBrandID, @stateCode, 0, Rowdata FROM @Seq;
+
+        COMMIT TRAN;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRAN;
+        THROW;
+    END CATCH
+END;

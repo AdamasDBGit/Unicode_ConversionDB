@@ -1,0 +1,25 @@
+﻿CREATE TABLE [SMManagement].[T_Stock_Master_ReturnAudit] (
+    [AuditID]         INT           IDENTITY (1, 1) NOT NULL,
+    [StockID]         INT           NOT NULL,
+    [ItemCode]        VARCHAR (16)  NULL,
+    [ItemDescription] VARCHAR (100) NULL,
+    [BarcodePrefix]   VARCHAR (10)  NULL,
+    [BarcodeSerial]   VARCHAR (10)  NULL,
+    [Barcode]         VARCHAR (20)  NULL,
+    [PR]              VARCHAR (20)  NULL,
+    [PO]              VARCHAR (20)  NULL,
+    [GRN]             VARCHAR (20)  NULL,
+    [StatusID]        INT           NULL,
+    [ItemType]        INT           NULL,
+    [IsScheduled]     BIT           NULL,
+    [ItemCount]       INT           NULL,
+    [BrandID]         INT           NULL,
+    [CreatedBy]       VARCHAR (50)  NULL,
+    [CreatedOn]       DATETIME      NULL,
+    [UpdatedBy]       VARCHAR (50)  NULL,
+    [UpdatedOn]       DATETIME      NULL,
+    [LocationID]      INT           NULL,
+    [AuditDate]       DATETIME      NULL,
+    [AuditStatus]     INT           CONSTRAINT [DF__T_Stock_M__Audit__1842A6DD] DEFAULT ((1)) NULL
+);
+

@@ -1,0 +1,129 @@
+﻿-- =============================================    
+-- Author:  <Parichoy Nandi>    
+-- Create date: <14th Sept 2023>    
+-- Description: <to add or update the class>    
+--exec [usp_ERP_AddClass] null,'4567',1,'Class7234',107
+-- =============================================    
+CREATE PROCEDURE [dbo].[usp_ERP_AddClass]     
+    @iClassID int = null,    
+    @sClassCode NVARCHAR(MAX),    
+    @iClassStatus int,    
+    @sClassName NVARCHAR(MAX),  
+    @BrandID int = null,
+    @Streams nvarchar(200) = null
+AS    
+BEGIN    
+    SET NOCOUNT ON;    
+    BEGIN TRANSACTION    
+    BEGIN TRY     
+        -- Temporary table to store stream IDs
+        CREATE TABLE #TempStreams (
+            StreamID int
+        );
+
+        -- Split the comma-separated stream IDs and insert into the temporary table if @Streams is not empty
+        IF @Streams IS NOT NULL AND LEN(@Streams) > 0
+        BEGIN
+            DECLARE @Pos int, @Value nvarchar(200);
+            SET @Pos = CHARINDEX(',', @Streams);
+            WHILE @Pos > 0
+            BEGIN
+                SET @Value = LEFT(@Streams, @Pos - 1);
+                INSERT INTO #TempStreams (StreamID) VALUES (CAST(@Value AS int));
+                SET @Streams = RIGHT(@Streams, LEN(@Streams) - @Pos);
+                SET @Pos = CHARINDEX(',', @Streams);
+            END
+            INSERT INTO #TempStreams (StreamID) VALUES (CAST(@Streams AS int));
+        END
+
+        IF (@iClassID > 0)    
+        BEGIN    
+            IF EXISTS (SELECT 1 FROM T_Class WHERE S_Class_Name = @sClassName AND I_Class_ID != @iClassID AND I_Brand_ID = @BrandID)    
+            BEGIN    
+                SELECT 0 AS StatusFlag, 'Duplicate Class Name' AS Message;    
+            END    
+            ELSE IF EXISTS (SELECT 1 FROM T_Class WHERE S_Class_Code = @sClassCode AND I_Class_ID != @iClassID AND I_Brand_ID = @BrandID)    
+            BEGIN    
+                SELECT 0 AS StatusFlag, 'Duplicate Class Code' AS Message;    
+            END    
+            ELSE    
+            BEGIN    
+                UPDATE [dbo].[T_Class]     
+                SET     
+                    [S_Class_Code] = @sClassCode,    
+                    [S_Class_Name] = @sClassName,    
+                    [I_Status] = @iClassStatus,  
+                    I_Brand_ID = @BrandID  
+                WHERE I_Class_ID = @iClassID;    
+                
+                -- Merge operation for T_ERP_Temp_ClassStream
+                MERGE T_ERP_Temp_ClassStream AS target
+                USING #TempStreams AS source
+                ON target.I_Class_ID = @iClassID AND target.I_Stream_ID = source.StreamID AND target.I_Brand_ID = @BrandID
+                WHEN MATCHED THEN
+                    UPDATE SET I_Active = 1
+                WHEN NOT MATCHED BY SOURCE AND target.I_Class_ID = @iClassID AND target.I_Brand_ID = @BrandID THEN
+                    UPDATE SET I_Active = 0
+                WHEN NOT MATCHED BY TARGET THEN
+                    INSERT (I_Class_ID, I_Stream_ID, I_Brand_ID, I_Active)
+                    VALUES (@iClassID, source.StreamID, @BrandID, 1);
+
+                SELECT 1 AS StatusFlag, 'Class updated' AS Message;    
+            END    
+        END    
+        ELSE    
+        BEGIN    
+            IF EXISTS (SELECT 1 FROM T_Class WHERE S_Class_Name = @sClassName AND I_Brand_ID = @BrandID)    
+            BEGIN    
+                SELECT 0 AS StatusFlag, 'Duplicate Class Name' AS Message;    
+            END    
+            ELSE IF EXISTS (SELECT 1 FROM T_Class WHERE S_Class_Code = @sClassCode AND I_Brand_ID = @BrandID)    
+            BEGIN    
+                SELECT 0 AS StatusFlag, 'Duplicate Class Code' AS Message;    
+            END    
+            ELSE    
+            BEGIN    
+                DECLARE @classIDD int;
+                INSERT INTO [dbo].[T_Class]    
+                (    
+                    [S_Class_Code],    
+                    [S_Class_Name],    
+                    [I_Status],  
+                    I_Brand_ID  
+                )    
+                VALUES    
+                (    
+                    @sClassCode,    
+                    @sClassName,    
+                    1,  
+                    @BrandID  
+                ); 
+                SET @classIDD = SCOPE_IDENTITY();
+                EXEC Usp_ERP_Course_batch_Map @ClassID = @classIDD, @BrandID = @BrandID, @streamID = NULL;
+                
+                -- Merge operation for T_ERP_Temp_ClassStream
+                MERGE T_ERP_Temp_ClassStream AS target
+                USING #TempStreams AS source
+                ON target.I_Class_ID = @classIDD AND target.I_Stream_ID = source.StreamID AND target.I_Brand_ID = @BrandID
+                WHEN MATCHED THEN
+                    UPDATE SET I_Active = 1
+                WHEN NOT MATCHED BY SOURCE AND target.I_Class_ID = @classIDD AND target.I_Brand_ID = @BrandID THEN
+                    UPDATE SET I_Active = 0
+                WHEN NOT MATCHED BY TARGET THEN
+                    INSERT (I_Class_ID, I_Stream_ID, I_Brand_ID, I_Active)
+                    VALUES (@classIDD, source.StreamID, @BrandID, 1);
+
+                SELECT 1 AS StatusFlag, 'Class added' AS Message;    
+            END    
+        END    
+        COMMIT TRANSACTION;    
+    END TRY    
+    BEGIN CATCH    
+        ROLLBACK TRANSACTION;    
+        DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int;    
+        SELECT @ErrMsg = ERROR_MESSAGE(), @ErrSeverity = ERROR_SEVERITY();    
+        SELECT 0 AS StatusFlag, @ErrMsg AS Message;    
+    END CATCH;    
+END;
+
+

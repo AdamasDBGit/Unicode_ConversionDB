@@ -1,0 +1,259 @@
+﻿-- ==============================================================  
+-- Author : Surya Narayan Chakraborty.  
+-- Created On : 05/11/2025  
+-- ==============================================================  
+  
+CREATE PROCEDURE [dbo].[usp_ERP_Transport_Fees_InsertUpdate]          
+    @RouteID INT = NULL,  
+    @PickupPointID INT = NULL,  
+    @Status INT = NULL,          
+    @UpdtBy VARCHAR(500) = NULL,          
+    @CrtdBy VARCHAR(500) = NULL,          
+    @iBrandID INT = NULL,          
+    @UT_Transport_Fees dbo.UT_Transport_Fees READONLY          
+AS          
+BEGIN          
+    SET NOCOUNT ON;          
+              
+    BEGIN TRY          
+        BEGIN TRANSACTION;          
+        DECLARE @FeesInsertStatus INT = 0, @FeesUpdateStatus INT = 0;          
+        DECLARE @FeesDeleteStatus INT = 0;          
+        DECLARE @TransportMasterUpdateStatus INT = 0;  
+        DECLARE @TransportMasterInsertStatus INT = 0;  
+        DECLARE @AcademicSessionID INT;  
+        DECLARE @SessionStartDate DATE;  
+        DECLARE @SessionEndDate DATE;  
+        DECLARE @CurrentYear VARCHAR(4);  
+        DECLARE @NewFareCode VARCHAR(20);  
+        DECLARE @MaxSequence INT;  
+          
+        -- Get Current Year  
+        SET @CurrentYear = CAST(YEAR(GETDATE()) AS VARCHAR(4));  
+          
+        -- Get Current Academic Session ID and Dates          
+        SELECT   
+            @AcademicSessionID = I_School_Session_ID,  
+            @SessionStartDate = Dt_Session_Start_Date,  
+            @SessionEndDate = Dt_Session_End_Date  
+        FROM T_School_Academic_Session_Master           
+        WHERE I_Status = 1 AND I_Brand_ID = @iBrandID;          
+          
+        -- Validate if RouteID exists          
+        IF NOT EXISTS (SELECT 1 FROM T_BusRoute_Master WHERE I_Route_ID = @RouteID)          
+        BEGIN          
+            SELECT 0 AS StatusFlag, 'Invalid Route ID' AS Message, @RouteID AS RouteID;          
+            RETURN;          
+        END          
+          
+        -- Validate if Academic Session exists  
+        IF @AcademicSessionID IS NULL  
+        BEGIN  
+            SELECT 0 AS StatusFlag, 'No active academic session found for the brand' AS Message,   
+            @AcademicSessionID AS Academic_Session;  
+            RETURN;  
+        END  
+          
+        -- Set default dates if NULL  
+        IF @SessionStartDate IS NULL  
+            SET @SessionStartDate = GETDATE();  
+              
+        IF @SessionEndDate IS NULL  
+            SET @SessionEndDate = DATEADD(YEAR, 1, GETDATE());  
+          
+        -- Create temporary table to handle new pickup points insertion  
+        DECLARE @NewPickupPoints TABLE (  
+            I_PickupPoint_ID INT,  
+            S_PickupPoint_Name VARCHAR(5000),  
+            N_Fees NUMERIC(10,2),  
+            Fare_Code VARCHAR(20),  
+            RowNum INT  
+        );  
+          
+        -- Identify and handle new pickup points that don't exist in T_Transport_Master  
+        INSERT INTO @NewPickupPoints (I_PickupPoint_ID, S_PickupPoint_Name, N_Fees, RowNum)  
+        SELECT   
+            ut.I_PickupPoint_ID,  
+            ut.Pickup_Point_Name,  
+            ut.Monthly_Amount,  
+            ROW_NUMBER() OVER (ORDER BY ut.I_PickupPoint_ID) AS RowNum  
+        FROM @UT_Transport_Fees ut  
+        WHERE NOT EXISTS (  
+            SELECT 1 FROM T_Transport_Master tm   
+            WHERE tm.I_PickupPoint_ID = ut.I_PickupPoint_ID  
+        );  
+          
+        -- Generate Fare_Code for new pickup points  
+        IF EXISTS (SELECT 1 FROM @NewPickupPoints)  
+        BEGIN  
+            -- Get the maximum sequence number for current year  
+            SELECT @MaxSequence = ISNULL(MAX(CAST(RIGHT(Fare_Code, 3) AS INT)), 0)  
+            FROM T_Transport_Master   
+            WHERE Fare_Code LIKE 'TF-' + @CurrentYear + '-%';  
+              
+            -- Update new pickup points with generated Fare_Code using RowNum  
+            UPDATE @NewPickupPoints  
+            SET Fare_Code = 'TF-' + @CurrentYear + '-' +   
+                RIGHT('000' + CAST(@MaxSequence + RowNum AS VARCHAR(3)), 3);  
+              
+            -- Insert new pickup points into T_Transport_Master 
+            -- Remove identity column from insert (assuming I_Transport_Master_ID is identity)
+            INSERT INTO T_Transport_Master (  
+                I_PickupPoint_ID,  
+                S_PickupPoint_Name,  
+                N_Fees,  
+                Fare_Code,  
+                I_Status,  
+                S_Crtd_By,  
+                Dt_Crtd_On,  
+                S_Updt_By,  
+                Dt_Updt_On,  
+                I_Brand_ID  
+            )  
+            SELECT   
+                I_PickupPoint_ID,  
+                S_PickupPoint_Name,  
+                N_Fees,  
+                Fare_Code,  
+                1, -- Active status  
+                @CrtdBy,  
+                GETDATE(),  
+                @UpdtBy,  
+                GETDATE(),  
+                @iBrandID  
+            FROM @NewPickupPoints;  
+              
+            SET @TransportMasterInsertStatus = 1;  
+        END  
+          
+        -- Update existing T_Transport_Master with Monthly_Amount from UT_Transport_Fees  
+        UPDATE T_Transport_Master  
+        SET N_Fees = ut.Monthly_Amount,  
+            S_Updt_By = @UpdtBy,  
+            Dt_Updt_On = GETDATE()  
+        FROM T_Transport_Master tm  
+        INNER JOIN @UT_Transport_Fees ut ON tm.I_PickupPoint_ID = ut.I_PickupPoint_ID;  
+          
+        -- Check if any Transport Master updates happened  
+        IF @@ROWCOUNT > 0  
+            SET @TransportMasterUpdateStatus = 1;  
+          
+        -- Merge Statement for Transport Fees with Route-Transport Mapping          
+        MERGE INTO T_Route_Transport_Map AS target           
+        USING (          
+            SELECT           
+                ut.I_PickupPoint_ID,  
+                @RouteID AS I_Route_ID,   
+                ut.Transport_Fee_Head,          
+                ut.Configuration_Name,          
+                ut.Monthly_Amount,          
+                ut.Bimonthly_Amount,          
+                ut.Quarterly_Amount,          
+                ut.Yearly_Amount,          
+                @AcademicSessionID AS I_Academic_Session_ID,  
+                @SessionStartDate AS Dt_Effective_From,  
+                @SessionEndDate AS Dt_Effective_To  
+            FROM @UT_Transport_Fees ut          
+        ) AS source          
+        ON target.I_Route_ID = source.I_Route_ID           
+           AND target.I_PickupPoint_ID = source.I_PickupPoint_ID          
+           AND target.I_Academic_Session_ID = source.I_Academic_Session_ID          
+        WHEN MATCHED THEN          
+            UPDATE SET           
+                Transport_Fee_Head = source.Transport_Fee_Head,          
+                Configuration_Name = source.Configuration_Name,          
+                Monthly_Amount = source.Monthly_Amount,          
+                Bimonthly_Amount = source.Bimonthly_Amount,          
+                Quarterly_Amount = source.Quarterly_Amount,          
+                Yearly_Amount = source.Yearly_Amount,          
+                Dt_Effective_From = source.Dt_Effective_From,  
+                Dt_Effective_To = source.Dt_Effective_To,  
+                I_Status = ISNULL(@Status, target.I_Status),          
+                S_Updt_By = @UpdtBy,          
+                Dt_Updt_On = GETDATE()          
+        WHEN NOT MATCHED THEN          
+            INSERT (          
+                I_Route_ID,          
+                I_PickupPoint_ID,          
+                I_Academic_Session_ID,          
+                Transport_Fee_Head,          
+                Configuration_Name,          
+                Monthly_Amount,          
+                Bimonthly_Amount,          
+                Quarterly_Amount,          
+                Yearly_Amount,          
+                Dt_Effective_From,  
+                Dt_Effective_To,  
+                I_Status,          
+                S_Crtd_By,          
+                Dt_Crtd_On,          
+                S_Updt_By,          
+                Dt_Updt_On          
+            )          
+            VALUES (          
+                source.I_Route_ID,         
+                source.I_PickupPoint_ID,          
+                source.I_Academic_Session_ID,          
+                source.Transport_Fee_Head,          
+                source.Configuration_Name,          
+                source.Monthly_Amount,          
+                source.Bimonthly_Amount,          
+                source.Quarterly_Amount,          
+                source.Yearly_Amount,          
+                source.Dt_Effective_From,  
+                source.Dt_Effective_To,  
+                ISNULL(@Status, 1),          
+                @CrtdBy,          
+                GETDATE(),          
+                @UpdtBy,          
+                GETDATE()          
+            );          
+          
+        -- Check if any fees inserts happened          
+        IF @@ROWCOUNT > 0          
+            SET @FeesInsertStatus = 1;          
+          
+        -- Delete fees for pickup points that are not in current update but exist for this route and academic session          
+        DELETE FROM T_Route_Transport_Map          
+        WHERE I_Route_ID = @RouteID          
+          AND I_Academic_Session_ID = @AcademicSessionID          
+          AND I_PickupPoint_ID NOT IN (          
+              SELECT DISTINCT I_PickupPoint_ID           
+              FROM @UT_Transport_Fees          
+          );          
+          
+        -- Check if any fees deletions happened          
+        IF @@ROWCOUNT > 0          
+            SET @FeesDeleteStatus = 1;          
+          
+        -- Final Status Output          
+        IF @FeesInsertStatus = 1 OR @FeesDeleteStatus = 1 OR @TransportMasterUpdateStatus = 1   
+        OR @TransportMasterInsertStatus = 1          
+        BEGIN          
+            SELECT 1 AS StatusFlag, 'Transport Fees Configuration Updated Successfully' AS Message, @RouteID AS RouteID;          
+        END          
+        ELSE          
+        BEGIN          
+            SELECT 1 AS StatusFlag, 'No Changes Made' AS Message, @RouteID AS RouteID;          
+        END  
+          
+        -- Return generated Fare_Codes for new pickup points  
+        IF @TransportMasterInsertStatus = 1  
+        BEGIN  
+            SELECT   
+                I_PickupPoint_ID,  
+                S_PickupPoint_Name,  
+                Fare_Code  
+            FROM @NewPickupPoints;  
+        END  
+          
+        COMMIT;          
+    END TRY          
+    BEGIN CATCH          
+        IF @@TRANCOUNT > 0 ROLLBACK;          
+                  
+        DECLARE @ErrMsg NVARCHAR(4000) = ERROR_MESSAGE();          
+        SELECT 0 AS StatusFlag, @ErrMsg AS Message, @RouteID AS RouteID;                
+        RAISERROR(@ErrMsg, 16, 1);          
+    END CATCH;          
+END;

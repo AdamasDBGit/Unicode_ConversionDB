@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[zzz_AIS_UserList] (
+    [I_User_ID]                INT              NOT NULL,
+    [S_Username]               NVARCHAR (50)    NOT NULL,
+    [S_Password]               NVARCHAR (50)    NOT NULL,
+    [S_Email]                  NVARCHAR (50)    NOT NULL,
+    [S_First_Name]             NVARCHAR (30)    NOT NULL,
+    [S_Middle_Name]            NVARCHAR (30)    NULL,
+    [S_Last_Name]              NVARCHAR (30)    NULL,
+    [S_Mobile]                 NVARCHAR (20)    NOT NULL,
+    [I_Created_By]             INT              NULL,
+    [Dt_CreatedAt]             DATETIME2 (3)    NULL,
+    [Dt_Last_Login]            DATETIME2 (3)    NULL,
+    [I_Status]                 INT              NOT NULL,
+    [I_User_Type]              INT              NULL,
+    [S_Token]                  NTEXT            NULL,
+    [IsAllAllowedEligible]     BIT              NULL,
+    [Is_Teaching_Staff]        BIT              NULL,
+    [Is_Non_Teaching_Staff]    BIT              NULL,
+    [S_FireBase_Token]         NVARCHAR (500)   NULL,
+    [Is_Active_Ignore_Allowed] BIT              NULL,
+    [isPasswordChanged]        BIT              NULL,
+    [unUserId]                 UNIQUEIDENTIFIER NULL,
+    [Old_UserMigID]            INT              NULL,
+    [I_User_Group_Master_ID]   INT              NOT NULL,
+    [S_User_GroupName]         NVARCHAR (MAX)   NULL
+);
+

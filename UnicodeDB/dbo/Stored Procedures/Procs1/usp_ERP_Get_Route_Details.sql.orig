@@ -1,0 +1,26 @@
+﻿-- =================================================================================  
+-- Author : Surya Narayan Chakraborty.  
+-- Created On : 03/11/2025  
+-- =================================================================================  
+  
+--EXEC [dbo].[usp_ERP_Get_Route_Details] 89,  NULL;  
+CREATE PROCEDURE [dbo].[usp_ERP_Get_Route_Details]  
+@RouteID INT = NULL,  
+@RouteNo VARCHAR(100) = NULL  
+AS  
+BEGIN  
+SET NOCOUNT ON;  
+BEGIN TRY  
+              SELECT  
+              I_Route_ID,  
+              S_Route_No  
+              FROM T_BusRoute_Master  
+          WHERE I_Status = 1
+          -- AND I_Route_ID = @RouteID OR @RouteID IS NULL  
+          --AND S_Route_No = @RouteNo  
+          ORDER BY I_Route_ID;  
+  
+    END TRY        
+BEGIN CATCH        
+     END CATCH        
+END  

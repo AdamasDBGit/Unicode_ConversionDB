@@ -1,0 +1,478 @@
+﻿
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+--exec [dbo].[usp_ERP_InitiateTransaction] 1,1,'string545','2024-05-31','Initiated','Online App_Arivoo','UPI',10475,1,32,'24-0044'
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ERP_Make_Transaction_Success_BKP_Aug_2025]
+	-- Add the parameters for the stored procedure here
+	@iFeeSchedule INT=NULL,
+	@iBrandID INT,
+	@iCenterID INT = NULL,
+	@sTransactionNo NVARCHAR(MAX),
+	@dtTransactionDate datetime,
+	@sTransactionStatus NVARCHAR(MAX),
+	@sTransactionSource NVARCHAR(MAX),
+	@sTransactionMode NVARCHAR(MAX),
+	@TotalTransactionAmount decimal(8,2),
+	@iPaymentGatewayBrandID INT,
+	@iSmsPaymentMode INT,
+	@sStudentID NVARCHAR(MAX),
+	@InvoiceXmlData XML=NULL,
+	@OnAccountXmlData XML=NULL,
+	@SuccessXML xml=NULL,
+	@PaymentJson NVARCHAR(MAX)=NULL,
+	@ReceiptHeader INT=NULL,
+	@OnAccountReceiptHeader INT=NULL,
+	@SourceOfRequestType NVARCHAR(MAX)=NULL,
+	@RequestUserId NVARCHAR(MAX)=NULL,
+	@CancelledBy NVARCHAR(MAX)=NULL,
+	@CancelledDate datetime=NULL,
+	@ExternalReceiptNo NVARCHAR(MAX)=NULL,
+	@PaymentStatus NVARCHAR(MAX)=NULL,
+	@PgResponse NVARCHAR(MAX)=NULL,
+    @PgMessage NVARCHAR(MAX)=NULL,
+	@RequestType NVARCHAR(MAX)=NULL,
+	@ExecutionDate datetime=NULL,
+	@Order_Id NVARCHAR(MAX)=NULL
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+        -- Your existing code...
+   BEGIN TRANSACTION;	
+
+	DECLARE @StudentDetailID INT
+	DECLARE @sErrorMSG NVARCHAR(4000)
+	DECLARE @TransactionID INT
+
+
+	select @StudentDetailID=I_Student_Detail_ID from T_Student_Detail where S_Student_ID=@sStudentID
+
+	IF @StudentDetailID IS NULL
+	BEGIN
+
+	set  @sErrorMSG='Student ID does not exists';
+
+    RAISERROR(@sErrorMSG, 11, 1);
+
+	END
+
+
+	select top 1 @iCenterID=I_Centre_Id from T_Brand_Center_Details where I_Brand_ID=@iBrandID and I_Status=1
+
+insert into InvoiceTableTransaction
+  (
+  TransactionNo,
+Dt_Created
+  )
+  select @sTransactionNo+'_Initial',GETDATE()
+
+
+CREATE TABLE #InvoiceTable (
+    FeeScheduleID INT,
+    InvoiceDetailID INT,
+    ReceiptDetailID INT,
+    AmountPaid DECIMAL(18, 2)
+);
+
+CREATE TABLE #InvoiceTaxTable (
+    InvoiceDetailID INT,
+    TaxID INT,
+    TaxPaid DECIMAL(18, 2)
+);
+
+
+CREATE TABLE #AdhocDetailsTable (
+        FeeScheduleID INT,
+		StatusValue INT,
+        Amount DECIMAL(18, 2),
+        InvoiceNo NVARCHAR(50),
+        InstallmentDate DATETIME
+    );
+
+	  CREATE TABLE #OnAccountTaxTable (
+        InvoiceNo NVARCHAR(50),
+        TaxID INT,
+        TaxPaid DECIMAL(18, 2)
+    );
+
+
+	INSERT INTO dbo.T_Error_Log_XML (
+        ProcedureName,
+        ErrorMessage,
+        ErrorSeverity,
+        ErrorState,
+        ErrorLine,
+        ErrorNumber,
+        InputInvoiceXml,
+        InputOnAccountXml,
+        TransactionNo,
+        StudentID,
+		LogTime
+    )
+	select top 1 'usp_ERP_Make_Transaction_Success',NULL,NULL,NULL,NULL,NULL,@InvoiceXmlData,@OnAccountXmlData,@sTransactionNo,@sStudentID,getdate()
+
+  
+
+  IF @InvoiceXmlData IS NOT NULL
+  BEGIN
+
+
+  insert into InvoiceTableTransaction
+  (
+  TransactionNo,
+FeeScheduleID, 
+InvoiceDetailID, 
+ReceiptDetailID,
+AmountPaid,
+Dt_Created
+  )
+  SELECT 
+  @sTransactionNo+'_Get_XML',
+    NULL AS FeeScheduleID,  -- FeeScheduleID is not provided in the sample XML
+    InvoiceDetail.value('@I_Invoice_Detail_ID', 'int') AS InvoiceDetailID,
+    InvoiceDetail.value('@I_Receipt_Detail_ID', 'int') AS ReceiptDetailID,
+    InvoiceDetail.value('@N_Amount_Paid', 'decimal(18, 2)') AS AmountPaid,
+	GETDATE()
+FROM @InvoiceXmlData.nodes('/TblRctCompDtl/RowRctCompDtl') AS InvoiceDetails(InvoiceDetail);
+
+
+insert into InvoiceTableTransaction
+  (
+  TransactionNo,
+Dt_Created
+  )
+  select @sTransactionNo+'_Before_Insert_InvoiceTable',GETDATE()
+
+ INSERT INTO #InvoiceTable (FeeScheduleID, InvoiceDetailID, ReceiptDetailID, AmountPaid)
+SELECT 
+    NULL AS FeeScheduleID,  -- FeeScheduleID is not provided in the sample XML
+    InvoiceDetail.value('@I_Invoice_Detail_ID', 'int') AS InvoiceDetailID,
+    InvoiceDetail.value('@I_Receipt_Detail_ID', 'int') AS ReceiptDetailID,
+    InvoiceDetail.value('@N_Amount_Paid', 'decimal(18, 2)') AS AmountPaid
+FROM @InvoiceXmlData.nodes('/TblRctCompDtl/RowRctCompDtl') AS InvoiceDetails(InvoiceDetail);
+
+-- Insert into invoice tax table
+INSERT INTO #InvoiceTaxTable (InvoiceDetailID, TaxID, TaxPaid)
+SELECT 
+    TaxDetail.value('@I_Invoice_Detail_ID', 'int') AS InvoiceDetailID,
+    TaxDetail.value('@I_Tax_ID', 'int') AS TaxID,
+    TaxDetail.value('@N_Tax_Paid', 'decimal(18, 2)') AS TaxPaid
+FROM @InvoiceXmlData.nodes('/TblRctCompDtl/RowRctCompDtl/TblRctTaxDtl/RowRctTaxDtl') AS TaxDetails(TaxDetail);
+
+--select * from #InvoiceTable
+--select * from #InvoiceTaxTable
+print @ReceiptHeader
+
+update TID set TID.SuccessXML=@InvoiceXmlData,StudentID=@sStudentID+'/'+ CAST(@ReceiptHeader AS VARCHAR(MAX))
+from
+T_ERP_Transaction_Invoice_Details  as TID WITH(NOLOCK)
+inner join
+T_ERP_Transaction_Master as ETM WITH(NOLOCK) on TID.I_ERP_Transaction_Master_ID=ETM.I_ERP_Transaction_Master_ID
+
+where ETM.I_ERP_TransactionNo=@sTransactionNo and TID.StatusValue IS NULL
+and ISNULL(TID.CanBeProcessed,'false')='true' and ISNULL(TID.IsCompleted,'false')='false'
+
+
+update TID set TID.IsCompleted='true',TID.Dt_CompletedOn=GETDATE(),TID.ReceiptHeaderID=@ReceiptHeader
+,TID.SuccessXML=@InvoiceXmlData,StudentID=@sStudentID
+from
+T_ERP_Transaction_Invoice_Details as TID WITH(NOLOCK)
+inner join
+T_ERP_Transaction_Master as ETM WITH(NOLOCK) on TID.I_ERP_Transaction_Master_ID=ETM.I_ERP_Transaction_Master_ID
+inner join
+T_Invoice_Child_Detail as ICD WITH(NOLOCK) on CONVERT(DATE,TID.Dt_Installment_Date)=CONVERT(DATE,ICD.Dt_Installment_Date)
+inner join
+#InvoiceTable as IT WITH(NOLOCK) on IT.InvoiceDetailID=ICD.I_Invoice_Detail_ID
+inner join
+T_Invoice_Child_Header as ICH2 WITH(NOLOCK) on ICH2.I_Invoice_Child_Header_ID=ICD.I_Invoice_Child_Header_ID 
+and ICH2.I_Invoice_Header_ID=TID.I_Invoice_Header_ID
+inner join
+T_Receipt_Component_Detail as RCD WITH(NOLOCK) on 
+RCD.I_Receipt_Detail_ID=@ReceiptHeader 
+and
+RCD.I_Invoice_Detail_ID=ICD.I_Invoice_Detail_ID
+where ETM.I_ERP_TransactionNo=@sTransactionNo and TID.StatusValue IS NULL
+and ISNULL(TID.CanBeProcessed,'false')='true' and ISNULL(TID.IsCompleted,'false')='false'
+
+
+update ICD set ICD.is_Freezed='false' from
+T_ERP_Transaction_Invoice_Details as TID WITH(NOLOCK)
+inner join
+T_ERP_Transaction_Master as ETM WITH(NOLOCK) on TID.I_ERP_Transaction_Master_ID=ETM.I_ERP_Transaction_Master_ID
+inner join
+T_Invoice_Child_Detail as ICD WITH(NOLOCK) on CONVERT(DATE,TID.Dt_Installment_Date)=CONVERT(DATE,ICD.Dt_Installment_Date)
+inner join
+#InvoiceTable as IT WITH(NOLOCK) on IT.InvoiceDetailID=ICD.I_Invoice_Detail_ID
+inner join
+T_Invoice_Child_Header as ICH2 WITH(NOLOCK) on ICH2.I_Invoice_Child_Header_ID=ICD.I_Invoice_Child_Header_ID 
+and ICH2.I_Invoice_Header_ID=TID.I_Invoice_Header_ID
+inner join
+T_Receipt_Component_Detail as RCD WITH(NOLOCK) on 
+RCD.I_Receipt_Detail_ID=@ReceiptHeader 
+and
+RCD.I_Invoice_Detail_ID=ICD.I_Invoice_Detail_ID
+where ETM.I_ERP_TransactionNo=@sTransactionNo
+and ISNULL(TID.CanBeProcessed,'false')='true' and ISNULL(TID.IsCompleted,'false')='true'
+
+
+	END
+
+
+   IF @OnAccountXmlData IS NOT NULL
+  BEGIN
+
+-- Parse XML and insert data into #AdhocDetailsTable
+INSERT INTO #AdhocDetailsTable (FeeScheduleID, StatusValue, Amount, InvoiceNo, InstallmentDate)
+SELECT 
+    NULL AS FeeScheduleID,  -- Assuming FeeScheduleID and StatusValue are not present in the XML
+    T.c.value('@StatusValue', 'int') AS StatusValue, 
+    T.c.value('@Amount', 'DECIMAL(18,2)') AS Amount,
+    T.c.value('@InvoiceNo', 'NVARCHAR(50)') AS InvoiceNo,
+    --T.c.value('@InstallmentDate', 'DATETIME') AS InstallmentDate
+	--CONVERT(datetime, T.c.value('@InstallmentDate', 'nvarchar(50)'), 103) as InstallmentDate
+	TRY_CAST(T.c.value('@InstallmentDate', 'nvarchar(50)') AS datetime) AS InstallmentDate
+FROM 
+    @OnAccountXmlData.nodes('/RowDueOnAccountDtl') AS T(c);
+
+-- Parse XML and insert data into #OnAccountTaxTable
+INSERT INTO #OnAccountTaxTable (InvoiceNo, TaxID, TaxPaid)
+SELECT 
+    T.c.value('@InvoiceNo', 'NVARCHAR(50)') AS InvoiceNo,
+    R.c.value('@TaxID', 'INT') AS TaxID,
+    R.c.value('@TaxPaid', 'DECIMAL(18,2)') AS TaxPaid
+FROM 
+    @OnAccountXmlData.nodes('/RowDueOnAccountDtl') AS T(c)
+CROSS APPLY 
+    T.c.nodes('ReceiptTax/TaxDetails') AS R(c);
+
+--select * from #AdhocDetailsTable
+--select * from #OnAccountTaxTable
+--print @OnAccountReceiptHeader
+
+
+--select * from
+--T_ERP_Transaction_Invoice_Details as TID
+--inner join
+--T_ERP_Transaction_Master as ETM on TID.I_ERP_Transaction_Master_ID=ETM.I_ERP_Transaction_Master_ID
+--inner join
+--#AdhocDetailsTable as ADT on CONVERT(DATE,ADT.InstallmentDate)=CONVERT(DATE,TID.Dt_Installment_Date)
+--and ADT.StatusValue=TID.StatusValue
+--where ETM.I_ERP_TransactionNo=@sTransactionNo
+--and TID.I_Invoice_Header_ID=@iFeeSchedule
+--and ISNULL(TID.CanBeProcessed,'false')='true' and ISNULL(TID.IsCompleted,'false')='false'
+
+
+update TID set TID.IsCompleted='true',TID.Dt_CompletedOn=GETDATE(),TID.ReceiptHeaderID=@OnAccountReceiptHeader 
+,TID.SuccessXML=@OnAccountXmlData,StudentID=@sStudentID
+from
+T_ERP_Transaction_Invoice_Details as TID WITH(NOLOCK)
+inner join
+T_ERP_Transaction_Master as ETM WITH(NOLOCK) on TID.I_ERP_Transaction_Master_ID=ETM.I_ERP_Transaction_Master_ID
+inner join
+#AdhocDetailsTable as ADT WITH(NOLOCK) on CONVERT(DATE,ADT.InstallmentDate)=CONVERT(DATE,TID.Dt_Installment_Date)
+and ADT.StatusValue=TID.StatusValue
+where ETM.I_ERP_TransactionNo=@sTransactionNo
+and TID.I_Invoice_Header_ID=@iFeeSchedule
+and ISNULL(TID.CanBeProcessed,'false')='true' and ISNULL(TID.IsCompleted,'false')='false'
+
+
+
+	END
+
+
+
+	IF @SuccessXML IS NOT NULL OR @PaymentJson IS NOT NULL 
+		BEGIN
+		select @TransactionID=I_ERP_Transaction_Master_ID  from T_ERP_Transaction_Master WITH(NOLOCK)
+		where I_ERP_TransactionNo=@sTransactionNo
+		
+		IF @TransactionID IS NOT NULL 
+		AND exists(select * from T_ERP_Transaction_Invoice_Details WITH(NOLOCK) where I_ERP_Transaction_Master_ID=@TransactionID)
+		AND not exists(select * from T_ERP_Transaction_Invoice_Details WITH(NOLOCK) where I_ERP_Transaction_Master_ID=@TransactionID and ReceiptHeaderID IS NULL)
+
+			BEGIN
+
+			update T_ERP_Transaction_Master set IsCompleted='true',Dt_CompletedOn=GETDATE(),
+			SuccessXML=@SuccessXML,PaymentJson=@PaymentJson,S_TransactionStatus=@sTransactionStatus,I_StudentDetailID=@StudentDetailID
+			,S_TransactionMode=@sTransactionMode
+			where I_ERP_TransactionNo=@sTransactionNo and ISNULL(CanBeProcessed,'false')='true' and ISNULL(IsCompleted,'false')='false'
+	
+	
+	 DECLARE @iTransactionMasterID INT=NULL
+
+ select @iTransactionMasterID=I_ERP_Transaction_Master_ID from T_ERP_Transaction_Master where I_ERP_TransactionNo=@sTransactionNo
+
+
+ insert into T_ERP_PG_History
+	(
+	I_Transaction_Master_ID,
+	S_Transaction_No,
+	SourceofRequestType,
+	RequestUserId,
+	PGCancelledBy,
+	PGCancelledDate,
+	ExternalReceiptNo,
+	PaymentStatus,
+	PGMessage,
+	PGResponseType,
+	PGExecutionDate,
+	PGResponseJson,
+	Dt_CreatedAt
+	)
+	values
+	(
+	@iTransactionMasterID,
+	@sTransactionNo,
+	@SourceOfRequestType,
+	@RequestUserId,
+	@CancelledBy,
+	@CancelledDate,
+	@ExternalReceiptNo,
+	@PaymentStatus,
+	@PgMessage,
+	@RequestType,
+	@ExecutionDate,
+	@PgResponse,
+	GETDATE()
+	)
+
+
+	Declare @PGHistoryID INT=NULL
+	set @PGHistoryID=SCOPE_IDENTITY()
+
+	update T_ERP_Transaction_Master set PG_History_ID=@PGHistoryID where I_ERP_Transaction_Master_ID=@iTransactionMasterID and I_ERP_TransactionNo=@sTransactionNo
+
+	
+			IF @SourceOfRequestType != 'System_Processed'
+					
+						BEGIN
+
+
+						exec [dbo].[usp_ERP_SaveTransactionCronJob] 
+						@sTransactionNo,
+						@iTransactionMasterID,
+						@sTransactionStatus,
+						'true',--@CompleteStatus bit=NULL,
+						'false',--@CronCanBeProcess bit=NULL,
+						NULL,--@NoOfAttempt int=NULL,
+						NULL,--@StatusID bit = NULL,
+						NULL,--@Is_PG_Success bit=NULL,
+						NULL,--@Is_PG_Failure bit=NULL,
+						NULL,--@Is_Failed_User bit =NULL,
+						@PGHistoryID,--@Requery_PG_LogID int=NULL,
+						NULL,--@Requery_Request_LogID int=NULL,
+						NULL,--@PG_Response varchar(max)=NULL,
+						NULL,--@ERP_Response varchar(max)=NULL,
+						NULL,--@PG_Remarks varchar(max)=NULL,
+						NULL,--@ERP_Remarks varchar(max)=NULL,
+						NULL,--@PG_Error varchar(max)=NULL,
+						NULL,--@ERP_Error varchar(max)=NULL,
+						NULL,--@CanbeProcessForERPSattlement BIT=NULL,
+						'false'--@IsFromCron bit
+
+
+					END
+	
+	
+	END
+		ELSE
+			BEGIN
+			
+				set  @sErrorMSG='Something went wrong! Receipts not adjusted';
+
+				RAISERROR(@sErrorMSG, 11, 1);
+			END
+		
+		END
+		
+	
+
+
+
+	
+ DROP TABLE #InvoiceTable
+ DROP TABLE #AdhocDetailsTable
+ DROP TABLE #InvoiceTaxTable
+ DROP TABLE #OnAccountTaxTable
+
+
+
+
+
+	select 1 StatusFlag,'Payment has succeeded' Message
+
+	--exec [dbo].[usp_ERP_InitiateTransaction] 1,1,'string545','2024-05-31','Initiated','Online App_Arivoo','UPI',10475,1,32,'24-0044'
+
+	COMMIT;
+	END TRY
+    BEGIN CATCH
+        -- Handle errors
+        --DECLARE @ErrorMessage NVARCHAR(4000);
+        --DECLARE @ErrorSeverity INT;
+        --DECLARE @ErrorState INT;
+
+        --SELECT 
+        --    @ErrorMessage = ERROR_MESSAGE(),
+        --    @ErrorSeverity = ERROR_SEVERITY(),
+        --    @ErrorState = ERROR_STATE();
+
+    DECLARE @ErrorMessage NVARCHAR(MAX);
+    DECLARE @ErrorSeverity INT;
+    DECLARE @ErrorState INT;
+    DECLARE @ErrorLine INT;
+    DECLARE @ErrorNumber INT;
+
+    SELECT 
+        @ErrorMessage = ERROR_MESSAGE(),
+        @ErrorSeverity = ERROR_SEVERITY(),
+        @ErrorState = ERROR_STATE(),
+        @ErrorLine = ERROR_LINE(),
+        @ErrorNumber = ERROR_NUMBER();
+
+	-- Rollback the transaction
+	 IF @@TRANCOUNT > 0
+		ROLLBACK;
+
+		 INSERT INTO dbo.T_Error_Log_XML (
+        ProcedureName,
+        ErrorMessage,
+        ErrorSeverity,
+        ErrorState,
+        ErrorLine,
+        ErrorNumber,
+        InputInvoiceXml,
+        InputOnAccountXml,
+        TransactionNo,
+        StudentID
+    )
+    VALUES (
+        OBJECT_NAME(@@PROCID),
+        @ErrorMessage,
+        @ErrorSeverity,
+        @ErrorState,
+        @ErrorLine,
+        @ErrorNumber,
+        @InvoiceXmlData,
+        @OnAccountXmlData,
+        @sTransactionNo,
+        @sStudentID
+    );
+
+
+        -- Raise the error
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH
+
+
+
+
+END
+

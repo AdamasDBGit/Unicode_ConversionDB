@@ -1,0 +1,32 @@
+﻿
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ERP_GET_RequestLogData_TransactionNumberWise] 
+	-- Add the parameters for the stored procedure here
+	@sTransactionNumber varchar(max)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+   
+   select 
+   I_ERP_RequestID RequestID,
+   S_Mobile_No MobileNo,
+   S_Source Source,
+   S_InvokedRoute InvokedRoute,
+   S_InvokedMethod InvokedMethod,
+   S_UniqueAttributeName UniqueAttributeName,
+   S_UniqueAttributeValue UniqueAttributeValue,
+   S_RequestParameters RequestParameters,
+   RequestResult RequestResult,
+   ErrorMessage ErrorMessage,
+   LogDate LogDate
+   from T_ERP_Request_Log where S_UniqueAttributeName like '%transaction%' and S_UniqueAttributeValue=@sTransactionNumber
+   order by LogDate desc
+
+END

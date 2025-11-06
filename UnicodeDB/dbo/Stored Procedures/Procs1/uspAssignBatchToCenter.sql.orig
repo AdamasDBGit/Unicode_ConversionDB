@@ -1,0 +1,199 @@
+﻿
+CREATE PROCEDURE [dbo].[uspAssignBatchToCenter]   
+(  
+ @iBatchId INT,  
+ @CreatedBy VARCHAR(20),  
+ @CreatedOn DATETIME,  
+ @CenterID INT,  
+ @CourseFeePlanID INT,  
+ @MaxStrength INT,  
+ @MinRegnAmt DECIMAL(10,2),  
+ @I_Status INT,  
+ @I_FacultyID INT,
+ @MinStrength INT,
+ @I_CenterDispatchScheme INT,
+ @S_ClassDays VARCHAR(MAX)='',
+ @S_OfflineClassTime VARCHAR(MAX)='',
+ @S_OnlineClassTime VARCHAR(MAX)='',
+ @S_HandoutClassTime VARCHAR(MAX)='',
+ @S_ClassMode VARCHAR(MAX)='',
+ @S_BatchTime VARCHAR(MAX)=''
+)  
+AS  
+BEGIN TRY 
+
+DECLARE @BrandID INT
+
+select @BrandID=I_Brand_ID from T_Center_Hierarchy_Name_Details where I_Center_ID=@CenterID
+
+--if(@BrandID>0 and @BrandID=109 and (@S_ClassDays is null or @S_ClassDays='' or @S_ClassDays=','))
+--begin
+
+--	--DELETE FROM T_Student_Batch_Master where I_Batch_ID=@iBatchId and I_Status=1
+--	RAISERROR('Class Days is mandatory for RICE',11,1)
+
+--end
+if(@S_OfflineClassTime=',')
+begin
+	set @S_OfflineClassTime=''
+end
+
+if(@S_OnlineClassTime=',')
+begin
+	set @S_OnlineClassTime=''
+end
+
+if(@S_HandoutClassTime=',')
+begin
+	set @S_HandoutClassTime=''
+end
+
+
+
+
+
+if(LEN(@S_ClassDays)>2)
+begin
+	set @S_ClassDays=LEFT(@S_ClassDays,LEN(@S_ClassDays)-1)
+end
+
+if(LEN(@S_OfflineClassTime)>2)
+begin
+	set @S_OfflineClassTime=LEFT(@S_OfflineClassTime,LEN(@S_OfflineClassTime)-1)
+end
+
+if(LEN(@S_OnlineClassTime)>2)
+begin
+	set @S_OnlineClassTime=LEFT(@S_OnlineClassTime,LEN(@S_OnlineClassTime)-1)
+end
+
+if(LEN(@S_HandoutClassTime)>2)
+begin
+	set @S_HandoutClassTime=LEFT(@S_HandoutClassTime,LEN(@S_HandoutClassTime)-1)
+end
+
+
+
+-- susmita 2022-09-23 : To Reset CenterDispachScheme ID to NULL Which are Mapped to No Available Dispatch Scheme
+if(@I_CenterDispatchScheme > 0)
+begin
+	DECLARE @DispatchSchemeID INT
+	select @DispatchSchemeID=SchemeID from SMManagement.T_Centre_Dispatch_Scheme_Map where CentreDispatchSchemeID=@I_CenterDispatchScheme
+
+	if exists(select * from SMManagement.T_Dispatch_Scheme_Master where DispatchSchemeID=@DispatchSchemeID and DispatchSchemeName like '%No Dispatch Scheme Available%')
+		begin
+			set @I_CenterDispatchScheme=NULL
+			
+		end
+
+end
+
+-- susmita 2022-09-23 : end
+
+
+ INSERT INTO dbo.T_Center_Batch_Details (  
+  I_Batch_ID,  
+  I_Centre_Id,  
+  I_Course_Fee_Plan_ID,  
+  Max_Strength,  
+  I_Minimum_Regn_Amt,  
+  I_Status,  
+  I_Employee_ID,  
+  S_Crtd_By,  
+  Dt_Crtd_On,
+  I_Min_Strength,
+  I_Center_Dispatch_Scheme_ID,
+  S_ClassDays,
+  S_OfflineClassTime,
+  S_OnlineClassTime,
+  S_HandoutClassTime,
+  S_ClassMode,
+  S_BatchTime
+ ) VALUES (   
+  /* I_Batch_ID - int */ @iBatchId,  
+  /* I_Centre_Id - int */ @CenterID,  
+  /* I_Course_Fee_Plan_ID - int */ @CourseFeePlanID,  
+  /* Max_Strength - int */ @MaxStrength,  
+  @MinRegnAmt,  
+  /* I_Status - int */ @I_Status,  
+  @I_FacultyID,  
+  /* S_Crtd_By - varchar(20) */ @CreatedBy,  
+  /* Dt_Crtd_On - datetime */ @CreatedOn,
+  @MinStrength,
+  @I_CenterDispatchScheme,
+  @S_ClassDays,
+  @S_OfflineClassTime,
+  @S_OnlineClassTime,
+  @S_HandoutClassTime,
+  @S_ClassMode,
+  @S_BatchTime
+  )   
+
+  ----susmita paul : 2023March08 : Current Batch - Fee plan Details insert into log table
+
+	Declare @BatchFeeplanJson varchar(Max)=NULL
+	SELECT @BatchFeeplanJson ='['+ STUFF((
+                SELECT ',{"I_Batch_ID":"' + CONVERT(NVARCHAR(MAX),t1.I_Batch_ID) + '",'+
+							+'"I_Centre_Id":"'+CONVERT(NVARCHAR(MAX),t1.I_Centre_Id) + '",'+
+							+'"I_Course_Fee_Plan_ID":"'+CONVERT(NVARCHAR(MAX),t1.I_Course_Fee_Plan_ID) + '",'+
+							+'"I_Minimum_Regn_Amt":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.I_Minimum_Regn_Amt),'NULL') + '",'+
+							+'"Max_Strength":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.Max_Strength),'NULL') + '",'+
+							+'"I_Status":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.I_Status),'NULL') + '",'+
+							+'"S_Crtd_By":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_Crtd_By),'NULL') + '",'+
+							+'"S_Updt_By":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_Updt_By),'NULL') + '",'
+							+'"Dt_Crtd_On":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.Dt_Crtd_On),'NULL') + '",'+
+							+'"Dt_Upd_On":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.Dt_Upd_On),'NULL') + '",'+
+							+'"I_Employee_ID":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.I_Employee_ID),'NULL')  + '",'+
+							+'"B_Is_Eligibility_List_Prepared":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.B_Is_Eligibility_List_Prepared),'NULL') + '",'+
+							+'"I_Min_Strength":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.I_Min_Strength),'NULL') + '",'+
+							+'"I_Center_Dispatch_Scheme_ID":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.I_Center_Dispatch_Scheme_ID),'NULL') + '",'+
+							+'"S_ClassDays":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_ClassDays),'NULL') + '",'+
+							+'"S_OfflineClassTime":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_OfflineClassTime),'NULL') + '",'+
+							+'"S_OnlineClassTime":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_OnlineClassTime),'NULL') + '",'+
+							+'"S_HandoutClassTime":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_HandoutClassTime),'NULL') + '",'+
+							+'"S_ClassMode":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_ClassMode),'NULL') + '",'+
+						+'"S_BatchTime":"'+ISNULL(CONVERT(NVARCHAR(MAX),t1.S_BatchTime),'NULL') + '"}'
+				   FROM (select * from T_Center_Batch_Details where I_Batch_ID=@iBatchId) t1 
+					FOR XML PATH(''), TYPE
+                  ).value('.', 'varchar(max)'),1,1,''
+              ) + ']' ;
+
+
+	Insert into Batch_Feeschedule_Log
+	(
+	BrandID,
+	ActionDate,
+	ApproveDate,
+	BatchID,
+	CourseFeePlanID,
+	BatchFeePlanDetailJson,
+	Actionstatus,
+	BatchFeePlanCreatedBy,
+	BatchFeePlanCreatedOn
+	)
+	values
+	(
+	@BrandID,
+	getdate(),
+	NULL,
+	@iBatchId,
+	@CourseFeePlanID,
+	@BatchFeeplanJson,
+	'Created',
+	@CreatedBy,
+	@CreatedOn
+	)
+
+
+  -----------------------------------------------------------------
+
+
+
+END TRY  
+BEGIN CATCH  
+ DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity int  
+ SELECT @ErrMsg = ERROR_MESSAGE(),  
+   @ErrSeverity = ERROR_SEVERITY()  
+  
+ RAISERROR(@ErrMsg, @ErrSeverity, 1)  
+END CATCH

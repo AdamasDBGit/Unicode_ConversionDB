@@ -1,0 +1,9 @@
+﻿CREATE PROCEDURE [dbo].[uspFTBatchGETMaxFTNumber]
+ 
+AS
+BEGIN
+
+	SELECT ISNULL(MAX(I_FT_SAP_ID),0) AS I_FT_SAP_ID 
+	FROM dbo.T_FT_History
+
+END

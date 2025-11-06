@@ -1,0 +1,79 @@
+﻿CREATE PROCEDURE usp_ERP_Student_Parent_UpdateOrSelect
+    @EventType NVARCHAR(MAX) = 'SELECT',
+    @StudentID NVARCHAR(MAX),
+    @BrandID INT = 107,
+    @RelationID INT = NULL,         -- 1 = Father, 2 = Mother
+    @FirstName NVARCHAR(MAX) = NULL,
+    @MiddleName NVARCHAR(MAX) = NULL,
+    @LastName NVARCHAR(MAX) = NULL,
+    @PhoneNo NVARCHAR(MAX) = NULL,
+    @IsPrimary INT = NULL,
+    @isBusTravel INT = NULL,
+    @s_ParentsID NVARCHAR(MAX) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @EventType = 'SELECT'
+    BEGIN
+        PRINT 'Data From Enquiry';
+
+        SELECT 
+            sd.I_Student_Detail_ID,
+            sd.S_Student_ID,
+            rd.I_Enquiry_Regn_ID,
+            rd.S_Father_Office_Phone,
+            rd.S_Mother_Office_Phone,
+            rd.S_Father_Name,
+            rd.S_Mother_Name
+        FROM T_Student_Class_Section scs
+        INNER JOIN T_Student_Detail sd ON sd.I_Student_Detail_ID = scs.I_Student_Detail_ID
+        LEFT JOIN T_Enquiry_Regn_Detail rd ON rd.I_Enquiry_Regn_ID = sd.I_Enquiry_Regn_ID
+        WHERE scs.I_Brand_ID = @BrandID
+          AND scs.I_School_Session_ID = 7
+          AND sd.S_Student_ID = @StudentID;
+
+        PRINT 'Data From Student map';
+
+        SELECT 
+            SPM.I_Student_Detail_ID,
+            SPM.S_Student_ID,
+            SPM.I_Parent_Master_ID,
+            PM.S_First_Name,
+            PM.S_Middile_Name,
+            PM.S_Last_Name,
+            PM.I_Relation_ID,
+            CASE 
+                WHEN PM.I_Relation_ID = 1 THEN 'Father'
+                WHEN PM.I_Relation_ID = 2 THEN 'Mother'
+                ELSE 'Others'
+            END AS Relation,
+            PM.S_Mobile_No,
+            PM.I_IsPrimary,
+            PM.I_IsBusTravel
+        FROM T_Student_Parent_Maps SPM
+        INNER JOIN T_Parent_Master PM ON SPM.I_Parent_Master_ID = PM.I_Parent_Master_ID
+        WHERE SPM.S_Student_ID = @StudentID
+          AND PM.I_Brand_ID = @BrandID;
+    END
+
+    ELSE IF @EventType = 'UPDATE'
+    BEGIN
+        PRINT 'Update Done';
+
+        UPDATE PM
+        SET 
+            PM.S_First_Name     = CASE WHEN @FirstName IS NOT NULL THEN @FirstName ELSE PM.S_First_Name END,
+            PM.S_Middile_Name   = CASE WHEN @MiddleName IS NOT NULL THEN @MiddleName ELSE PM.S_Middile_Name END,
+            PM.S_Last_Name      = CASE WHEN @LastName IS NOT NULL THEN @LastName ELSE PM.S_Last_Name END,
+            PM.S_Mobile_No      = CASE WHEN @PhoneNo IS NOT NULL THEN @PhoneNo ELSE PM.S_Mobile_No END,
+            PM.I_IsPrimary      = CASE WHEN @IsPrimary IS NOT NULL THEN @IsPrimary ELSE PM.I_IsPrimary END,
+            PM.I_IsBusTravel    = CASE WHEN @isBusTravel IS NOT NULL THEN @isBusTravel ELSE PM.I_IsBusTravel END
+        FROM T_Student_Parent_Maps SPM
+        INNER JOIN T_Parent_Master PM ON SPM.I_Parent_Master_ID = PM.I_Parent_Master_ID
+        WHERE SPM.S_Student_ID = @StudentID
+          AND PM.I_Brand_ID = @BrandID
+          AND PM.I_Relation_ID = @RelationID;
+    END
+END
+

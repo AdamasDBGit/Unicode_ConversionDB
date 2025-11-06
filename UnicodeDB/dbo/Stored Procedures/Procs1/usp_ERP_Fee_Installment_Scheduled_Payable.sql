@@ -1,0 +1,218 @@
+﻿      
+-- =============================================                                    
+--Procedure: usp_ERP_Fee_InstallmentPayment                                        
+-- Author:      Abhik Porel                                    
+-- Create date: 02.01.2024                                    
+-- Description: Generate FEE Installment                       
+                    
+-- exec [dbo].[usp_ERP_Fee_InstallmentPayable] 1164, 35, 0                      
+-- =============================================                               
+ --exec [dbo].[usp_ERP_Fee_Installment_Scheduled_Payable] 1197,35,null     
+     
+CREATE Proc [dbo].[usp_ERP_Fee_Installment_Scheduled_Payable]                        
+(                        
+    @Fee_Structure_ID int ,                    
+    @School_Session_ID int,                  
+    @PaymentType NVARCHAR(MAX)=Null      --- for insatllment 0 || lumsum 1                  
+)                        
+As                        
+Begin                        
+    SET NOCOUNT ON;                        
+    --Drop  table #Stud_Fee_Installment                    
+ --Drop table #FinalInstallment                    
+    --Declare                             
+    --@Fee_Structure_ID int ,@School_Session_ID int,@PaymentType int                            
+    --SET @Fee_Structure_ID=44                            
+    --SET @School_Session_ID=2                            
+    --SET @PaymentType=1                        
+    ---------------------------------------------------------                          
+    Declare @sessionstDt date,                        
+            @sessionEndDt Date   ,
+			@StartMonthNumber int,
+			@EndMonthNumber int
+                        
+   -- select @sessionstDt = Convert(Date, Dt_Session_Start_Date),                  
+   ----@sessionstDt = Convert(varchar, Dt_Session_Start_Date,107),                    
+   --        @sessionEndDt = Convert(Date, Dt_Session_End_Date)                        
+   -- from T_School_Academic_Session_Master                        
+   -- where I_School_Session_ID = @School_Session_ID        
+ select @sessionstDt=Convert(date,Dt_StartDt)      
+ ,@sessionEndDt=convert(date,Dt_EndDt )      
+ from T_ERP_Fee_Structure where I_Fee_Structure_ID=@Fee_Structure_ID      
+ Declare @MonthDiff int      
+ SET @MonthDiff=(SELECT DATEDIFF(MONTH, @sessionstDt, @sessionEndDt) + 1 )      
+       select @StartMonthNumber=Start_Period_Month,@EndMonthNumber=End_Period_Month from T_ERP_Fee_Structure where I_Fee_Structure_ID=@Fee_Structure_ID
+       
+      
+ ----------------------------------Installment Schedule---------------------------------------      
+      
+ Create Table #FinalInstallment                        
+ (                        
+  ID int Identity(1, 1),                     
+  I_Fee_Structure_Installment_Component_ID int,                  
+  Fee_Structure_ID int,                   
+  S_Fee_Structure_Name VARCHAR(MAX),                  
+  Fee_ComponentID int,                   
+  S_Fee_Component_Name VARCHAR(MAX),                  
+  Seq int,                      
+  Installmentdt date,                        
+  Installment_Amt Numeric(18, 2),            
+ Installment_Amt_IncludeTAX Numeric(18,2),            
+  Is_OneTime int,                    
+ PaymentInstallmentID int,            
+ CGST_Amt Numeric(18,2),            
+ SGST_Amt Numeric(18,2),            
+ IGST_Amt Numeric(18,2),            
+ CGST_Per Numeric(10,2),            
+ SGST_Per Numeric(10,2),            
+ IGST_Per Numeric(10,2) ,      
+ IsPreAdmission bit      
+ )        
+      
+      
+      
+ insert into #FinalInstallment      
+ (      
+ I_Fee_Structure_Installment_Component_ID,                  
+ Fee_Structure_ID,                   
+ S_Fee_Structure_Name,                  
+ Fee_ComponentID,                   
+ S_Fee_Component_Name,                  
+ Seq,                      
+ Installmentdt,                        
+ Installment_Amt,             
+ Is_OneTime,                    
+ PaymentInstallmentID,      
+ CGST_Per,            
+ SGST_Per,            
+ IGST_Per,     
+ IsPreAdmission  ,    
+ CGST_Amt,    
+ SGST_Amt,    
+ IGST_Amt    
+ )      
+ select   DISTINCT     
+ FSIC.I_Fee_Structure_Installment_Component_ID,      
+ EFS.I_Fee_Structure_ID,      
+ EFS.S_Fee_Structure_Name,      
+ FCM.I_Fee_Component_ID,      
+ FCM.S_Component_Name,      
+ FSIC.I_Seq_No,      
+ FSSIB.Expected_Installment_Date,      
+ FSSIB.N_Component_Actual_Total_Annual_Amount,      
+ FSSIB.Is_OneTime,      
+ ISNULL(FSSIB.R_I_Fee_Pay_Installment_ID,3),      
+ ISNULL(FSSIB.CGST_Perc,0),      
+ ISNULL(FSSIB.SGST_Perc,0),      
+ ISNULL(FSSIB.IGST_Perc,0),      
+ FSSIB.Is_During_Admission  ,    
+ FSSIB.CGST_value,    
+ FSSIB.SGST_value,    
+ FSSIB.IGST_value    
+ from       
+ T_ERP_Fee_Structure_Session_Installment_Breakup as FSSIB      
+ inner join      
+ T_ERP_Fee_Structure_Installment_Component as FSIC       
+ on FSSIB.I_Fee_Structure_Installment_Component_ID=FSIC.I_Fee_Structure_Installment_Component_ID      
+ inner join      
+ T_Fee_Component_Master as FCM on FSIC.R_I_Fee_Component_ID=FCM.I_Fee_Component_ID      
+ inner join      
+ T_ERP_Fee_Structure as EFS on EFS.I_Fee_Structure_ID=FSIC.R_I_Fee_Structure_ID   
+ inner join T_ERP_Fee_Structure_AcademicSession_Map TEFSA ON TEFSA.I_Fee_Structure_AcademicSession_Map_ID=FSSIB.I_Fee_Structure_AcademicSession_Map_ID
+ --left join      
+ --#TempComponent_GST as t2 on t2.I_Fee_Component_ID=FCM.I_Fee_Component_ID      
+ where FSIC.R_I_Fee_Structure_ID= @Fee_Structure_ID  and TEFSA.I_School_Session_ID=@School_Session_ID    
+      
+       
+     -- select * from    #FinalInstallment        
+      
+      
+--------------------------------    
+      
+      
+      
+           Select DISTINCT I_Fee_Structure_Installment_Component_ID as I_Fee_Component_InstallmentID,                  
+             Fee_Structure_ID as R_I_Fee_Structure_ID,                  
+             S_Fee_Structure_Name,                  
+             Fee_ComponentID,                  
+             S_Fee_Component_Name,                  
+             Seq,                  
+             --Installmentdt,                  
+             CONVERT(varchar,Installmentdt,107) as Dt_Payment_Installment_Dt,                  
+             Installment_Amt as N_Installment_Amount,             
+            (Installment_Amt+IGST_Amt) as Installment_Amt_IncludeTAX,            
+             Is_OneTime,                  
+             DENSE_RANK() OVER (ORDER BY IsPreAdmission DESC, Installmentdt ASC) as DateWiseInstallmentSequenceNo,                  
+             PaymentInstallmentID,            
+             CGST_Amt,            
+             SGST_Amt,         
+             IGST_Amt,            
+             CGST_Per,            
+             SGST_Per,            
+             IGST_Per,      
+             IsPreAdmission as IsPreAdmission      
+            from #FinalInstallment                    
+            order by Seq                  
+                  
+                  
+            select  SUM(Installment_Amt)+SUM(ISNULL(IGST_Amt,0)) as Total_AMt,                  
+            --Select SUM() as total                  
+            DENSE_RANK() OVER (ORDER BY IsPreAdmission DESC, Installmentdt ASC)   
+   as DateWiseInstallmentSequenceNo,                  
+            CONVERT(varchar,Installmentdt,107) as Dt_Payment_Installment_Dt,                  
+             IsPreAdmission      
+                  
+                  
+            from #FinalInstallment                   
+                              
+            Group by Installmentdt,IsPreAdmission                  
+            order by Installmentdt,IsPreAdmission    
+     
+             select  SUM(Installment_Amt)as Total_AMt, SUM(CGST_Amt) as Total_CGST_AMt ,            
+             SUM(SGST_Amt) as Total_SGST_AMt,            
+             SUM(IGST_Amt) as Total_IGST_AMt,            
+            --Select SUM() as total                  
+            DENSE_RANK() OVER (ORDER BY IsPreAdmission DESC, Installmentdt ASC) as DateWiseInstallmentSequenceNo,                  
+            CONVERT(varchar,Installmentdt,107) as Dt_Payment_Installment_Dt,                  
+           IsPreAdmission    
+       
+                  
+            Into #TotalFinalAMt                  
+            from #FinalInstallment                   
+                           
+            Group by Installmentdt,IsPreAdmission                  
+            order by Installmentdt,IsPreAdmission      
+     
+           --Select * from #TotalFinalAMt                  
+            Select Sum(Total_AMt) as ComponentTotalAmount,            
+            SUM(Total_CGST_AMt) as Total_CGSt,            
+            SUM(Total_SGST_AMt) as Total_SGST,            
+            SUM(Total_IGST_AMt) as Total_IGSt  ,
+			@StartMonthNumber StartMonthNumber,
+			@EndMonthNumber EndMonthNumber,
+			DATENAME(MONTH, DATEADD(MONTH, @StartMonthNumber - 1, '1900-01-01')) StartMonthName,
+			DATENAME(MONTH, DATEADD(MONTH, @EndMonthNumber - 1, '1900-01-01')) EndMonthName
+            from #TotalFinalAMt                  
+                  
+            Drop table #TotalFinalAMt         
+              
+                  
+                           
+            IF OBJECT_ID(N'tempdb..#FinalInstallment') IS NOT NULL                        
+            BEGIN                        
+             DROP TABLE #FinalInstallment                        
+            END               
+                   
+      
+      
+      
+      
+      
+    IF OBJECT_ID(N'tempdb..#Stud_Fee_Installment') IS NOT NULL                        
+    BEGIN                        
+        DROP TABLE #Stud_Fee_Installment                        
+    END                        
+--END                    
+END    -----                
+                        
+--EXEC usp_ERP_Fee_InstallmentPayment 1,1,1 

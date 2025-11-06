@@ -1,0 +1,84 @@
+06-11-2025 09:43:55	This log contains information about the import schema operation into project 'UnicodeDB' on computer 'ABHIKP-HS-L' by user 'Abhik'.
+06-11-2025 09:44:03	Import of database schema has started.
+06-11-2025 09:44:09	Gathering database credentials
+06-11-2025 09:44:09	Gathering database options
+06-11-2025 09:44:09	Gathering generic database scoped configuration option
+06-11-2025 09:44:09	Gathering users
+06-11-2025 09:44:09	Gathering roles
+06-11-2025 09:44:09	Gathering application roles
+06-11-2025 09:44:09	Gathering role memberships
+06-11-2025 09:44:09	Gathering filegroups
+06-11-2025 09:44:09	Gathering full-text catalogs
+06-11-2025 09:44:09	Gathering assemblies
+06-11-2025 09:44:09	Gathering certificates
+06-11-2025 09:44:09	Gathering asymmetric keys
+06-11-2025 09:44:09	Gathering symmetric keys
+06-11-2025 09:44:09	Gathering encrypted symmetric keys
+06-11-2025 09:44:09	Gathering schemas
+06-11-2025 09:44:09	Gathering XML schema collections
+06-11-2025 09:44:09	Gathering user-defined data types
+06-11-2025 09:44:09	Gathering user-defined types
+06-11-2025 09:44:09	Gathering table types
+06-11-2025 09:44:09	Gathering unique keys for table types
+06-11-2025 09:44:09	Gathering primary keys for table types
+06-11-2025 09:44:09	Gathering indexes for table types
+06-11-2025 09:44:09	Gathering check constraints for table types
+06-11-2025 09:44:09	Gathering default constraints for table types
+06-11-2025 09:44:09	Gathering partition functions
+06-11-2025 09:44:09	Gathering partition schemes
+06-11-2025 09:44:09	Gathering functions
+06-11-2025 09:44:10	Gathering encrypted functions
+06-11-2025 09:44:10	Gathering aggregates
+06-11-2025 09:44:10	Gathering procedures
+06-11-2025 09:44:43	Gathering encrypted procedures
+06-11-2025 09:44:43	Gathering tables
+06-11-2025 09:44:50	Gathering primary keys
+06-11-2025 09:44:51	Gathering unique constraints
+06-11-2025 09:44:51	Gathering foreign keys
+06-11-2025 09:44:51	Gathering default constraints
+06-11-2025 09:44:51	Gathering check constraints
+06-11-2025 09:44:51	Gathering views
+06-11-2025 09:44:51	Gathering encrypted views
+06-11-2025 09:44:51	Gathering indexes
+06-11-2025 09:44:51	Gathering statistics
+06-11-2025 09:44:51	Gathering full-text index stoplists
+06-11-2025 09:44:51	Gathering search property lists
+06-11-2025 09:44:51	Gathering search properties
+06-11-2025 09:44:51	Gathering full-text indexes
+06-11-2025 09:44:51	Gathering column store indexes
+06-11-2025 09:44:51	Gathering spatial indexes
+06-11-2025 09:44:51	Gathering XML indexes
+06-11-2025 09:44:51	Gathering Selective XML indexes
+06-11-2025 09:44:51	Gathering encrypted triggers
+06-11-2025 09:44:51	Gathering triggers
+06-11-2025 09:44:51	Gathering encrypted and clr ddl triggers
+06-11-2025 09:44:51	Gathering ddl triggers
+06-11-2025 09:44:51	Creating edge constraints
+06-11-2025 09:44:51	Gathering synonyms
+06-11-2025 09:44:51	Gathering defaults
+06-11-2025 09:44:51	Gathering data constraint uddt bindings
+06-11-2025 09:44:51	Gathering rules
+06-11-2025 09:44:51	Gathering data constraint uddt bindings
+06-11-2025 09:44:52	Gathering message types
+06-11-2025 09:44:52	Gathering queues
+06-11-2025 09:44:52	Gathering contracts
+06-11-2025 09:44:52	Gathering services
+06-11-2025 09:44:52	Gathering event notifications
+06-11-2025 09:44:52	Gathering remote service bindings
+06-11-2025 09:44:52	Gathering broker priorities
+06-11-2025 09:44:52	Gathering signatures
+06-11-2025 09:44:52	Gathering data compression options
+06-11-2025 09:44:52	Gathering sequence types
+06-11-2025 09:44:52	Gathering security policies
+06-11-2025 09:44:52	Gather column encryption keys
+06-11-2025 09:44:52	Gathering column master keys
+06-11-2025 09:44:52	Gathering external data sources
+06-11-2025 09:44:52	Gathering external file formats
+06-11-2025 09:44:52	Gathering external tables
+06-11-2025 09:44:52	Gathering extended properties
+06-11-2025 09:44:55	Gathering assemblies
+06-11-2025 09:45:07	Scanning project for duplicate elements
+06-11-2025 09:45:08	Finished duplicate element processing
+06-11-2025 09:45:37	Finished importing database.
+06-11-2025 09:45:37	A summary of the import was saved to the following location: C:\Users\Admin\source\repos\Unicode_ConversionDB\UnicodeDB\Import Schema Logs\UnicodeDB_20251106041355.log
+06-11-2025 09:45:37	Click Finish to continue...

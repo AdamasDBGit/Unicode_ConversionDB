@@ -1,0 +1,85 @@
+﻿--EXEC USP_ERP_Insert_Transfer_Certificate 
+
+CREATE PROCEDURE USP_ERP_Insert_Transfer_Certificate
+    @BrandID INT,
+    @School_SessionID INT,
+    @TransferStatus BIT,
+    @ProposedReleaseDt DATE,
+    @Actual_ReleasedDt DATE,
+    @TC_SerialNo VARCHAR(20),
+    @TC_Remarks VARCHAR(100),
+    @iStudentID BIGINT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @I_Transfer_Cert_Req_ID INT;
+    DECLARE @ErrMsg NVARCHAR(4000);
+    DECLARE @ErrSeverity INT;
+
+    BEGIN TRY
+        IF NOT EXISTS (
+            SELECT 1 
+            FROM T_ERP_Transfer_Certificates 
+            WHERE I_Student_Detail_ID = @iStudentID 
+              AND I_Brand_ID = @BrandID
+        )
+        BEGIN
+            INSERT INTO T_ERP_Transfer_Certificates (
+                 I_Student_Detail_ID
+                ,I_Transfer_Req_Status
+                ,TC_Serial_No
+                ,Proposed_Release_Date
+                ,Actual_Release_Date
+                ,Is_Released
+                ,S_Remarks
+                ,I_Created_By
+                ,Dt_Crtd_On
+                ,I_Brand_ID
+                ,I_School_Session_ID
+            )
+            VALUES (
+                 @iStudentID
+                ,@TransferStatus
+                ,@TC_SerialNo
+                ,@ProposedReleaseDt
+                ,@Actual_ReleasedDt
+                ,1 -- Is_Released = true
+                ,@TC_Remarks
+                ,52 -- Hardcoded Created_By
+                ,GETDATE()
+                ,@BrandID
+                ,@School_SessionID
+            );
+
+            SET @I_Transfer_Cert_Req_ID = SCOPE_IDENTITY();
+
+            INSERT INTO T_ERP_Transfer_Certificates_Audit_Trial (
+                 I_Transfer_Cert_Req_ID
+                ,I_Transfer_Req_Status
+                ,S_Remarks
+                ,Is_Released
+                ,I_Created_By
+                ,Dt_Created_on
+            )
+            VALUES (
+                 @I_Transfer_Cert_Req_ID
+                ,1
+                ,@TC_Remarks
+                ,1
+                ,52
+                ,GETDATE()
+            );
+			Update T_Student_Class_Section set I_Status=0,dt_modify_dt=getdate() ,s_remarks=@TC_Remarks
+			where I_Student_Detail_ID=@iStudentID and I_Brand_ID=@BrandID
+        END
+    END TRY
+    BEGIN CATCH
+        -- Capture and throw the error
+        SET @ErrMsg = ERROR_MESSAGE();
+        SET @ErrSeverity = ERROR_SEVERITY();
+
+        RAISERROR(@ErrMsg, @ErrSeverity, 1);
+        -- Optionally log errors to a table if needed
+    END CATCH
+END;

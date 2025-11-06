@@ -1,0 +1,23 @@
+﻿
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ERP_GET_Payment_Gateway_Log] 
+	-- Add the parameters for the stored procedure here
+	@sTransactionNo varchar(max)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	select PH.* from T_ERP_Transaction_Master as TM
+	inner join
+	T_ERP_PG_History as PH on TM.I_ERP_Transaction_Master_ID=PH.I_Transaction_Master_ID
+	where TM.I_ERP_TransactionNo=@sTransactionNo
+	order by PH.Dt_CreatedAt desc
+
+
+END

@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[T_Discontinue_Student_Interface] (
+    [I_Discontinue_Student_Interface_ID] INT             IDENTITY (1, 1) NOT NULL,
+    [S_Student_ID]                       NVARCHAR (MAX)  NULL,
+    [S_Student_Name]                     NVARCHAR (MAX)  NULL,
+    [I_Invoice_Header_ID]                INT             NULL,
+    [I_Invoice_Detail_ID]                INT             NULL,
+    [InstalmentDate]                     DATETIME        NULL,
+    [DueAmount]                          DECIMAL (18, 2) NULL,
+    [TaxAmount]                          DECIMAL (18, 2) NULL,
+    [TotalAmount]                        DECIMAL (18, 2) NULL,
+    [AmountPaid]                         DECIMAL (18, 2) NULL,
+    [TaxPaid]                            DECIMAL (18, 2) NULL,
+    [TotalPaid]                          DECIMAL (18, 2) NULL,
+    [AmountDue]                          DECIMAL (18, 2) NULL,
+    [TaxDue]                             DECIMAL (18, 2) NULL,
+    [TotalDue]                           DECIMAL (18, 2) NULL,
+    [CreditNoteNumber]                   NVARCHAR (MAX)  NULL,
+    [CreditNoteAmount]                   DECIMAL (18, 2) NULL,
+    [CreditNoteTax]                      DECIMAL (18, 2) NULL,
+    [CreditNoteDate]                     DATETIME        NULL,
+    [NewInvoiceNo]                       NVARCHAR (MAX)  NULL,
+    [InvoiceDate]                        DATETIME        NULL,
+    [InvoiceAmount]                      DECIMAL (18, 2) NULL,
+    [Status]                             NVARCHAR (MAX)  NULL
+);
+

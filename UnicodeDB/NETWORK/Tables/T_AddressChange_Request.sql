@@ -1,0 +1,28 @@
+﻿CREATE TABLE [NETWORK].[T_AddressChange_Request] (
+    [I_AddressChange_Request_ID] INT           IDENTITY (1, 1) NOT FOR REPLICATION NOT NULL,
+    [I_Centre_Id]                INT           NULL,
+    [S_Center_Address1]          VARCHAR (100) NULL,
+    [S_Center_Address2]          VARCHAR (100) NULL,
+    [I_City_ID]                  INT           NULL,
+    [I_State_ID]                 INT           NULL,
+    [I_Country_ID]               INT           NULL,
+    [S_Pin_Code]                 VARCHAR (10)  NULL,
+    [S_Telephone_No]             VARCHAR (20)  NULL,
+    [S_Email_ID]                 VARCHAR (50)  NULL,
+    [S_Delivery_Address1]        VARCHAR (100) NULL,
+    [S_Delivery_Address2]        VARCHAR (100) NULL,
+    [I_Delivery_City_ID]         INT           NULL,
+    [I_Delivery_State_ID]        INT           NULL,
+    [I_Delivery_Country_ID]      INT           NULL,
+    [S_Delivery_Pin]             VARCHAR (10)  NULL,
+    [S_Delivery_Telephone]       VARCHAR (20)  NULL,
+    [S_Delivery_Email]           VARCHAR (50)  NULL,
+    [S_Reason]                   VARCHAR (200) NULL,
+    [I_Status]                   INT           NULL,
+    [S_Crtd_By]                  VARCHAR (20)  NULL,
+    [S_Upd_By]                   VARCHAR (20)  NULL,
+    [Dt_Crtd_On]                 DATETIME      NULL,
+    [Dt_Upd_On]                  DATETIME      NULL,
+    CONSTRAINT [PK__T_AddressChange___48317F57] PRIMARY KEY CLUSTERED ([I_AddressChange_Request_ID] ASC)
+);
+

@@ -1,0 +1,52 @@
+﻿  
+CREATE Proc [dbo].[ERP_USP_Update_Receipt_PaymentInfo](  
+@ReceiptID bigint,  
+@nCreditCardNo NUMERIC(18, 0)=Null ,          
+@dCreditCardExpiry NVARCHAR(MAX)=null ,          
+@sCreditCardIssuer NVARCHAR(MAX) =null,          
+@sChequeDDNo NVARCHAR(MAX) =null,          
+@dChequeDDDate NVARCHAR(MAX)=null ,          
+@sBankName NVARCHAR(MAX)=null ,          
+@sBranchName NVARCHAR(MAX)=null ,          
+@sNarration NVARCHAR(MAX)=null,      
+@paymentmodeid int,  
+@UTRNo NVARCHAR(MAX)=null,  
+@PrayerAccountNo NVARCHAR(MAX)=null  
+)  
+As  
+Begin  
+  
+--INSERT INTO tEst(Test)  
+--VALUES (  
+--    'Starting ReceiptNo : ' + CAST(@ReceiptID AS VARCHAR(50)) +  
+--    ' P:ERP_USP_Update_Receipt_PaymentInfo at ' + CONVERT(VARCHAR(20), GETDATE(), 120) +  
+--    ' for Mode ' + CAST(@paymentmodeid AS VARCHAR(10))  
+--)  
+  
+If @ReceiptID >0  
+begin  
+  
+--INSERT INTO tEst(Test)  
+--VALUES (  
+--    'Starting ReceiptNo : ' + CAST(@ReceiptID AS VARCHAR(50)) +  
+--    ' P:ERP_USP_Update_Receipt_PaymentInfo at ' + CONVERT(VARCHAR(20), GETDATE(), 120) +  
+--    ' for Mode ' + CAST(@paymentmodeid AS VARCHAR(10))  
+--)  
+  
+  
+Update T_Receipt_Header   
+set N_CreditCard_No=@nCreditCardNo,  
+Dt_CreditCard_Expiry=@dCreditCardExpiry,  
+S_CreditCard_Issuer=@sCreditCardIssuer,  
+S_ChequeDD_No=@sChequeDDNo,  
+Dt_ChequeDD_Date=@dChequeDDDate,  
+S_Bank_Name=@sBankName, 
+Bank_Account_Name=@sBankName,
+S_Branch_Name=@sBranchName,  
+S_Narration=@sNarration,  
+I_PaymentMode_ID=@paymentmodeid,  
+S_Utr_No=@UTRNo,  
+S_Prayer_Account_No=@PrayerAccountNo  
+Where I_Receipt_Header_ID=@ReceiptID  
+End  
+End  

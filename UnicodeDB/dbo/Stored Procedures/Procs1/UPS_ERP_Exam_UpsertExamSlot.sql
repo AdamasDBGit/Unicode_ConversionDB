@@ -1,0 +1,61 @@
+﻿CREATE PROCEDURE [dbo].[UPS_ERP_Exam_UpsertExamSlot]  
+    @inSlotID         INT = NULL,    
+    @stSlotCode       NVARCHAR(MAX) = NULL,  
+    @tmSlotStartTime  TIME(0) = NULL,  
+    @tmSlotEndTime    TIME(0) = NULL,     
+    @inCreatedBy      INT = NULL,  
+    @IsActive         BIT = NULL  
+AS  
+BEGIN  
+    SET NOCOUNT ON;  
+  
+    -- Check for duplicate Slot Code and overlapping Start/End Times  
+    IF EXISTS (  
+        SELECT 1  
+        FROM [dbo].[T_ERP_Exam_Slot_Master]  
+        WHERE [tmSlotStartTime] = @tmSlotStartTime  
+        AND [tmSlotEndTime] = @tmSlotEndTime  
+        AND (@inSlotID IS NULL OR [inSlotID] <> @inSlotID)  
+    )  
+    BEGIN  
+        SELECT 0 AS StatusFlag, 'Duplicate Slot Code with identical start and end times exists.' AS Message;  
+        RETURN;  
+    END  
+  
+    -- Update if inSlotID exists  
+    IF EXISTS (SELECT 1 FROM [dbo].[T_ERP_Exam_Slot_Master] WHERE [inSlotID] = @inSlotID)  
+    BEGIN  
+        UPDATE [dbo].[T_ERP_Exam_Slot_Master]  
+        SET [stSlotCode]       = COALESCE(@stSlotCode, [stSlotCode]),  
+            [tmSlotStartTime]  = COALESCE(@tmSlotStartTime, [tmSlotStartTime]),  
+            [tmSlotEndTime]    = COALESCE(@tmSlotEndTime, [tmSlotEndTime]),  
+            [dtModifiedDate]   = GETDATE(),  
+            [inModifiedBy]     = COALESCE(@inCreatedBy, [inModifiedBy]),  
+            [IsActive]         = COALESCE(@IsActive, [IsActive])  
+        WHERE [inSlotID] = @inSlotID;  
+    END  
+    ELSE  
+    BEGIN  
+        -- Insert new record  
+        INSERT INTO [dbo].[T_ERP_Exam_Slot_Master]  
+        (  
+            [stSlotCode],  
+            [tmSlotStartTime],  
+            [tmSlotEndTime],  
+            [dtCreatedDate],  
+            [inCreatedBy],  
+            [IsActive]  
+        )  
+        VALUES  
+        (  
+            @stSlotCode,  
+            @tmSlotStartTime,  
+            @tmSlotEndTime,  
+            GETDATE(),  
+            @inCreatedBy,  
+            @IsActive  
+        );  
+    END  
+  
+    SELECT 1 AS StatusFlag, 'Slot saved successfully!' AS Message;  
+END  

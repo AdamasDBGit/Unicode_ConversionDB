@@ -1,0 +1,89 @@
+﻿CREATE PROCEDURE [dbo].[ERP_uspGetBrandConfiguredDocuments]
+(
+    @sToken NVARCHAR(200),
+    @sMobileNo VARCHAR(20),
+    @DocumentType VARCHAR(100) = NULL
+)
+AS
+BEGIN
+    DECLARE @BrandID INT;
+
+    CREATE TABLE #Documents (
+        DocumentPath VARCHAR(100),
+        DocumentTypeID INT,
+        PatternHeaderID INT,
+        SaasPatternChildHeaderID INT,
+        DocumentID INT
+    );
+
+    -- Validate token
+    IF @sToken = 'Ahx6cuOkPkykBfpthTpYhXc'
+    BEGIN
+        -- Check if the mobile number exists in T_Parent_Master or T_ERP_User
+        IF EXISTS (
+            SELECT 1 
+            FROM T_Parent_Master 
+            WHERE S_Mobile_No = @sMobileNo
+            OR EXISTS (
+                SELECT 1
+                FROM T_ERP_User EU
+                INNER JOIN T_ERP_User_Brand EUB ON EUB.I_User_ID = EU.I_User_ID
+                WHERE EU.S_Mobile = @sMobileNo
+            )
+        )
+        BEGIN
+            -- Attempt to get BrandID from T_Parent_Master
+            SELECT @BrandID = I_Brand_ID
+            FROM T_Parent_Master 
+            WHERE S_Mobile_No = @sMobileNo;
+
+            -- If BrandID is not found in T_Parent_Master, get it from T_ERP_User_Brand
+            IF @BrandID IS NULL
+            BEGIN
+                SELECT @BrandID = EUB.I_Brand_ID
+                FROM T_ERP_User EU
+                INNER JOIN T_ERP_User_Brand EUB ON EUB.I_User_ID = EU.I_User_ID
+                WHERE EU.S_Mobile = @sMobileNo;
+            END
+
+            -- Insert the split values into the temporary table
+            INSERT INTO #Documents (DocumentPath, DocumentTypeID, PatternHeaderID, SaasPatternChildHeaderID, DocumentID)
+            SELECT 
+                'Document/' + LEFT(Value, CHARINDEX(';', Value) - 1) AS DocumentPath,
+                CAST(SUBSTRING(Value, CHARINDEX(';', Value) + 1, LEN(Value)) AS INT) AS DocumentTypeID,
+                PatternHeaderID,
+                SaasPatternChildHeaderID,
+                DocumentID
+            FROM (
+                SELECT 
+                    ESPCH.N_Value AS Value,
+                    ESPCH.I_Pattern_HeaderID AS PatternHeaderID,
+                    ESPCH.I_Saas_Pattern_Child_Header_ID AS SaasPatternChildHeaderID,
+                    ESPCH.I_Saas_Pattern_Child_Header_ID AS DocumentID
+                FROM T_ERP_Saas_Pattern_Header AS SPH
+                INNER JOIN T_ERP_Saas_Pattern_Child_Header AS ESPCH 
+                    ON SPH.I_Pattern_HeaderID = ESPCH.I_Pattern_HeaderID
+                WHERE SPH.S_Property_Name = 'Document' 
+                AND SPH.I_Brand_ID = @BrandID
+            ) AS Data;
+
+            -- Select data from the temporary table
+            SELECT 
+                @BrandID AS BrandID,
+                DC.*,
+                BCD.STypeName AS DocumentType
+            FROM #Documents AS DC
+            INNER JOIN T_ERP_BrandConfigDocumentType AS BCD 
+                ON DC.DocumentTypeID = BCD.I_DocumentTypeID
+            WHERE BCD.STypeName = ISNULL(@DocumentType, BCD.STypeName);
+        END
+        ELSE
+        BEGIN
+            SELECT 0 AS StatusFlag, 'Mobile No not exists' AS Message;
+        END
+    END
+    ELSE
+    BEGIN
+        SELECT 0 AS StatusFlag, 'Invalid Token' AS Message;
+    END
+END

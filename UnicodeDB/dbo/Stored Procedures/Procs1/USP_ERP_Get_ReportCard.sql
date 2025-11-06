@@ -1,0 +1,2 @@
+﻿--exec [USP_ERP_Get_ReportCard] 44354,31  
+CREATE Proc [dbo].[USP_ERP_Get_ReportCard] ( @inStudentId int,@inExamScheduleDetailId int) as Begin select top 1 * from T_ERP_Exam_ScheduleSubjectAttendanceMarks  where inStudentId=@inStudentId and inExamScheduleDetailId=@inExamScheduleDetailId   End

@@ -1,0 +1,27 @@
+﻿CREATE TABLE [NETWORK].[T_Center_Master_Audit] (
+    [T_Center_Master_Audit_ID]       INT           IDENTITY (1, 1) NOT FOR REPLICATION NOT NULL,
+    [I_Centre_Id]                    INT           NULL,
+    [S_Center_Code]                  VARCHAR (20)  NULL,
+    [S_Center_Name]                  VARCHAR (100) NULL,
+    [I_Status]                       INT           NULL,
+    [Dt_Valid_From]                  DATETIME      NULL,
+    [Dt_Valid_To]                    DATETIME      NULL,
+    [S_Center_Short_Name]            VARCHAR (50)  NULL,
+    [I_Center_Category]              INT           NULL,
+    [I_RFF_Type]                     INT           NULL,
+    [I_Is_Startup_Material_In_Place] BIT           NULL,
+    [I_Is_Library_In_Place]          BIT           NULL,
+    [I_Country_ID]                   INT           NULL,
+    [I_Expiry_Status]                INT           NULL,
+    [S_Crtd_By]                      VARCHAR (20)  NULL,
+    [S_Upd_By]                       VARCHAR (20)  NULL,
+    [Dt_Crtd_On]                     DATETIME      NULL,
+    [Dt_Upd_On]                      DATETIME      NULL,
+    [I_Is_OwnCenter]                 INT           NULL,
+    [S_ServiceTax_Regd_Code]         VARCHAR (100) NULL,
+    [S_SAP_Customer_Id]              VARCHAR (20)  NULL,
+    [I_Is_Center_Serv_Tax_Reqd]      BIT           NULL,
+    [S_Cost_Center]                  VARCHAR (10)  NULL,
+    CONSTRAINT [PK__T_Center_Master___5A460DF1] PRIMARY KEY CLUSTERED ([T_Center_Master_Audit_ID] ASC)
+);
+
